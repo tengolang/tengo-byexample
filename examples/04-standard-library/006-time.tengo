@@ -1,4 +1,5 @@
 // # Time
+// nooutput
 //
 // The `times` module wraps Go's `time` package. Use `times.now()` for the
 // current instant and `times.time_format` to produce formatted strings.

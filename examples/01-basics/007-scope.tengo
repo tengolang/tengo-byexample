@@ -1,0 +1,49 @@
+// # Scope
+//
+// Tengo uses lexical (block) scoping. `:=` always declares a new variable
+// in the current scope; `=` assigns to an existing one in an enclosing scope.
+
+fmt := import("fmt")
+
+// `:=` inside a block creates a new variable — the outer `x` is unaffected.
+x := 10
+if true {
+    x := 20
+    fmt.println(x)
+}
+fmt.println(x)
+
+// `=` inside a block modifies the nearest enclosing declaration.
+if true {
+    x = 30
+}
+fmt.println(x)
+
+// Loop variables are scoped to the loop body.
+// Referencing `i` outside the loop would be a compile error.
+for i := 0; i < 3; i++ {
+    _ := i
+}
+
+// Closures capture variables by reference, not by value.
+counter := 0
+inc := func() { counter++ }
+inc()
+inc()
+fmt.println(counter)
+
+// Loop-closure trap: all closures share the same loop variable.
+// When the loop ends `i` equals 3, so every closure returns 3.
+fns := []
+for i := 0; i < 3; i++ {
+    fns = append(fns, func() { return i })
+}
+fmt.printf("%d %d %d\n", fns[0](), fns[1](), fns[2]())
+
+// Fix: use an immediately-called function to pass the current value
+// as a parameter, creating a fresh binding for each iteration.
+fns2 := []
+for i := 0; i < 3; i++ {
+    fns2 = append(fns2, (func(v) { return func() { return v } })(i))
+}
+fmt.printf("%d %d %d\n", fns2[0](), fns2[1](), fns2[2]())

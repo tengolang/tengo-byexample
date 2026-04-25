@@ -1,0 +1,40 @@
+// # String Building
+//
+// Tengo has no string interpolation. Use `+` for simple concatenation,
+// `fmt.sprintf` for formatted strings, and `text.join` to assemble
+// arrays of parts into a single string.
+
+fmt := import("fmt")
+text := import("text")
+
+// Simple concatenation with `+`.
+s := "Hello" + ", " + "Tengo!"
+fmt.println(s)
+
+// `fmt.sprintf` is the primary tool for formatted string construction.
+// It supports the same verbs as Go's `fmt.Sprintf`.
+name := "world"
+n := 42
+fmt.println(fmt.sprintf("Hello, %s! The answer is %d.", name, n))
+fmt.println(fmt.sprintf("pi ≈ %.4f", 3.14159))
+fmt.println(fmt.sprintf("%-10s %5d", "score:", 99))
+
+// Build a string from parts with a loop, then join.
+parts := []
+for i := 1; i <= 5; i++ {
+    parts = append(parts, string(i))
+}
+fmt.println(text.join(parts, " + ") + " = 15")
+
+// `text.repeat` duplicates a string n times.
+fmt.println(text.repeat("=-", 10))
+
+// `text.trim_space` strips leading and trailing whitespace.
+fmt.println(text.trim_space("   padded   "))
+
+// `text.trim` removes a specific cutset from both ends.
+fmt.println(text.trim("***hello***", "*"))
+
+// `text.has_prefix` and `text.has_suffix` test for substrings.
+fmt.println(text.has_prefix("Tengo", "Ten"))
+fmt.println(text.has_suffix("Tengo", "go"))

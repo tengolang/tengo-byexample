@@ -1,10 +1,13 @@
 // # Random Numbers
 //
 // The `rand` module provides random integers, floats, and permutations.
-// Without seeding, the generator is automatically seeded.
+// Call `rand.seed` first for reproducible output.
 
 fmt := import("fmt")
 rand := import("rand")
+
+// Seed the generator so output is deterministic.
+rand.seed(42)
 
 // `rand.intn(n)` returns a random integer in [0, n).
 fmt.println(rand.intn(100))
@@ -15,11 +18,10 @@ fmt.println(rand.float())
 // `rand.perm(n)` returns a random permutation of [0, n).
 fmt.println(rand.perm(6))
 
-// `rand.seed` initializes the generator for reproducible sequences.
+// The same seed always produces the same sequence.
 rand.seed(42)
 fmt.println(rand.intn(1000))
 fmt.println(rand.intn(1000))
 
-// Same seed always produces the same sequence.
 rand.seed(42)
 fmt.println(rand.intn(1000))

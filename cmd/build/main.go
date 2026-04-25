@@ -141,8 +141,10 @@ func loadExamplesFromDir(dir string) ([]Example, error) {
 			return nil, err
 		}
 		ex := parseExample(f, src)
-		out, _ := tengorunner.Run(string(src))
-		ex.Output = strings.TrimRight(out, "\n")
+		if !strings.Contains(string(src), "// nooutput") {
+			out, _ := tengorunner.Run(string(src))
+			ex.Output = strings.TrimRight(out, "\n")
+		}
 		examples = append(examples, ex)
 	}
 	return examples, nil
