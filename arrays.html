@@ -17,37 +17,135 @@
   <div class="example" id="arrays">
     <h2><a href="index.html">Tengo by Example</a>: Arrays</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Arrays hold ordered sequences of values and can contain mixed types.
-Use `append` to add elements, `len` for the size, and slice notation
-`a[low:high]` to extract a sub-array.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
-fmt.println(fruits[0])
-fmt.println(len(fruits))
-
-fruits = append(fruits, &#34;date&#34;)
-fmt.println(fruits)
-
-for i, v in fruits {
-    fmt.println(i, v)
-}
-
-nums := [3, 1, 4, 1, 5, 9]
-fmt.println(nums[1:4])</code></pre></td>
-      </tr>
+      <div class="row">
+        <div class="docs">
+          <p>In Tengo, an array is a numbered sequence of elements of any type.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
       
-    </table>
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="here-we-create-an-array-a-that-will-hold-exactly-5-integers">
+        <div class="docs">
+          <p><a href="#here-we-create-an-array-a-that-will-hold-exactly-5-integers">Here we create an array `a` that will hold exactly 5 integers.
+By default, an array is zero-valued, which for integers means 0s.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">a := [0, 0, 0, 0, 0]
+fmt.println(&#34;emp:&#34;, a)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="we-can-set-a-value-at-an-index-using-the-arrayindex-value-syntax">
+        <div class="docs">
+          <p><a href="#we-can-set-a-value-at-an-index-using-the-arrayindex-value-syntax">We can set a value at an index using the `array[index] = value` syntax,
+and get a value with `array[index]`.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">a[4] = 100
+fmt.println(&#34;set:&#34;, a)
+fmt.println(&#34;get:&#34;, a[4])</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-built-in-len-returns-the-length-of-an-array">
+        <div class="docs">
+          <p><a href="#the-built-in-len-returns-the-length-of-an-array">The built-in `len` returns the length of an array.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;len:&#34;, len(a))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="use-this-syntax-to-declare-and-initialize-an-array-in-one-line">
+        <div class="docs">
+          <p><a href="#use-this-syntax-to-declare-and-initialize-an-array-in-one-line">Use this syntax to declare and initialize an array in one line.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">b := [1, 2, 3, 4, 5]
+fmt.println(&#34;dcl:&#34;, b)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="arrays-can-contain-elements-of-different-types">
+        <div class="docs">
+          <p><a href="#arrays-can-contain-elements-of-different-types">Arrays can contain elements of different types.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">c := [1, &#34;two&#34;, 3.0, true]
+fmt.println(&#34;mix:&#34;, c)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="you-can-also-create-multi-dimensional-data-structures-by">
+        <div class="docs">
+          <p><a href="#you-can-also-create-multi-dimensional-data-structures-by">You can also create multi-dimensional data structures by
+nesting arrays.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">twoD := [
+    [0, 1, 2],
+    [1, 2, 3]
+]
+fmt.println(&#34;2d: &#34;, twoD)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -55,58 +153,62 @@ fmt.println(nums[1:4])</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Arrays
-//
-// Arrays hold ordered sequences of values and can contain mixed types.
-// Use `append` to add elements, `len` for the size, and slice notation
-// `a[low:high]` to extract a sub-array.
+              data-original="fmt := import(&#34;fmt&#34;)
 
-fmt := import(&#34;fmt&#34;)
+a := [0, 0, 0, 0, 0]
+fmt.println(&#34;emp:&#34;, a)
 
-fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
-fmt.println(fruits[0])
-fmt.println(len(fruits))
+a[4] = 100
+fmt.println(&#34;set:&#34;, a)
+fmt.println(&#34;get:&#34;, a[4])
 
-fruits = append(fruits, &#34;date&#34;)
-fmt.println(fruits)
+fmt.println(&#34;len:&#34;, len(a))
 
-for i, v in fruits {
-    fmt.println(i, v)
-}
+b := [1, 2, 3, 4, 5]
+fmt.println(&#34;dcl:&#34;, b)
 
-nums := [3, 1, 4, 1, 5, 9]
-fmt.println(nums[1:4])">// # Arrays
-//
-// Arrays hold ordered sequences of values and can contain mixed types.
-// Use `append` to add elements, `len` for the size, and slice notation
-// `a[low:high]` to extract a sub-array.
+c := [1, &#34;two&#34;, 3.0, true]
+fmt.println(&#34;mix:&#34;, c)
 
-fmt := import(&#34;fmt&#34;)
+twoD := [
+    [0, 1, 2],
+    [1, 2, 3]
+]
+fmt.println(&#34;2d: &#34;, twoD)">fmt := import(&#34;fmt&#34;)
 
-fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
-fmt.println(fruits[0])
-fmt.println(len(fruits))
+a := [0, 0, 0, 0, 0]
+fmt.println(&#34;emp:&#34;, a)
 
-fruits = append(fruits, &#34;date&#34;)
-fmt.println(fruits)
+a[4] = 100
+fmt.println(&#34;set:&#34;, a)
+fmt.println(&#34;get:&#34;, a[4])
 
-for i, v in fruits {
-    fmt.println(i, v)
-}
+fmt.println(&#34;len:&#34;, len(a))
 
-nums := [3, 1, 4, 1, 5, 9]
-fmt.println(nums[1:4])</textarea>
+b := [1, 2, 3, 4, 5]
+fmt.println(&#34;dcl:&#34;, b)
+
+c := [1, &#34;two&#34;, 3.0, true]
+fmt.println(&#34;mix:&#34;, c)
+
+twoD := [
+    [0, 1, 2],
+    [1, 2, 3]
+]
+fmt.println(&#34;2d: &#34;, twoD)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="recursion.html" rel="prev">Recursion</a>.</p>
-    <p class="next">Next example: <a href="maps.html" rel="next">Maps</a>.</p>
+    <div class="nav-links">
+      
+        <a href="recursion.html" rel="prev">← Recursion</a>
+      
+      
+        <a href="maps.html" rel="next">Maps →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

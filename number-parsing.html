@@ -17,12 +17,25 @@
   <div class="example" id="number-parsing">
     <h2><a href="index.html">Tengo by Example</a>: Number Parsing</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching
-`format_*` functions for converting between numbers and strings.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching `format_*` functions for converting between numbers and strings.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 fmt.println(text.atoi(&#34;42&#34;))
@@ -34,17 +47,21 @@ fmt.println(text.parse_bool(&#34;true&#34;))
 fmt.println(text.itoa(42))
 fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
 fmt.println(text.format_int(255, 16))
-fmt.println(text.format_int(42, 2))</code></pre></td>
-      </tr>
+fmt.println(text.format_int(42, 2))</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -52,12 +69,7 @@ fmt.println(text.format_int(42, 2))</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Number Parsing
-//
-// The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching
-// `format_*` functions for converting between numbers and strings.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 fmt.println(text.atoi(&#34;42&#34;))
@@ -69,12 +81,7 @@ fmt.println(text.parse_bool(&#34;true&#34;))
 fmt.println(text.itoa(42))
 fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
 fmt.println(text.format_int(255, 16))
-fmt.println(text.format_int(42, 2))">// # Number Parsing
-//
-// The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching
-// `format_*` functions for converting between numbers and strings.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(text.format_int(42, 2))">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 fmt.println(text.atoi(&#34;42&#34;))
@@ -88,16 +95,18 @@ fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
 fmt.println(text.format_int(255, 16))
 fmt.println(text.format_int(42, 2))</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="random-numbers.html" rel="prev">Random Numbers</a>.</p>
-    <p class="next">Next example: <a href="base64-encoding.html" rel="next">Base64 Encoding</a>.</p>
+    <div class="nav-links">
+      
+        <a href="random-numbers.html" rel="prev">← Random Numbers</a>
+      
+      
+        <a href="base64-encoding.html" rel="next">Base64 Encoding →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

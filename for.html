@@ -17,43 +17,144 @@
   <div class="example" id="for">
     <h2><a href="index.html">Tengo by Example</a>: For Loops</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>`for` is Tengo&#39;s only looping construct. It supports an init/condition/post
-form, a condition-only (while) form, and `for k, v in collection` iteration
-over arrays and maps.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-for i := 0; i &lt; 3; i&#43;&#43; {
+      <div class="row">
+        <div class="docs">
+          <p>`for` is Tengo&#39;s only looping construct. It supports several forms.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-most-basic-type-with-a-single-condition">
+        <div class="docs">
+          <p><a href="#the-most-basic-type-with-a-single-condition">The most basic type, with a single condition.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">n := 1
+for n &lt; 5 {
+    fmt.println(n)
+    n&#43;&#43;
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="a-classic-initialconditionafter-for-loop">
+        <div class="docs">
+          <p><a href="#a-classic-initialconditionafter-for-loop">A classic initial/condition/after `for` loop.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">for i := 0; i &lt; 3; i&#43;&#43; {
     fmt.println(&#34;i =&#34;, i)
-}
-
-n := 1
-for n &lt; 16 {
-    fmt.println(&#34;n =&#34;, n)
-    n *= 2
-}
-
-fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="for-without-a-condition-will-loop-repeatedly-until-you-break">
+        <div class="docs">
+          <p><a href="#for-without-a-condition-will-loop-repeatedly-until-you-break">`for` without a condition will loop repeatedly until you `break`
+out of the loop or `return` from the enclosing function.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">for {
+    fmt.println(&#34;loop&#34;)
+    break
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="you-can-also-continue-to-the-next-iteration-of-the-loop">
+        <div class="docs">
+          <p><a href="#you-can-also-continue-to-the-next-iteration-of-the-loop">You can also `continue` to the next iteration of the loop.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">for i := 0; i &lt;= 5; i&#43;&#43; {
+    if i % 2 == 0 {
+        continue
+    }
+    fmt.println(i)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="iterating-over-an-array-with-for-k-v-in-collection">
+        <div class="docs">
+          <p><a href="#iterating-over-an-array-with-for-k-v-in-collection">Iterating over an array with `for k, v in collection`.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
 for i, fruit in fruits {
     fmt.println(i, &#34;-&gt;&#34;, fruit)
-}
-
-scores := {alice: 95, bob: 87}
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="iterating-over-a-map">
+        <div class="docs">
+          <p><a href="#iterating-over-a-map">Iterating over a map.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">scores := {alice: 95, bob: 87}
 for name, score in scores {
     fmt.println(name, &#34;scored&#34;, score)
-}</code></pre></td>
-      </tr>
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -61,22 +162,28 @@ for name, score in scores {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # For Loops
-//
-// `for` is Tengo&#39;s only looping construct. It supports an init/condition/post
-// form, a condition-only (while) form, and `for k, v in collection` iteration
-// over arrays and maps.
+              data-original="fmt := import(&#34;fmt&#34;)
 
-fmt := import(&#34;fmt&#34;)
+n := 1
+for n &lt; 5 {
+    fmt.println(n)
+    n&#43;&#43;
+}
 
 for i := 0; i &lt; 3; i&#43;&#43; {
     fmt.println(&#34;i =&#34;, i)
 }
 
-n := 1
-for n &lt; 16 {
-    fmt.println(&#34;n =&#34;, n)
-    n *= 2
+for {
+    fmt.println(&#34;loop&#34;)
+    break
+}
+
+for i := 0; i &lt;= 5; i&#43;&#43; {
+    if i % 2 == 0 {
+        continue
+    }
+    fmt.println(i)
 }
 
 fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
@@ -87,22 +194,28 @@ for i, fruit in fruits {
 scores := {alice: 95, bob: 87}
 for name, score in scores {
     fmt.println(name, &#34;scored&#34;, score)
-}">// # For Loops
-//
-// `for` is Tengo&#39;s only looping construct. It supports an init/condition/post
-// form, a condition-only (while) form, and `for k, v in collection` iteration
-// over arrays and maps.
+}">fmt := import(&#34;fmt&#34;)
 
-fmt := import(&#34;fmt&#34;)
+n := 1
+for n &lt; 5 {
+    fmt.println(n)
+    n&#43;&#43;
+}
 
 for i := 0; i &lt; 3; i&#43;&#43; {
     fmt.println(&#34;i =&#34;, i)
 }
 
-n := 1
-for n &lt; 16 {
-    fmt.println(&#34;n =&#34;, n)
-    n *= 2
+for {
+    fmt.println(&#34;loop&#34;)
+    break
+}
+
+for i := 0; i &lt;= 5; i&#43;&#43; {
+    if i % 2 == 0 {
+        continue
+    }
+    fmt.println(i)
 }
 
 fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
@@ -115,16 +228,18 @@ for name, score in scores {
     fmt.println(name, &#34;scored&#34;, score)
 }</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="switch.html" rel="prev">Switch</a>.</p>
-    <p class="next">Next example: <a href="constants.html" rel="next">Constants</a>.</p>
+    <div class="nav-links">
+      
+        <a href="switch.html" rel="prev">← Switch</a>
+      
+      
+        <a href="constants.html" rel="next">Constants →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

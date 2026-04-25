@@ -17,14 +17,25 @@
   <div class="example" id="immutability">
     <h2><a href="index.html">Tengo by Example</a>: Immutability</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>By default, arrays and maps are mutable. The built-in `immutable()` returns
-a deeply immutable copy of any value. Attempting to modify an immutable
-value causes a runtime error, so use this when you want to enforce read-only
-data.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>By default, arrays and maps are mutable. The built-in `immutable()` returns a deeply immutable copy of any value. Attempting to modify an immutable value causes a runtime error, so use this when you want to enforce read-only data.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 
 nums := [1, 2, 3]
 nums[0] = 99
@@ -36,17 +47,21 @@ fmt.println(frozen[1])
 
 config := immutable({host: &#34;localhost&#34;, port: 5432})
 fmt.println(config[&#34;host&#34;])
-fmt.println(config[&#34;port&#34;])</code></pre></td>
-      </tr>
+fmt.println(config[&#34;port&#34;])</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -54,14 +69,7 @@ fmt.println(config[&#34;port&#34;])</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Immutability
-//
-// By default, arrays and maps are mutable. The built-in `immutable()` returns
-// a deeply immutable copy of any value. Attempting to modify an immutable
-// value causes a runtime error, so use this when you want to enforce read-only
-// data.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 
 nums := [1, 2, 3]
 nums[0] = 99
@@ -73,14 +81,7 @@ fmt.println(frozen[1])
 
 config := immutable({host: &#34;localhost&#34;, port: 5432})
 fmt.println(config[&#34;host&#34;])
-fmt.println(config[&#34;port&#34;])">// # Immutability
-//
-// By default, arrays and maps are mutable. The built-in `immutable()` returns
-// a deeply immutable copy of any value. Attempting to modify an immutable
-// value causes a runtime error, so use this when you want to enforce read-only
-// data.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(config[&#34;port&#34;])">fmt := import(&#34;fmt&#34;)
 
 nums := [1, 2, 3]
 nums[0] = 99
@@ -94,16 +95,18 @@ config := immutable({host: &#34;localhost&#34;, port: 5432})
 fmt.println(config[&#34;host&#34;])
 fmt.println(config[&#34;port&#34;])</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="hex-encoding.html" rel="prev">Hex Encoding</a>.</p>
-    <p class="next">Next example: <a href="enum.html" rel="next">Enum</a>.</p>
+    <div class="nav-links">
+      
+        <a href="hex-encoding.html" rel="prev">← Hex Encoding</a>
+      
+      
+        <a href="enum.html" rel="next">Enum →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

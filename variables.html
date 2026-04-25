@@ -17,37 +17,102 @@
   <div class="example" id="variables">
     <h2><a href="index.html">Tengo by Example</a>: Variables</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Variables are declared and initialized with `:=`. Tengo is dynamically typed:
-a variable can hold any value and be reassigned to a different type.
-Use plain `=` to reassign an existing variable.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-message := &#34;hello&#34;
-fmt.println(message)
-message = &#34;world&#34;
-fmt.println(message)
-
-x := 10
+      <div class="row">
+        <div class="docs">
+          <p>Variables are declared and initialized with `:=`. Tengo is dynamically typed: a variable can hold any value and be reassigned to a different type.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="use-to-declare-and-initialize-a-variable">
+        <div class="docs">
+          <p><a href="#use-to-declare-and-initialize-a-variable">Use `:=` to declare and initialize a variable.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">message := &#34;hello&#34;
+fmt.println(message)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="use-plain-to-reassign-an-existing-variable">
+        <div class="docs">
+          <p><a href="#use-plain-to-reassign-an-existing-variable">Use plain `=` to reassign an existing variable.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">message = &#34;world&#34;
+fmt.println(message)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="you-can-declare-multiple-variables">
+        <div class="docs">
+          <p><a href="#you-can-declare-multiple-variables">You can declare multiple variables.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">x := 10
 y := 20
-fmt.println(&#34;sum:&#34;, x&#43;y)
-
-value := 42
+fmt.println(&#34;sum:&#34;, x&#43;y)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="dynamically-typed-a-variable-can-change-types">
+        <div class="docs">
+          <p><a href="#dynamically-typed-a-variable-can-change-types">Dynamically typed: a variable can change types.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">value := 42
 fmt.println(value)
 value = &#34;now a string&#34;
-fmt.println(value)</code></pre></td>
-      </tr>
+fmt.println(value)</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -55,16 +120,11 @@ fmt.println(value)</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Variables
-//
-// Variables are declared and initialized with `:=`. Tengo is dynamically typed:
-// a variable can hold any value and be reassigned to a different type.
-// Use plain `=` to reassign an existing variable.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 
 message := &#34;hello&#34;
 fmt.println(message)
+
 message = &#34;world&#34;
 fmt.println(message)
 
@@ -75,16 +135,11 @@ fmt.println(&#34;sum:&#34;, x&#43;y)
 value := 42
 fmt.println(value)
 value = &#34;now a string&#34;
-fmt.println(value)">// # Variables
-//
-// Variables are declared and initialized with `:=`. Tengo is dynamically typed:
-// a variable can hold any value and be reassigned to a different type.
-// Use plain `=` to reassign an existing variable.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(value)">fmt := import(&#34;fmt&#34;)
 
 message := &#34;hello&#34;
 fmt.println(message)
+
 message = &#34;world&#34;
 fmt.println(message)
 
@@ -97,16 +152,18 @@ fmt.println(value)
 value = &#34;now a string&#34;
 fmt.println(value)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="values.html" rel="prev">Values</a>.</p>
-    <p class="next">Next example: <a href="if-else.html" rel="next">If / Else</a>.</p>
+    <div class="nav-links">
+      
+        <a href="values.html" rel="prev">← Values</a>
+      
+      
+        <a href="if-else.html" rel="next">If / Else →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

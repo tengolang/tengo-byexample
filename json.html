@@ -17,33 +17,132 @@
   <div class="example" id="json">
     <h2><a href="index.html">Tengo by Example</a>: JSON</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>The `json` module encodes Tengo maps and arrays to JSON bytes and decodes
-JSON bytes back into Tengo values. Use `string()` to convert the byte
-output to a printable string.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-json := import(&#34;json&#34;)
-
-data := {name: &#34;Tengo&#34;, version: 3, fast: true}
-encoded := json.encode(data)
-fmt.println(string(encoded))
-
-decoded := json.decode(encoded)
-fmt.println(decoded[&#34;name&#34;])
-fmt.println(decoded[&#34;version&#34;])
-fmt.println(decoded[&#34;fast&#34;])</code></pre></td>
-      </tr>
+      <div class="row">
+        <div class="docs">
+          <p>Tengo offers built-in support for JSON encoding and decoding.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
       
-    </table>
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+json := import(&#34;json&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="first-well-look-at-encoding-tengo-values-to-json-strings">
+        <div class="docs">
+          <p><a href="#first-well-look-at-encoding-tengo-values-to-json-strings">First we&#39;ll look at encoding Tengo values to JSON strings.
+Here&#39;s one for a map of data.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">data := {
+    name: &#34;Tengo&#34;,
+    version: 3,
+    tags: [&#34;script&#34;, &#34;go&#34;, &#34;fast&#34;],
+    active: true
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="jsonencode-converts-a-tengo-value-into-a-byte-array">
+        <div class="docs">
+          <p><a href="#jsonencode-converts-a-tengo-value-into-a-byte-array">`json.encode` converts a Tengo value into a byte array
+of JSON. We use `string()` to convert it for printing.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">encoded := json.encode(data)
+fmt.println(string(encoded))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="now-lets-look-at-decoding-json-data-into-tengo-values">
+        <div class="docs">
+          <p><a href="#now-lets-look-at-decoding-json-data-into-tengo-values">Now let&#39;s look at decoding JSON data into Tengo values.
+Here&#39;s a generic JSON string.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">raw := `{&#34;apple&#34;:5,&#34;lettuce&#34;:7}`</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="jsondecode-parses-the-json-and-returns-a-tengo-map-or-array">
+        <div class="docs">
+          <p><a href="#jsondecode-parses-the-json-and-returns-a-tengo-map-or-array">`json.decode` parses the JSON and returns a Tengo map or array.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">decoded := json.decode(raw)
+fmt.println(decoded)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="we-can-access-the-values-in-the-decoded-map-just-like">
+        <div class="docs">
+          <p><a href="#we-can-access-the-values-in-the-decoded-map-just-like">We can access the values in the decoded map just like
+any other Tengo map.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;apple count:&#34;, decoded[&#34;apple&#34;])</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="you-can-also-decode-into-a-pre-existing-map-to-merge-or">
+        <div class="docs">
+          <p><a href="#you-can-also-decode-into-a-pre-existing-map-to-merge-or">You can also decode into a pre-existing map to merge or
+strictly define the structure, but simple decoding is
+most common.</a></p>
+        </div>
+        <div class="code leading">
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -51,50 +150,56 @@ fmt.println(decoded[&#34;fast&#34;])</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # JSON
-//
-// The `json` module encodes Tengo maps and arrays to JSON bytes and decodes
-// JSON bytes back into Tengo values. Use `string()` to convert the byte
-// output to a printable string.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 json := import(&#34;json&#34;)
 
-data := {name: &#34;Tengo&#34;, version: 3, fast: true}
+data := {
+    name: &#34;Tengo&#34;,
+    version: 3,
+    tags: [&#34;script&#34;, &#34;go&#34;, &#34;fast&#34;],
+    active: true
+}
+
 encoded := json.encode(data)
 fmt.println(string(encoded))
 
-decoded := json.decode(encoded)
-fmt.println(decoded[&#34;name&#34;])
-fmt.println(decoded[&#34;version&#34;])
-fmt.println(decoded[&#34;fast&#34;])">// # JSON
-//
-// The `json` module encodes Tengo maps and arrays to JSON bytes and decodes
-// JSON bytes back into Tengo values. Use `string()` to convert the byte
-// output to a printable string.
+raw := `{&#34;apple&#34;:5,&#34;lettuce&#34;:7}`
 
-fmt := import(&#34;fmt&#34;)
+decoded := json.decode(raw)
+fmt.println(decoded)
+
+fmt.println(&#34;apple count:&#34;, decoded[&#34;apple&#34;])">fmt := import(&#34;fmt&#34;)
 json := import(&#34;json&#34;)
 
-data := {name: &#34;Tengo&#34;, version: 3, fast: true}
+data := {
+    name: &#34;Tengo&#34;,
+    version: 3,
+    tags: [&#34;script&#34;, &#34;go&#34;, &#34;fast&#34;],
+    active: true
+}
+
 encoded := json.encode(data)
 fmt.println(string(encoded))
 
-decoded := json.decode(encoded)
-fmt.println(decoded[&#34;name&#34;])
-fmt.println(decoded[&#34;version&#34;])
-fmt.println(decoded[&#34;fast&#34;])</textarea>
+raw := `{&#34;apple&#34;:5,&#34;lettuce&#34;:7}`
+
+decoded := json.decode(raw)
+fmt.println(decoded)
+
+fmt.println(&#34;apple count:&#34;, decoded[&#34;apple&#34;])</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="math.html" rel="prev">Math</a>.</p>
-    <p class="next">Next example: <a href="text.html" rel="next">Text</a>.</p>
+    <div class="nav-links">
+      
+        <a href="math.html" rel="prev">← Math</a>
+      
+      
+        <a href="text.html" rel="next">Text →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

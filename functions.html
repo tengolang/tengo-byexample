@@ -17,38 +17,104 @@
   <div class="example" id="functions">
     <h2><a href="index.html">Tengo by Example</a>: Functions</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Functions are first-class values defined with `func`. They can be assigned
-to variables, passed as arguments, and returned from other functions.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-add := func(a, b) {
-    return a &#43; b
-}
-fmt.println(add(3, 4))
-
-greet := func(name) {
-    return &#34;Hello, &#34; &#43; name &#43; &#34;!&#34;
-}
-fmt.println(greet(&#34;Tengo&#34;))
-
-apply := func(f, x) {
-    return f(x)
-}
-double := func(n) { return n * 2 }
-fmt.println(apply(double, 21))</code></pre></td>
-      </tr>
+      <div class="row">
+        <div class="docs">
+          <p>Functions are central in Tengo.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
       
-    </table>
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="heres-a-function-that-takes-two-integers-and-returns">
+        <div class="docs">
+          <p><a href="#heres-a-function-that-takes-two-integers-and-returns">Here&#39;s a function that takes two integers and returns
+their sum as an integer.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">plus := func(a, b) {</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="tengo-functions-return-the-value-of-the-last-statement">
+        <div class="docs">
+          <p><a href="#tengo-functions-return-the-value-of-the-last-statement">Tengo functions return the value of the last statement
+if there&#39;s no explicit `return`.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">    return a &#43; b
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="call-a-function-just-as-youd-expect-with-nameargs">
+        <div class="docs">
+          <p><a href="#call-a-function-just-as-youd-expect-with-nameargs">Call a function just as you&#39;d expect, with `name(args)`.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">res := plus(1, 2)
+fmt.println(&#34;1&#43;2 =&#34;, res)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="when-you-have-multiple-parameters-of-the-same-type-you">
+        <div class="docs">
+          <p><a href="#when-you-have-multiple-parameters-of-the-same-type-you">When you have multiple parameters of the same type, you
+still need to list them all (Tengo is dynamically typed).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">plusPlus := func(a, b, c) {
+    return a &#43; b &#43; c
+}
+res = plusPlus(1, 2, 3)
+fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -56,60 +122,48 @@ fmt.println(apply(double, 21))</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Functions
-//
-// Functions are first-class values defined with `func`. They can be assigned
-// to variables, passed as arguments, and returned from other functions.
+              data-original="fmt := import(&#34;fmt&#34;)
 
-fmt := import(&#34;fmt&#34;)
+plus := func(a, b) {
 
-add := func(a, b) {
     return a &#43; b
 }
-fmt.println(add(3, 4))
 
-greet := func(name) {
-    return &#34;Hello, &#34; &#43; name &#43; &#34;!&#34;
+res := plus(1, 2)
+fmt.println(&#34;1&#43;2 =&#34;, res)
+
+plusPlus := func(a, b, c) {
+    return a &#43; b &#43; c
 }
-fmt.println(greet(&#34;Tengo&#34;))
+res = plusPlus(1, 2, 3)
+fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)">fmt := import(&#34;fmt&#34;)
 
-apply := func(f, x) {
-    return f(x)
-}
-double := func(n) { return n * 2 }
-fmt.println(apply(double, 21))">// # Functions
-//
-// Functions are first-class values defined with `func`. They can be assigned
-// to variables, passed as arguments, and returned from other functions.
+plus := func(a, b) {
 
-fmt := import(&#34;fmt&#34;)
-
-add := func(a, b) {
     return a &#43; b
 }
-fmt.println(add(3, 4))
 
-greet := func(name) {
-    return &#34;Hello, &#34; &#43; name &#43; &#34;!&#34;
-}
-fmt.println(greet(&#34;Tengo&#34;))
+res := plus(1, 2)
+fmt.println(&#34;1&#43;2 =&#34;, res)
 
-apply := func(f, x) {
-    return f(x)
+plusPlus := func(a, b, c) {
+    return a &#43; b &#43; c
 }
-double := func(n) { return n * 2 }
-fmt.println(apply(double, 21))</textarea>
+res = plusPlus(1, 2, 3)
+fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="sorting.html" rel="prev">Sorting</a>.</p>
-    <p class="next">Next example: <a href="closures.html" rel="next">Closures</a>.</p>
+    <div class="nav-links">
+      
+        <a href="sorting.html" rel="prev">← Sorting</a>
+      
+      
+        <a href="closures.html" rel="next">Closures →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

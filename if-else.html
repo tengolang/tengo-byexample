@@ -17,37 +17,104 @@
   <div class="example" id="if-else">
     <h2><a href="index.html">Tengo by Example</a>: If / Else</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Tengo&#39;s `if` and `else` work like most languages. Conditions do not need
-parentheses, but braces are required. An optional init statement can appear
-before the condition, separated by a semicolon.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-x := 7
-
-if x &gt; 10 {
-    fmt.println(&#34;big&#34;)
-} else if x &gt; 5 {
-    fmt.println(&#34;medium&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>Branching with `if` and `else` in Tengo is straight-forward.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="heres-a-basic-example">
+        <div class="docs">
+          <p><a href="#heres-a-basic-example">Here&#39;s a basic example.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">if 7 % 2 == 0 {
+    fmt.println(&#34;7 is even&#34;)
 } else {
-    fmt.println(&#34;small&#34;)
-}
-
-if n := 42; n%2 == 0 {
-    fmt.println(n, &#34;is even&#34;)
-}</code></pre></td>
-      </tr>
+    fmt.println(&#34;7 is odd&#34;)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+      <div class="row" id="you-can-have-an-if-statement-without-an-else">
+        <div class="docs">
+          <p><a href="#you-can-have-an-if-statement-without-an-else">You can have an `if` statement without an else.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">if 8 % 4 == 0 {
+    fmt.println(&#34;8 is divisible by 4&#34;)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="a-statement-can-precede-conditionals-any-variables-declared-in-this">
+        <div class="docs">
+          <p><a href="#a-statement-can-precede-conditionals-any-variables-declared-in-this">A statement can precede conditionals; any variables declared in this
+statement are available in all branches.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">if n := 9; n &lt; 0 {
+    fmt.println(n, &#34;is negative&#34;)
+} else if n &lt; 10 {
+    fmt.println(n, &#34;has 1 digit&#34;)
+} else {
+    fmt.println(n, &#34;has multiple digits&#34;)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="note-that-you-dont-need-parentheses-around-conditions-in-tengo">
+        <div class="docs">
+          <p><a href="#note-that-you-dont-need-parentheses-around-conditions-in-tengo">Note that you don&#39;t need parentheses around conditions in Tengo,
+but that the braces are required.</a></p>
+        </div>
+        <div class="code leading">
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -55,58 +122,56 @@ if n := 42; n%2 == 0 {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # If / Else
-//
-// Tengo&#39;s `if` and `else` work like most languages. Conditions do not need
-// parentheses, but braces are required. An optional init statement can appear
-// before the condition, separated by a semicolon.
+              data-original="fmt := import(&#34;fmt&#34;)
 
-fmt := import(&#34;fmt&#34;)
-
-x := 7
-
-if x &gt; 10 {
-    fmt.println(&#34;big&#34;)
-} else if x &gt; 5 {
-    fmt.println(&#34;medium&#34;)
+if 7 % 2 == 0 {
+    fmt.println(&#34;7 is even&#34;)
 } else {
-    fmt.println(&#34;small&#34;)
+    fmt.println(&#34;7 is odd&#34;)
 }
 
-if n := 42; n%2 == 0 {
-    fmt.println(n, &#34;is even&#34;)
-}">// # If / Else
-//
-// Tengo&#39;s `if` and `else` work like most languages. Conditions do not need
-// parentheses, but braces are required. An optional init statement can appear
-// before the condition, separated by a semicolon.
-
-fmt := import(&#34;fmt&#34;)
-
-x := 7
-
-if x &gt; 10 {
-    fmt.println(&#34;big&#34;)
-} else if x &gt; 5 {
-    fmt.println(&#34;medium&#34;)
-} else {
-    fmt.println(&#34;small&#34;)
+if 8 % 4 == 0 {
+    fmt.println(&#34;8 is divisible by 4&#34;)
 }
 
-if n := 42; n%2 == 0 {
-    fmt.println(n, &#34;is even&#34;)
+if n := 9; n &lt; 0 {
+    fmt.println(n, &#34;is negative&#34;)
+} else if n &lt; 10 {
+    fmt.println(n, &#34;has 1 digit&#34;)
+} else {
+    fmt.println(n, &#34;has multiple digits&#34;)
+}">fmt := import(&#34;fmt&#34;)
+
+if 7 % 2 == 0 {
+    fmt.println(&#34;7 is even&#34;)
+} else {
+    fmt.println(&#34;7 is odd&#34;)
+}
+
+if 8 % 4 == 0 {
+    fmt.println(&#34;8 is divisible by 4&#34;)
+}
+
+if n := 9; n &lt; 0 {
+    fmt.println(n, &#34;is negative&#34;)
+} else if n &lt; 10 {
+    fmt.println(n, &#34;has 1 digit&#34;)
+} else {
+    fmt.println(n, &#34;has multiple digits&#34;)
 }</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="variables.html" rel="prev">Variables</a>.</p>
-    <p class="next">Next example: <a href="switch.html" rel="next">Switch</a>.</p>
+    <div class="nav-links">
+      
+        <a href="variables.html" rel="prev">← Variables</a>
+      
+      
+        <a href="switch.html" rel="next">Switch →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

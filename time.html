@@ -17,13 +17,25 @@
   <div class="example" id="time">
     <h2><a href="index.html">Tengo by Example</a>: Time</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the
-current instant, `times.time_format` to produce strings with a layout, and
-`times.parse` to parse a string back into a time value.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the current instant, `times.time_format` to produce strings with a layout, and `times.parse` to parse a string back into a time value.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 times := import(&#34;times&#34;)
 
 now := times.now()
@@ -36,17 +48,21 @@ past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
 fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
 
 diff := times.sub(now, past)
-fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))</code></pre></td>
-      </tr>
+fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -54,13 +70,7 @@ fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(dif
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Time
-//
-// The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the
-// current instant, `times.time_format` to produce strings with a layout, and
-// `times.parse` to parse a string back into a time value.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 times := import(&#34;times&#34;)
 
 now := times.now()
@@ -73,13 +83,7 @@ past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
 fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
 
 diff := times.sub(now, past)
-fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))">// # Time
-//
-// The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the
-// current instant, `times.time_format` to produce strings with a layout, and
-// `times.parse` to parse a string back into a time value.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))">fmt := import(&#34;fmt&#34;)
 times := import(&#34;times&#34;)
 
 now := times.now()
@@ -94,16 +98,18 @@ fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
 diff := times.sub(now, past)
 fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="regular-expressions.html" rel="prev">Regular Expressions</a>.</p>
-    <p class="next">Next example: <a href="random-numbers.html" rel="next">Random Numbers</a>.</p>
+    <div class="nav-links">
+      
+        <a href="regular-expressions.html" rel="prev">← Regular Expressions</a>
+      
+      
+        <a href="random-numbers.html" rel="next">Random Numbers →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

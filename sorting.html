@@ -17,13 +17,25 @@
   <div class="example" id="sorting">
     <h2><a href="index.html">Tengo by Example</a>: Sorting</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Tengo has no built-in sort function, but the `enum` source module makes it
-easy to implement one. Below is a merge sort that works on any array whose
-elements support `&lt;` comparison.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>Tengo has no built-in sort function, but the `enum` source module makes it easy to implement one. Below is a merge sort that works on any array whose elements support `&lt;` comparison.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 enum := import(&#34;enum&#34;)
 
 merge := func(left, right) {
@@ -62,17 +74,21 @@ nums := [5, 2, 8, 1, 9, 3]
 fmt.println(msort(nums))
 
 words := [&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]
-fmt.println(msort(words))</code></pre></td>
-      </tr>
+fmt.println(msort(words))</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -80,13 +96,7 @@ fmt.println(msort(words))</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Sorting
-//
-// Tengo has no built-in sort function, but the `enum` source module makes it
-// easy to implement one. Below is a merge sort that works on any array whose
-// elements support `&lt;` comparison.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 enum := import(&#34;enum&#34;)
 
 merge := func(left, right) {
@@ -125,13 +135,7 @@ nums := [5, 2, 8, 1, 9, 3]
 fmt.println(msort(nums))
 
 words := [&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]
-fmt.println(msort(words))">// # Sorting
-//
-// Tengo has no built-in sort function, but the `enum` source module makes it
-// easy to implement one. Below is a merge sort that works on any array whose
-// elements support `&lt;` comparison.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(msort(words))">fmt := import(&#34;fmt&#34;)
 enum := import(&#34;enum&#34;)
 
 merge := func(left, right) {
@@ -172,16 +176,18 @@ fmt.println(msort(nums))
 words := [&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]
 fmt.println(msort(words))</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="slices.html" rel="prev">Slices</a>.</p>
-    <p class="next">Next example: <a href="functions.html" rel="next">Functions</a>.</p>
+    <div class="nav-links">
+      
+        <a href="slices.html" rel="prev">← Slices</a>
+      
+      
+        <a href="functions.html" rel="next">Functions →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

@@ -17,39 +17,137 @@
   <div class="example" id="slices">
     <h2><a href="index.html">Tengo by Example</a>: Slices</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
-Omitting either bound defaults to the start or end of the array. Slices
-share underlying storage with the original — modifying a slice element also
-modifies the original array.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-a := [1, 2, 3, 4, 5]
-
-fmt.println(a[1:3])
-fmt.println(a[:2])
-fmt.println(a[3:])
-fmt.println(a[:])
-
-b := a[1:4]
-b[0] = 99
-fmt.println(b)
-fmt.println(a)
-
-s := &#34;Hello, World!&#34;
-fmt.println(s[7:12])</code></pre></td>
-      </tr>
+      <div class="row">
+        <div class="docs">
+          <p>Slices are a key data type in Tengo, giving a more powerful interface to sequences than arrays.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
       
-    </table>
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="unlike-arrays-slices-can-be-resized-a-slice-is-often">
+        <div class="docs">
+          <p><a href="#unlike-arrays-slices-can-be-resized-a-slice-is-often">Unlike arrays, slices can be resized. A slice is often
+created by slicing an existing array or slice.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">s := [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;, &#34;d&#34;, &#34;e&#34;]
+fmt.println(&#34;base array:&#34;, s)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-syntax-slicelowhigh-creates-a-new-slice">
+        <div class="docs">
+          <p><a href="#the-syntax-slicelowhigh-creates-a-new-slice">The syntax `slice[low:high]` creates a new slice.
+For example, this gets elements from index 1 to 2 (excluding 3).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">l := s[1:3]
+fmt.println(&#34;sl1:&#34;, l)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="this-slices-up-to-but-excluding-index-5">
+        <div class="docs">
+          <p><a href="#this-slices-up-to-but-excluding-index-5">This slices up to (but excluding) index 5.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">l = s[:5]
+fmt.println(&#34;sl2:&#34;, l)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="and-this-slices-from-index-2-including-to-the-end">
+        <div class="docs">
+          <p><a href="#and-this-slices-from-index-2-including-to-the-end">And this slices from index 2 (including) to the end.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">l = s[2:]
+fmt.println(&#34;sl3:&#34;, l)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="you-can-also-create-a-copy-of-a-slice-to-ensure-that">
+        <div class="docs">
+          <p><a href="#you-can-also-create-a-copy-of-a-slice-to-ensure-that">You can also create a copy of a slice to ensure that
+modifications to the new slice don&#39;t affect the original.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">c := append([], s...)
+fmt.println(&#34;cpy:&#34;, c)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="slices-can-be-composed-into-multi-dimensional-data-structures">
+        <div class="docs">
+          <p><a href="#slices-can-be-composed-into-multi-dimensional-data-structures">Slices can be composed into multi-dimensional data structures.
+The length of the inner slices can vary, unlike multi-dimensional arrays.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">twoD := [
+    [0],
+    [1, 2],
+    [2, 3, 4]
+]
+fmt.println(&#34;2d: &#34;, twoD)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -57,62 +155,64 @@ fmt.println(s[7:12])</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Slices
-//
-// Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
-// Omitting either bound defaults to the start or end of the array. Slices
-// share underlying storage with the original — modifying a slice element also
-// modifies the original array.
+              data-original="fmt := import(&#34;fmt&#34;)
 
-fmt := import(&#34;fmt&#34;)
+s := [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;, &#34;d&#34;, &#34;e&#34;]
+fmt.println(&#34;base array:&#34;, s)
 
-a := [1, 2, 3, 4, 5]
+l := s[1:3]
+fmt.println(&#34;sl1:&#34;, l)
 
-fmt.println(a[1:3])
-fmt.println(a[:2])
-fmt.println(a[3:])
-fmt.println(a[:])
+l = s[:5]
+fmt.println(&#34;sl2:&#34;, l)
 
-b := a[1:4]
-b[0] = 99
-fmt.println(b)
-fmt.println(a)
+l = s[2:]
+fmt.println(&#34;sl3:&#34;, l)
 
-s := &#34;Hello, World!&#34;
-fmt.println(s[7:12])">// # Slices
-//
-// Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
-// Omitting either bound defaults to the start or end of the array. Slices
-// share underlying storage with the original — modifying a slice element also
-// modifies the original array.
+c := append([], s...)
+fmt.println(&#34;cpy:&#34;, c)
 
-fmt := import(&#34;fmt&#34;)
+twoD := [
+    [0],
+    [1, 2],
+    [2, 3, 4]
+]
+fmt.println(&#34;2d: &#34;, twoD)">fmt := import(&#34;fmt&#34;)
 
-a := [1, 2, 3, 4, 5]
+s := [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;, &#34;d&#34;, &#34;e&#34;]
+fmt.println(&#34;base array:&#34;, s)
 
-fmt.println(a[1:3])
-fmt.println(a[:2])
-fmt.println(a[3:])
-fmt.println(a[:])
+l := s[1:3]
+fmt.println(&#34;sl1:&#34;, l)
 
-b := a[1:4]
-b[0] = 99
-fmt.println(b)
-fmt.println(a)
+l = s[:5]
+fmt.println(&#34;sl2:&#34;, l)
 
-s := &#34;Hello, World!&#34;
-fmt.println(s[7:12])</textarea>
+l = s[2:]
+fmt.println(&#34;sl3:&#34;, l)
+
+c := append([], s...)
+fmt.println(&#34;cpy:&#34;, c)
+
+twoD := [
+    [0],
+    [1, 2],
+    [2, 3, 4]
+]
+fmt.println(&#34;2d: &#34;, twoD)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="strings.html" rel="prev">Strings</a>.</p>
-    <p class="next">Next example: <a href="sorting.html" rel="next">Sorting</a>.</p>
+    <div class="nav-links">
+      
+        <a href="strings.html" rel="prev">← Strings</a>
+      
+      
+        <a href="sorting.html" rel="next">Sorting →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

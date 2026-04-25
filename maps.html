@@ -17,37 +17,143 @@
   <div class="example" id="maps">
     <h2><a href="index.html">Tengo by Example</a>: Maps</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Maps store unordered key-value pairs. Keys are strings; values can be any
-type. Accessing a missing key returns `undefined`, which `is_undefined`
-can detect. Use `delete` to remove a key.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-ages := {alice: 30, bob: 25, carol: 35}
-fmt.println(ages[&#34;alice&#34;])
-
-ages[&#34;dave&#34;] = 28
-fmt.println(len(ages))
-
-fmt.println(is_undefined(ages[&#34;nobody&#34;]))
-
-delete(ages, &#34;bob&#34;)
-
-for name, age in ages {
-    fmt.println(name, age)
-}</code></pre></td>
-      </tr>
+      <div class="row">
+        <div class="docs">
+          <p>Maps are Tengo&#39;s built-in associative data type (sometimes called hashes or dicts).</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
       
-    </table>
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="to-create-an-empty-map-use-the-key-value-syntax-with-braces">
+        <div class="docs">
+          <p><a href="#to-create-an-empty-map-use-the-key-value-syntax-with-braces">To create an empty map, use the `{key: value}` syntax with braces.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">m := {}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="set-keyvalue-pairs-using-typical-namekey-val-syntax">
+        <div class="docs">
+          <p><a href="#set-keyvalue-pairs-using-typical-namekey-val-syntax">Set key/value pairs using typical `name[key] = val` syntax.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">m[&#34;k1&#34;] = 7
+m[&#34;k2&#34;] = 13</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="printing-a-map-with-fmtprintln-will-show-all-of-its-keyvalue-pairs">
+        <div class="docs">
+          <p><a href="#printing-a-map-with-fmtprintln-will-show-all-of-its-keyvalue-pairs">Printing a map with `fmt.println` will show all of its key/value pairs.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;map:&#34;, m)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="get-a-value-for-a-key-with-namekey">
+        <div class="docs">
+          <p><a href="#get-a-value-for-a-key-with-namekey">Get a value for a key with `name[key]`.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">v1 := m[&#34;k1&#34;]
+fmt.println(&#34;v1: &#34;, v1)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-built-in-len-returns-the-number-of-keyvalue-pairs">
+        <div class="docs">
+          <p><a href="#the-built-in-len-returns-the-number-of-keyvalue-pairs">The built-in `len` returns the number of key/value pairs
+when called on a map.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;len:&#34;, len(m))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-built-in-delete-removes-keyvalue-pairs-from-a-map">
+        <div class="docs">
+          <p><a href="#the-built-in-delete-removes-keyvalue-pairs-from-a-map">The built-in `delete` removes key/value pairs from a map.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">delete(m, &#34;k2&#34;)
+fmt.println(&#34;map:&#34;, m)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="you-can-also-use-a-literal-syntax-to-declare-and-initialize">
+        <div class="docs">
+          <p><a href="#you-can-also-use-a-literal-syntax-to-declare-and-initialize">You can also use a literal syntax to declare and initialize
+a new map on the same line.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">n := {foo: 1, bar: 2}
+fmt.println(&#34;map:&#34;, n)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -55,58 +161,56 @@ for name, age in ages {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Maps
-//
-// Maps store unordered key-value pairs. Keys are strings; values can be any
-// type. Accessing a missing key returns `undefined`, which `is_undefined`
-// can detect. Use `delete` to remove a key.
+              data-original="fmt := import(&#34;fmt&#34;)
 
-fmt := import(&#34;fmt&#34;)
+m := {}
 
-ages := {alice: 30, bob: 25, carol: 35}
-fmt.println(ages[&#34;alice&#34;])
+m[&#34;k1&#34;] = 7
+m[&#34;k2&#34;] = 13
 
-ages[&#34;dave&#34;] = 28
-fmt.println(len(ages))
+fmt.println(&#34;map:&#34;, m)
 
-fmt.println(is_undefined(ages[&#34;nobody&#34;]))
+v1 := m[&#34;k1&#34;]
+fmt.println(&#34;v1: &#34;, v1)
 
-delete(ages, &#34;bob&#34;)
+fmt.println(&#34;len:&#34;, len(m))
 
-for name, age in ages {
-    fmt.println(name, age)
-}">// # Maps
-//
-// Maps store unordered key-value pairs. Keys are strings; values can be any
-// type. Accessing a missing key returns `undefined`, which `is_undefined`
-// can detect. Use `delete` to remove a key.
+delete(m, &#34;k2&#34;)
+fmt.println(&#34;map:&#34;, m)
 
-fmt := import(&#34;fmt&#34;)
+n := {foo: 1, bar: 2}
+fmt.println(&#34;map:&#34;, n)">fmt := import(&#34;fmt&#34;)
 
-ages := {alice: 30, bob: 25, carol: 35}
-fmt.println(ages[&#34;alice&#34;])
+m := {}
 
-ages[&#34;dave&#34;] = 28
-fmt.println(len(ages))
+m[&#34;k1&#34;] = 7
+m[&#34;k2&#34;] = 13
 
-fmt.println(is_undefined(ages[&#34;nobody&#34;]))
+fmt.println(&#34;map:&#34;, m)
 
-delete(ages, &#34;bob&#34;)
+v1 := m[&#34;k1&#34;]
+fmt.println(&#34;v1: &#34;, v1)
 
-for name, age in ages {
-    fmt.println(name, age)
-}</textarea>
+fmt.println(&#34;len:&#34;, len(m))
+
+delete(m, &#34;k2&#34;)
+fmt.println(&#34;map:&#34;, m)
+
+n := {foo: 1, bar: 2}
+fmt.println(&#34;map:&#34;, n)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="arrays.html" rel="prev">Arrays</a>.</p>
-    <p class="next">Next example: <a href="strings.html" rel="next">Strings</a>.</p>
+    <div class="nav-links">
+      
+        <a href="arrays.html" rel="prev">← Arrays</a>
+      
+      
+        <a href="strings.html" rel="next">Strings →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

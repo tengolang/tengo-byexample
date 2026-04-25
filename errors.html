@@ -17,13 +17,25 @@
   <div class="example" id="errors">
     <h2><a href="index.html">Tengo by Example</a>: Errors</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Tengo uses `error()` to create error values. Functions signal failure by
-returning an error, and callers check with `is_error()`. Errors carry a
-string message accessible via `.value`.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>Tengo uses `error()` to create error values. Functions signal failure by returning an error, and callers check with `is_error()`. Errors carry a string message accessible via `.value`.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 
 divide := func(a, b) {
     if b == 0 {
@@ -38,17 +50,21 @@ fmt.println(result)
 result = divide(10, 0)
 if is_error(result) {
     fmt.println(&#34;error:&#34;, result.value)
-}</code></pre></td>
-      </tr>
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -56,13 +72,7 @@ if is_error(result) {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Errors
-//
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 
 divide := func(a, b) {
     if b == 0 {
@@ -77,13 +87,7 @@ fmt.println(result)
 result = divide(10, 0)
 if is_error(result) {
     fmt.println(&#34;error:&#34;, result.value)
-}">// # Errors
-//
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
-
-fmt := import(&#34;fmt&#34;)
+}">fmt := import(&#34;fmt&#34;)
 
 divide := func(a, b) {
     if b == 0 {
@@ -100,16 +104,18 @@ if is_error(result) {
     fmt.println(&#34;error:&#34;, result.value)
 }</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="closures.html" rel="prev">Closures</a>.</p>
-    <p class="next">Next example: <a href="custom-errors.html" rel="next">Custom Errors</a>.</p>
+    <div class="nav-links">
+      
+        <a href="closures.html" rel="prev">← Closures</a>
+      
+      
+        <a href="custom-errors.html" rel="next">Custom Errors →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

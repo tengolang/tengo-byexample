@@ -17,12 +17,25 @@
   <div class="example" id="text">
     <h2><a href="index.html">Tengo by Example</a>: Text</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>The `text` module handles string manipulation including searching, splitting,
-trimming, case conversion, and regular expressions.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>The `text` module handles string manipulation including searching, splitting, trimming, case conversion, and regular expressions.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 fmt.println(text.title(&#34;hello world&#34;))
@@ -34,17 +47,21 @@ fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
 fmt.println(text.repeat(&#34;ab&#34;, 3))
 
 fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
-fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</code></pre></td>
-      </tr>
+fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -52,12 +69,7 @@ fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</code></pre>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Text
-//
-// The `text` module handles string manipulation including searching, splitting,
-// trimming, case conversion, and regular expressions.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 fmt.println(text.title(&#34;hello world&#34;))
@@ -69,12 +81,7 @@ fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
 fmt.println(text.repeat(&#34;ab&#34;, 3))
 
 fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
-fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))">// # Text
-//
-// The `text` module handles string manipulation including searching, splitting,
-// trimming, case conversion, and regular expressions.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 fmt.println(text.title(&#34;hello world&#34;))
@@ -88,16 +95,18 @@ fmt.println(text.repeat(&#34;ab&#34;, 3))
 fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
 fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="json.html" rel="prev">JSON</a>.</p>
-    <p class="next">Next example: <a href="string-formatting.html" rel="next">String Formatting</a>.</p>
+    <div class="nav-links">
+      
+        <a href="json.html" rel="prev">← JSON</a>
+      
+      
+        <a href="string-formatting.html" rel="next">String Formatting →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

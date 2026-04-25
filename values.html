@@ -17,31 +17,85 @@
   <div class="example" id="values">
     <h2><a href="index.html">Tengo by Example</a>: Values</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Tengo has several built-in value types: strings, integers, floats, booleans,
-arrays, and maps. Strings concatenate with `&#43;`, integer division truncates,
-and float division produces a float result.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-fmt.println(&#34;ten&#34; &#43; &#34;go&#34;)
-fmt.println(&#34;1&#43;1 =&#34;, 1&#43;1)
+      <div class="row">
+        <div class="docs">
+          <p>Tengo has several built-in value types: strings, integers, floats, booleans, arrays, and maps.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="strings-can-be-concatenated-with">
+        <div class="docs">
+          <p><a href="#strings-can-be-concatenated-with">Strings can be concatenated with `&#43;`.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;ten&#34; &#43; &#34;go&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="integers-and-floats">
+        <div class="docs">
+          <p><a href="#integers-and-floats">Integers and floats.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;1&#43;1 =&#34;, 1&#43;1)
 fmt.println(&#34;7/2 =&#34;, 7/2)
-fmt.println(&#34;7.0/2.0 =&#34;, 7.0/2.0)
-fmt.println(true &amp;&amp; false)
-fmt.println(true || false)
-fmt.println(!true)</code></pre></td>
-      </tr>
+fmt.println(&#34;7.0/2.0 =&#34;, 7.0/2.0)</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+      <div class="row" id="booleans-with-boolean-operators-as-youd-expect">
+        <div class="docs">
+          <p><a href="#booleans-with-boolean-operators-as-youd-expect">Booleans, with boolean operators as you&#39;d expect.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(true &amp;&amp; false)
+fmt.println(true || false)
+fmt.println(!true)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -49,46 +103,40 @@ fmt.println(!true)</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Values
-//
-// Tengo has several built-in value types: strings, integers, floats, booleans,
-// arrays, and maps. Strings concatenate with `&#43;`, integer division truncates,
-// and float division produces a float result.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 
 fmt.println(&#34;ten&#34; &#43; &#34;go&#34;)
+
 fmt.println(&#34;1&#43;1 =&#34;, 1&#43;1)
 fmt.println(&#34;7/2 =&#34;, 7/2)
 fmt.println(&#34;7.0/2.0 =&#34;, 7.0/2.0)
+
 fmt.println(true &amp;&amp; false)
 fmt.println(true || false)
-fmt.println(!true)">// # Values
-//
-// Tengo has several built-in value types: strings, integers, floats, booleans,
-// arrays, and maps. Strings concatenate with `&#43;`, integer division truncates,
-// and float division produces a float result.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(!true)">fmt := import(&#34;fmt&#34;)
 
 fmt.println(&#34;ten&#34; &#43; &#34;go&#34;)
+
 fmt.println(&#34;1&#43;1 =&#34;, 1&#43;1)
 fmt.println(&#34;7/2 =&#34;, 7/2)
 fmt.println(&#34;7.0/2.0 =&#34;, 7.0/2.0)
+
 fmt.println(true &amp;&amp; false)
 fmt.println(true || false)
 fmt.println(!true)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="hello-world.html" rel="prev">Hello World</a>.</p>
-    <p class="next">Next example: <a href="variables.html" rel="next">Variables</a>.</p>
+    <div class="nav-links">
+      
+        <a href="hello-world.html" rel="prev">← Hello World</a>
+      
+      
+        <a href="variables.html" rel="next">Variables →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

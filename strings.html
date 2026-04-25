@@ -17,35 +17,156 @@
   <div class="example" id="strings">
     <h2><a href="index.html">Tengo by Example</a>: Strings</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>Strings are immutable byte sequences. Slice notation extracts substrings,
-and the `text` module provides search, split, join, and case conversion.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-text := import(&#34;text&#34;)
-
-s := &#34;Hello, Tengo!&#34;
-fmt.println(len(s))
-fmt.println(s[7:12])
-fmt.println(text.to_upper(s))
-fmt.println(text.to_lower(s))
-fmt.println(text.contains(s, &#34;Tengo&#34;))
-fmt.println(text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
-
-parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(parts)
-fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</code></pre></td>
-      </tr>
+      <div class="row">
+        <div class="docs">
+          <p>A string is an immutable sequence of bytes. In Tengo, strings are UTF-8 encoded by default.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
       
-    </table>
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="use-double-quotes-for-string-literals">
+        <div class="docs">
+          <p><a href="#use-double-quotes-for-string-literals">Use double quotes for string literals.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">s := &#34;Hello, Tengo!&#34;</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="len-returns-the-number-of-bytes-in-the-string">
+        <div class="docs">
+          <p><a href="#len-returns-the-number-of-bytes-in-the-string">`len` returns the number of bytes in the string.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;len:&#34;, len(s))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="you-can-use-slice-notation-to-get-a-substring">
+        <div class="docs">
+          <p><a href="#you-can-use-slice-notation-to-get-a-substring">You can use slice notation to get a substring.
+`s[7:12]` gets characters from index 7 to 11.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;slice:&#34;, s[7:12])</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-text-module-provides-many-helpful-functions">
+        <div class="docs">
+          <p><a href="#the-text-module-provides-many-helpful-functions">The `text` module provides many helpful functions.
+Here we change the case of the string.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;upper:&#34;, text.to_upper(s))
+fmt.println(&#34;lower:&#34;, text.to_lower(s))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="search-for-a-substring-within-a-string">
+        <div class="docs">
+          <p><a href="#search-for-a-substring-within-a-string">Search for a substring within a string.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;contains &#39;Tengo&#39;:&#34;, text.contains(s, &#34;Tengo&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="replace-occurrences-of-a-substring">
+        <div class="docs">
+          <p><a href="#replace-occurrences-of-a-substring">Replace occurrences of a substring.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;replace:&#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="split-a-string-into-an-array-of-substrings">
+        <div class="docs">
+          <p><a href="#split-a-string-into-an-array-of-substrings">Split a string into an array of substrings.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
+fmt.println(&#34;split:&#34;, parts)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="join-an-array-of-strings-into-a-single-string-with-a-separator">
+        <div class="docs">
+          <p><a href="#join-an-array-of-strings-into-a-single-string-with-a-separator">Join an array of strings into a single string with a separator.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;join:&#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -53,54 +174,58 @@ fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</co
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Strings
-//
-// Strings are immutable byte sequences. Slice notation extracts substrings,
-// and the `text` module provides search, split, join, and case conversion.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 s := &#34;Hello, Tengo!&#34;
-fmt.println(len(s))
-fmt.println(s[7:12])
-fmt.println(text.to_upper(s))
-fmt.println(text.to_lower(s))
-fmt.println(text.contains(s, &#34;Tengo&#34;))
-fmt.println(text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+
+fmt.println(&#34;len:&#34;, len(s))
+
+fmt.println(&#34;slice:&#34;, s[7:12])
+
+fmt.println(&#34;upper:&#34;, text.to_upper(s))
+fmt.println(&#34;lower:&#34;, text.to_lower(s))
+
+fmt.println(&#34;contains &#39;Tengo&#39;:&#34;, text.contains(s, &#34;Tengo&#34;))
+
+fmt.println(&#34;replace:&#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
 
 parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(parts)
-fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))">// # Strings
-//
-// Strings are immutable byte sequences. Slice notation extracts substrings,
-// and the `text` module provides search, split, join, and case conversion.
+fmt.println(&#34;split:&#34;, parts)
 
-fmt := import(&#34;fmt&#34;)
+fmt.println(&#34;join:&#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 s := &#34;Hello, Tengo!&#34;
-fmt.println(len(s))
-fmt.println(s[7:12])
-fmt.println(text.to_upper(s))
-fmt.println(text.to_lower(s))
-fmt.println(text.contains(s, &#34;Tengo&#34;))
-fmt.println(text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+
+fmt.println(&#34;len:&#34;, len(s))
+
+fmt.println(&#34;slice:&#34;, s[7:12])
+
+fmt.println(&#34;upper:&#34;, text.to_upper(s))
+fmt.println(&#34;lower:&#34;, text.to_lower(s))
+
+fmt.println(&#34;contains &#39;Tengo&#39;:&#34;, text.contains(s, &#34;Tengo&#34;))
+
+fmt.println(&#34;replace:&#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
 
 parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(parts)
-fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</textarea>
+fmt.println(&#34;split:&#34;, parts)
+
+fmt.println(&#34;join:&#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="maps.html" rel="prev">Maps</a>.</p>
-    <p class="next">Next example: <a href="slices.html" rel="next">Slices</a>.</p>
+    <div class="nav-links">
+      
+        <a href="maps.html" rel="prev">← Maps</a>
+      
+      
+        <a href="slices.html" rel="next">Slices →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

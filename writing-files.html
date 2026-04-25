@@ -17,13 +17,25 @@
   <div class="example" id="writing-files">
     <h2><a href="index.html">Tengo by Example</a>: Writing Files</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>`os.create` creates or truncates a file and returns a file object. Use
-`.write(bytes)` or `.write_string(string)` to write data, and always call
-`.close()` when done.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>`os.create` creates or truncates a file and returns a file object. Use `.write(bytes)` or `.write_string(string)` to write data, and always call `.close()` when done.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 f := os.create(&#34;/tmp/tengo_write.txt&#34;)
@@ -40,17 +52,21 @@ f2.close()
 
 fmt.println(string(os.read_file(&#34;/tmp/tengo_write.txt&#34;)))
 
-os.remove(&#34;/tmp/tengo_write.txt&#34;)</code></pre></td>
-      </tr>
+os.remove(&#34;/tmp/tengo_write.txt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -58,13 +74,7 @@ os.remove(&#34;/tmp/tengo_write.txt&#34;)</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Writing Files
-//
-// `os.create` creates or truncates a file and returns a file object. Use
-// `.write(bytes)` or `.write_string(string)` to write data, and always call
-// `.close()` when done.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 f := os.create(&#34;/tmp/tengo_write.txt&#34;)
@@ -81,13 +91,7 @@ f2.close()
 
 fmt.println(string(os.read_file(&#34;/tmp/tengo_write.txt&#34;)))
 
-os.remove(&#34;/tmp/tengo_write.txt&#34;)">// # Writing Files
-//
-// `os.create` creates or truncates a file and returns a file object. Use
-// `.write(bytes)` or `.write_string(string)` to write data, and always call
-// `.close()` when done.
-
-fmt := import(&#34;fmt&#34;)
+os.remove(&#34;/tmp/tengo_write.txt&#34;)">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 f := os.create(&#34;/tmp/tengo_write.txt&#34;)
@@ -106,16 +110,18 @@ fmt.println(string(os.read_file(&#34;/tmp/tengo_write.txt&#34;)))
 
 os.remove(&#34;/tmp/tengo_write.txt&#34;)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="reading-files.html" rel="prev">Reading Files</a>.</p>
-    <p class="next">Next example: <a href="exit.html" rel="next">Exit</a>.</p>
+    <div class="nav-links">
+      
+        <a href="reading-files.html" rel="prev">← Reading Files</a>
+      
+      
+        <a href="exit.html" rel="next">Exit →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

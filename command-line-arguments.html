@@ -17,15 +17,25 @@
   <div class="example" id="command-line-arguments">
     <h2><a href="index.html">Tengo by Example</a>: Command-Line Arguments</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>`os.args()` returns the argument list as an array. The first element is
-always the interpreter name (`tengo`), the second is the script path, and
-any further elements are the arguments passed by the caller.
-
-Run this example with: `tengo command-line-arguments.tengo arg1 arg2`</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>`os.args()` returns the argument list as an array. The first element is always the interpreter name (`tengo`), the second is the script path, and any further elements are the arguments passed by the caller.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 args := os.args()
@@ -34,17 +44,21 @@ fmt.println(len(args))
 
 if len(args) &gt; 2 {
     fmt.println(&#34;first user arg:&#34;, args[2])
-}</code></pre></td>
-      </tr>
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -52,15 +66,7 @@ if len(args) &gt; 2 {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Command-Line Arguments
-//
-// `os.args()` returns the argument list as an array. The first element is
-// always the interpreter name (`tengo`), the second is the script path, and
-// any further elements are the arguments passed by the caller.
-//
-// Run this example with: `tengo command-line-arguments.tengo arg1 arg2`
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 args := os.args()
@@ -69,15 +75,7 @@ fmt.println(len(args))
 
 if len(args) &gt; 2 {
     fmt.println(&#34;first user arg:&#34;, args[2])
-}">// # Command-Line Arguments
-//
-// `os.args()` returns the argument list as an array. The first element is
-// always the interpreter name (`tengo`), the second is the script path, and
-// any further elements are the arguments passed by the caller.
-//
-// Run this example with: `tengo command-line-arguments.tengo arg1 arg2`
-
-fmt := import(&#34;fmt&#34;)
+}">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 args := os.args()
@@ -88,16 +86,18 @@ if len(args) &gt; 2 {
     fmt.println(&#34;first user arg:&#34;, args[2])
 }</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="coroutines.html" rel="prev">Coroutines</a>.</p>
-    <p class="next">Next example: <a href="environment-variables.html" rel="next">Environment Variables</a>.</p>
+    <div class="nav-links">
+      
+        <a href="coroutines.html" rel="prev">← Coroutines</a>
+      
+      
+        <a href="environment-variables.html" rel="next">Environment Variables →</a>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

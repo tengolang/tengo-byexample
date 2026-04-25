@@ -17,28 +17,44 @@
   <div class="example" id="exit">
     <h2><a href="index.html">Tengo by Example</a>: Exit</h2>
 
-    <table>
+    <div class="example-grid">
       
-      <tr>
-        <td class="docs"><p>`os.exit(code)` terminates the script immediately with the given exit code.
-Deferred cleanup does not run (Tengo has no `defer`), so close resources
-before calling exit.</p></td>
-        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+      <div class="row">
+        <div class="docs">
+          <p>`os.exit(code)` terminates the script immediately with the given exit code. Deferred cleanup does not run (Tengo has no `defer`), so close resources before calling exit.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 fmt.println(&#34;before exit&#34;)
 os.exit(0)
-fmt.println(&#34;this will not print&#34;)</code></pre></td>
-      </tr>
+fmt.println(&#34;this will not print&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
       
-    </table>
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -46,40 +62,30 @@ fmt.println(&#34;this will not print&#34;)</code></pre></td>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Exit
-//
-// `os.exit(code)` terminates the script immediately with the given exit code.
-// Deferred cleanup does not run (Tengo has no `defer`), so close resources
-// before calling exit.
-
-fmt := import(&#34;fmt&#34;)
+              data-original="fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 fmt.println(&#34;before exit&#34;)
 os.exit(0)
-fmt.println(&#34;this will not print&#34;)">// # Exit
-//
-// `os.exit(code)` terminates the script immediately with the given exit code.
-// Deferred cleanup does not run (Tengo has no `defer`), so close resources
-// before calling exit.
-
-fmt := import(&#34;fmt&#34;)
+fmt.println(&#34;this will not print&#34;)">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 fmt.println(&#34;before exit&#34;)
 os.exit(0)
 fmt.println(&#34;this will not print&#34;)</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    <p class="prev">Previous example: <a href="writing-files.html" rel="prev">Writing Files</a>.</p>
-    
+    <div class="nav-links">
+      
+        <a href="writing-files.html" rel="prev">← Writing Files</a>
+      
+      
+        <span></span>
+      
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
