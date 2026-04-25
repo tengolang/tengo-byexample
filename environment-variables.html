@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: Environment Variables</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "command-line-arguments.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "reading-files.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="environment-variables">
+    <h2><a href="index.html">Tengo by Example</a>: Environment Variables</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>The `os` module exposes `getenv`, `setenv`, `unsetenv`, `environ`, and
+`lookup_env`. `getenv` returns an empty string for missing variables;
+`lookup_env` returns `(value, true)` or `(&#34;&#34;, false)`.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
+
+fmt.println(os.getenv(&#34;HOME&#34;))
+fmt.println(os.getenv(&#34;NONEXISTENT&#34;))
+
+os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
+fmt.println(os.getenv(&#34;GREETING&#34;))
+
+val, ok := os.lookup_env(&#34;GREETING&#34;)
+fmt.println(val, ok)
+
+_, ok = os.lookup_env(&#34;MISSING&#34;)
+fmt.println(ok)
+
+os.unsetenv(&#34;GREETING&#34;)</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # Environment Variables
+//
+// The `os` module exposes `getenv`, `setenv`, `unsetenv`, `environ`, and
+// `lookup_env`. `getenv` returns an empty string for missing variables;
+// `lookup_env` returns `(value, true)` or `(&#34;&#34;, false)`.
+
+fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
+
+fmt.println(os.getenv(&#34;HOME&#34;))
+fmt.println(os.getenv(&#34;NONEXISTENT&#34;))
+
+os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
+fmt.println(os.getenv(&#34;GREETING&#34;))
+
+val, ok := os.lookup_env(&#34;GREETING&#34;)
+fmt.println(val, ok)
+
+_, ok = os.lookup_env(&#34;MISSING&#34;)
+fmt.println(ok)
+
+os.unsetenv(&#34;GREETING&#34;)">// # Environment Variables
+//
+// The `os` module exposes `getenv`, `setenv`, `unsetenv`, `environ`, and
+// `lookup_env`. `getenv` returns an empty string for missing variables;
+// `lookup_env` returns `(value, true)` or `(&#34;&#34;, false)`.
+
+fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
+
+fmt.println(os.getenv(&#34;HOME&#34;))
+fmt.println(os.getenv(&#34;NONEXISTENT&#34;))
+
+os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
+fmt.println(os.getenv(&#34;GREETING&#34;))
+
+val, ok := os.lookup_env(&#34;GREETING&#34;)
+fmt.println(val, ok)
+
+_, ok = os.lookup_env(&#34;MISSING&#34;)
+fmt.println(ok)
+
+os.unsetenv(&#34;GREETING&#34;)</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="command-line-arguments.html" rel="prev">Command-Line Arguments</a>.</p>
+    <p class="next">Next example: <a href="reading-files.html" rel="next">Reading Files</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

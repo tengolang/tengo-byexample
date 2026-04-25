@@ -2,43 +2,38 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tengo by Example: Errors</title>
+  <title>Tengo by Example: Constants</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <script>
   window.onkeydown = (e) => {
     if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "closures.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "custom-errors.html"; }
+    if (e.key === "ArrowLeft")  { window.location.href = "for.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "type-conversions.html"; }
   };
 </script>
 <body>
-  <div class="example" id="errors">
-    <h2><a href="index.html">Tengo by Example</a>: Errors</h2>
+  <div class="example" id="constants">
+    <h2><a href="index.html">Tengo by Example</a>: Constants</h2>
 
     <table>
       
       <tr>
-        <td class="docs"><p>Tengo uses `error()` to create error values. Functions signal failure by
-returning an error, and callers check with `is_error()`. Errors carry a
-string message accessible via `.value`.</p></td>
+        <td class="docs"><p>Tengo has no `const` keyword. Constant-like values are typically module-level
+variables. For data that must not be mutated, wrap it with `immutable()` to
+get a runtime-enforced read-only value.</p></td>
         <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+pi := 3.14159265358979
+greeting := &#34;Hello&#34;
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(pi)
+fmt.println(greeting)
 
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</code></pre></td>
+limits := immutable({min: 0, max: 100})
+fmt.println(limits[&#34;min&#34;])
+fmt.println(limits[&#34;max&#34;])</code></pre></td>
       </tr>
       
     </table>
@@ -56,49 +51,39 @@ if is_error(result) {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Errors
+              data-original="// # Constants
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// Tengo has no `const` keyword. Constant-like values are typically module-level
+// variables. For data that must not be mutated, wrap it with `immutable()` to
+// get a runtime-enforced read-only value.
 
 fmt := import(&#34;fmt&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+pi := 3.14159265358979
+greeting := &#34;Hello&#34;
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(pi)
+fmt.println(greeting)
 
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}">// # Errors
+limits := immutable({min: 0, max: 100})
+fmt.println(limits[&#34;min&#34;])
+fmt.println(limits[&#34;max&#34;])">// # Constants
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// Tengo has no `const` keyword. Constant-like values are typically module-level
+// variables. For data that must not be mutated, wrap it with `immutable()` to
+// get a runtime-enforced read-only value.
 
 fmt := import(&#34;fmt&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+pi := 3.14159265358979
+greeting := &#34;Hello&#34;
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(pi)
+fmt.println(greeting)
 
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</textarea>
+limits := immutable({min: 0, max: 100})
+fmt.println(limits[&#34;min&#34;])
+fmt.println(limits[&#34;max&#34;])</textarea>
           </div>
         </td>
       </tr>
@@ -108,8 +93,8 @@ if is_error(result) {
       </tr>
     </table>
 
-    <p class="prev">Previous example: <a href="closures.html" rel="prev">Closures</a>.</p>
-    <p class="next">Next example: <a href="custom-errors.html" rel="next">Custom Errors</a>.</p>
+    <p class="prev">Previous example: <a href="for.html" rel="prev">For Loops</a>.</p>
+    <p class="next">Next example: <a href="type-conversions.html" rel="next">Type Conversions</a>.</p>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

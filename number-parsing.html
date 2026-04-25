@@ -2,40 +2,39 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tengo by Example: Strings</title>
+  <title>Tengo by Example: Number Parsing</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <script>
   window.onkeydown = (e) => {
     if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "maps.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "slices.html"; }
+    if (e.key === "ArrowLeft")  { window.location.href = "random-numbers.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "base64-encoding.html"; }
   };
 </script>
 <body>
-  <div class="example" id="strings">
-    <h2><a href="index.html">Tengo by Example</a>: Strings</h2>
+  <div class="example" id="number-parsing">
+    <h2><a href="index.html">Tengo by Example</a>: Number Parsing</h2>
 
     <table>
       
       <tr>
-        <td class="docs"><p>Strings are immutable byte sequences. Slice notation extracts substrings,
-and the `text` module provides search, split, join, and case conversion.</p></td>
+        <td class="docs"><p>The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching
+`format_*` functions for converting between numbers and strings.</p></td>
         <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
-s := &#34;Hello, Tengo!&#34;
-fmt.println(len(s))
-fmt.println(s[7:12])
-fmt.println(text.to_upper(s))
-fmt.println(text.to_lower(s))
-fmt.println(text.contains(s, &#34;Tengo&#34;))
-fmt.println(text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+fmt.println(text.atoi(&#34;42&#34;))
+fmt.println(text.parse_float(&#34;3.14&#34;, 64))
+fmt.println(text.parse_int(&#34;ff&#34;, 16, 64))
+fmt.println(text.parse_int(&#34;101010&#34;, 2, 64))
+fmt.println(text.parse_bool(&#34;true&#34;))
 
-parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(parts)
-fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</code></pre></td>
+fmt.println(text.itoa(42))
+fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
+fmt.println(text.format_int(255, 16))
+fmt.println(text.format_int(42, 2))</code></pre></td>
       </tr>
       
     </table>
@@ -53,43 +52,41 @@ fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</co
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Strings
+              data-original="// # Number Parsing
 //
-// Strings are immutable byte sequences. Slice notation extracts substrings,
-// and the `text` module provides search, split, join, and case conversion.
+// The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching
+// `format_*` functions for converting between numbers and strings.
 
 fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
-s := &#34;Hello, Tengo!&#34;
-fmt.println(len(s))
-fmt.println(s[7:12])
-fmt.println(text.to_upper(s))
-fmt.println(text.to_lower(s))
-fmt.println(text.contains(s, &#34;Tengo&#34;))
-fmt.println(text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+fmt.println(text.atoi(&#34;42&#34;))
+fmt.println(text.parse_float(&#34;3.14&#34;, 64))
+fmt.println(text.parse_int(&#34;ff&#34;, 16, 64))
+fmt.println(text.parse_int(&#34;101010&#34;, 2, 64))
+fmt.println(text.parse_bool(&#34;true&#34;))
 
-parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(parts)
-fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))">// # Strings
+fmt.println(text.itoa(42))
+fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
+fmt.println(text.format_int(255, 16))
+fmt.println(text.format_int(42, 2))">// # Number Parsing
 //
-// Strings are immutable byte sequences. Slice notation extracts substrings,
-// and the `text` module provides search, split, join, and case conversion.
+// The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching
+// `format_*` functions for converting between numbers and strings.
 
 fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
-s := &#34;Hello, Tengo!&#34;
-fmt.println(len(s))
-fmt.println(s[7:12])
-fmt.println(text.to_upper(s))
-fmt.println(text.to_lower(s))
-fmt.println(text.contains(s, &#34;Tengo&#34;))
-fmt.println(text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+fmt.println(text.atoi(&#34;42&#34;))
+fmt.println(text.parse_float(&#34;3.14&#34;, 64))
+fmt.println(text.parse_int(&#34;ff&#34;, 16, 64))
+fmt.println(text.parse_int(&#34;101010&#34;, 2, 64))
+fmt.println(text.parse_bool(&#34;true&#34;))
 
-parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(parts)
-fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</textarea>
+fmt.println(text.itoa(42))
+fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
+fmt.println(text.format_int(255, 16))
+fmt.println(text.format_int(42, 2))</textarea>
           </div>
         </td>
       </tr>
@@ -99,8 +96,8 @@ fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</te
       </tr>
     </table>
 
-    <p class="prev">Previous example: <a href="maps.html" rel="prev">Maps</a>.</p>
-    <p class="next">Next example: <a href="slices.html" rel="next">Slices</a>.</p>
+    <p class="prev">Previous example: <a href="random-numbers.html" rel="prev">Random Numbers</a>.</p>
+    <p class="next">Next example: <a href="base64-encoding.html" rel="next">Base64 Encoding</a>.</p>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

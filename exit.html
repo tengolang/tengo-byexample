@@ -2,43 +2,33 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tengo by Example: Errors</title>
+  <title>Tengo by Example: Exit</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <script>
   window.onkeydown = (e) => {
     if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "closures.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "custom-errors.html"; }
+    if (e.key === "ArrowLeft")  { window.location.href = "writing-files.html"; }
+    
   };
 </script>
 <body>
-  <div class="example" id="errors">
-    <h2><a href="index.html">Tengo by Example</a>: Errors</h2>
+  <div class="example" id="exit">
+    <h2><a href="index.html">Tengo by Example</a>: Exit</h2>
 
     <table>
       
       <tr>
-        <td class="docs"><p>Tengo uses `error()` to create error values. Functions signal failure by
-returning an error, and callers check with `is_error()`. Errors carry a
-string message accessible via `.value`.</p></td>
+        <td class="docs"><p>`os.exit(code)` terminates the script immediately with the given exit code.
+Deferred cleanup does not run (Tengo has no `defer`), so close resources
+before calling exit.</p></td>
         <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
-
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</code></pre></td>
+fmt.println(&#34;before exit&#34;)
+os.exit(0)
+fmt.println(&#34;this will not print&#34;)</code></pre></td>
       </tr>
       
     </table>
@@ -56,49 +46,29 @@ if is_error(result) {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Errors
+              data-original="// # Exit
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// `os.exit(code)` terminates the script immediately with the given exit code.
+// Deferred cleanup does not run (Tengo has no `defer`), so close resources
+// before calling exit.
 
 fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
-
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}">// # Errors
+fmt.println(&#34;before exit&#34;)
+os.exit(0)
+fmt.println(&#34;this will not print&#34;)">// # Exit
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// `os.exit(code)` terminates the script immediately with the given exit code.
+// Deferred cleanup does not run (Tengo has no `defer`), so close resources
+// before calling exit.
 
 fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
-
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</textarea>
+fmt.println(&#34;before exit&#34;)
+os.exit(0)
+fmt.println(&#34;this will not print&#34;)</textarea>
           </div>
         </td>
       </tr>
@@ -108,8 +78,8 @@ if is_error(result) {
       </tr>
     </table>
 
-    <p class="prev">Previous example: <a href="closures.html" rel="prev">Closures</a>.</p>
-    <p class="next">Next example: <a href="custom-errors.html" rel="next">Custom Errors</a>.</p>
+    <p class="prev">Previous example: <a href="writing-files.html" rel="prev">Writing Files</a>.</p>
+    
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

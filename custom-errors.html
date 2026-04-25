@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: Custom Errors</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "errors.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "math.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="custom-errors">
+    <h2><a href="index.html">Tengo by Example</a>: Custom Errors</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>`error(value)` accepts any value, not just strings. Passing a map lets you
+attach structured metadata to an error. Retrieve the payload with `.value`.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+
+notFound := func(name) {
+    return error({code: 404, message: &#34;not found: &#34; &#43; name})
+}
+
+result := notFound(&#34;config.json&#34;)
+
+if is_error(result) {
+    e := result.value
+    fmt.println(e[&#34;code&#34;])
+    fmt.println(e[&#34;message&#34;])
+}
+
+validate := func(age) {
+    if age &lt; 0 {
+        return error({field: &#34;age&#34;, reason: &#34;must be non-negative&#34;})
+    }
+    if age &gt; 150 {
+        return error({field: &#34;age&#34;, reason: &#34;unrealistic value&#34;})
+    }
+    return age
+}
+
+fmt.println(validate(25))
+
+err := validate(-1)
+if is_error(err) {
+    fmt.println(err.value[&#34;field&#34;], err.value[&#34;reason&#34;])
+}</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # Custom Errors
+//
+// `error(value)` accepts any value, not just strings. Passing a map lets you
+// attach structured metadata to an error. Retrieve the payload with `.value`.
+
+fmt := import(&#34;fmt&#34;)
+
+notFound := func(name) {
+    return error({code: 404, message: &#34;not found: &#34; &#43; name})
+}
+
+result := notFound(&#34;config.json&#34;)
+
+if is_error(result) {
+    e := result.value
+    fmt.println(e[&#34;code&#34;])
+    fmt.println(e[&#34;message&#34;])
+}
+
+validate := func(age) {
+    if age &lt; 0 {
+        return error({field: &#34;age&#34;, reason: &#34;must be non-negative&#34;})
+    }
+    if age &gt; 150 {
+        return error({field: &#34;age&#34;, reason: &#34;unrealistic value&#34;})
+    }
+    return age
+}
+
+fmt.println(validate(25))
+
+err := validate(-1)
+if is_error(err) {
+    fmt.println(err.value[&#34;field&#34;], err.value[&#34;reason&#34;])
+}">// # Custom Errors
+//
+// `error(value)` accepts any value, not just strings. Passing a map lets you
+// attach structured metadata to an error. Retrieve the payload with `.value`.
+
+fmt := import(&#34;fmt&#34;)
+
+notFound := func(name) {
+    return error({code: 404, message: &#34;not found: &#34; &#43; name})
+}
+
+result := notFound(&#34;config.json&#34;)
+
+if is_error(result) {
+    e := result.value
+    fmt.println(e[&#34;code&#34;])
+    fmt.println(e[&#34;message&#34;])
+}
+
+validate := func(age) {
+    if age &lt; 0 {
+        return error({field: &#34;age&#34;, reason: &#34;must be non-negative&#34;})
+    }
+    if age &gt; 150 {
+        return error({field: &#34;age&#34;, reason: &#34;unrealistic value&#34;})
+    }
+    return age
+}
+
+fmt.println(validate(25))
+
+err := validate(-1)
+if is_error(err) {
+    fmt.println(err.value[&#34;field&#34;], err.value[&#34;reason&#34;])
+}</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="errors.html" rel="prev">Errors</a>.</p>
+    <p class="next">Next example: <a href="math.html" rel="next">Math</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

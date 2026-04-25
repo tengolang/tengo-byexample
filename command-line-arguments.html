@@ -2,42 +2,38 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tengo by Example: Errors</title>
+  <title>Tengo by Example: Command-Line Arguments</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <script>
   window.onkeydown = (e) => {
     if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "closures.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "custom-errors.html"; }
+    if (e.key === "ArrowLeft")  { window.location.href = "coroutines.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "environment-variables.html"; }
   };
 </script>
 <body>
-  <div class="example" id="errors">
-    <h2><a href="index.html">Tengo by Example</a>: Errors</h2>
+  <div class="example" id="command-line-arguments">
+    <h2><a href="index.html">Tengo by Example</a>: Command-Line Arguments</h2>
 
     <table>
       
       <tr>
-        <td class="docs"><p>Tengo uses `error()` to create error values. Functions signal failure by
-returning an error, and callers check with `is_error()`. Errors carry a
-string message accessible via `.value`.</p></td>
+        <td class="docs"><p>`os.args()` returns the argument list as an array. The first element is
+always the interpreter name (`tengo`), the second is the script path, and
+any further elements are the arguments passed by the caller.
+
+Run this example with: `tengo command-line-arguments.tengo arg1 arg2`</p></td>
         <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+args := os.args()
+fmt.println(args)
+fmt.println(len(args))
 
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
+if len(args) &gt; 2 {
+    fmt.println(&#34;first user arg:&#34;, args[2])
 }</code></pre></td>
       </tr>
       
@@ -56,48 +52,40 @@ if is_error(result) {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Errors
+              data-original="// # Command-Line Arguments
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// `os.args()` returns the argument list as an array. The first element is
+// always the interpreter name (`tengo`), the second is the script path, and
+// any further elements are the arguments passed by the caller.
+//
+// Run this example with: `tengo command-line-arguments.tengo arg1 arg2`
 
 fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+args := os.args()
+fmt.println(args)
+fmt.println(len(args))
 
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}">// # Errors
+if len(args) &gt; 2 {
+    fmt.println(&#34;first user arg:&#34;, args[2])
+}">// # Command-Line Arguments
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// `os.args()` returns the argument list as an array. The first element is
+// always the interpreter name (`tengo`), the second is the script path, and
+// any further elements are the arguments passed by the caller.
+//
+// Run this example with: `tengo command-line-arguments.tengo arg1 arg2`
 
 fmt := import(&#34;fmt&#34;)
+os := import(&#34;os&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+args := os.args()
+fmt.println(args)
+fmt.println(len(args))
 
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
+if len(args) &gt; 2 {
+    fmt.println(&#34;first user arg:&#34;, args[2])
 }</textarea>
           </div>
         </td>
@@ -108,8 +96,8 @@ if is_error(result) {
       </tr>
     </table>
 
-    <p class="prev">Previous example: <a href="closures.html" rel="prev">Closures</a>.</p>
-    <p class="next">Next example: <a href="custom-errors.html" rel="next">Custom Errors</a>.</p>
+    <p class="prev">Previous example: <a href="coroutines.html" rel="prev">Coroutines</a>.</p>
+    <p class="next">Next example: <a href="environment-variables.html" rel="next">Environment Variables</a>.</p>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

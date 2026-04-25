@@ -2,43 +2,44 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tengo by Example: Errors</title>
+  <title>Tengo by Example: Slices</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <script>
   window.onkeydown = (e) => {
     if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "closures.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "custom-errors.html"; }
+    if (e.key === "ArrowLeft")  { window.location.href = "strings.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "sorting.html"; }
   };
 </script>
 <body>
-  <div class="example" id="errors">
-    <h2><a href="index.html">Tengo by Example</a>: Errors</h2>
+  <div class="example" id="slices">
+    <h2><a href="index.html">Tengo by Example</a>: Slices</h2>
 
     <table>
       
       <tr>
-        <td class="docs"><p>Tengo uses `error()` to create error values. Functions signal failure by
-returning an error, and callers check with `is_error()`. Errors carry a
-string message accessible via `.value`.</p></td>
+        <td class="docs"><p>Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
+Omitting either bound defaults to the start or end of the array. Slices
+share underlying storage with the original — modifying a slice element also
+modifies the original array.</p></td>
         <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+a := [1, 2, 3, 4, 5]
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(a[1:3])
+fmt.println(a[:2])
+fmt.println(a[3:])
+fmt.println(a[:])
 
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</code></pre></td>
+b := a[1:4]
+b[0] = 99
+fmt.println(b)
+fmt.println(a)
+
+s := &#34;Hello, World!&#34;
+fmt.println(s[7:12])</code></pre></td>
       </tr>
       
     </table>
@@ -56,49 +57,51 @@ if is_error(result) {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Errors
+              data-original="// # Slices
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
+// Omitting either bound defaults to the start or end of the array. Slices
+// share underlying storage with the original — modifying a slice element also
+// modifies the original array.
 
 fmt := import(&#34;fmt&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+a := [1, 2, 3, 4, 5]
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(a[1:3])
+fmt.println(a[:2])
+fmt.println(a[3:])
+fmt.println(a[:])
 
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}">// # Errors
+b := a[1:4]
+b[0] = 99
+fmt.println(b)
+fmt.println(a)
+
+s := &#34;Hello, World!&#34;
+fmt.println(s[7:12])">// # Slices
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
+// Omitting either bound defaults to the start or end of the array. Slices
+// share underlying storage with the original — modifying a slice element also
+// modifies the original array.
 
 fmt := import(&#34;fmt&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+a := [1, 2, 3, 4, 5]
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(a[1:3])
+fmt.println(a[:2])
+fmt.println(a[3:])
+fmt.println(a[:])
 
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</textarea>
+b := a[1:4]
+b[0] = 99
+fmt.println(b)
+fmt.println(a)
+
+s := &#34;Hello, World!&#34;
+fmt.println(s[7:12])</textarea>
           </div>
         </td>
       </tr>
@@ -108,8 +111,8 @@ if is_error(result) {
       </tr>
     </table>
 
-    <p class="prev">Previous example: <a href="closures.html" rel="prev">Closures</a>.</p>
-    <p class="next">Next example: <a href="custom-errors.html" rel="next">Custom Errors</a>.</p>
+    <p class="prev">Previous example: <a href="strings.html" rel="prev">Strings</a>.</p>
+    <p class="next">Next example: <a href="sorting.html" rel="next">Sorting</a>.</p>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

@@ -2,43 +2,36 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Tengo by Example: Errors</title>
+  <title>Tengo by Example: Random Numbers</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <script>
   window.onkeydown = (e) => {
     if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "closures.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "custom-errors.html"; }
+    if (e.key === "ArrowLeft")  { window.location.href = "time.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "number-parsing.html"; }
   };
 </script>
 <body>
-  <div class="example" id="errors">
-    <h2><a href="index.html">Tengo by Example</a>: Errors</h2>
+  <div class="example" id="random-numbers">
+    <h2><a href="index.html">Tengo by Example</a>: Random Numbers</h2>
 
     <table>
       
       <tr>
-        <td class="docs"><p>Tengo uses `error()` to create error values. Functions signal failure by
-returning an error, and callers check with `is_error()`. Errors carry a
-string message accessible via `.value`.</p></td>
+        <td class="docs"><p>The `rand` module provides random integers, floats, and permutations.
+Use `rand.seed` to initialize the generator for reproducible sequences.</p></td>
         <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+rand := import(&#34;rand&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+fmt.println(rand.intn(100))
+fmt.println(rand.float())
+fmt.println(rand.perm(6))
 
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</code></pre></td>
+rand.seed(42)
+fmt.println(rand.intn(1000))
+fmt.println(rand.intn(1000))</code></pre></td>
       </tr>
       
     </table>
@@ -56,49 +49,35 @@ if is_error(result) {
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="// # Errors
+              data-original="// # Random Numbers
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// The `rand` module provides random integers, floats, and permutations.
+// Use `rand.seed` to initialize the generator for reproducible sequences.
 
 fmt := import(&#34;fmt&#34;)
+rand := import(&#34;rand&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+fmt.println(rand.intn(100))
+fmt.println(rand.float())
+fmt.println(rand.perm(6))
 
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}">// # Errors
+rand.seed(42)
+fmt.println(rand.intn(1000))
+fmt.println(rand.intn(1000))">// # Random Numbers
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// The `rand` module provides random integers, floats, and permutations.
+// Use `rand.seed` to initialize the generator for reproducible sequences.
 
 fmt := import(&#34;fmt&#34;)
+rand := import(&#34;rand&#34;)
 
-divide := func(a, b) {
-    if b == 0 {
-        return error(&#34;division by zero&#34;)
-    }
-    return a / b
-}
+fmt.println(rand.intn(100))
+fmt.println(rand.float())
+fmt.println(rand.perm(6))
 
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
-if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
-}</textarea>
+rand.seed(42)
+fmt.println(rand.intn(1000))
+fmt.println(rand.intn(1000))</textarea>
           </div>
         </td>
       </tr>
@@ -108,8 +87,8 @@ if is_error(result) {
       </tr>
     </table>
 
-    <p class="prev">Previous example: <a href="closures.html" rel="prev">Closures</a>.</p>
-    <p class="next">Next example: <a href="custom-errors.html" rel="next">Custom Errors</a>.</p>
+    <p class="prev">Previous example: <a href="time.html" rel="prev">Time</a>.</p>
+    <p class="next">Next example: <a href="number-parsing.html" rel="next">Number Parsing</a>.</p>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

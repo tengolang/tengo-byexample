@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: Multiple Return Values</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "type-conversions.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "recursion.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="multiple-return-values">
+    <h2><a href="index.html">Tengo by Example</a>: Multiple Return Values</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>Functions in Tengo can return more than one value. The caller unpacks them
+with a multi-assignment. This is commonly used to return a result alongside
+an error or a secondary piece of information.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+
+minmax := func(arr) {
+    mn := arr[0]
+    mx := arr[0]
+    for _, v in arr {
+        if v &lt; mn { mn = v }
+        if v &gt; mx { mx = v }
+    }
+    return mn, mx
+}
+
+lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
+fmt.println(lo)
+fmt.println(hi)
+
+divide := func(a, b) {
+    if b == 0 {
+        return 0, error(&#34;division by zero&#34;)
+    }
+    return a / b, undefined
+}
+
+result, err := divide(10, 3)
+fmt.println(result, err)
+
+_, err = divide(5, 0)
+fmt.println(is_error(err))</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # Multiple Return Values
+//
+// Functions in Tengo can return more than one value. The caller unpacks them
+// with a multi-assignment. This is commonly used to return a result alongside
+// an error or a secondary piece of information.
+
+fmt := import(&#34;fmt&#34;)
+
+minmax := func(arr) {
+    mn := arr[0]
+    mx := arr[0]
+    for _, v in arr {
+        if v &lt; mn { mn = v }
+        if v &gt; mx { mx = v }
+    }
+    return mn, mx
+}
+
+lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
+fmt.println(lo)
+fmt.println(hi)
+
+divide := func(a, b) {
+    if b == 0 {
+        return 0, error(&#34;division by zero&#34;)
+    }
+    return a / b, undefined
+}
+
+result, err := divide(10, 3)
+fmt.println(result, err)
+
+_, err = divide(5, 0)
+fmt.println(is_error(err))">// # Multiple Return Values
+//
+// Functions in Tengo can return more than one value. The caller unpacks them
+// with a multi-assignment. This is commonly used to return a result alongside
+// an error or a secondary piece of information.
+
+fmt := import(&#34;fmt&#34;)
+
+minmax := func(arr) {
+    mn := arr[0]
+    mx := arr[0]
+    for _, v in arr {
+        if v &lt; mn { mn = v }
+        if v &gt; mx { mx = v }
+    }
+    return mn, mx
+}
+
+lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
+fmt.println(lo)
+fmt.println(hi)
+
+divide := func(a, b) {
+    if b == 0 {
+        return 0, error(&#34;division by zero&#34;)
+    }
+    return a / b, undefined
+}
+
+result, err := divide(10, 3)
+fmt.println(result, err)
+
+_, err = divide(5, 0)
+fmt.println(is_error(err))</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="type-conversions.html" rel="prev">Type Conversions</a>.</p>
+    <p class="next">Next example: <a href="recursion.html" rel="next">Recursion</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

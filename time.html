@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: Time</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "regular-expressions.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "random-numbers.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="time">
+    <h2><a href="index.html">Tengo by Example</a>: Time</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the
+current instant, `times.time_format` to produce strings with a layout, and
+`times.parse` to parse a string back into a time value.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+times := import(&#34;times&#34;)
+
+now := times.now()
+fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
+fmt.println(times.time_format(now, times.format_rfc3339))
+fmt.println(times.time_year(now))
+fmt.println(times.time_month(now))
+
+past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
+fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
+
+diff := times.sub(now, past)
+fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # Time
+//
+// The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the
+// current instant, `times.time_format` to produce strings with a layout, and
+// `times.parse` to parse a string back into a time value.
+
+fmt := import(&#34;fmt&#34;)
+times := import(&#34;times&#34;)
+
+now := times.now()
+fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
+fmt.println(times.time_format(now, times.format_rfc3339))
+fmt.println(times.time_year(now))
+fmt.println(times.time_month(now))
+
+past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
+fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
+
+diff := times.sub(now, past)
+fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))">// # Time
+//
+// The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the
+// current instant, `times.time_format` to produce strings with a layout, and
+// `times.parse` to parse a string back into a time value.
+
+fmt := import(&#34;fmt&#34;)
+times := import(&#34;times&#34;)
+
+now := times.now()
+fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
+fmt.println(times.time_format(now, times.format_rfc3339))
+fmt.println(times.time_year(now))
+fmt.println(times.time_month(now))
+
+past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
+fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
+
+diff := times.sub(now, past)
+fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="regular-expressions.html" rel="prev">Regular Expressions</a>.</p>
+    <p class="next">Next example: <a href="random-numbers.html" rel="next">Random Numbers</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
