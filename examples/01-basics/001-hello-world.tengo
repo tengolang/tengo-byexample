@@ -3,6 +3,10 @@
 // Our first Tengo program prints the classic "Hello, World!" greeting.
 // Every example on this site can be edited and run live in the browser.
 
+// We start by importing the `fmt` module, which provides
+// formatted I/O functions.
 fmt := import("fmt")
 
+// Then we use the `println` function to print the greeting
+// to the standard output.
 fmt.println("Hello, World!")

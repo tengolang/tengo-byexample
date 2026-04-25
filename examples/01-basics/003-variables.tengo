@@ -2,19 +2,23 @@
 //
 // Variables are declared and initialized with `:=`. Tengo is dynamically typed:
 // a variable can hold any value and be reassigned to a different type.
-// Use plain `=` to reassign an existing variable.
 
 fmt := import("fmt")
 
+// Use `:=` to declare and initialize a variable.
 message := "hello"
 fmt.println(message)
+
+// Use plain `=` to reassign an existing variable.
 message = "world"
 fmt.println(message)
 
+// You can declare multiple variables.
 x := 10
 y := 20
 fmt.println("sum:", x+y)
 
+// Dynamically typed: a variable can change types.
 value := 42
 fmt.println(value)
 value = "now a string"

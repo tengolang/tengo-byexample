@@ -11,14 +11,16 @@ import (
 )
 
 type Example struct {
-	Slug        string
-	Title       string
-	Description string
-	Sections    []Section
-	FullCode    string
+	Slug           string
+	Title          string
+	Description    string
+	Sections       []Section
+	FullCode       string
+	PlaygroundCode string
 }
 
 type Section struct {
+	ID   string
 	Doc  string
 	Code string
 }
@@ -154,8 +156,9 @@ func parseExample(filename string, src []byte) Example {
 
 	var blocks []rawBlock
 	for _, line := range lines {
-		if strings.HasPrefix(line, "//") {
-			text := strings.TrimPrefix(line, "// ")
+		trimmed := strings.TrimSpace(line)
+		if strings.HasPrefix(trimmed, "//") {
+			text := strings.TrimPrefix(trimmed, "// ")
 			text = strings.TrimPrefix(text, "//")
 			if len(blocks) == 0 || blocks[len(blocks)-1].kind != "doc" {
 				blocks = append(blocks, rawBlock{kind: "doc", content: text})
@@ -191,9 +194,7 @@ func parseExample(filename string, src []byte) Example {
 				description = strings.Join(parts, " ")
 			}
 			blocks[0].content = rest
-			if blocks[0].content == "" {
-				blocks = blocks[1:]
-			}
+			blocks = blocks[1:]
 		} else {
 			title = strings.TrimPrefix(content, "# ")
 			blocks = blocks[1:]
@@ -201,18 +202,22 @@ func parseExample(filename string, src []byte) Example {
 	}
 
 	var sections []Section
+	var playgroundCode []string
 	i := 0
 	for i < len(blocks) {
 		var s Section
 		if blocks[i].kind == "doc" {
 			s.Doc = strings.TrimSpace(blocks[i].content)
+			s.ID = slugify(s.Doc)
 			i++
 			if i < len(blocks) && blocks[i].kind == "code" {
-				s.Code = strings.TrimSpace(blocks[i].content)
+				s.Code = strings.Trim(blocks[i].content, "\n")
+				playgroundCode = append(playgroundCode, s.Code)
 				i++
 			}
 		} else {
-			s.Code = strings.TrimSpace(blocks[i].content)
+			s.Code = strings.Trim(blocks[i].content, "\n")
+			playgroundCode = append(playgroundCode, s.Code)
 			i++
 		}
 		if s.Doc != "" || s.Code != "" {
@@ -221,11 +226,12 @@ func parseExample(filename string, src []byte) Example {
 	}
 
 	return Example{
-		Slug:        slug,
-		Title:       title,
-		Description: description,
-		Sections:    sections,
-		FullCode:    strings.TrimSpace(normalized),
+		Slug:           slug,
+		Title:          title,
+		Description:    description,
+		Sections:       sections,
+		FullCode:       strings.TrimSpace(normalized),
+		PlaygroundCode: strings.TrimSpace(strings.Join(playgroundCode, "\n\n")),
 	}
 }
 
@@ -238,6 +244,23 @@ func fileSlug(filename string) string {
 		}
 	}
 	return base
+}
+
+func slugify(text string) string {
+	if text == "" {
+		return ""
+	}
+	lines := strings.Split(text, "\n")
+	s := strings.ToLower(lines[0])
+	var res strings.Builder
+	for _, r := range s {
+		if (r >= 'a' && r <= 'z') || (r >= '0' && r <= '9') {
+			res.WriteRune(r)
+		} else if r == ' ' || r == '-' {
+			res.WriteRune('-')
+		}
+	}
+	return strings.Trim(strings.ReplaceAll(res.String(), "--", "-"), "-")
 }
 
 func mustTemplate(path string) *template.Template {

@@ -1,21 +1,30 @@
 // # If / Else
 //
-// Tengo's `if` and `else` work like most languages. Conditions do not need
-// parentheses, but braces are required. An optional init statement can appear
-// before the condition, separated by a semicolon.
+// Branching with `if` and `else` in Tengo is straight-forward.
 
 fmt := import("fmt")
 
-x := 7
-
-if x > 10 {
-    fmt.println("big")
-} else if x > 5 {
-    fmt.println("medium")
+// Here's a basic example.
+if 7 % 2 == 0 {
+    fmt.println("7 is even")
 } else {
-    fmt.println("small")
+    fmt.println("7 is odd")
 }
 
-if n := 42; n%2 == 0 {
-    fmt.println(n, "is even")
+// You can have an `if` statement without an else.
+if 8 % 4 == 0 {
+    fmt.println("8 is divisible by 4")
 }
+
+// A statement can precede conditionals; any variables declared in this
+// statement are available in all branches.
+if n := 9; n < 0 {
+    fmt.println(n, "is negative")
+} else if n < 10 {
+    fmt.println(n, "has 1 digit")
+} else {
+    fmt.println(n, "has multiple digits")
+}
+
+// Note that you don't need parentheses around conditions in Tengo,
+// but that the braces are required.

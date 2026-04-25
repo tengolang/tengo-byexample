@@ -1,6 +1,6 @@
 'use strict';
 
-const go = new Go();
+let go = null;
 let wasmReady = false;
 let cmEditor   = null;
 
@@ -9,6 +9,10 @@ async function initWasm() {
   const runBtn   = document.getElementById('run-btn');
 
   try {
+    if (typeof Go === 'undefined') {
+        throw new Error('wasm_exec.js not loaded');
+    }
+    go = new Go();
     const response = await fetch('tengo.wasm.gz');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
@@ -76,6 +80,39 @@ function resetCode() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Copy Buttons ---
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.nextElementSibling.querySelector('code').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const originalText = btn.textContent;
+        btn.textContent = 'copied!';
+        setTimeout(() => { btn.textContent = originalText; }, 2000);
+      });
+    });
+  });
+
+  // --- Home Page Search ---
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll('.group').forEach(group => {
+        let hasVisible = false;
+        group.querySelectorAll('li').forEach(li => {
+          const text = li.textContent.toLowerCase();
+          if (text.includes(query)) {
+            li.style.display = '';
+            hasVisible = true;
+          } else {
+            li.style.display = 'none';
+          }
+        });
+        group.style.display = hasVisible ? '' : 'none';
+      });
+    });
+  }
+
   const ta = document.getElementById('code-editor');
   if (!ta || typeof CodeMirror === 'undefined') return;
 
@@ -107,4 +144,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-initWasm();
+// Only initialize WASM if we're on an example page with a playground
+if (document.getElementById('code-editor')) {
+  initWasm();
+}

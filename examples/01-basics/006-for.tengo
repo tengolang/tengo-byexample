@@ -1,26 +1,43 @@
 // # For Loops
 //
-// `for` is Tengo's only looping construct. It supports an init/condition/post
-// form, a condition-only (while) form, and `for k, v in collection` iteration
-// over arrays and maps.
+// `for` is Tengo's only looping construct. It supports several forms.
 
 fmt := import("fmt")
 
+// The most basic type, with a single condition.
+n := 1
+for n < 5 {
+    fmt.println(n)
+    n++
+}
+
+// A classic initial/condition/after `for` loop.
 for i := 0; i < 3; i++ {
     fmt.println("i =", i)
 }
 
-n := 1
-for n < 16 {
-    fmt.println("n =", n)
-    n *= 2
+// `for` without a condition will loop repeatedly until you `break`
+// out of the loop or `return` from the enclosing function.
+for {
+    fmt.println("loop")
+    break
 }
 
+// You can also `continue` to the next iteration of the loop.
+for i := 0; i <= 5; i++ {
+    if i % 2 == 0 {
+        continue
+    }
+    fmt.println(i)
+}
+
+// Iterating over an array with `for k, v in collection`.
 fruits := ["apple", "banana", "cherry"]
 for i, fruit in fruits {
     fmt.println(i, "->", fruit)
 }
 
+// Iterating over a map.
 scores := {alice: 95, bob: 87}
 for name, score in scores {
     fmt.println(name, "scored", score)

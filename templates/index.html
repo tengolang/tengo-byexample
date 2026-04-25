@@ -18,14 +18,24 @@
       needed. Click <em>run</em> on any example, or press
       <code>Ctrl+Enter</code>.
     </p>
-    {{range .Groups}}
-    <h3>{{.Title}}</h3>
-    <ul>
-      {{range .Examples}}
-      <li><a href="{{.Slug}}.html">{{.Title}}</a></li>
+
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search examples (e.g. json, loops, etc.)..." aria-label="Search examples">
+    </div>
+
+    <div class="groups-grid">
+      {{range .Groups}}
+      <div class="group">
+        <h3>{{.Title}}</h3>
+        <ul>
+          {{range .Examples}}
+          <li><a href="{{.Slug}}.html">{{.Title}}</a></li>
+          {{end}}
+        </ul>
+      </div>
       {{end}}
-    </ul>
-    {{end}}
+    </div>
   </div>
+  <script src="site.js"></script>
 </body>
 </html>

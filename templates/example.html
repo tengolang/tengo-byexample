@@ -17,21 +17,39 @@
   <div class="example" id="{{.Example.Slug}}">
     <h2><a href="index.html">Tengo by Example</a>: {{.Example.Title}}</h2>
 
-    <table>
-      {{range .Example.Sections}}
-      <tr>
-        <td class="docs">{{if .Doc}}<p>{{.Doc}}</p>{{end}}</td>
-        <td class="code leading">{{if .Code}}<pre><code class="language-go">{{.Code}}</code></pre>{{end}}</td>
-      </tr>
+    <div class="example-grid">
+      {{if .Example.Description}}
+      <div class="row">
+        <div class="docs">
+          <p>{{.Example.Description}}</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
       {{end}}
-    </table>
+      {{range .Example.Sections}}
+      <div class="row" {{if .ID}}id="{{.ID}}"{{end}}>
+        <div class="docs">
+          {{if .Doc}}<p>{{if .ID}}<a href="#{{.ID}}">{{.Doc}}</a>{{else}}{{.Doc}}{{end}}</p>{{end}}
+        </div>
+        <div class="code leading">
+          {{if .Code}}
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">{{.Code}}</code></pre>
+          </div>
+          {{end}}
+        </div>
+      </div>
+      {{end}}
+    </div>
 
-    <table class="playground-table">
-      <tr>
-        <td class="docs">
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
           <p class="play-label">try it</p>
-        </td>
-        <td class="code leading">
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="code leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -39,18 +57,24 @@
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="{{.Example.FullCode}}">{{.Example.FullCode}}</textarea>
+              data-original="{{.Example.PlaygroundCode}}">{{.Example.PlaygroundCode}}</textarea>
           </div>
-        </td>
-      </tr>
-      <tr id="output-row">
-        <td class="docs"></td>
-        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
-      </tr>
-    </table>
+        </div>
+      </div>
+    </div>
 
-    {{if .Prev}}<p class="prev">Previous example: <a href="{{.Prev.Slug}}.html" rel="prev">{{.Prev.Title}}</a>.</p>{{end}}
-    {{if .Next}}<p class="next">Next example: <a href="{{.Next.Slug}}.html" rel="next">{{.Next.Title}}</a>.</p>{{end}}
+    <div class="nav-links">
+      {{if .Prev}}
+        <a href="{{.Prev.Slug}}.html" rel="prev">← {{.Prev.Title}}</a>
+      {{else}}
+        <span></span>
+      {{end}}
+      {{if .Next}}
+        <a href="{{.Next.Slug}}.html" rel="next">{{.Next.Title}} →</a>
+      {{else}}
+        <span></span>
+      {{end}}
+    </div>
 
     <p class="footer">
       by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>

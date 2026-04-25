@@ -1,23 +1,38 @@
 // # Slices
 //
-// Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
-// Omitting either bound defaults to the start or end of the array. Slices
-// share underlying storage with the original — modifying a slice element also
-// modifies the original array.
+// Slices are a key data type in Tengo, giving a more powerful interface
+// to sequences than arrays.
 
 fmt := import("fmt")
 
-a := [1, 2, 3, 4, 5]
+// Unlike arrays, slices can be resized. A slice is often
+// created by slicing an existing array or slice.
+s := ["a", "b", "c", "d", "e"]
+fmt.println("base array:", s)
 
-fmt.println(a[1:3])
-fmt.println(a[:2])
-fmt.println(a[3:])
-fmt.println(a[:])
+// The syntax `slice[low:high]` creates a new slice.
+// For example, this gets elements from index 1 to 2 (excluding 3).
+l := s[1:3]
+fmt.println("sl1:", l)
 
-b := a[1:4]
-b[0] = 99
-fmt.println(b)
-fmt.println(a)
+// This slices up to (but excluding) index 5.
+l = s[:5]
+fmt.println("sl2:", l)
 
-s := "Hello, World!"
-fmt.println(s[7:12])
+// And this slices from index 2 (including) to the end.
+l = s[2:]
+fmt.println("sl3:", l)
+
+// You can also create a copy of a slice to ensure that
+// modifications to the new slice don't affect the original.
+c := append([], s...)
+fmt.println("cpy:", c)
+
+// Slices can be composed into multi-dimensional data structures.
+// The length of the inner slices can vary, unlike multi-dimensional arrays.
+twoD := [
+    [0],
+    [1, 2],
+    [2, 3, 4]
+]
+fmt.println("2d: ", twoD)

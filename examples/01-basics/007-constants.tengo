@@ -1,17 +1,27 @@
 // # Constants
 //
-// Tengo has no `const` keyword. Constant-like values are typically module-level
-// variables. For data that must not be mutated, wrap it with `immutable()` to
-// get a runtime-enforced read-only value.
+// Tengo supports constants for strings, integers, floats, and booleans.
+// Constants are declared with the `const` keyword and must be assigned
+// a value at declaration.
 
 fmt := import("fmt")
 
-pi := 3.14159265358979
-greeting := "Hello"
+// `const` declares a constant value.
+const s = "constant"
 
-fmt.println(pi)
-fmt.println(greeting)
+func main() {
+    fmt.println(s)
 
-limits := immutable({min: 0, max: 100})
-fmt.println(limits["min"])
-fmt.println(limits["max"])
+    // A `const` statement can appear anywhere a `var` statement can.
+    const n = 500000000
+
+    // Constant expressions perform arithmetic with arbitrary precision.
+    const d = 3e20 / n
+    fmt.println(d)
+
+    // A numeric constant has no type until it’s given one,
+    // such as by an explicit conversion.
+    fmt.println(int(d))
+}
+
+main()

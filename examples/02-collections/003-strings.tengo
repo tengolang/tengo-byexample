@@ -1,19 +1,35 @@
 // # Strings
 //
-// Strings are immutable byte sequences. Slice notation extracts substrings,
-// and the `text` module provides search, split, join, and case conversion.
+// A string is an immutable sequence of bytes. In Tengo, strings are 
+// UTF-8 encoded by default.
 
 fmt := import("fmt")
 text := import("text")
 
+// Use double quotes for string literals.
 s := "Hello, Tengo!"
-fmt.println(len(s))
-fmt.println(s[7:12])
-fmt.println(text.to_upper(s))
-fmt.println(text.to_lower(s))
-fmt.println(text.contains(s, "Tengo"))
-fmt.println(text.replace(s, "Tengo", "World", -1))
 
+// `len` returns the number of bytes in the string.
+fmt.println("len:", len(s))
+
+// You can use slice notation to get a substring. 
+// `s[7:12]` gets characters from index 7 to 11.
+fmt.println("slice:", s[7:12])
+
+// The `text` module provides many helpful functions. 
+// Here we change the case of the string.
+fmt.println("upper:", text.to_upper(s))
+fmt.println("lower:", text.to_lower(s))
+
+// Search for a substring within a string.
+fmt.println("contains 'Tengo':", text.contains(s, "Tengo"))
+
+// Replace occurrences of a substring.
+fmt.println("replace:", text.replace(s, "Tengo", "World", -1))
+
+// Split a string into an array of substrings.
 parts := text.split("a,b,c", ",")
-fmt.println(parts)
-fmt.println(text.join(["x", "y", "z"], "-"))
+fmt.println("split:", parts)
+
+// Join an array of strings into a single string with a separator.
+fmt.println("join:", text.join(["x", "y", "z"], "-"))
