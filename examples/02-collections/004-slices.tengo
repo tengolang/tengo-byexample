@@ -1,0 +1,23 @@
+// # Slices
+//
+// Tengo arrays support slice notation `a[low:high]` to extract a sub-array.
+// Omitting either bound defaults to the start or end of the array. Slices
+// share underlying storage with the original — modifying a slice element also
+// modifies the original array.
+
+fmt := import("fmt")
+
+a := [1, 2, 3, 4, 5]
+
+fmt.println(a[1:3])
+fmt.println(a[:2])
+fmt.println(a[3:])
+fmt.println(a[:])
+
+b := a[1:4]
+b[0] = 99
+fmt.println(b)
+fmt.println(a)
+
+s := "Hello, World!"
+fmt.println(s[7:12])

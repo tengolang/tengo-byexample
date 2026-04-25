@@ -1,0 +1,17 @@
+// # Constants
+//
+// Tengo has no `const` keyword. Constant-like values are typically module-level
+// variables. For data that must not be mutated, wrap it with `immutable()` to
+// get a runtime-enforced read-only value.
+
+fmt := import("fmt")
+
+pi := 3.14159265358979
+greeting := "Hello"
+
+fmt.println(pi)
+fmt.println(greeting)
+
+limits := immutable({min: 0, max: 100})
+fmt.println(limits["min"])
+fmt.println(limits["max"])

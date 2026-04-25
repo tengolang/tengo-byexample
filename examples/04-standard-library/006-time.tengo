@@ -1,0 +1,20 @@
+// # Time
+//
+// The `times` module wraps Go's `time` package. Use `times.now()` for the
+// current instant, `times.time_format` to produce strings with a layout, and
+// `times.parse` to parse a string back into a time value.
+
+fmt := import("fmt")
+times := import("times")
+
+now := times.now()
+fmt.println(times.time_format(now, "2006-01-02"))
+fmt.println(times.time_format(now, times.format_rfc3339))
+fmt.println(times.time_year(now))
+fmt.println(times.time_month(now))
+
+past := times.parse("2006-01-02", "2001-09-09")
+fmt.println(times.time_format(past, "January 2, 2006"))
+
+diff := times.sub(now, past)
+fmt.println(fmt.sprintf("%.0f days since then", times.duration_hours(diff)/24))

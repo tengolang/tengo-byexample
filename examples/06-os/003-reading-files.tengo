@@ -1,0 +1,21 @@
+// # Reading Files
+//
+// `os.read_file` reads an entire file as bytes. For streaming access, use
+// `os.open` to get a file object and call `.read(n)` on it. Convert bytes to
+// a string with `string()`.
+
+fmt := import("fmt")
+os := import("os")
+
+os.create("/tmp/tengo_read.txt").write_string("Hello from Tengo!\nSecond line.\n")
+
+content := os.read_file("/tmp/tengo_read.txt")
+fmt.println(string(content))
+
+f := os.open("/tmp/tengo_read.txt")
+buf := bytes(5)
+f.read(buf)
+fmt.println(string(buf))
+f.close()
+
+os.remove("/tmp/tengo_read.txt")

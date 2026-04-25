@@ -1,0 +1,18 @@
+// # Number Parsing
+//
+// The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching
+// `format_*` functions for converting between numbers and strings.
+
+fmt := import("fmt")
+text := import("text")
+
+fmt.println(text.atoi("42"))
+fmt.println(text.parse_float("3.14", 64))
+fmt.println(text.parse_int("ff", 16, 64))
+fmt.println(text.parse_int("101010", 2, 64))
+fmt.println(text.parse_bool("true"))
+
+fmt.println(text.itoa(42))
+fmt.println(text.format_float(3.14159, 'f', 2, 64))
+fmt.println(text.format_int(255, 16))
+fmt.println(text.format_int(42, 2))

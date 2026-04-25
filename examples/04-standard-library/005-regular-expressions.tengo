@@ -1,0 +1,24 @@
+// # Regular Expressions
+//
+// The `text` module exposes Go's `regexp` package as `re_match`, `re_find`,
+// `re_replace`, and `re_split`. All pattern arguments are Go regular
+// expressions. `re_compile` returns a reusable compiled regexp object.
+
+fmt := import("fmt")
+text := import("text")
+
+fmt.println(text.re_match(`^\d{3}-\d{4}$`, "555-1234"))
+fmt.println(text.re_match(`^\d{3}-\d{4}$`, "hello"))
+
+fmt.println(text.re_replace(`\d+`, "score: 42 and 7", "NUM"))
+
+parts := text.re_split(`\s+`, "  one   two  three  ", -1)
+fmt.println(parts)
+
+hits := text.re_find(`[a-z]+`, "a1b2c3d4", -1)
+for _, m in hits {
+    fmt.println(m[0]["text"])
+}
+
+re := text.re_compile(`(\w+)@(\w+)\.(\w+)`)
+fmt.println(re.match("user@example.com"))

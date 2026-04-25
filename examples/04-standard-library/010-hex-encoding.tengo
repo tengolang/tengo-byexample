@@ -1,0 +1,17 @@
+// # Hex Encoding
+//
+// The `hex` module encodes bytes to a lowercase hexadecimal string and decodes
+// hex strings back to bytes. This is useful for binary data inspection and
+// simple checksums.
+
+fmt := import("fmt")
+hex := import("hex")
+
+data := bytes("Hello, Tengo!")
+encoded := hex.encode(data)
+fmt.println(encoded)
+
+decoded := hex.decode(encoded)
+fmt.println(string(decoded))
+
+fmt.println(hex.encode(bytes("\x00\x01\x7f\xff")))

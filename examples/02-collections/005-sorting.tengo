@@ -1,0 +1,46 @@
+// # Sorting
+//
+// Tengo has no built-in sort function, but the `enum` source module makes it
+// easy to implement one. Below is a merge sort that works on any array whose
+// elements support `<` comparison.
+
+fmt := import("fmt")
+enum := import("enum")
+
+merge := func(left, right) {
+    result := []
+    li := 0
+    ri := 0
+    for li < len(left) && ri < len(right) {
+        if left[li] <= right[ri] {
+            result = append(result, left[li])
+            li++
+        } else {
+            result = append(result, right[ri])
+            ri++
+        }
+    }
+    for li < len(left) {
+        result = append(result, left[li])
+        li++
+    }
+    for ri < len(right) {
+        result = append(result, right[ri])
+        ri++
+    }
+    return result
+}
+
+msort := func(arr) {
+    if len(arr) <= 1 { return arr }
+    mid := len(arr) / 2
+    left := msort(arr[:mid])
+    right := msort(arr[mid:])
+    return merge(left, right)
+}
+
+nums := [5, 2, 8, 1, 9, 3]
+fmt.println(msort(nums))
+
+words := ["banana", "apple", "cherry", "date"]
+fmt.println(msort(words))

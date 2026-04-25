@@ -1,0 +1,15 @@
+// # Random Numbers
+//
+// The `rand` module provides random integers, floats, and permutations.
+// Use `rand.seed` to initialize the generator for reproducible sequences.
+
+fmt := import("fmt")
+rand := import("rand")
+
+fmt.println(rand.intn(100))
+fmt.println(rand.float())
+fmt.println(rand.perm(6))
+
+rand.seed(42)
+fmt.println(rand.intn(1000))
+fmt.println(rand.intn(1000))

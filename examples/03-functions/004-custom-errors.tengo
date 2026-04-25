@@ -1,0 +1,35 @@
+// # Custom Errors
+//
+// `error(value)` accepts any value, not just strings. Passing a map lets you
+// attach structured metadata to an error. Retrieve the payload with `.value`.
+
+fmt := import("fmt")
+
+notFound := func(name) {
+    return error({code: 404, message: "not found: " + name})
+}
+
+result := notFound("config.json")
+
+if is_error(result) {
+    e := result.value
+    fmt.println(e["code"])
+    fmt.println(e["message"])
+}
+
+validate := func(age) {
+    if age < 0 {
+        return error({field: "age", reason: "must be non-negative"})
+    }
+    if age > 150 {
+        return error({field: "age", reason: "unrealistic value"})
+    }
+    return age
+}
+
+fmt.println(validate(25))
+
+err := validate(-1)
+if is_error(err) {
+    fmt.println(err.value["field"], err.value["reason"])
+}

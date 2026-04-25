@@ -1,0 +1,25 @@
+// # Recursion
+//
+// Functions in Tengo can call themselves recursively. Because functions are
+// values assigned to variables, the function body can reference its own
+// variable name and the closure captures the latest binding.
+
+fmt := import("fmt")
+
+fact := func(n) {
+    if n == 0 { return 1 }
+    return n * fact(n-1)
+}
+fmt.println(fact(6))
+
+fib := func(n) {
+    if n <= 1 { return n }
+    return fib(n-1) + fib(n-2)
+}
+fmt.println(fib(10))
+
+sum := func(arr) {
+    if len(arr) == 0 { return 0 }
+    return arr[0] + sum(arr[1:])
+}
+fmt.println(sum([1, 2, 3, 4, 5]))

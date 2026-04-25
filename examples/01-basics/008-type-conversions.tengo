@@ -1,0 +1,19 @@
+// # Type Conversions
+//
+// Tengo provides built-in functions to convert between its core types:
+// `int`, `float`, `string`, `bool`, `char`, and `bytes`. Conversions that
+// cannot succeed return `undefined`.
+
+fmt := import("fmt")
+
+fmt.println(int("42"))
+fmt.println(int(3.99))
+fmt.println(float("3.14"))
+fmt.println(float(7))
+fmt.println(string(99))
+fmt.println(string(true))
+fmt.println(bool(0))
+fmt.println(bool(1))
+fmt.println(char(65))
+fmt.println(bytes("hi"))
+fmt.println(string(bytes("hi")))
