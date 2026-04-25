@@ -1,0 +1,48 @@
+// # Built-in Functions
+//
+// Tengo provides built-in functions that are always available without
+// importing a module. Many come in mutating and non-mutating pairs.
+
+fmt := import("fmt")
+
+// `len` works on strings, arrays, maps, and bytes.
+fmt.println(len("hello"))
+fmt.println(len([1, 2, 3]))
+fmt.println(len({a: 1, b: 2}))
+
+// `range(start, stop)` produces an integer array. Optional third arg is step.
+fmt.println(range(0, 5))
+fmt.println(range(0, 10, 2))
+
+// `assoc` and `dissoc` return modified copies of a map (non-mutating).
+m := {name: "Tengo", version: 3}
+m2 := assoc(m, "stable", true)
+fmt.println(m2)
+m3 := dissoc(m, "version")
+fmt.println(m3)
+
+// `delete` removes a key from a map in place (mutating).
+counts := {a: 1, b: 2, c: 3}
+delete(counts, "b")
+fmt.println(counts)
+
+// `insert` and `remove` return modified copies of an array (non-mutating).
+arr := [1, 2, 3, 4]
+arr2 := insert(arr, 2, 99)
+fmt.println(arr2)
+arr3 := remove(arr, 0)
+fmt.println(arr3)
+
+// `splice` modifies an array in place and returns the removed elements.
+nums := [10, 20, 30, 40, 50]
+removed := splice(nums, 1, 2)
+fmt.println(nums)
+fmt.println(removed)
+
+// `format` is a built-in sprintf — no import needed.
+fmt.println(format("%-8s %d", "score:", 42))
+
+// Type-check predicates work on any value.
+fmt.println(is_int(42))
+fmt.println(is_string("hi"))
+fmt.println(is_callable(func() {}))

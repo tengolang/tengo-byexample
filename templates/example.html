@@ -36,6 +36,14 @@
         </div>
       </div>
       {{end}}
+      {{if .Example.Output}}
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">{{.Example.Output}}</pre>
+        </div>
+      </div>
+      {{end}}
     </div>
 
     <div class="playground-grid">

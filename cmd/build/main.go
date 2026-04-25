@@ -8,6 +8,8 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/tengolang/tengo-byexample/internal/tengorunner"
 )
 
 type Example struct {
@@ -17,6 +19,7 @@ type Example struct {
 	Sections       []Section
 	FullCode       string
 	PlaygroundCode string
+	Output         string
 }
 
 type Section struct {
@@ -137,7 +140,10 @@ func loadExamplesFromDir(dir string) ([]Example, error) {
 		if err != nil {
 			return nil, err
 		}
-		examples = append(examples, parseExample(f, src))
+		ex := parseExample(f, src)
+		out, _ := tengorunner.Run(string(src))
+		ex.Output = strings.TrimRight(out, "\n")
+		examples = append(examples, ex)
 	}
 	return examples, nil
 }

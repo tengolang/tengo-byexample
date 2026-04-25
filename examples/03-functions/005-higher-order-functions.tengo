@@ -1,0 +1,54 @@
+// # Higher-Order Functions
+//
+// Functions are first-class values in Tengo. You can pass them as
+// arguments, return them from other functions, and store them in maps or
+// arrays — enabling map, filter, and reduce patterns without a stdlib.
+
+fmt := import("fmt")
+
+// `map_fn` applies a function to every element and returns a new array.
+map_fn := func(arr, f) {
+    result := []
+    for _, v in arr {
+        result = append(result, f(v))
+    }
+    return result
+}
+
+doubled := map_fn([1, 2, 3, 4], func(x) { return x * 2 })
+fmt.println(doubled)
+
+// `filter_fn` keeps only elements where the predicate returns true.
+filter_fn := func(arr, pred) {
+    result := []
+    for _, v in arr {
+        if pred(v) {
+            result = append(result, v)
+        }
+    }
+    return result
+}
+
+evens := filter_fn([1, 2, 3, 4, 5, 6], func(x) { return x % 2 == 0 })
+fmt.println(evens)
+
+// `reduce_fn` folds an array into a single value.
+reduce_fn := func(arr, initial, f) {
+    acc := initial
+    for _, v in arr {
+        acc = f(acc, v)
+    }
+    return acc
+}
+
+total := reduce_fn([1, 2, 3, 4, 5], 0, func(a, b) { return a + b })
+fmt.println(total)
+
+// Functions can return functions — useful for building specialised helpers.
+multiplier := func(factor) {
+    return func(x) { return x * factor }
+}
+
+triple := multiplier(3)
+fmt.println(triple(7))
+fmt.println(map_fn([1, 2, 3], multiplier(10)))

@@ -1,0 +1,53 @@
+// # Maps as Objects
+//
+// Tengo has no classes. The idiomatic pattern is a constructor function
+// that returns a map bundling data and closures as "methods".
+
+fmt := import("fmt")
+
+// The constructor creates a fresh `count` variable per call.
+// All returned functions close over the same `count`.
+new_counter := func(start) {
+    count := start
+    return {
+        inc:   func() { count++ },
+        dec:   func() { count-- },
+        value: func() { return count },
+        reset: func() { count = start },
+    }
+}
+
+c := new_counter(0)
+c.inc()
+c.inc()
+c.inc()
+fmt.println(c.value())
+
+c.dec()
+fmt.println(c.value())
+
+c.reset()
+fmt.println(c.value())
+
+// Each instance has independent state.
+a := new_counter(10)
+b := new_counter(20)
+a.inc()
+b.inc()
+b.inc()
+fmt.printf("%d %d\n", a.value(), b.value())
+
+// Maps can also carry plain data alongside functions.
+new_point := func(x, y) {
+    return {
+        x: x,
+        y: y,
+        string: func() {
+            return fmt.sprintf("(%d, %d)", x, y)
+        },
+    }
+}
+
+p := new_point(3, 4)
+fmt.println(p.string())
+fmt.printf("%d %d\n", p.x, p.y)
