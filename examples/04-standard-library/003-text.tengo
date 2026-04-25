@@ -1,18 +1,29 @@
 // # Text
 //
-// The `text` module handles string manipulation including searching, splitting,
-// trimming, case conversion, and regular expressions.
+// The `text` module wraps Go's `strings` and `strconv` packages, providing
+// search, split, join, trimming, case conversion, and more.
 
 fmt := import("fmt")
 text := import("text")
 
+// Case conversion and trimming.
+fmt.println(text.to_upper("hello"))
+fmt.println(text.to_lower("WORLD"))
 fmt.println(text.title("hello world"))
 fmt.println(text.trim_space("  hello  "))
+
+// Searching and testing.
+fmt.println(text.contains("Tengo", "eng"))
 fmt.println(text.has_prefix("Tengo", "Ten"))
 fmt.println(text.has_suffix("Tengo", "go"))
 fmt.println(text.index("hello", "ll"))
 fmt.println(text.count("banana", "a"))
+
+// Splitting and joining.
+fmt.println(text.split("a,b,c", ","))
+fmt.println(text.join(["x", "y", "z"], "-"))
 fmt.println(text.repeat("ab", 3))
 
-fmt.println(text.re_match(`^\d+$`, "12345"))
-fmt.println(text.re_split(`\s+`, "one two  three", -1))
+// Replace all occurrences (pass -1 for unlimited replacements).
+fmt.println(text.replace("oink oink oink", "oink", "moo", -1))
+fmt.println(text.replace("oink oink oink", "oink", "moo", 2))

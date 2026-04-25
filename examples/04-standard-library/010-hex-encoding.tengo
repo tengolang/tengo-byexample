@@ -1,17 +1,21 @@
 // # Hex Encoding
 //
-// The `hex` module encodes bytes to a lowercase hexadecimal string and decodes
-// hex strings back to bytes. This is useful for binary data inspection and
-// simple checksums.
+// The `hex` module encodes bytes to a lowercase hexadecimal string and
+// decodes hex strings back to bytes.
 
 fmt := import("fmt")
 hex := import("hex")
 
-data := bytes("Hello, Tengo!")
-encoded := hex.encode(data)
+// `hex.encode` converts bytes to a hex string.
+encoded := hex.encode(bytes("Hello"))
 fmt.println(encoded)
 
+// `hex.decode` reverses the encoding.
 decoded := hex.decode(encoded)
 fmt.println(string(decoded))
 
+// Each byte becomes exactly two hex digits.
+fmt.println(hex.encode(bytes("AB")))
+
+// Arbitrary bytes can be encoded too.
 fmt.println(hex.encode(bytes("\x00\x01\x7f\xff")))

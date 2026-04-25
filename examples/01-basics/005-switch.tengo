@@ -5,7 +5,7 @@
 fmt := import("fmt")
 times := import("times")
 
-// Here’s a basic `switch`.
+// Here's a basic `switch`.
 i := 2
 fmt.print("Write ", i, " as ")
 switch i {
@@ -18,19 +18,19 @@ case 3:
 }
 
 // You can use commas to separate multiple expressions in the same
-// `case` statement. We use the optional `default` case in this example as well.
+// `case` statement. `times.time_weekday` returns 0 (Sunday) through
+// 6 (Saturday).
 t := times.now()
-switch t.weekday() {
-case "Saturday", "Sunday":
+switch times.time_weekday(t) {
+case 0, 6:
     fmt.println("It's the weekend")
 default:
     fmt.println("It's a weekday")
 }
 
 // `switch` without an expression is an alternate way to express
-// if/else logic. Here we also show how the `case` expressions
-// can be non-constants.
-hour := t.hour()
+// if/else logic.
+hour := times.time_hour(t)
 switch {
 case hour < 12:
     fmt.println("It's before noon")
@@ -38,16 +38,15 @@ default:
     fmt.println("It's after noon")
 }
 
-// A type `switch` compares types instead of values. You can use this
-// to discover the type of an interface value.
-whatAmI := func(i) {
-    switch i.(type) {
+// Use `type_name` to branch on the runtime type of a value.
+whatAmI := func(v) {
+    switch type_name(v) {
     case "bool":
-        fmt.println("I'm a bool")
+        fmt.println("bool")
     case "int":
-        fmt.println("I'm an int")
+        fmt.println("int")
     default:
-        fmt.printf("Don't know type %T\n", i)
+        fmt.println("other:", type_name(v))
     }
 }
 whatAmI(true)

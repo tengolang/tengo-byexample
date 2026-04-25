@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo Playground</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="standalone-playground" id="playground">
+    <h2>Playground</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+    <p class="playground-intro">Write and run any Tengo code directly in your browser.
+    Press <code>Ctrl+Enter</code> to run.</p>
+
+    <div class="editor-wrap">
+      <div class="editor-toolbar">
+        <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+        <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+        <span id="wasm-status">loading…</span>
+      </div>
+      <textarea id="code-editor" spellcheck="false"
+        data-original="{{.DefaultCode}}">{{.DefaultCode}}</textarea>
+    </div>
+
+    <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>

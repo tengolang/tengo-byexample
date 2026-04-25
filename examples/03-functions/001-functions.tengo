@@ -1,25 +1,29 @@
 // # Functions
 //
-// Functions are central in Tengo.
+// Functions are central in Tengo. They are values that can be assigned
+// to variables, passed as arguments, and returned from other functions.
 
 fmt := import("fmt")
 
-// Here's a function that takes two integers and returns
-// their sum as an integer.
+// Here's a function that takes two numbers and returns their sum.
+// Use `return` to return a value explicitly.
 plus := func(a, b) {
-    // Tengo functions return the value of the last statement
-    // if there's no explicit `return`.
     return a + b
 }
 
-// Call a function just as you'd expect, with `name(args)`.
+// Call a function with `name(args)`.
 res := plus(1, 2)
 fmt.println("1+2 =", res)
 
-// When you have multiple parameters of the same type, you
-// still need to list them all (Tengo is dynamically typed).
+// Functions work with any number of parameters.
 plusPlus := func(a, b, c) {
     return a + b + c
 }
 res = plusPlus(1, 2, 3)
 fmt.println("1+2+3 =", res)
+
+// Functions are first-class values and can be passed as arguments.
+apply := func(f, a, b) {
+    return f(a, b)
+}
+fmt.println("apply:", apply(plus, 5, 3))

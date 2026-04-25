@@ -1,12 +1,12 @@
 // # Writing Files
 //
-// `os.create` creates or truncates a file and returns a file object. Use
-// `.write(bytes)` or `.write_string(string)` to write data, and always call
-// `.close()` when done.
+// `os.create` creates or truncates a file and returns a file object.
+// Use `write_string` or `write` (for bytes), then `close` when done.
 
 fmt := import("fmt")
 os := import("os")
 
+// `os.create` opens a file for writing, creating it if necessary.
 f := os.create("/tmp/tengo_write.txt")
 f.write_string("line 1\n")
 f.write_string("line 2\n")
@@ -15,10 +15,14 @@ f.close()
 
 fmt.println(string(os.read_file("/tmp/tengo_write.txt")))
 
-f2 := os.open_file("/tmp/tengo_write.txt", os.o_wronly|os.o_append, 0644)
+// `os.open_file` with `o_append` adds to an existing file
+// without truncating it.
+flags := os.o_wronly | os.o_append
+f2 := os.open_file("/tmp/tengo_write.txt", flags, 0644)
 f2.write_string("line 4\n")
 f2.close()
 
 fmt.println(string(os.read_file("/tmp/tengo_write.txt")))
 
+// Clean up.
 os.remove("/tmp/tengo_write.txt")

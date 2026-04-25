@@ -92,27 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- Home Page Search ---
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      document.querySelectorAll('.group').forEach(group => {
-        let hasVisible = false;
-        group.querySelectorAll('li').forEach(li => {
-          const text = li.textContent.toLowerCase();
-          if (text.includes(query)) {
-            li.style.display = '';
-            hasVisible = true;
-          } else {
-            li.style.display = 'none';
-          }
-        });
-        group.style.display = hasVisible ? '' : 'none';
-      });
-    });
-  }
-
   const ta = document.getElementById('code-editor');
   if (!ta || typeof CodeMirror === 'undefined') return;
 

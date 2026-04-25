@@ -1,12 +1,11 @@
 // # Sorting
 //
-// Tengo has no built-in sort function, but the `enum` source module makes it
-// easy to implement one. Below is a merge sort that works on any array whose
-// elements support `<` comparison.
+// Tengo has no built-in sort function, but it is straightforward to implement
+// one using closures and recursion.
 
 fmt := import("fmt")
-enum := import("enum")
 
+// `merge` combines two sorted arrays into one sorted array.
 merge := func(left, right) {
     result := []
     li := 0
@@ -31,16 +30,21 @@ merge := func(left, right) {
     return result
 }
 
+// `msort` recursively splits the array and merges the sorted halves.
 msort := func(arr) {
     if len(arr) <= 1 { return arr }
     mid := len(arr) / 2
-    left := msort(arr[:mid])
-    right := msort(arr[mid:])
-    return merge(left, right)
+    return merge(msort(arr[:mid]), msort(arr[mid:]))
 }
 
-nums := [5, 2, 8, 1, 9, 3]
-fmt.println(msort(nums))
+// Sort numbers.
+fmt.println(msort([5, 2, 8, 1, 9, 3]))
 
-words := ["banana", "apple", "cherry", "date"]
-fmt.println(msort(words))
+// Sort strings — any comparable type works.
+fmt.println(msort(["banana", "apple", "cherry", "date"]))
+
+// The original array is unchanged.
+nums := [5, 2, 8, 1]
+sorted := msort(nums)
+fmt.println("original:", nums)
+fmt.println("sorted:  ", sorted)

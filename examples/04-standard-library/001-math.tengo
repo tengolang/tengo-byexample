@@ -1,16 +1,23 @@
 // # Math
 //
-// The `math` module exposes common mathematical functions and the constants
-// `e`, `pi`, and `phi`.
+// The `math` module exposes Go's math package: common functions and the
+// constants `e`, `pi`, and `phi`.
 
 fmt := import("fmt")
 math := import("math")
 
+// Constants are pre-defined float values.
 fmt.println(math.pi)
+fmt.println(math.e)
+
+// Basic functions: absolute value, square root, power.
 fmt.println(math.abs(-7.5))
 fmt.println(math.sqrt(144.0))
 fmt.println(math.pow(2.0, 10.0))
+
+// Rounding functions.
 fmt.println(math.floor(3.7))
 fmt.println(math.ceil(3.2))
+// `min` and `max` work on floats.
 fmt.println(math.min(4.0, 7.0))
 fmt.println(math.max(4.0, 7.0))

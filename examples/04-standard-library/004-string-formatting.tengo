@@ -1,15 +1,26 @@
 // # String Formatting
 //
-// `fmt.sprintf` produces a formatted string using Go-style verbs: `%s` for
-// strings, `%d` for integers, `%f` for floats, `%t` for booleans, `%v` for
-// any value. `fmt.printf` writes directly to output.
+// `fmt.sprintf` formats a string using Go-style verbs and returns it.
+// `fmt.printf` writes the formatted output directly.
 
 fmt := import("fmt")
 
+// `%s` formats a string, `%d` an integer, `%f` a float.
 fmt.println(fmt.sprintf("Hello, %s!", "Tengo"))
 fmt.println(fmt.sprintf("%d + %d = %d", 3, 4, 7))
 fmt.println(fmt.sprintf("Pi ~ %.4f", 3.14159))
-fmt.println(fmt.sprintf("%08b", 42))
-fmt.println(fmt.sprintf("%10s|%-10s", "right", "left"))
+
+// Width and alignment: use a number before the verb.
+// Negative width left-aligns.
+fmt.println(fmt.sprintf("|%10s|%-10s|", "right", "left"))
+
+// `%v` is the default representation, useful for any value.
 fmt.println(fmt.sprintf("%v", [1, 2, 3]))
-fmt.printf("formatted output: %d\n", 99)
+fmt.println(fmt.sprintf("%v", {a: 1}))
+
+// Integer bases: `%b` binary, `%o` octal, `%x` hex.
+fmt.println(fmt.sprintf("%08b", 42))
+fmt.println(fmt.sprintf("%x", 255))
+
+// `fmt.printf` writes directly to output.
+fmt.printf("formatted: %d\n", 99)

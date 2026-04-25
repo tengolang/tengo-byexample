@@ -1,11 +1,11 @@
 // # Errors
 //
-// Tengo uses `error()` to create error values. Functions signal failure by
-// returning an error, and callers check with `is_error()`. Errors carry a
-// string message accessible via `.value`.
+// Tengo uses `error(value)` to create error values. Functions signal failure
+// by returning an error, and callers check with `is_error()`.
 
 fmt := import("fmt")
 
+// This function returns an error when `b` is zero.
 divide := func(a, b) {
     if b == 0 {
         return error("division by zero")
@@ -13,10 +13,22 @@ divide := func(a, b) {
     return a / b
 }
 
-result := divide(10, 2)
-fmt.println(result)
+// A successful call returns the numeric result.
+fmt.println(divide(10, 2))
 
-result = divide(10, 0)
+// A failed call returns an error value.
+// Retrieve the message with `.value`.
+result := divide(10, 0)
 if is_error(result) {
     fmt.println("error:", result.value)
+}
+
+// `is_error` lets you handle failure without panicking.
+vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
+for _, v in vals {
+    if is_error(v) {
+        fmt.println("got error:", v.value)
+    } else {
+        fmt.println("got value:", v)
+    }
 }

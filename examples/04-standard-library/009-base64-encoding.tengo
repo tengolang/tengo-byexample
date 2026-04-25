@@ -1,19 +1,27 @@
 // # Base64 Encoding
 //
-// The `base64` module encodes and decodes using standard, URL-safe, and raw
-// variants. Input and output are `bytes`; use `string()` to print the result.
+// The `base64` module encodes and decodes using standard, URL-safe, and
+// raw (no padding) variants. Input and output are `bytes`.
 
 fmt := import("fmt")
 base64 := import("base64")
 
+// `base64.encode` produces standard base64 with `=` padding.
+// Use `string()` to print the result.
 msg := bytes("Hello, Tengo!")
 enc := base64.encode(msg)
 fmt.println(string(enc))
 
+// `base64.decode` reverses the encoding.
 dec := base64.decode(enc)
 fmt.println(string(dec))
 
+// URL-safe base64 uses `-` and `_` instead of `+` and `/`,
+// making it safe for use in URLs and filenames.
 url_enc := base64.url_encode(bytes("data?key=value&x=1"))
 fmt.println(string(url_enc))
-
 fmt.println(string(base64.url_decode(url_enc)))
+
+// Raw variants omit the `=` padding.
+raw := base64.raw_encode(bytes("Tengo"))
+fmt.println(string(raw))

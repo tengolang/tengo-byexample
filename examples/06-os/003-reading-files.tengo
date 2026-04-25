@@ -1,21 +1,27 @@
 // # Reading Files
 //
-// `os.read_file` reads an entire file as bytes. For streaming access, use
-// `os.open` to get a file object and call `.read(n)` on it. Convert bytes to
-// a string with `string()`.
+// `os.read_file` reads an entire file into a `bytes` value. For streaming
+// access, `os.open` returns a file object with a `read(buf)` method.
 
 fmt := import("fmt")
 os := import("os")
 
-os.create("/tmp/tengo_read.txt").write_string("Hello from Tengo!\nSecond line.\n")
+// Create a small file to read from.
+f0 := os.create("/tmp/tengo_read.txt")
+f0.write_string("Hello from Tengo!\nSecond line.\n")
 
+// `os.read_file` is the simplest way to read a whole file.
+// Convert the bytes result with `string()`.
 content := os.read_file("/tmp/tengo_read.txt")
 fmt.println(string(content))
 
+// `os.open` returns a file object for streaming reads.
+// Pass a pre-allocated `bytes` buffer to `read`.
 f := os.open("/tmp/tengo_read.txt")
 buf := bytes(5)
 f.read(buf)
 fmt.println(string(buf))
 f.close()
 
+// Clean up.
 os.remove("/tmp/tengo_read.txt")

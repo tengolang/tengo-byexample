@@ -1,24 +1,30 @@
 // # Regular Expressions
 //
-// The `text` module exposes Go's `regexp` package as `re_match`, `re_find`,
-// `re_replace`, and `re_split`. All pattern arguments are Go regular
-// expressions. `re_compile` returns a reusable compiled regexp object.
+// The `text` module exposes Go's `regexp` package through `re_match`,
+// `re_find`, `re_replace`, and `re_split`. Patterns follow Go regexp syntax.
 
 fmt := import("fmt")
 text := import("text")
 
+// `re_match(pattern, str)` returns true if the whole string matches.
 fmt.println(text.re_match(`^\d{3}-\d{4}$`, "555-1234"))
 fmt.println(text.re_match(`^\d{3}-\d{4}$`, "hello"))
 
+// `re_replace(pattern, str, repl)` replaces all matches.
 fmt.println(text.re_replace(`\d+`, "score: 42 and 7", "NUM"))
 
-parts := text.re_split(`\s+`, "  one   two  three  ", -1)
+// `re_split(pattern, str, n)` splits on the pattern.
+// Pass -1 to split on all occurrences.
+parts := text.re_split(`\s+`, "one   two  three", -1)
 fmt.println(parts)
 
-hits := text.re_find(`[a-z]+`, "a1b2c3d4", -1)
+// `re_find(pattern, str, n)` returns an array of match objects,
+// each containing `text`, `begin`, and `end`.
+hits := text.re_find(`[a-z]+`, "a1b2c3", -1)
 for _, m in hits {
     fmt.println(m[0]["text"])
 }
 
+// `re_compile` creates a reusable compiled regexp object.
 re := text.re_compile(`(\w+)@(\w+)\.(\w+)`)
 fmt.println(re.match("user@example.com"))

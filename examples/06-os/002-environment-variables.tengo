@@ -1,18 +1,22 @@
 // # Environment Variables
 //
-// The `os` module exposes `getenv`, `setenv`, `unsetenv`, `environ`, and
-// `lookup_env`. `getenv` returns an empty string for missing variables;
-// `lookup_env` returns `(value, true)` or `("", false)`.
+// The `os` module provides `getenv`, `setenv`, `unsetenv`, and `lookup_env`
+// for reading and writing the process environment.
 
 fmt := import("fmt")
 os := import("os")
 
+// `getenv` returns the value of a variable, or an empty string if unset.
 fmt.println(os.getenv("HOME"))
 fmt.println(os.getenv("NONEXISTENT"))
 
+// `setenv` and `unsetenv` modify the environment for the current process.
 os.setenv("GREETING", "hello")
 fmt.println(os.getenv("GREETING"))
 
+// `lookup_env` returns `(value, true)` when the variable exists,
+// or `("", false)` when it is absent — useful to distinguish
+// an unset variable from one set to the empty string.
 val, ok := os.lookup_env("GREETING")
 fmt.println(val, ok)
 

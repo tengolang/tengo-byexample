@@ -13,7 +13,7 @@ import (
 type Example struct {
 	Slug           string
 	Title          string
-	Description    string
+	Description    template.HTML
 	Sections       []Section
 	FullCode       string
 	PlaygroundCode string
@@ -21,7 +21,7 @@ type Example struct {
 
 type Section struct {
 	ID   string
-	Doc  string
+	Doc  template.HTML
 	Code string
 }
 
@@ -53,8 +53,12 @@ func main() {
 
 	indexTmpl := mustTemplate("templates/index.html")
 	exampleTmpl := mustTemplate("templates/example.html")
+	playgroundTmpl := mustTemplate("templates/playground.html")
 
 	writeTemplate("docs/index.html", indexTmpl, map[string]any{"Groups": groups})
+	writeTemplate("docs/playground.html", playgroundTmpl, map[string]any{
+		"DefaultCode": defaultPlaygroundCode,
+	})
 
 	for i, ex := range allExamples {
 		data := PageData{Example: ex, Groups: groups}
@@ -69,8 +73,20 @@ func main() {
 		writeTemplate(filepath.Join("docs", ex.Slug+".html"), exampleTmpl, data)
 	}
 
-	log.Printf("built %d examples in %d groups → docs/", len(allExamples), len(groups))
+	log.Printf("built %d examples in %d groups + playground → docs/", len(allExamples), len(groups))
 }
+
+const defaultPlaygroundCode = `fmt := import("fmt")
+
+fmt.println("Hello from Tengo!")
+
+// Fibonacci
+fib := func(n) {
+    if n <= 1 { return n }
+    return fib(n-1) + fib(n-2)
+}
+fmt.println("fib(10) =", fib(10))
+`
 
 func loadGroups(dir string) ([]Group, error) {
 	entries, err := os.ReadDir(dir)
@@ -175,7 +191,7 @@ func parseExample(filename string, src []byte) Example {
 	}
 
 	title := slug
-	description := ""
+	description := template.HTML("")
 	if len(blocks) > 0 && blocks[0].kind == "doc" {
 		content := blocks[0].content
 		if nl := strings.Index(content, "\n"); nl >= 0 {
@@ -191,7 +207,7 @@ func parseExample(filename string, src []byte) Example {
 					}
 					parts = append(parts, l)
 				}
-				description = strings.Join(parts, " ")
+				description = renderDoc(strings.Join(parts, " "))
 			}
 			blocks[0].content = rest
 			blocks = blocks[1:]
@@ -207,8 +223,9 @@ func parseExample(filename string, src []byte) Example {
 	for i < len(blocks) {
 		var s Section
 		if blocks[i].kind == "doc" {
-			s.Doc = strings.TrimSpace(blocks[i].content)
-			s.ID = slugify(s.Doc)
+			rawDoc := strings.TrimSpace(blocks[i].content)
+			s.Doc = renderDoc(rawDoc)
+			s.ID = slugify(rawDoc)
 			i++
 			if i < len(blocks) && blocks[i].kind == "code" {
 				s.Code = strings.Trim(blocks[i].content, "\n")
@@ -244,6 +261,31 @@ func fileSlug(filename string) string {
 		}
 	}
 	return base
+}
+
+// renderDoc converts plain doc text to HTML, wrapping `backtick` spans in <code>.
+func renderDoc(s string) template.HTML {
+	var out strings.Builder
+	for len(s) > 0 {
+		start := strings.IndexByte(s, '`')
+		if start < 0 {
+			out.WriteString(template.HTMLEscapeString(s))
+			break
+		}
+		out.WriteString(template.HTMLEscapeString(s[:start]))
+		s = s[start+1:]
+		end := strings.IndexByte(s, '`')
+		if end < 0 {
+			out.WriteByte('`')
+			out.WriteString(template.HTMLEscapeString(s))
+			break
+		}
+		out.WriteString("<code>")
+		out.WriteString(template.HTMLEscapeString(s[:end]))
+		out.WriteString("</code>")
+		s = s[end+1:]
+	}
+	return template.HTML(out.String())
 }
 
 func slugify(text string) string {

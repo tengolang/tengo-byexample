@@ -1,20 +1,27 @@
 // # Immutability
 //
-// By default, arrays and maps are mutable. The built-in `immutable()` returns
-// a deeply immutable copy of any value. Attempting to modify an immutable
-// value causes a runtime error, so use this when you want to enforce read-only
-// data.
+// By default, arrays and maps are mutable. The built-in `immutable()`
+// returns a deeply immutable copy of any value. Attempting to modify it
+// causes a runtime error.
 
 fmt := import("fmt")
 
+// Regular arrays are mutable — elements can be changed in-place.
 nums := [1, 2, 3]
 nums[0] = 99
 fmt.println(nums)
 
+// `immutable()` creates a read-only copy.
+// Any attempt to modify it at runtime will produce an error.
 frozen := immutable([10, 20, 30])
 fmt.println(frozen)
 fmt.println(frozen[1])
 
+// Maps can also be made immutable.
 config := immutable({host: "localhost", port: 5432})
 fmt.println(config["host"])
 fmt.println(config["port"])
+
+// `immutable` works on any value, including nested structures.
+data := immutable({users: ["alice", "bob"], count: 2})
+fmt.println(data["users"])

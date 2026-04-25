@@ -1,18 +1,23 @@
 // # Command-Line Arguments
 //
-// `os.args()` returns the argument list as an array. The first element is
-// always the interpreter name (`tengo`), the second is the script path, and
-// any further elements are the arguments passed by the caller.
-//
-// Run this example with: `tengo command-line-arguments.tengo arg1 arg2`
+// `os.args()` returns the full argument list. The first element is the
+// interpreter name, the second is the script path, and anything after
+// that is user-supplied.
 
 fmt := import("fmt")
 os := import("os")
 
+// Print all arguments.
 args := os.args()
 fmt.println(args)
-fmt.println(len(args))
 
+// The interpreter and script are always present.
+fmt.println("program:", args[0])
+fmt.println("script: ", args[1])
+
+// User arguments start at index 2.
 if len(args) > 2 {
     fmt.println("first user arg:", args[2])
+} else {
+    fmt.println("(no user args — try: tengo script.tengo hello)")
 }

@@ -1,12 +1,20 @@
 // # Exit
 //
-// `os.exit(code)` terminates the script immediately with the given exit code.
-// Deferred cleanup does not run (Tengo has no `defer`), so close resources
-// before calling exit.
+// `os.exit(code)` terminates the script immediately with the given integer
+// exit code. Code 0 means success; any non-zero value signals failure.
 
 fmt := import("fmt")
 os := import("os")
 
-fmt.println("before exit")
+fmt.println("starting")
+
+// Everything before `os.exit` runs normally.
+for i := 0; i < 3; i++ {
+    fmt.println("step", i)
+}
+
+// `os.exit` stops execution immediately.
+// Nothing after this line will run.
 os.exit(0)
+
 fmt.println("this will not print")

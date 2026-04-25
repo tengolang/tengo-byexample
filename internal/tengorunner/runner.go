@@ -30,9 +30,11 @@ func Run(code string) (output string, errMsg string) {
 }
 
 // CaptureFmtModuleMap returns a module map identical to the standard one
-// except that the fmt module writes to w instead of os.Stdout.
+// except that the fmt module writes to w instead of os.Stdout, and the os
+// module is backed by an in-memory filesystem for WASM sandbox safety.
 func CaptureFmtModuleMap(w *bytes.Buffer) *tengo.ModuleMap {
 	mods := stdlib.GetModuleMap(stdlib.AllModuleNames()...)
+	mods.AddBuiltinModule("os", mockOsModule())
 	mods.AddBuiltinModule("fmt", map[string]tengo.Object{
 		"print": &tengo.UserFunction{Name: "print", Value: func(args ...tengo.Object) (tengo.Object, error) {
 			pa, err := collectPrintArgs(args)

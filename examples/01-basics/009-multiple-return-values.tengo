@@ -1,11 +1,11 @@
 // # Multiple Return Values
 //
-// Functions in Tengo can return more than one value. The caller unpacks them
-// with a multi-assignment. This is commonly used to return a result alongside
-// an error or a secondary piece of information.
+// Functions in Tengo can return more than one value using a comma-separated
+// return list. The caller unpacks them with a multi-assignment.
 
 fmt := import("fmt")
 
+// This function returns the minimum and maximum of an array.
 minmax := func(arr) {
     mn := arr[0]
     mx := arr[0]
@@ -16,10 +16,13 @@ minmax := func(arr) {
     return mn, mx
 }
 
+// Both return values are captured in one assignment.
 lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(lo)
-fmt.println(hi)
+fmt.println("min:", lo)
+fmt.println("max:", hi)
 
+// A common pattern is returning a result and an error.
+// Use `_` to discard a value you don't need.
 divide := func(a, b) {
     if b == 0 {
         return 0, error("division by zero")
@@ -28,7 +31,7 @@ divide := func(a, b) {
 }
 
 result, err := divide(10, 3)
-fmt.println(result, err)
+fmt.println("result:", result)
 
 _, err = divide(5, 0)
-fmt.println(is_error(err))
+fmt.println("is_error:", is_error(err))

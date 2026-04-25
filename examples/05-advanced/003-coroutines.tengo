@@ -1,22 +1,26 @@
 // # Coroutines
 //
-// The `coro` module provides cooperative coroutines. A coroutine suspends at
-// each `yield` call. Iterate with `for...in`, or call `.resume()` which
-// returns a `(value, ok)` pair — `ok` is `false` when the coroutine is done.
+// The `coro` module provides cooperative coroutines. A coroutine suspends
+// at each `yield` call and resumes when iterated or when `.resume()` is called.
 
 fmt := import("fmt")
 coro := import("coro")
 
+// Create a coroutine with `coro.new`. The function receives a `yield`
+// callback it uses to emit values one at a time.
 gen := coro.new(func(yield) {
     yield(1)
     yield(2)
     yield(3)
 })
 
+// Coroutines implement the iterable protocol, so `for...in` works directly.
 for _, v in gen {
     fmt.println(v)
 }
 
+// `.resume()` steps the coroutine manually.
+// It returns `(value, ok)` — `ok` becomes false when exhausted.
 countdown := coro.new(func(yield) {
     for i := 5; i > 0; i-- {
         yield(i)
@@ -24,8 +28,6 @@ countdown := coro.new(func(yield) {
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
-v, ok = countdown.resume()
 fmt.println(v, ok)
 v, ok = countdown.resume()
 fmt.println(v, ok)
