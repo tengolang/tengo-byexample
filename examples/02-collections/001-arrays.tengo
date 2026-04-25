@@ -1,0 +1,21 @@
+// # Arrays
+//
+// Arrays hold ordered sequences of values and can contain mixed types.
+// Use `append` to add elements, `len` for the size, and slice notation
+// `a[low:high]` to extract a sub-array.
+
+fmt := import("fmt")
+
+fruits := ["apple", "banana", "cherry"]
+fmt.println(fruits[0])
+fmt.println(len(fruits))
+
+fruits = append(fruits, "date")
+fmt.println(fruits)
+
+for i, v in fruits {
+    fmt.println(i, v)
+}
+
+nums := [3, 1, 4, 1, 5, 9]
+fmt.println(nums[1:4])

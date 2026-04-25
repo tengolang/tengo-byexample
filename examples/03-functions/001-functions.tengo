@@ -1,0 +1,22 @@
+// # Functions
+//
+// Functions are first-class values defined with `func`. They can be assigned
+// to variables, passed as arguments, and returned from other functions.
+
+fmt := import("fmt")
+
+add := func(a, b) {
+    return a + b
+}
+fmt.println(add(3, 4))
+
+greet := func(name) {
+    return "Hello, " + name + "!"
+}
+fmt.println(greet("Tengo"))
+
+apply := func(f, x) {
+    return f(x)
+}
+double := func(n) { return n * 2 }
+fmt.println(apply(double, 21))

@@ -1,0 +1,15 @@
+// # Values
+//
+// Tengo has several built-in value types: strings, integers, floats, booleans,
+// arrays, and maps. Strings concatenate with `+`, integer division truncates,
+// and float division produces a float result.
+
+fmt := import("fmt")
+
+fmt.println("ten" + "go")
+fmt.println("1+1 =", 1+1)
+fmt.println("7/2 =", 7/2)
+fmt.println("7.0/2.0 =", 7.0/2.0)
+fmt.println(true && false)
+fmt.println(true || false)
+fmt.println(!true)

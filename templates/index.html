@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div id="intro">
+    <h2><a href="index.html">Tengo by Example</a></h2>
+    <p>
+      <a href="https://github.com/tengolang/tengo">Tengo</a> is a small,
+      dynamic, fast, secure script language for Go. This site introduces
+      <em>tengolang/tengo v3</em> through annotated example programs.
+    </p>
+    <p>
+      Every example runs live in your browser via WebAssembly — no install
+      needed. Click <em>run</em> on any example, or press
+      <code>Ctrl+Enter</code>.
+    </p>
+    {{range .Groups}}
+    <h3>{{.Title}}</h3>
+    <ul>
+      {{range .Examples}}
+      <li><a href="{{.Slug}}.html">{{.Title}}</a></li>
+      {{end}}
+    </ul>
+    {{end}}
+  </div>
+</body>
+</html>

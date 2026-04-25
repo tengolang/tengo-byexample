@@ -1,0 +1,22 @@
+// # Errors
+//
+// Tengo uses `error()` to create error values. Functions signal failure by
+// returning an error, and callers check with `is_error()`. Errors carry a
+// string message accessible via `.value`.
+
+fmt := import("fmt")
+
+divide := func(a, b) {
+    if b == 0 {
+        return error("division by zero")
+    }
+    return a / b
+}
+
+result := divide(10, 2)
+fmt.println(result)
+
+result = divide(10, 0)
+if is_error(result) {
+    fmt.println("error:", result.value)
+}

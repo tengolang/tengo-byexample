@@ -1,0 +1,18 @@
+// # Text
+//
+// The `text` module handles string manipulation including searching, splitting,
+// trimming, case conversion, and regular expressions.
+
+fmt := import("fmt")
+text := import("text")
+
+fmt.println(text.title("hello world"))
+fmt.println(text.trim_space("  hello  "))
+fmt.println(text.has_prefix("Tengo", "Ten"))
+fmt.println(text.has_suffix("Tengo", "go"))
+fmt.println(text.index("hello", "ll"))
+fmt.println(text.count("banana", "a"))
+fmt.println(text.repeat("ab", 3))
+
+fmt.println(text.re_match(`^\d+$`, "12345"))
+fmt.println(text.re_split(`\s+`, "one two  three", -1))

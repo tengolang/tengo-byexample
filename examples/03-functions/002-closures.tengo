@@ -1,0 +1,22 @@
+// # Closures
+//
+// Functions capture variables from their enclosing scope. Each closure
+// maintains its own independent copy of the captured state.
+
+fmt := import("fmt")
+
+makeCounter := func() {
+    count := 0
+    return func() {
+        count++
+        return count
+    }
+}
+
+a := makeCounter()
+b := makeCounter()
+
+fmt.println(a())
+fmt.println(a())
+fmt.println(a())
+fmt.println(b())

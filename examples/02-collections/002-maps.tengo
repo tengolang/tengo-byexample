@@ -1,0 +1,21 @@
+// # Maps
+//
+// Maps store unordered key-value pairs. Keys are strings; values can be any
+// type. Accessing a missing key returns `undefined`, which `is_undefined`
+// can detect. Use `delete` to remove a key.
+
+fmt := import("fmt")
+
+ages := {alice: 30, bob: 25, carol: 35}
+fmt.println(ages["alice"])
+
+ages["dave"] = 28
+fmt.println(len(ages))
+
+fmt.println(is_undefined(ages["nobody"]))
+
+delete(ages, "bob")
+
+for name, age in ages {
+    fmt.println(name, age)
+}

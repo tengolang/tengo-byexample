@@ -1,0 +1,20 @@
+// # Immutability
+//
+// By default, arrays and maps are mutable. The built-in `immutable()` returns
+// a deeply immutable copy of any value. Attempting to modify an immutable
+// value causes a runtime error, so use this when you want to enforce read-only
+// data.
+
+fmt := import("fmt")
+
+nums := [1, 2, 3]
+nums[0] = 99
+fmt.println(nums)
+
+frozen := immutable([10, 20, 30])
+fmt.println(frozen)
+fmt.println(frozen[1])
+
+config := immutable({host: "localhost", port: 5432})
+fmt.println(config["host"])
+fmt.println(config["port"])

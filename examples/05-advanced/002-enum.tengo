@@ -1,0 +1,22 @@
+// # Enum
+//
+// The `enum` source module provides functional iteration: `map`, `filter`,
+// `find`, `all`, `any`, and `each`. Callbacks receive the key (index for
+// arrays) and value as arguments.
+
+fmt := import("fmt")
+enum := import("enum")
+
+nums := [1, 2, 3, 4, 5]
+
+doubled := enum.map(nums, func(_, v) { return v * 2 })
+fmt.println(doubled)
+
+evens := enum.filter(nums, func(_, v) { return v%2 == 0 })
+fmt.println(evens)
+
+first := enum.find(nums, func(_, v) { return v > 3 })
+fmt.println(first)
+
+fmt.println(enum.all(nums, func(_, v) { return v > 0 }))
+fmt.println(enum.any(nums, func(_, v) { return v > 4 }))

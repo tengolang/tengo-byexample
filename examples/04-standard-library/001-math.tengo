@@ -1,0 +1,16 @@
+// # Math
+//
+// The `math` module exposes common mathematical functions and the constants
+// `e`, `pi`, and `phi`.
+
+fmt := import("fmt")
+math := import("math")
+
+fmt.println(math.pi)
+fmt.println(math.abs(-7.5))
+fmt.println(math.sqrt(144.0))
+fmt.println(math.pow(2.0, 10.0))
+fmt.println(math.floor(3.7))
+fmt.println(math.ceil(3.2))
+fmt.println(math.min(4.0, 7.0))
+fmt.println(math.max(4.0, 7.0))

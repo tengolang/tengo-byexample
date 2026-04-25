@@ -1,0 +1,17 @@
+// # JSON
+//
+// The `json` module encodes Tengo maps and arrays to JSON bytes and decodes
+// JSON bytes back into Tengo values. Use `string()` to convert the byte
+// output to a printable string.
+
+fmt := import("fmt")
+json := import("json")
+
+data := {name: "Tengo", version: 3, fast: true}
+encoded := json.encode(data)
+fmt.println(string(encoded))
+
+decoded := json.decode(encoded)
+fmt.println(decoded["name"])
+fmt.println(decoded["version"])
+fmt.println(decoded["fast"])

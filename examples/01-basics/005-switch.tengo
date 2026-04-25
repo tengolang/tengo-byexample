@@ -1,0 +1,36 @@
+// # Switch
+//
+// Tengo supports `switch` with tagged, tagless, and init-form variants.
+// Cases do not fall through by default; use `fallthrough` explicitly.
+// Multiple values can appear in a single case, separated by commas.
+
+fmt := import("fmt")
+
+day := "Tuesday"
+switch day {
+case "Monday", "Tuesday", "Wednesday", "Thursday", "Friday":
+    fmt.println(day, "is a weekday")
+case "Saturday", "Sunday":
+    fmt.println(day, "is a weekend")
+}
+
+score := 82
+switch {
+case score >= 90:
+    fmt.println("A")
+case score >= 80:
+    fmt.println("B")
+case score >= 70:
+    fmt.println("C")
+default:
+    fmt.println("F")
+}
+
+switch n := 3; n {
+case 1:
+    fmt.println("one")
+case 2:
+    fmt.println("two")
+case 3:
+    fmt.println("three")
+}

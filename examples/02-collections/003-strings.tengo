@@ -1,0 +1,19 @@
+// # Strings
+//
+// Strings are immutable byte sequences. Slice notation extracts substrings,
+// and the `text` module provides search, split, join, and case conversion.
+
+fmt := import("fmt")
+text := import("text")
+
+s := "Hello, Tengo!"
+fmt.println(len(s))
+fmt.println(s[7:12])
+fmt.println(text.to_upper(s))
+fmt.println(text.to_lower(s))
+fmt.println(text.contains(s, "Tengo"))
+fmt.println(text.replace(s, "Tengo", "World", -1))
+
+parts := text.split("a,b,c", ",")
+fmt.println(parts)
+fmt.println(text.join(["x", "y", "z"], "-"))

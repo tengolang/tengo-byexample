@@ -1,0 +1,21 @@
+// # If / Else
+//
+// Tengo's `if` and `else` work like most languages. Conditions do not need
+// parentheses, but braces are required. An optional init statement can appear
+// before the condition, separated by a semicolon.
+
+fmt := import("fmt")
+
+x := 7
+
+if x > 10 {
+    fmt.println("big")
+} else if x > 5 {
+    fmt.println("medium")
+} else {
+    fmt.println("small")
+}
+
+if n := 42; n%2 == 0 {
+    fmt.println(n, "is even")
+}
