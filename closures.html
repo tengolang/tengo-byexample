@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: Closures</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "functions.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "errors.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="closures">
+    <h2><a href="index.html">Tengo by Example</a>: Closures</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>Functions capture variables from their enclosing scope. Each closure
+maintains its own independent copy of the captured state.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+
+makeCounter := func() {
+    count := 0
+    return func() {
+        count&#43;&#43;
+        return count
+    }
+}
+
+a := makeCounter()
+b := makeCounter()
+
+fmt.println(a())
+fmt.println(a())
+fmt.println(a())
+fmt.println(b())</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # Closures
+//
+// Functions capture variables from their enclosing scope. Each closure
+// maintains its own independent copy of the captured state.
+
+fmt := import(&#34;fmt&#34;)
+
+makeCounter := func() {
+    count := 0
+    return func() {
+        count&#43;&#43;
+        return count
+    }
+}
+
+a := makeCounter()
+b := makeCounter()
+
+fmt.println(a())
+fmt.println(a())
+fmt.println(a())
+fmt.println(b())">// # Closures
+//
+// Functions capture variables from their enclosing scope. Each closure
+// maintains its own independent copy of the captured state.
+
+fmt := import(&#34;fmt&#34;)
+
+makeCounter := func() {
+    count := 0
+    return func() {
+        count&#43;&#43;
+        return count
+    }
+}
+
+a := makeCounter()
+b := makeCounter()
+
+fmt.println(a())
+fmt.println(a())
+fmt.println(a())
+fmt.println(b())</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="functions.html" rel="prev">Functions</a>.</p>
+    <p class="next">Next example: <a href="errors.html" rel="next">Errors</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

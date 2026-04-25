@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: For Loops</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "switch.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "arrays.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="for">
+    <h2><a href="index.html">Tengo by Example</a>: For Loops</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>`for` is Tengo&#39;s only looping construct. It supports an init/condition/post
+form, a condition-only (while) form, and `for k, v in collection` iteration
+over arrays and maps.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+
+for i := 0; i &lt; 3; i&#43;&#43; {
+    fmt.println(&#34;i =&#34;, i)
+}
+
+n := 1
+for n &lt; 16 {
+    fmt.println(&#34;n =&#34;, n)
+    n *= 2
+}
+
+fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+for i, fruit in fruits {
+    fmt.println(i, &#34;-&gt;&#34;, fruit)
+}
+
+scores := {alice: 95, bob: 87}
+for name, score in scores {
+    fmt.println(name, &#34;scored&#34;, score)
+}</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # For Loops
+//
+// `for` is Tengo&#39;s only looping construct. It supports an init/condition/post
+// form, a condition-only (while) form, and `for k, v in collection` iteration
+// over arrays and maps.
+
+fmt := import(&#34;fmt&#34;)
+
+for i := 0; i &lt; 3; i&#43;&#43; {
+    fmt.println(&#34;i =&#34;, i)
+}
+
+n := 1
+for n &lt; 16 {
+    fmt.println(&#34;n =&#34;, n)
+    n *= 2
+}
+
+fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+for i, fruit in fruits {
+    fmt.println(i, &#34;-&gt;&#34;, fruit)
+}
+
+scores := {alice: 95, bob: 87}
+for name, score in scores {
+    fmt.println(name, &#34;scored&#34;, score)
+}">// # For Loops
+//
+// `for` is Tengo&#39;s only looping construct. It supports an init/condition/post
+// form, a condition-only (while) form, and `for k, v in collection` iteration
+// over arrays and maps.
+
+fmt := import(&#34;fmt&#34;)
+
+for i := 0; i &lt; 3; i&#43;&#43; {
+    fmt.println(&#34;i =&#34;, i)
+}
+
+n := 1
+for n &lt; 16 {
+    fmt.println(&#34;n =&#34;, n)
+    n *= 2
+}
+
+fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+for i, fruit in fruits {
+    fmt.println(i, &#34;-&gt;&#34;, fruit)
+}
+
+scores := {alice: 95, bob: 87}
+for name, score in scores {
+    fmt.println(name, &#34;scored&#34;, score)
+}</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="switch.html" rel="prev">Switch</a>.</p>
+    <p class="next">Next example: <a href="arrays.html" rel="next">Arrays</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

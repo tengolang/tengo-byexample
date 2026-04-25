@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: Arrays</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "for.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "maps.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="arrays">
+    <h2><a href="index.html">Tengo by Example</a>: Arrays</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>Arrays hold ordered sequences of values and can contain mixed types.
+Use `append` to add elements, `len` for the size, and slice notation
+`a[low:high]` to extract a sub-array.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+
+fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+fmt.println(fruits[0])
+fmt.println(len(fruits))
+
+fruits = append(fruits, &#34;date&#34;)
+fmt.println(fruits)
+
+for i, v in fruits {
+    fmt.println(i, v)
+}
+
+nums := [3, 1, 4, 1, 5, 9]
+fmt.println(nums[1:4])</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # Arrays
+//
+// Arrays hold ordered sequences of values and can contain mixed types.
+// Use `append` to add elements, `len` for the size, and slice notation
+// `a[low:high]` to extract a sub-array.
+
+fmt := import(&#34;fmt&#34;)
+
+fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+fmt.println(fruits[0])
+fmt.println(len(fruits))
+
+fruits = append(fruits, &#34;date&#34;)
+fmt.println(fruits)
+
+for i, v in fruits {
+    fmt.println(i, v)
+}
+
+nums := [3, 1, 4, 1, 5, 9]
+fmt.println(nums[1:4])">// # Arrays
+//
+// Arrays hold ordered sequences of values and can contain mixed types.
+// Use `append` to add elements, `len` for the size, and slice notation
+// `a[low:high]` to extract a sub-array.
+
+fmt := import(&#34;fmt&#34;)
+
+fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
+fmt.println(fruits[0])
+fmt.println(len(fruits))
+
+fruits = append(fruits, &#34;date&#34;)
+fmt.println(fruits)
+
+for i, v in fruits {
+    fmt.println(i, v)
+}
+
+nums := [3, 1, 4, 1, 5, 9]
+fmt.println(nums[1:4])</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="for.html" rel="prev">For Loops</a>.</p>
+    <p class="next">Next example: <a href="maps.html" rel="next">Maps</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

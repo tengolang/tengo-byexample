@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tengo by Example: Text</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<script>
+  window.onkeydown = (e) => {
+    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
+    if (e.key === "ArrowLeft")  { window.location.href = "json.html"; }
+    if (e.key === "ArrowRight") { window.location.href = "immutability.html"; }
+  };
+</script>
+<body>
+  <div class="example" id="text">
+    <h2><a href="index.html">Tengo by Example</a>: Text</h2>
+
+    <table>
+      
+      <tr>
+        <td class="docs"><p>The `text` module handles string manipulation including searching, splitting,
+trimming, case conversion, and regular expressions.</p></td>
+        <td class="code leading"><pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)
+
+fmt.println(text.title(&#34;hello world&#34;))
+fmt.println(text.trim_space(&#34;  hello  &#34;))
+fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
+fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))
+fmt.println(text.index(&#34;hello&#34;, &#34;ll&#34;))
+fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
+fmt.println(text.repeat(&#34;ab&#34;, 3))
+
+fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
+fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</code></pre></td>
+      </tr>
+      
+    </table>
+
+    <table class="playground-table">
+      <tr>
+        <td class="docs">
+          <p class="play-label">try it</p>
+        </td>
+        <td class="code leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="// # Text
+//
+// The `text` module handles string manipulation including searching, splitting,
+// trimming, case conversion, and regular expressions.
+
+fmt := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)
+
+fmt.println(text.title(&#34;hello world&#34;))
+fmt.println(text.trim_space(&#34;  hello  &#34;))
+fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
+fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))
+fmt.println(text.index(&#34;hello&#34;, &#34;ll&#34;))
+fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
+fmt.println(text.repeat(&#34;ab&#34;, 3))
+
+fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
+fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))">// # Text
+//
+// The `text` module handles string manipulation including searching, splitting,
+// trimming, case conversion, and regular expressions.
+
+fmt := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)
+
+fmt.println(text.title(&#34;hello world&#34;))
+fmt.println(text.trim_space(&#34;  hello  &#34;))
+fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
+fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))
+fmt.println(text.index(&#34;hello&#34;, &#34;ll&#34;))
+fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
+fmt.println(text.repeat(&#34;ab&#34;, 3))
+
+fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
+fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</textarea>
+          </div>
+        </td>
+      </tr>
+      <tr id="output-row">
+        <td class="docs"></td>
+        <td class="code"><pre id="output"><span class="hint">$ (output will appear here)</span></pre></td>
+      </tr>
+    </table>
+
+    <p class="prev">Previous example: <a href="json.html" rel="prev">JSON</a>.</p>
+    <p class="next">Next example: <a href="immutability.html" rel="next">Immutability</a>.</p>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
