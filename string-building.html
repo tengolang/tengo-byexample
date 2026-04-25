@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: String Building</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="string-building">
+    <h2>String Building</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Tengo has no string interpolation. Use <code>+</code> for simple concatenation, <code>fmt.sprintf</code> for formatted strings, and <code>text.join</code> to assemble arrays of parts into a single string.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="simple-concatenation-with">
+        <div class="docs">
+          <p><a href="#simple-concatenation-with">Simple concatenation with <code>+</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">s := &#34;Hello&#34; &#43; &#34;, &#34; &#43; &#34;Tengo!&#34;
+fmt.println(s)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="fmtsprintf-is-the-primary-tool-for-formatted-string-construction">
+        <div class="docs">
+          <p><a href="#fmtsprintf-is-the-primary-tool-for-formatted-string-construction"><code>fmt.sprintf</code> is the primary tool for formatted string construction.
+It supports the same verbs as Go&#39;s <code>fmt.Sprintf</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">name := &#34;world&#34;
+n := 42
+fmt.println(fmt.sprintf(&#34;Hello, %s! The answer is %d.&#34;, name, n))
+fmt.println(fmt.sprintf(&#34;pi ≈ %.4f&#34;, 3.14159))
+fmt.println(fmt.sprintf(&#34;%-10s %5d&#34;, &#34;score:&#34;, 99))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="build-a-string-from-parts-with-a-loop-then-join">
+        <div class="docs">
+          <p><a href="#build-a-string-from-parts-with-a-loop-then-join">Build a string from parts with a loop, then join.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">parts := []
+for i := 1; i &lt;= 5; i&#43;&#43; {
+    parts = append(parts, string(i))
+}
+fmt.println(text.join(parts, &#34; &#43; &#34;) &#43; &#34; = 15&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="textrepeat-duplicates-a-string-n-times">
+        <div class="docs">
+          <p><a href="#textrepeat-duplicates-a-string-n-times"><code>text.repeat</code> duplicates a string n times.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.repeat(&#34;=-&#34;, 10))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="texttrimspace-strips-leading-and-trailing-whitespace">
+        <div class="docs">
+          <p><a href="#texttrimspace-strips-leading-and-trailing-whitespace"><code>text.trim_space</code> strips leading and trailing whitespace.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.trim_space(&#34;   padded   &#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="texttrim-removes-a-specific-cutset-from-both-ends">
+        <div class="docs">
+          <p><a href="#texttrim-removes-a-specific-cutset-from-both-ends"><code>text.trim</code> removes a specific cutset from both ends.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.trim(&#34;***hello***&#34;, &#34;*&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="texthasprefix-and-texthassuffix-test-for-substrings">
+        <div class="docs">
+          <p><a href="#texthasprefix-and-texthassuffix-test-for-substrings"><code>text.has_prefix</code> and <code>text.has_suffix</code> test for substrings.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
+fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">Hello, Tengo!
+Hello, world! The answer is 42.
+pi ≈ 3.1416
+score:        99
+1 &#43; 2 &#43; 3 &#43; 4 &#43; 5 = 15
+=-=-=-=-=-=-=-=-=-=-
+padded
+hello
+true
+true</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)
+
+s := &#34;Hello&#34; &#43; &#34;, &#34; &#43; &#34;Tengo!&#34;
+fmt.println(s)
+
+name := &#34;world&#34;
+n := 42
+fmt.println(fmt.sprintf(&#34;Hello, %s! The answer is %d.&#34;, name, n))
+fmt.println(fmt.sprintf(&#34;pi ≈ %.4f&#34;, 3.14159))
+fmt.println(fmt.sprintf(&#34;%-10s %5d&#34;, &#34;score:&#34;, 99))
+
+parts := []
+for i := 1; i &lt;= 5; i&#43;&#43; {
+    parts = append(parts, string(i))
+}
+fmt.println(text.join(parts, &#34; &#43; &#34;) &#43; &#34; = 15&#34;)
+
+fmt.println(text.repeat(&#34;=-&#34;, 10))
+
+fmt.println(text.trim_space(&#34;   padded   &#34;))
+
+fmt.println(text.trim(&#34;***hello***&#34;, &#34;*&#34;))
+
+fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
+fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))">fmt := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)
+
+s := &#34;Hello&#34; &#43; &#34;, &#34; &#43; &#34;Tengo!&#34;
+fmt.println(s)
+
+name := &#34;world&#34;
+n := 42
+fmt.println(fmt.sprintf(&#34;Hello, %s! The answer is %d.&#34;, name, n))
+fmt.println(fmt.sprintf(&#34;pi ≈ %.4f&#34;, 3.14159))
+fmt.println(fmt.sprintf(&#34;%-10s %5d&#34;, &#34;score:&#34;, 99))
+
+parts := []
+for i := 1; i &lt;= 5; i&#43;&#43; {
+    parts = append(parts, string(i))
+}
+fmt.println(text.join(parts, &#34; &#43; &#34;) &#43; &#34; = 15&#34;)
+
+fmt.println(text.repeat(&#34;=-&#34;, 10))
+
+fmt.println(text.trim_space(&#34;   padded   &#34;))
+
+fmt.println(text.trim(&#34;***hello***&#34;, &#34;*&#34;))
+
+fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
+fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="hex-encoding.html" rel="prev">← Hex Encoding</a>
+      
+      
+        <a href="immutability.html" rel="next">Immutability →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
