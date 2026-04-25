@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "writing-files.html"; }
-    
-  };
-</script>
 <body>
   <div class="example" id="exit">
-    <h2><a href="index.html">Tengo by Example</a>: Exit</h2>
+    <h2>Exit</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>`os.exit(code)` terminates the script immediately with the given exit code. Deferred cleanup does not run (Tengo has no `defer`), so close resources before calling exit.</p>
+          <p><code>os.exit(code)</code> terminates the script immediately with the given integer exit code. Code 0 means success; any non-zero value signals failure.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,8 +32,39 @@
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
-fmt.println(&#34;before exit&#34;)
-os.exit(0)
+fmt.println(&#34;starting&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="everything-before-osexit-runs-normally">
+        <div class="docs">
+          <p><a href="#everything-before-osexit-runs-normally">Everything before <code>os.exit</code> runs normally.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">for i := 0; i &lt; 3; i&#43;&#43; {
+    fmt.println(&#34;step&#34;, i)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="osexit-stops-execution-immediately">
+        <div class="docs">
+          <p><a href="#osexit-stops-execution-immediately"><code>os.exit</code> stops execution immediately.
+Nothing after this line will run.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">os.exit(0)
+
 fmt.println(&#34;this will not print&#34;)</code></pre>
           </div>
           
@@ -54,7 +79,7 @@ fmt.println(&#34;this will not print&#34;)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -65,13 +90,25 @@ fmt.println(&#34;this will not print&#34;)</code></pre>
               data-original="fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
-fmt.println(&#34;before exit&#34;)
+fmt.println(&#34;starting&#34;)
+
+for i := 0; i &lt; 3; i&#43;&#43; {
+    fmt.println(&#34;step&#34;, i)
+}
+
 os.exit(0)
+
 fmt.println(&#34;this will not print&#34;)">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
-fmt.println(&#34;before exit&#34;)
+fmt.println(&#34;starting&#34;)
+
+for i := 0; i &lt; 3; i&#43;&#43; {
+    fmt.println(&#34;step&#34;, i)
+}
+
 os.exit(0)
+
 fmt.println(&#34;this will not print&#34;)</textarea>
           </div>
         </div>

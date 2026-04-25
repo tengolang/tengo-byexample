@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "closures.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "custom-errors.html"; }
-  };
-</script>
 <body>
   <div class="example" id="errors">
-    <h2><a href="index.html">Tengo by Example</a>: Errors</h2>
+    <h2>Errors</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>Tengo uses `error()` to create error values. Functions signal failure by returning an error, and callers check with `is_error()`. Errors carry a string message accessible via `.value`.</p>
+          <p>Tengo uses <code>error(value)</code> to create error values. Functions signal failure by returning an error, and callers check with <code>is_error()</code>.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -35,21 +29,78 @@
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-divide := func(a, b) {
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="this-function-returns-an-error-when-b-is-zero">
+        <div class="docs">
+          <p><a href="#this-function-returns-an-error-when-b-is-zero">This function returns an error when <code>b</code> is zero.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">divide := func(a, b) {
     if b == 0 {
         return error(&#34;division by zero&#34;)
     }
     return a / b
-}
-
-result := divide(10, 2)
-fmt.println(result)
-
-result = divide(10, 0)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="a-successful-call-returns-the-numeric-result">
+        <div class="docs">
+          <p><a href="#a-successful-call-returns-the-numeric-result">A successful call returns the numeric result.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(divide(10, 2))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="a-failed-call-returns-an-error-value">
+        <div class="docs">
+          <p><a href="#a-failed-call-returns-an-error-value">A failed call returns an error value.
+Retrieve the message with <code>.value</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">result := divide(10, 0)
 if is_error(result) {
     fmt.println(&#34;error:&#34;, result.value)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="iserror-lets-you-handle-failure-without-panicking">
+        <div class="docs">
+          <p><a href="#iserror-lets-you-handle-failure-without-panicking"><code>is_error</code> lets you handle failure without panicking.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
+for _, v in vals {
+    if is_error(v) {
+        fmt.println(&#34;got error:&#34;, v.value)
+    } else {
+        fmt.println(&#34;got value:&#34;, v)
+    }
 }</code></pre>
           </div>
           
@@ -64,7 +115,7 @@ if is_error(result) {
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -81,12 +132,20 @@ divide := func(a, b) {
     return a / b
 }
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(divide(10, 2))
 
-result = divide(10, 0)
+result := divide(10, 0)
 if is_error(result) {
     fmt.println(&#34;error:&#34;, result.value)
+}
+
+vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
+for _, v in vals {
+    if is_error(v) {
+        fmt.println(&#34;got error:&#34;, v.value)
+    } else {
+        fmt.println(&#34;got value:&#34;, v)
+    }
 }">fmt := import(&#34;fmt&#34;)
 
 divide := func(a, b) {
@@ -96,12 +155,20 @@ divide := func(a, b) {
     return a / b
 }
 
-result := divide(10, 2)
-fmt.println(result)
+fmt.println(divide(10, 2))
 
-result = divide(10, 0)
+result := divide(10, 0)
 if is_error(result) {
     fmt.println(&#34;error:&#34;, result.value)
+}
+
+vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
+for _, v in vals {
+    if is_error(v) {
+        fmt.println(&#34;got error:&#34;, v.value)
+    } else {
+        fmt.println(&#34;got value:&#34;, v)
+    }
 }</textarea>
           </div>
         </div>

@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "if-else.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "for.html"; }
-  };
-</script>
 <body>
   <div class="example" id="switch">
-    <h2><a href="index.html">Tengo by Example</a>: Switch</h2>
+    <h2>Switch</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>`switch` statements express conditionals across many branches.</p>
+          <p><code>switch</code> statements express conditionals across many branches.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -44,7 +38,7 @@ times := import(&#34;times&#34;)</code></pre>
       
       <div class="row" id="heres-a-basic-switch">
         <div class="docs">
-          <p><a href="#heres-a-basic-switch">Here’s a basic `switch`.</a></p>
+          <p><a href="#heres-a-basic-switch">Here&#39;s a basic <code>switch</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -68,15 +62,16 @@ case 3:
       <div class="row" id="you-can-use-commas-to-separate-multiple-expressions-in-the-same">
         <div class="docs">
           <p><a href="#you-can-use-commas-to-separate-multiple-expressions-in-the-same">You can use commas to separate multiple expressions in the same
-`case` statement. We use the optional `default` case in this example as well.</a></p>
+<code>case</code> statement. <code>times.time_weekday</code> returns 0 (Sunday) through
+6 (Saturday).</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">t := times.now()
-switch t.weekday() {
-case &#34;Saturday&#34;, &#34;Sunday&#34;:
+switch times.time_weekday(t) {
+case 0, 6:
     fmt.println(&#34;It&#39;s the weekend&#34;)
 default:
     fmt.println(&#34;It&#39;s a weekday&#34;)
@@ -88,15 +83,14 @@ default:
       
       <div class="row" id="switch-without-an-expression-is-an-alternate-way-to-express">
         <div class="docs">
-          <p><a href="#switch-without-an-expression-is-an-alternate-way-to-express">`switch` without an expression is an alternate way to express
-if/else logic. Here we also show how the `case` expressions
-can be non-constants.</a></p>
+          <p><a href="#switch-without-an-expression-is-an-alternate-way-to-express"><code>switch</code> without an expression is an alternate way to express
+if/else logic.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">hour := t.hour()
+            <pre><code class="language-go">hour := times.time_hour(t)
 switch {
 case hour &lt; 12:
     fmt.println(&#34;It&#39;s before noon&#34;)
@@ -108,23 +102,22 @@ default:
         </div>
       </div>
       
-      <div class="row" id="a-type-switch-compares-types-instead-of-values-you-can-use-this">
+      <div class="row" id="use-typename-to-branch-on-the-runtime-type-of-a-value">
         <div class="docs">
-          <p><a href="#a-type-switch-compares-types-instead-of-values-you-can-use-this">A type `switch` compares types instead of values. You can use this
-to discover the type of an interface value.</a></p>
+          <p><a href="#use-typename-to-branch-on-the-runtime-type-of-a-value">Use <code>type_name</code> to branch on the runtime type of a value.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">whatAmI := func(i) {
-    switch i.(type) {
+            <pre><code class="language-go">whatAmI := func(v) {
+    switch type_name(v) {
     case &#34;bool&#34;:
-        fmt.println(&#34;I&#39;m a bool&#34;)
+        fmt.println(&#34;bool&#34;)
     case &#34;int&#34;:
-        fmt.println(&#34;I&#39;m an int&#34;)
+        fmt.println(&#34;int&#34;)
     default:
-        fmt.printf(&#34;Don&#39;t know type %T\n&#34;, i)
+        fmt.println(&#34;other:&#34;, type_name(v))
     }
 }
 whatAmI(true)
@@ -143,7 +136,7 @@ whatAmI(&#34;hey&#34;)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -166,14 +159,14 @@ case 3:
 }
 
 t := times.now()
-switch t.weekday() {
-case &#34;Saturday&#34;, &#34;Sunday&#34;:
+switch times.time_weekday(t) {
+case 0, 6:
     fmt.println(&#34;It&#39;s the weekend&#34;)
 default:
     fmt.println(&#34;It&#39;s a weekday&#34;)
 }
 
-hour := t.hour()
+hour := times.time_hour(t)
 switch {
 case hour &lt; 12:
     fmt.println(&#34;It&#39;s before noon&#34;)
@@ -181,14 +174,14 @@ default:
     fmt.println(&#34;It&#39;s after noon&#34;)
 }
 
-whatAmI := func(i) {
-    switch i.(type) {
+whatAmI := func(v) {
+    switch type_name(v) {
     case &#34;bool&#34;:
-        fmt.println(&#34;I&#39;m a bool&#34;)
+        fmt.println(&#34;bool&#34;)
     case &#34;int&#34;:
-        fmt.println(&#34;I&#39;m an int&#34;)
+        fmt.println(&#34;int&#34;)
     default:
-        fmt.printf(&#34;Don&#39;t know type %T\n&#34;, i)
+        fmt.println(&#34;other:&#34;, type_name(v))
     }
 }
 whatAmI(true)
@@ -208,14 +201,14 @@ case 3:
 }
 
 t := times.now()
-switch t.weekday() {
-case &#34;Saturday&#34;, &#34;Sunday&#34;:
+switch times.time_weekday(t) {
+case 0, 6:
     fmt.println(&#34;It&#39;s the weekend&#34;)
 default:
     fmt.println(&#34;It&#39;s a weekday&#34;)
 }
 
-hour := t.hour()
+hour := times.time_hour(t)
 switch {
 case hour &lt; 12:
     fmt.println(&#34;It&#39;s before noon&#34;)
@@ -223,14 +216,14 @@ default:
     fmt.println(&#34;It&#39;s after noon&#34;)
 }
 
-whatAmI := func(i) {
-    switch i.(type) {
+whatAmI := func(v) {
+    switch type_name(v) {
     case &#34;bool&#34;:
-        fmt.println(&#34;I&#39;m a bool&#34;)
+        fmt.println(&#34;bool&#34;)
     case &#34;int&#34;:
-        fmt.println(&#34;I&#39;m an int&#34;)
+        fmt.println(&#34;int&#34;)
     default:
-        fmt.printf(&#34;Don&#39;t know type %T\n&#34;, i)
+        fmt.println(&#34;other:&#34;, type_name(v))
     }
 }
 whatAmI(true)

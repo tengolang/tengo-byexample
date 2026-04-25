@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "enum.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "command-line-arguments.html"; }
-  };
-</script>
 <body>
   <div class="example" id="coroutines">
-    <h2><a href="index.html">Tengo by Example</a>: Coroutines</h2>
+    <h2>Coroutines</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `coro` module provides cooperative coroutines. A coroutine suspends at each `yield` call. Iterate with `for...in`, or call `.resume()` which returns a `(value, ok)` pair — `ok` is `false` when the coroutine is done.</p>
+          <p>The <code>coro</code> module provides cooperative coroutines. A coroutine suspends at each <code>yield</code> call and resumes when iterated or when <code>.resume()</code> is called.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,27 +30,63 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-coro := import(&#34;coro&#34;)
-
-gen := coro.new(func(yield) {
+coro := import(&#34;coro&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="create-a-coroutine-with-coronew-the-function-receives-a-yield">
+        <div class="docs">
+          <p><a href="#create-a-coroutine-with-coronew-the-function-receives-a-yield">Create a coroutine with <code>coro.new</code>. The function receives a <code>yield</code>
+callback it uses to emit values one at a time.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">gen := coro.new(func(yield) {
     yield(1)
     yield(2)
     yield(3)
-})
-
-for _, v in gen {
+})</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="coroutines-implement-the-iterable-protocol-so-forin-works-directly">
+        <div class="docs">
+          <p><a href="#coroutines-implement-the-iterable-protocol-so-forin-works-directly">Coroutines implement the iterable protocol, so <code>for...in</code> works directly.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">for _, v in gen {
     fmt.println(v)
-}
-
-countdown := coro.new(func(yield) {
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="resume-steps-the-coroutine-manually">
+        <div class="docs">
+          <p><a href="#resume-steps-the-coroutine-manually"><code>.resume()</code> steps the coroutine manually.
+It returns <code>(value, ok)</code> — <code>ok</code> becomes false when exhausted.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">countdown := coro.new(func(yield) {
     for i := 5; i &gt; 0; i-- {
         yield(i)
     }
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
-v, ok = countdown.resume()
 fmt.println(v, ok)
 v, ok = countdown.resume()
 fmt.println(v, ok)</code></pre>
@@ -73,7 +103,7 @@ fmt.println(v, ok)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -103,8 +133,6 @@ countdown := coro.new(func(yield) {
 v, ok := countdown.resume()
 fmt.println(v, ok)
 v, ok = countdown.resume()
-fmt.println(v, ok)
-v, ok = countdown.resume()
 fmt.println(v, ok)">fmt := import(&#34;fmt&#34;)
 coro := import(&#34;coro&#34;)
 
@@ -125,8 +153,6 @@ countdown := coro.new(func(yield) {
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
-v, ok = countdown.resume()
 fmt.println(v, ok)
 v, ok = countdown.resume()
 fmt.println(v, ok)</textarea>

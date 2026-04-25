@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "errors.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "math.html"; }
-  };
-</script>
 <body>
   <div class="example" id="custom-errors">
-    <h2><a href="index.html">Tengo by Example</a>: Custom Errors</h2>
+    <h2>Custom Errors</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>`error(value)` accepts any value, not just strings. Passing a map lets you attach structured metadata to an error. Retrieve the payload with `.value`.</p>
+          <p><code>error(value)</code> accepts any value, not just strings. Passing a map lets you attach structured metadata — a code, a field name, or any other context.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -35,23 +29,48 @@
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-notFound := func(name) {
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="a-map-payload-turns-an-error-into-a-structured-object">
+        <div class="docs">
+          <p><a href="#a-map-payload-turns-an-error-into-a-structured-object">A map payload turns an error into a structured object.
+Retrieve the payload with <code>.value</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">notFound := func(name) {
     return error({code: 404, message: &#34;not found: &#34; &#43; name})
 }
 
 result := notFound(&#34;config.json&#34;)
-
 if is_error(result) {
     e := result.value
-    fmt.println(e[&#34;code&#34;])
-    fmt.println(e[&#34;message&#34;])
-}
-
-validate := func(age) {
+    fmt.println(&#34;code:&#34;, e[&#34;code&#34;])
+    fmt.println(&#34;message:&#34;, e[&#34;message&#34;])
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="structured-errors-are-easy-to-inspect-in-validation-logic">
+        <div class="docs">
+          <p><a href="#structured-errors-are-easy-to-inspect-in-validation-logic">Structured errors are easy to inspect in validation logic.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">validate := func(age) {
     if age &lt; 0 {
-        return error({field: &#34;age&#34;, reason: &#34;must be non-negative&#34;})
+        msg := &#34;must be non-negative&#34;
+        return error({field: &#34;age&#34;, reason: msg})
     }
     if age &gt; 150 {
         return error({field: &#34;age&#34;, reason: &#34;unrealistic value&#34;})
@@ -63,7 +82,7 @@ fmt.println(validate(25))
 
 err := validate(-1)
 if is_error(err) {
-    fmt.println(err.value[&#34;field&#34;], err.value[&#34;reason&#34;])
+    fmt.println(err.value[&#34;field&#34;] &#43; &#34;: &#34; &#43; err.value[&#34;reason&#34;])
 }</code></pre>
           </div>
           
@@ -78,7 +97,7 @@ if is_error(err) {
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -93,16 +112,16 @@ notFound := func(name) {
 }
 
 result := notFound(&#34;config.json&#34;)
-
 if is_error(result) {
     e := result.value
-    fmt.println(e[&#34;code&#34;])
-    fmt.println(e[&#34;message&#34;])
+    fmt.println(&#34;code:&#34;, e[&#34;code&#34;])
+    fmt.println(&#34;message:&#34;, e[&#34;message&#34;])
 }
 
 validate := func(age) {
     if age &lt; 0 {
-        return error({field: &#34;age&#34;, reason: &#34;must be non-negative&#34;})
+        msg := &#34;must be non-negative&#34;
+        return error({field: &#34;age&#34;, reason: msg})
     }
     if age &gt; 150 {
         return error({field: &#34;age&#34;, reason: &#34;unrealistic value&#34;})
@@ -114,7 +133,7 @@ fmt.println(validate(25))
 
 err := validate(-1)
 if is_error(err) {
-    fmt.println(err.value[&#34;field&#34;], err.value[&#34;reason&#34;])
+    fmt.println(err.value[&#34;field&#34;] &#43; &#34;: &#34; &#43; err.value[&#34;reason&#34;])
 }">fmt := import(&#34;fmt&#34;)
 
 notFound := func(name) {
@@ -122,16 +141,16 @@ notFound := func(name) {
 }
 
 result := notFound(&#34;config.json&#34;)
-
 if is_error(result) {
     e := result.value
-    fmt.println(e[&#34;code&#34;])
-    fmt.println(e[&#34;message&#34;])
+    fmt.println(&#34;code:&#34;, e[&#34;code&#34;])
+    fmt.println(&#34;message:&#34;, e[&#34;message&#34;])
 }
 
 validate := func(age) {
     if age &lt; 0 {
-        return error({field: &#34;age&#34;, reason: &#34;must be non-negative&#34;})
+        msg := &#34;must be non-negative&#34;
+        return error({field: &#34;age&#34;, reason: msg})
     }
     if age &gt; 150 {
         return error({field: &#34;age&#34;, reason: &#34;unrealistic value&#34;})
@@ -143,7 +162,7 @@ fmt.println(validate(25))
 
 err := validate(-1)
 if is_error(err) {
-    fmt.println(err.value[&#34;field&#34;], err.value[&#34;reason&#34;])
+    fmt.println(err.value[&#34;field&#34;] &#43; &#34;: &#34; &#43; err.value[&#34;reason&#34;])
 }</textarea>
           </div>
         </div>

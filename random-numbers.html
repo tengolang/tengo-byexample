@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "time.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "number-parsing.html"; }
-  };
-</script>
 <body>
   <div class="example" id="random-numbers">
-    <h2><a href="index.html">Tengo by Example</a>: Random Numbers</h2>
+    <h2>Random Numbers</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `rand` module provides random integers, floats, and permutations. Use `rand.seed` to initialize the generator for reproducible sequences.</p>
+          <p>The <code>rand</code> module provides random integers, floats, and permutations. Without seeding, the generator is automatically seeded.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,14 +30,79 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-rand := import(&#34;rand&#34;)
-
-fmt.println(rand.intn(100))
-fmt.println(rand.float())
-fmt.println(rand.perm(6))
-
-rand.seed(42)
+rand := import(&#34;rand&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="randintnn-returns-a-random-integer-in-0-n">
+        <div class="docs">
+          <p><a href="#randintnn-returns-a-random-integer-in-0-n"><code>rand.intn(n)</code> returns a random integer in [0, n).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(rand.intn(100))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="randfloat-returns-a-random-float-in-00-10">
+        <div class="docs">
+          <p><a href="#randfloat-returns-a-random-float-in-00-10"><code>rand.float()</code> returns a random float in [0.0, 1.0).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(rand.float())</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="randpermn-returns-a-random-permutation-of-0-n">
+        <div class="docs">
+          <p><a href="#randpermn-returns-a-random-permutation-of-0-n"><code>rand.perm(n)</code> returns a random permutation of [0, n).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(rand.perm(6))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="randseed-initializes-the-generator-for-reproducible-sequences">
+        <div class="docs">
+          <p><a href="#randseed-initializes-the-generator-for-reproducible-sequences"><code>rand.seed</code> initializes the generator for reproducible sequences.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">rand.seed(42)
 fmt.println(rand.intn(1000))
+fmt.println(rand.intn(1000))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="same-seed-always-produces-the-same-sequence">
+        <div class="docs">
+          <p><a href="#same-seed-always-produces-the-same-sequence">Same seed always produces the same sequence.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">rand.seed(42)
 fmt.println(rand.intn(1000))</code></pre>
           </div>
           
@@ -58,7 +117,7 @@ fmt.println(rand.intn(1000))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -70,20 +129,30 @@ fmt.println(rand.intn(1000))</code></pre>
 rand := import(&#34;rand&#34;)
 
 fmt.println(rand.intn(100))
+
 fmt.println(rand.float())
+
 fmt.println(rand.perm(6))
 
 rand.seed(42)
 fmt.println(rand.intn(1000))
+fmt.println(rand.intn(1000))
+
+rand.seed(42)
 fmt.println(rand.intn(1000))">fmt := import(&#34;fmt&#34;)
 rand := import(&#34;rand&#34;)
 
 fmt.println(rand.intn(100))
+
 fmt.println(rand.float())
+
 fmt.println(rand.perm(6))
 
 rand.seed(42)
 fmt.println(rand.intn(1000))
+fmt.println(rand.intn(1000))
+
+rand.seed(42)
 fmt.println(rand.intn(1000))</textarea>
           </div>
         </div>

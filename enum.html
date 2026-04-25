@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "immutability.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "coroutines.html"; }
-  };
-</script>
 <body>
   <div class="example" id="enum">
-    <h2><a href="index.html">Tengo by Example</a>: Enum</h2>
+    <h2>Enum</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `enum` source module provides functional iteration: `map`, `filter`, `find`, `all`, `any`, and `each`. Callbacks receive the key (index for arrays) and value as arguments.</p>
+          <p>The <code>enum</code> source module provides functional iteration helpers: <code>map</code>, <code>filter</code>, <code>find</code>, <code>all</code>, <code>any</code>, and <code>each</code>. Callbacks receive the key (index for arrays) and value as arguments.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,19 +32,81 @@
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
 enum := import(&#34;enum&#34;)
 
-nums := [1, 2, 3, 4, 5]
-
-doubled := enum.map(nums, func(_, v) { return v * 2 })
-fmt.println(doubled)
-
-evens := enum.filter(nums, func(_, v) { return v%2 == 0 })
-fmt.println(evens)
-
-first := enum.find(nums, func(_, v) { return v &gt; 3 })
-fmt.println(first)
-
-fmt.println(enum.all(nums, func(_, v) { return v &gt; 0 }))
-fmt.println(enum.any(nums, func(_, v) { return v &gt; 4 }))</code></pre>
+nums := [1, 2, 3, 4, 5]</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="enummap-transforms-each-element-and-returns-a-new-array">
+        <div class="docs">
+          <p><a href="#enummap-transforms-each-element-and-returns-a-new-array"><code>enum.map</code> transforms each element and returns a new array.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">doubled := enum.map(nums, func(_, v) { return v * 2 })
+fmt.println(doubled)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="enumfilter-returns-elements-for-which-the-predicate-is-true">
+        <div class="docs">
+          <p><a href="#enumfilter-returns-elements-for-which-the-predicate-is-true"><code>enum.filter</code> returns elements for which the predicate is true.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">evens := enum.filter(nums, func(_, v) { return v%2 == 0 })
+fmt.println(evens)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="enumfind-returns-the-first-value-matching-the-predicate">
+        <div class="docs">
+          <p><a href="#enumfind-returns-the-first-value-matching-the-predicate"><code>enum.find</code> returns the first value matching the predicate.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">first := enum.find(nums, func(_, v) { return v &gt; 3 })
+fmt.println(first)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="enumall-is-true-only-if-the-predicate-holds-for-every-element">
+        <div class="docs">
+          <p><a href="#enumall-is-true-only-if-the-predicate-holds-for-every-element"><code>enum.all</code> is true only if the predicate holds for every element.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(enum.all(nums, func(_, v) { return v &gt; 0 }))
+fmt.println(enum.all(nums, func(_, v) { return v &gt; 3 }))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="enumany-is-true-if-at-least-one-element-matches">
+        <div class="docs">
+          <p><a href="#enumany-is-true-if-at-least-one-element-matches"><code>enum.any</code> is true if at least one element matches.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(enum.any(nums, func(_, v) { return v &gt; 4 }))</code></pre>
           </div>
           
         </div>
@@ -64,7 +120,7 @@ fmt.println(enum.any(nums, func(_, v) { return v &gt; 4 }))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -87,6 +143,8 @@ first := enum.find(nums, func(_, v) { return v &gt; 3 })
 fmt.println(first)
 
 fmt.println(enum.all(nums, func(_, v) { return v &gt; 0 }))
+fmt.println(enum.all(nums, func(_, v) { return v &gt; 3 }))
+
 fmt.println(enum.any(nums, func(_, v) { return v &gt; 4 }))">fmt := import(&#34;fmt&#34;)
 enum := import(&#34;enum&#34;)
 
@@ -102,6 +160,8 @@ first := enum.find(nums, func(_, v) { return v &gt; 3 })
 fmt.println(first)
 
 fmt.println(enum.all(nums, func(_, v) { return v &gt; 0 }))
+fmt.println(enum.all(nums, func(_, v) { return v &gt; 3 }))
+
 fmt.println(enum.any(nums, func(_, v) { return v &gt; 4 }))</textarea>
           </div>
         </div>

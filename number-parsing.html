@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "random-numbers.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "base64-encoding.html"; }
-  };
-</script>
 <body>
   <div class="example" id="number-parsing">
-    <h2><a href="index.html">Tengo by Example</a>: Number Parsing</h2>
+    <h2>Number Parsing</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `text` module provides `atoi`, `parse_float`, `parse_int`, and matching `format_*` functions for converting between numbers and strings.</p>
+          <p>The <code>text</code> module provides <code>atoi</code>, <code>parse_float</code>, <code>parse_int</code>, and matching <code>format_*</code> functions for converting between numbers and strings.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,18 +30,82 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-text := import(&#34;text&#34;)
-
-fmt.println(text.atoi(&#34;42&#34;))
-fmt.println(text.parse_float(&#34;3.14&#34;, 64))
-fmt.println(text.parse_int(&#34;ff&#34;, 16, 64))
-fmt.println(text.parse_int(&#34;101010&#34;, 2, 64))
-fmt.println(text.parse_bool(&#34;true&#34;))
-
-fmt.println(text.itoa(42))
-fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
+text := import(&#34;text&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="atoi-converts-a-decimal-string-to-an-integer">
+        <div class="docs">
+          <p><a href="#atoi-converts-a-decimal-string-to-an-integer"><code>atoi</code> converts a decimal string to an integer.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.atoi(&#34;42&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="parsefloatstr-bits-parses-a-floating-point-string">
+        <div class="docs">
+          <p><a href="#parsefloatstr-bits-parses-a-floating-point-string"><code>parse_float(str, bits)</code> parses a floating-point string.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.parse_float(&#34;3.14&#34;, 64))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="parseintstr-base-bits-parses-an-integer-in-any-base">
+        <div class="docs">
+          <p><a href="#parseintstr-base-bits-parses-an-integer-in-any-base"><code>parse_int(str, base, bits)</code> parses an integer in any base.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.parse_int(&#34;ff&#34;, 16, 64))
+fmt.println(text.parse_int(&#34;101010&#34;, 2, 64))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="parsebool-converts-true-false-strings">
+        <div class="docs">
+          <p><a href="#parsebool-converts-true-false-strings"><code>parse_bool</code> converts &#34;true&#34; / &#34;false&#34; strings.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.parse_bool(&#34;true&#34;))
+fmt.println(text.parse_bool(&#34;false&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="format-integers-and-floats-back-to-strings">
+        <div class="docs">
+          <p><a href="#format-integers-and-floats-back-to-strings">Format integers and floats back to strings.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.itoa(42))
 fmt.println(text.format_int(255, 16))
-fmt.println(text.format_int(42, 2))</code></pre>
+fmt.println(text.format_int(42, 2))
+fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))</code></pre>
           </div>
           
         </div>
@@ -61,7 +119,7 @@ fmt.println(text.format_int(42, 2))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -73,27 +131,35 @@ fmt.println(text.format_int(42, 2))</code></pre>
 text := import(&#34;text&#34;)
 
 fmt.println(text.atoi(&#34;42&#34;))
+
 fmt.println(text.parse_float(&#34;3.14&#34;, 64))
+
 fmt.println(text.parse_int(&#34;ff&#34;, 16, 64))
 fmt.println(text.parse_int(&#34;101010&#34;, 2, 64))
+
 fmt.println(text.parse_bool(&#34;true&#34;))
+fmt.println(text.parse_bool(&#34;false&#34;))
 
 fmt.println(text.itoa(42))
-fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
 fmt.println(text.format_int(255, 16))
-fmt.println(text.format_int(42, 2))">fmt := import(&#34;fmt&#34;)
+fmt.println(text.format_int(42, 2))
+fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 fmt.println(text.atoi(&#34;42&#34;))
+
 fmt.println(text.parse_float(&#34;3.14&#34;, 64))
+
 fmt.println(text.parse_int(&#34;ff&#34;, 16, 64))
 fmt.println(text.parse_int(&#34;101010&#34;, 2, 64))
+
 fmt.println(text.parse_bool(&#34;true&#34;))
+fmt.println(text.parse_bool(&#34;false&#34;))
 
 fmt.println(text.itoa(42))
-fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))
 fmt.println(text.format_int(255, 16))
-fmt.println(text.format_int(42, 2))</textarea>
+fmt.println(text.format_int(42, 2))
+fmt.println(text.format_float(3.14159, &#39;f&#39;, 2, 64))</textarea>
           </div>
         </div>
       </div>

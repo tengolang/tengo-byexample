@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "hex-encoding.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "enum.html"; }
-  };
-</script>
 <body>
   <div class="example" id="immutability">
-    <h2><a href="index.html">Tengo by Example</a>: Immutability</h2>
+    <h2>Immutability</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>By default, arrays and maps are mutable. The built-in `immutable()` returns a deeply immutable copy of any value. Attempting to modify an immutable value causes a runtime error, so use this when you want to enforce read-only data.</p>
+          <p>By default, arrays and maps are mutable. The built-in <code>immutable()</code> returns a deeply immutable copy of any value. Attempting to modify it causes a runtime error.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -35,19 +29,71 @@
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-nums := [1, 2, 3]
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="regular-arrays-are-mutable-elements-can-be-changed-in-place">
+        <div class="docs">
+          <p><a href="#regular-arrays-are-mutable-elements-can-be-changed-in-place">Regular arrays are mutable — elements can be changed in-place.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">nums := [1, 2, 3]
 nums[0] = 99
-fmt.println(nums)
-
-frozen := immutable([10, 20, 30])
+fmt.println(nums)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="immutable-creates-a-read-only-copy">
+        <div class="docs">
+          <p><a href="#immutable-creates-a-read-only-copy"><code>immutable()</code> creates a read-only copy.
+Any attempt to modify it at runtime will produce an error.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">frozen := immutable([10, 20, 30])
 fmt.println(frozen)
-fmt.println(frozen[1])
-
-config := immutable({host: &#34;localhost&#34;, port: 5432})
+fmt.println(frozen[1])</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="maps-can-also-be-made-immutable">
+        <div class="docs">
+          <p><a href="#maps-can-also-be-made-immutable">Maps can also be made immutable.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">config := immutable({host: &#34;localhost&#34;, port: 5432})
 fmt.println(config[&#34;host&#34;])
 fmt.println(config[&#34;port&#34;])</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="immutable-works-on-any-value-including-nested-structures">
+        <div class="docs">
+          <p><a href="#immutable-works-on-any-value-including-nested-structures"><code>immutable</code> works on any value, including nested structures.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">data := immutable({users: [&#34;alice&#34;, &#34;bob&#34;], count: 2})
+fmt.println(data[&#34;users&#34;])</code></pre>
           </div>
           
         </div>
@@ -61,7 +107,7 @@ fmt.println(config[&#34;port&#34;])</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -81,7 +127,10 @@ fmt.println(frozen[1])
 
 config := immutable({host: &#34;localhost&#34;, port: 5432})
 fmt.println(config[&#34;host&#34;])
-fmt.println(config[&#34;port&#34;])">fmt := import(&#34;fmt&#34;)
+fmt.println(config[&#34;port&#34;])
+
+data := immutable({users: [&#34;alice&#34;, &#34;bob&#34;], count: 2})
+fmt.println(data[&#34;users&#34;])">fmt := import(&#34;fmt&#34;)
 
 nums := [1, 2, 3]
 nums[0] = 99
@@ -93,7 +142,10 @@ fmt.println(frozen[1])
 
 config := immutable({host: &#34;localhost&#34;, port: 5432})
 fmt.println(config[&#34;host&#34;])
-fmt.println(config[&#34;port&#34;])</textarea>
+fmt.println(config[&#34;port&#34;])
+
+data := immutable({users: [&#34;alice&#34;, &#34;bob&#34;], count: 2})
+fmt.println(data[&#34;users&#34;])</textarea>
           </div>
         </div>
       </div>

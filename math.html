@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "custom-errors.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "json.html"; }
-  };
-</script>
 <body>
   <div class="example" id="math">
-    <h2><a href="index.html">Tengo by Example</a>: Math</h2>
+    <h2>Math</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `math` module exposes common mathematical functions and the constants `e`, `pi`, and `phi`.</p>
+          <p>The <code>math</code> module exposes Go&#39;s math package: common functions and the constants <code>e</code>, <code>pi</code>, and <code>phi</code>.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,15 +30,67 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-math := import(&#34;math&#34;)
-
-fmt.println(math.pi)
-fmt.println(math.abs(-7.5))
+math := import(&#34;math&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="constants-are-pre-defined-float-values">
+        <div class="docs">
+          <p><a href="#constants-are-pre-defined-float-values">Constants are pre-defined float values.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(math.pi)
+fmt.println(math.e)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="basic-functions-absolute-value-square-root-power">
+        <div class="docs">
+          <p><a href="#basic-functions-absolute-value-square-root-power">Basic functions: absolute value, square root, power.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(math.abs(-7.5))
 fmt.println(math.sqrt(144.0))
-fmt.println(math.pow(2.0, 10.0))
-fmt.println(math.floor(3.7))
-fmt.println(math.ceil(3.2))
-fmt.println(math.min(4.0, 7.0))
+fmt.println(math.pow(2.0, 10.0))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="rounding-functions">
+        <div class="docs">
+          <p><a href="#rounding-functions">Rounding functions.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(math.floor(3.7))
+fmt.println(math.ceil(3.2))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="min-and-max-work-on-floats">
+        <div class="docs">
+          <p><a href="#min-and-max-work-on-floats"><code>min</code> and <code>max</code> work on floats.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(math.min(4.0, 7.0))
 fmt.println(math.max(4.0, 7.0))</code></pre>
           </div>
           
@@ -59,7 +105,7 @@ fmt.println(math.max(4.0, 7.0))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -71,21 +117,29 @@ fmt.println(math.max(4.0, 7.0))</code></pre>
 math := import(&#34;math&#34;)
 
 fmt.println(math.pi)
+fmt.println(math.e)
+
 fmt.println(math.abs(-7.5))
 fmt.println(math.sqrt(144.0))
 fmt.println(math.pow(2.0, 10.0))
+
 fmt.println(math.floor(3.7))
 fmt.println(math.ceil(3.2))
+
 fmt.println(math.min(4.0, 7.0))
 fmt.println(math.max(4.0, 7.0))">fmt := import(&#34;fmt&#34;)
 math := import(&#34;math&#34;)
 
 fmt.println(math.pi)
+fmt.println(math.e)
+
 fmt.println(math.abs(-7.5))
 fmt.println(math.sqrt(144.0))
 fmt.println(math.pow(2.0, 10.0))
+
 fmt.println(math.floor(3.7))
 fmt.println(math.ceil(3.2))
+
 fmt.println(math.min(4.0, 7.0))
 fmt.println(math.max(4.0, 7.0))</textarea>
           </div>

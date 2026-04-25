@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "slices.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "functions.html"; }
-  };
-</script>
 <body>
   <div class="example" id="sorting">
-    <h2><a href="index.html">Tengo by Example</a>: Sorting</h2>
+    <h2>Sorting</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>Tengo has no built-in sort function, but the `enum` source module makes it easy to implement one. Below is a merge sort that works on any array whose elements support `&lt;` comparison.</p>
+          <p>Tengo has no built-in sort function, but it is straightforward to implement one using closures and recursion.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -35,10 +29,21 @@
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-enum := import(&#34;enum&#34;)
-
-merge := func(left, right) {
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="merge-combines-two-sorted-arrays-into-one-sorted-array">
+        <div class="docs">
+          <p><a href="#merge-combines-two-sorted-arrays-into-one-sorted-array"><code>merge</code> combines two sorted arrays into one sorted array.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">merge := func(left, right) {
     result := []
     li := 0
     ri := 0
@@ -60,21 +65,70 @@ merge := func(left, right) {
         ri&#43;&#43;
     }
     return result
-}
-
-msort := func(arr) {
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="msort-recursively-splits-the-array-and-merges-the-sorted-halves">
+        <div class="docs">
+          <p><a href="#msort-recursively-splits-the-array-and-merges-the-sorted-halves"><code>msort</code> recursively splits the array and merges the sorted halves.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">msort := func(arr) {
     if len(arr) &lt;= 1 { return arr }
     mid := len(arr) / 2
-    left := msort(arr[:mid])
-    right := msort(arr[mid:])
-    return merge(left, right)
-}
-
-nums := [5, 2, 8, 1, 9, 3]
-fmt.println(msort(nums))
-
-words := [&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]
-fmt.println(msort(words))</code></pre>
+    return merge(msort(arr[:mid]), msort(arr[mid:]))
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="sort-numbers">
+        <div class="docs">
+          <p><a href="#sort-numbers">Sort numbers.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(msort([5, 2, 8, 1, 9, 3]))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="sort-strings-any-comparable-type-works">
+        <div class="docs">
+          <p><a href="#sort-strings-any-comparable-type-works">Sort strings — any comparable type works.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(msort([&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-original-array-is-unchanged">
+        <div class="docs">
+          <p><a href="#the-original-array-is-unchanged">The original array is unchanged.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">nums := [5, 2, 8, 1]
+sorted := msort(nums)
+fmt.println(&#34;original:&#34;, nums)
+fmt.println(&#34;sorted:  &#34;, sorted)</code></pre>
           </div>
           
         </div>
@@ -88,7 +142,7 @@ fmt.println(msort(words))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -97,7 +151,6 @@ fmt.println(msort(words))</code></pre>
             </div>
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
-enum := import(&#34;enum&#34;)
 
 merge := func(left, right) {
     result := []
@@ -126,17 +179,17 @@ merge := func(left, right) {
 msort := func(arr) {
     if len(arr) &lt;= 1 { return arr }
     mid := len(arr) / 2
-    left := msort(arr[:mid])
-    right := msort(arr[mid:])
-    return merge(left, right)
+    return merge(msort(arr[:mid]), msort(arr[mid:]))
 }
 
-nums := [5, 2, 8, 1, 9, 3]
-fmt.println(msort(nums))
+fmt.println(msort([5, 2, 8, 1, 9, 3]))
 
-words := [&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]
-fmt.println(msort(words))">fmt := import(&#34;fmt&#34;)
-enum := import(&#34;enum&#34;)
+fmt.println(msort([&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]))
+
+nums := [5, 2, 8, 1]
+sorted := msort(nums)
+fmt.println(&#34;original:&#34;, nums)
+fmt.println(&#34;sorted:  &#34;, sorted)">fmt := import(&#34;fmt&#34;)
 
 merge := func(left, right) {
     result := []
@@ -165,16 +218,17 @@ merge := func(left, right) {
 msort := func(arr) {
     if len(arr) &lt;= 1 { return arr }
     mid := len(arr) / 2
-    left := msort(arr[:mid])
-    right := msort(arr[mid:])
-    return merge(left, right)
+    return merge(msort(arr[:mid]), msort(arr[mid:]))
 }
 
-nums := [5, 2, 8, 1, 9, 3]
-fmt.println(msort(nums))
+fmt.println(msort([5, 2, 8, 1, 9, 3]))
 
-words := [&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]
-fmt.println(msort(words))</textarea>
+fmt.println(msort([&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;date&#34;]))
+
+nums := [5, 2, 8, 1]
+sorted := msort(nums)
+fmt.println(&#34;original:&#34;, nums)
+fmt.println(&#34;sorted:  &#34;, sorted)</textarea>
           </div>
         </div>
       </div>

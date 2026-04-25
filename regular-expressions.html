@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "string-formatting.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "time.html"; }
-  };
-</script>
 <body>
   <div class="example" id="regular-expressions">
-    <h2><a href="index.html">Tengo by Example</a>: Regular Expressions</h2>
+    <h2>Regular Expressions</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `text` module exposes Go&#39;s `regexp` package as `re_match`, `re_find`, `re_replace`, and `re_split`. All pattern arguments are Go regular expressions. `re_compile` returns a reusable compiled regexp object.</p>
+          <p>The <code>text</code> module exposes Go&#39;s <code>regexp</code> package through <code>re_match</code>, <code>re_find</code>, <code>re_replace</code>, and <code>re_split</code>. Patterns follow Go regexp syntax.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,22 +30,84 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-text := import(&#34;text&#34;)
-
-fmt.println(text.re_match(`^\d{3}-\d{4}$`, &#34;555-1234&#34;))
-fmt.println(text.re_match(`^\d{3}-\d{4}$`, &#34;hello&#34;))
-
-fmt.println(text.re_replace(`\d&#43;`, &#34;score: 42 and 7&#34;, &#34;NUM&#34;))
-
-parts := text.re_split(`\s&#43;`, &#34;  one   two  three  &#34;, -1)
-fmt.println(parts)
-
-hits := text.re_find(`[a-z]&#43;`, &#34;a1b2c3d4&#34;, -1)
+text := import(&#34;text&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="rematchpattern-str-returns-true-if-the-whole-string-matches">
+        <div class="docs">
+          <p><a href="#rematchpattern-str-returns-true-if-the-whole-string-matches"><code>re_match(pattern, str)</code> returns true if the whole string matches.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.re_match(`^\d{3}-\d{4}$`, &#34;555-1234&#34;))
+fmt.println(text.re_match(`^\d{3}-\d{4}$`, &#34;hello&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="rereplacepattern-str-repl-replaces-all-matches">
+        <div class="docs">
+          <p><a href="#rereplacepattern-str-repl-replaces-all-matches"><code>re_replace(pattern, str, repl)</code> replaces all matches.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.re_replace(`\d&#43;`, &#34;score: 42 and 7&#34;, &#34;NUM&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="resplitpattern-str-n-splits-on-the-pattern">
+        <div class="docs">
+          <p><a href="#resplitpattern-str-n-splits-on-the-pattern"><code>re_split(pattern, str, n)</code> splits on the pattern.
+Pass -1 to split on all occurrences.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">parts := text.re_split(`\s&#43;`, &#34;one   two  three&#34;, -1)
+fmt.println(parts)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="refindpattern-str-n-returns-an-array-of-match-objects">
+        <div class="docs">
+          <p><a href="#refindpattern-str-n-returns-an-array-of-match-objects"><code>re_find(pattern, str, n)</code> returns an array of match objects,
+each containing <code>text</code>, <code>begin</code>, and <code>end</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">hits := text.re_find(`[a-z]&#43;`, &#34;a1b2c3&#34;, -1)
 for _, m in hits {
     fmt.println(m[0][&#34;text&#34;])
-}
-
-re := text.re_compile(`(\w&#43;)@(\w&#43;)\.(\w&#43;)`)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="recompile-creates-a-reusable-compiled-regexp-object">
+        <div class="docs">
+          <p><a href="#recompile-creates-a-reusable-compiled-regexp-object"><code>re_compile</code> creates a reusable compiled regexp object.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">re := text.re_compile(`(\w&#43;)@(\w&#43;)\.(\w&#43;)`)
 fmt.println(re.match(&#34;user@example.com&#34;))</code></pre>
           </div>
           
@@ -66,7 +122,7 @@ fmt.println(re.match(&#34;user@example.com&#34;))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -82,10 +138,10 @@ fmt.println(text.re_match(`^\d{3}-\d{4}$`, &#34;hello&#34;))
 
 fmt.println(text.re_replace(`\d&#43;`, &#34;score: 42 and 7&#34;, &#34;NUM&#34;))
 
-parts := text.re_split(`\s&#43;`, &#34;  one   two  three  &#34;, -1)
+parts := text.re_split(`\s&#43;`, &#34;one   two  three&#34;, -1)
 fmt.println(parts)
 
-hits := text.re_find(`[a-z]&#43;`, &#34;a1b2c3d4&#34;, -1)
+hits := text.re_find(`[a-z]&#43;`, &#34;a1b2c3&#34;, -1)
 for _, m in hits {
     fmt.println(m[0][&#34;text&#34;])
 }
@@ -99,10 +155,10 @@ fmt.println(text.re_match(`^\d{3}-\d{4}$`, &#34;hello&#34;))
 
 fmt.println(text.re_replace(`\d&#43;`, &#34;score: 42 and 7&#34;, &#34;NUM&#34;))
 
-parts := text.re_split(`\s&#43;`, &#34;  one   two  three  &#34;, -1)
+parts := text.re_split(`\s&#43;`, &#34;one   two  three&#34;, -1)
 fmt.println(parts)
 
-hits := text.re_find(`[a-z]&#43;`, &#34;a1b2c3d4&#34;, -1)
+hits := text.re_find(`[a-z]&#43;`, &#34;a1b2c3&#34;, -1)
 for _, m in hits {
     fmt.println(m[0][&#34;text&#34;])
 }

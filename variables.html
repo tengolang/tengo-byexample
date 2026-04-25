@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "values.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "if-else.html"; }
-  };
-</script>
 <body>
   <div class="example" id="variables">
-    <h2><a href="index.html">Tengo by Example</a>: Variables</h2>
+    <h2>Variables</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>Variables are declared and initialized with `:=`. Tengo is dynamically typed: a variable can hold any value and be reassigned to a different type.</p>
+          <p>Variables are declared and initialized with <code>:=</code>. Tengo is dynamically typed: a variable can hold any value and be reassigned to a different type.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -43,7 +37,7 @@
       
       <div class="row" id="use-to-declare-and-initialize-a-variable">
         <div class="docs">
-          <p><a href="#use-to-declare-and-initialize-a-variable">Use `:=` to declare and initialize a variable.</a></p>
+          <p><a href="#use-to-declare-and-initialize-a-variable">Use <code>:=</code> to declare and initialize a variable.</a></p>
         </div>
         <div class="code leading">
           
@@ -58,7 +52,7 @@ fmt.println(message)</code></pre>
       
       <div class="row" id="use-plain-to-reassign-an-existing-variable">
         <div class="docs">
-          <p><a href="#use-plain-to-reassign-an-existing-variable">Use plain `=` to reassign an existing variable.</a></p>
+          <p><a href="#use-plain-to-reassign-an-existing-variable">Use plain <code>=</code> to reassign an existing variable.</a></p>
         </div>
         <div class="code leading">
           
@@ -112,7 +106,7 @@ fmt.println(value)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "multiple-return-values.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "arrays.html"; }
-  };
-</script>
 <body>
   <div class="example" id="recursion">
-    <h2><a href="index.html">Tengo by Example</a>: Recursion</h2>
+    <h2>Recursion</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>Functions in Tengo can call themselves recursively. Because functions are values assigned to variables, the function body can reference its own variable name and the closure captures the latest binding.</p>
+          <p>Tengo supports recursive functions. Because functions are values assigned to variables, the function body references its own variable name, and the closure captures the current binding.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -35,21 +29,57 @@
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-fact := func(n) {
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-classic-recursive-factorial">
+        <div class="docs">
+          <p><a href="#the-classic-recursive-factorial">The classic recursive factorial.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fact := func(n) {
     if n == 0 { return 1 }
     return n * fact(n-1)
 }
-fmt.println(fact(6))
-
-fib := func(n) {
+fmt.println(fact(6))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="fibonacci-via-mutual-recursion-through-the-same-variable">
+        <div class="docs">
+          <p><a href="#fibonacci-via-mutual-recursion-through-the-same-variable">Fibonacci via mutual recursion through the same variable.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fib := func(n) {
     if n &lt;= 1 { return n }
     return fib(n-1) &#43; fib(n-2)
 }
-fmt.println(fib(10))
-
-sum := func(arr) {
+fmt.println(fib(10))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="recursion-also-works-on-arrays-here-we-sum-all-elements">
+        <div class="docs">
+          <p><a href="#recursion-also-works-on-arrays-here-we-sum-all-elements">Recursion also works on arrays — here we sum all elements.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">sum := func(arr) {
     if len(arr) == 0 { return 0 }
     return arr[0] &#43; sum(arr[1:])
 }
@@ -67,7 +97,7 @@ fmt.println(sum([1, 2, 3, 4, 5]))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "command-line-arguments.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "reading-files.html"; }
-  };
-</script>
 <body>
   <div class="example" id="environment-variables">
-    <h2><a href="index.html">Tengo by Example</a>: Environment Variables</h2>
+    <h2>Environment Variables</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `os` module exposes `getenv`, `setenv`, `unsetenv`, `environ`, and `lookup_env`. `getenv` returns an empty string for missing variables; `lookup_env` returns `(value, true)` or `(&#34;&#34;, false)`.</p>
+          <p>The <code>os</code> module provides <code>getenv</code>, <code>setenv</code>, <code>unsetenv</code>, and <code>lookup_env</code> for reading and writing the process environment.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,15 +30,53 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-os := import(&#34;os&#34;)
-
-fmt.println(os.getenv(&#34;HOME&#34;))
-fmt.println(os.getenv(&#34;NONEXISTENT&#34;))
-
-os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
-fmt.println(os.getenv(&#34;GREETING&#34;))
-
-val, ok := os.lookup_env(&#34;GREETING&#34;)
+os := import(&#34;os&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="getenv-returns-the-value-of-a-variable-or-an-empty-string-if-unset">
+        <div class="docs">
+          <p><a href="#getenv-returns-the-value-of-a-variable-or-an-empty-string-if-unset"><code>getenv</code> returns the value of a variable, or an empty string if unset.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(os.getenv(&#34;HOME&#34;))
+fmt.println(os.getenv(&#34;NONEXISTENT&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="setenv-and-unsetenv-modify-the-environment-for-the-current-process">
+        <div class="docs">
+          <p><a href="#setenv-and-unsetenv-modify-the-environment-for-the-current-process"><code>setenv</code> and <code>unsetenv</code> modify the environment for the current process.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
+fmt.println(os.getenv(&#34;GREETING&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="lookupenv-returns-value-true-when-the-variable-exists">
+        <div class="docs">
+          <p><a href="#lookupenv-returns-value-true-when-the-variable-exists"><code>lookup_env</code> returns <code>(value, true)</code> when the variable exists,
+or <code>(&#34;&#34;, false)</code> when it is absent — useful to distinguish
+an unset variable from one set to the empty string.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">val, ok := os.lookup_env(&#34;GREETING&#34;)
 fmt.println(val, ok)
 
 _, ok = os.lookup_env(&#34;MISSING&#34;)
@@ -64,7 +96,7 @@ os.unsetenv(&#34;GREETING&#34;)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

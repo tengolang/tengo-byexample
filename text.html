@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "json.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "string-formatting.html"; }
-  };
-</script>
 <body>
   <div class="example" id="text">
-    <h2><a href="index.html">Tengo by Example</a>: Text</h2>
+    <h2>Text</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `text` module handles string manipulation including searching, splitting, trimming, case conversion, and regular expressions.</p>
+          <p>The <code>text</code> module wraps Go&#39;s <code>strings</code> and <code>strconv</code> packages, providing search, split, join, trimming, case conversion, and more.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,18 +30,73 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-text := import(&#34;text&#34;)
-
+text := import(&#34;text&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="case-conversion-and-trimming">
+        <div class="docs">
+          <p><a href="#case-conversion-and-trimming">Case conversion and trimming.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.to_upper(&#34;hello&#34;))
+fmt.println(text.to_lower(&#34;WORLD&#34;))
 fmt.println(text.title(&#34;hello world&#34;))
-fmt.println(text.trim_space(&#34;  hello  &#34;))
+fmt.println(text.trim_space(&#34;  hello  &#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="searching-and-testing">
+        <div class="docs">
+          <p><a href="#searching-and-testing">Searching and testing.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.contains(&#34;Tengo&#34;, &#34;eng&#34;))
 fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
 fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))
 fmt.println(text.index(&#34;hello&#34;, &#34;ll&#34;))
-fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
-fmt.println(text.repeat(&#34;ab&#34;, 3))
-
-fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
-fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</code></pre>
+fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="splitting-and-joining">
+        <div class="docs">
+          <p><a href="#splitting-and-joining">Splitting and joining.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.split(&#34;a,b,c&#34;, &#34;,&#34;))
+fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))
+fmt.println(text.repeat(&#34;ab&#34;, 3))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="replace-all-occurrences-pass-1-for-unlimited-replacements">
+        <div class="docs">
+          <p><a href="#replace-all-occurrences-pass-1-for-unlimited-replacements">Replace all occurrences (pass -1 for unlimited replacements).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(text.replace(&#34;oink oink oink&#34;, &#34;oink&#34;, &#34;moo&#34;, -1))
+fmt.println(text.replace(&#34;oink oink oink&#34;, &#34;oink&#34;, &#34;moo&#34;, 2))</code></pre>
           </div>
           
         </div>
@@ -61,7 +110,7 @@ fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -72,28 +121,42 @@ fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</code></pre>
               data-original="fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
+fmt.println(text.to_upper(&#34;hello&#34;))
+fmt.println(text.to_lower(&#34;WORLD&#34;))
 fmt.println(text.title(&#34;hello world&#34;))
 fmt.println(text.trim_space(&#34;  hello  &#34;))
+
+fmt.println(text.contains(&#34;Tengo&#34;, &#34;eng&#34;))
 fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
 fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))
 fmt.println(text.index(&#34;hello&#34;, &#34;ll&#34;))
 fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
+
+fmt.println(text.split(&#34;a,b,c&#34;, &#34;,&#34;))
+fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))
 fmt.println(text.repeat(&#34;ab&#34;, 3))
 
-fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
-fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))">fmt := import(&#34;fmt&#34;)
+fmt.println(text.replace(&#34;oink oink oink&#34;, &#34;oink&#34;, &#34;moo&#34;, -1))
+fmt.println(text.replace(&#34;oink oink oink&#34;, &#34;oink&#34;, &#34;moo&#34;, 2))">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
+fmt.println(text.to_upper(&#34;hello&#34;))
+fmt.println(text.to_lower(&#34;WORLD&#34;))
 fmt.println(text.title(&#34;hello world&#34;))
 fmt.println(text.trim_space(&#34;  hello  &#34;))
+
+fmt.println(text.contains(&#34;Tengo&#34;, &#34;eng&#34;))
 fmt.println(text.has_prefix(&#34;Tengo&#34;, &#34;Ten&#34;))
 fmt.println(text.has_suffix(&#34;Tengo&#34;, &#34;go&#34;))
 fmt.println(text.index(&#34;hello&#34;, &#34;ll&#34;))
 fmt.println(text.count(&#34;banana&#34;, &#34;a&#34;))
+
+fmt.println(text.split(&#34;a,b,c&#34;, &#34;,&#34;))
+fmt.println(text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))
 fmt.println(text.repeat(&#34;ab&#34;, 3))
 
-fmt.println(text.re_match(`^\d&#43;$`, &#34;12345&#34;))
-fmt.println(text.re_split(`\s&#43;`, &#34;one two  three&#34;, -1))</textarea>
+fmt.println(text.replace(&#34;oink oink oink&#34;, &#34;oink&#34;, &#34;moo&#34;, -1))
+fmt.println(text.replace(&#34;oink oink oink&#34;, &#34;oink&#34;, &#34;moo&#34;, 2))</textarea>
           </div>
         </div>
       </div>

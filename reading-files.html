@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "environment-variables.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "writing-files.html"; }
-  };
-</script>
 <body>
   <div class="example" id="reading-files">
-    <h2><a href="index.html">Tengo by Example</a>: Reading Files</h2>
+    <h2>Reading Files</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>`os.read_file` reads an entire file as bytes. For streaming access, use `os.open` to get a file object and call `.read(n)` on it. Convert bytes to a string with `string()`.</p>
+          <p><code>os.read_file</code> reads an entire file into a <code>bytes</code> value. For streaming access, <code>os.open</code> returns a file object with a <code>read(buf)</code> method.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,20 +30,71 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-os := import(&#34;os&#34;)
-
-os.create(&#34;/tmp/tengo_read.txt&#34;).write_string(&#34;Hello from Tengo!\nSecond line.\n&#34;)
-
-content := os.read_file(&#34;/tmp/tengo_read.txt&#34;)
-fmt.println(string(content))
-
-f := os.open(&#34;/tmp/tengo_read.txt&#34;)
+os := import(&#34;os&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="create-a-small-file-to-read-from">
+        <div class="docs">
+          <p><a href="#create-a-small-file-to-read-from">Create a small file to read from.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">f0 := os.create(&#34;/tmp/tengo_read.txt&#34;)
+f0.write_string(&#34;Hello from Tengo!\nSecond line.\n&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="osreadfile-is-the-simplest-way-to-read-a-whole-file">
+        <div class="docs">
+          <p><a href="#osreadfile-is-the-simplest-way-to-read-a-whole-file"><code>os.read_file</code> is the simplest way to read a whole file.
+Convert the bytes result with <code>string()</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">content := os.read_file(&#34;/tmp/tengo_read.txt&#34;)
+fmt.println(string(content))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="osopen-returns-a-file-object-for-streaming-reads">
+        <div class="docs">
+          <p><a href="#osopen-returns-a-file-object-for-streaming-reads"><code>os.open</code> returns a file object for streaming reads.
+Pass a pre-allocated <code>bytes</code> buffer to <code>read</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">f := os.open(&#34;/tmp/tengo_read.txt&#34;)
 buf := bytes(5)
 f.read(buf)
 fmt.println(string(buf))
-f.close()
-
-os.remove(&#34;/tmp/tengo_read.txt&#34;)</code></pre>
+f.close()</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="clean-up">
+        <div class="docs">
+          <p><a href="#clean-up">Clean up.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">os.remove(&#34;/tmp/tengo_read.txt&#34;)</code></pre>
           </div>
           
         </div>
@@ -63,7 +108,7 @@ os.remove(&#34;/tmp/tengo_read.txt&#34;)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -74,7 +119,8 @@ os.remove(&#34;/tmp/tengo_read.txt&#34;)</code></pre>
               data-original="fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
-os.create(&#34;/tmp/tengo_read.txt&#34;).write_string(&#34;Hello from Tengo!\nSecond line.\n&#34;)
+f0 := os.create(&#34;/tmp/tengo_read.txt&#34;)
+f0.write_string(&#34;Hello from Tengo!\nSecond line.\n&#34;)
 
 content := os.read_file(&#34;/tmp/tengo_read.txt&#34;)
 fmt.println(string(content))
@@ -88,7 +134,8 @@ f.close()
 os.remove(&#34;/tmp/tengo_read.txt&#34;)">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
-os.create(&#34;/tmp/tengo_read.txt&#34;).write_string(&#34;Hello from Tengo!\nSecond line.\n&#34;)
+f0 := os.create(&#34;/tmp/tengo_read.txt&#34;)
+f0.write_string(&#34;Hello from Tengo!\nSecond line.\n&#34;)
 
 content := os.read_file(&#34;/tmp/tengo_read.txt&#34;)
 fmt.println(string(content))

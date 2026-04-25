@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "coroutines.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "environment-variables.html"; }
-  };
-</script>
 <body>
   <div class="example" id="command-line-arguments">
-    <h2><a href="index.html">Tengo by Example</a>: Command-Line Arguments</h2>
+    <h2>Command-Line Arguments</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>`os.args()` returns the argument list as an array. The first element is always the interpreter name (`tengo`), the second is the script path, and any further elements are the arguments passed by the caller.</p>
+          <p><code>os.args()</code> returns the full argument list. The first element is the interpreter name, the second is the script path, and anything after that is user-supplied.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,14 +30,54 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-os := import(&#34;os&#34;)
-
-args := os.args()
-fmt.println(args)
-fmt.println(len(args))
-
-if len(args) &gt; 2 {
+os := import(&#34;os&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="print-all-arguments">
+        <div class="docs">
+          <p><a href="#print-all-arguments">Print all arguments.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">args := os.args()
+fmt.println(args)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-interpreter-and-script-are-always-present">
+        <div class="docs">
+          <p><a href="#the-interpreter-and-script-are-always-present">The interpreter and script are always present.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;program:&#34;, args[0])
+fmt.println(&#34;script: &#34;, args[1])</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="user-arguments-start-at-index-2">
+        <div class="docs">
+          <p><a href="#user-arguments-start-at-index-2">User arguments start at index 2.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">if len(args) &gt; 2 {
     fmt.println(&#34;first user arg:&#34;, args[2])
+} else {
+    fmt.println(&#34;(no user args — try: tengo script.tengo hello)&#34;)
 }</code></pre>
           </div>
           
@@ -58,7 +92,7 @@ if len(args) &gt; 2 {
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -71,19 +105,27 @@ os := import(&#34;os&#34;)
 
 args := os.args()
 fmt.println(args)
-fmt.println(len(args))
+
+fmt.println(&#34;program:&#34;, args[0])
+fmt.println(&#34;script: &#34;, args[1])
 
 if len(args) &gt; 2 {
     fmt.println(&#34;first user arg:&#34;, args[2])
+} else {
+    fmt.println(&#34;(no user args — try: tengo script.tengo hello)&#34;)
 }">fmt := import(&#34;fmt&#34;)
 os := import(&#34;os&#34;)
 
 args := os.args()
 fmt.println(args)
-fmt.println(len(args))
+
+fmt.println(&#34;program:&#34;, args[0])
+fmt.println(&#34;script: &#34;, args[1])
 
 if len(args) &gt; 2 {
     fmt.println(&#34;first user arg:&#34;, args[2])
+} else {
+    fmt.println(&#34;(no user args — try: tengo script.tengo hello)&#34;)
 }</textarea>
           </div>
         </div>

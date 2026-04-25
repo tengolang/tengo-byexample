@@ -6,16 +6,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "arrays.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "strings.html"; }
-  };
-</script>
 <body>
   <div class="example" id="maps">
-    <h2><a href="index.html">Tengo by Example</a>: Maps</h2>
+    <h2>Maps</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
@@ -43,7 +37,7 @@
       
       <div class="row" id="to-create-an-empty-map-use-the-key-value-syntax-with-braces">
         <div class="docs">
-          <p><a href="#to-create-an-empty-map-use-the-key-value-syntax-with-braces">To create an empty map, use the `{key: value}` syntax with braces.</a></p>
+          <p><a href="#to-create-an-empty-map-use-the-key-value-syntax-with-braces">To create an empty map, use the <code>{key: value}</code> syntax with braces.</a></p>
         </div>
         <div class="code leading">
           
@@ -57,7 +51,7 @@
       
       <div class="row" id="set-keyvalue-pairs-using-typical-namekey-val-syntax">
         <div class="docs">
-          <p><a href="#set-keyvalue-pairs-using-typical-namekey-val-syntax">Set key/value pairs using typical `name[key] = val` syntax.</a></p>
+          <p><a href="#set-keyvalue-pairs-using-typical-namekey-val-syntax">Set key/value pairs using typical <code>name[key] = val</code> syntax.</a></p>
         </div>
         <div class="code leading">
           
@@ -72,7 +66,7 @@ m[&#34;k2&#34;] = 13</code></pre>
       
       <div class="row" id="printing-a-map-with-fmtprintln-will-show-all-of-its-keyvalue-pairs">
         <div class="docs">
-          <p><a href="#printing-a-map-with-fmtprintln-will-show-all-of-its-keyvalue-pairs">Printing a map with `fmt.println` will show all of its key/value pairs.</a></p>
+          <p><a href="#printing-a-map-with-fmtprintln-will-show-all-of-its-keyvalue-pairs">Printing a map with <code>fmt.println</code> will show all of its key/value pairs.</a></p>
         </div>
         <div class="code leading">
           
@@ -86,7 +80,7 @@ m[&#34;k2&#34;] = 13</code></pre>
       
       <div class="row" id="get-a-value-for-a-key-with-namekey">
         <div class="docs">
-          <p><a href="#get-a-value-for-a-key-with-namekey">Get a value for a key with `name[key]`.</a></p>
+          <p><a href="#get-a-value-for-a-key-with-namekey">Get a value for a key with <code>name[key]</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -101,7 +95,7 @@ fmt.println(&#34;v1: &#34;, v1)</code></pre>
       
       <div class="row" id="the-built-in-len-returns-the-number-of-keyvalue-pairs">
         <div class="docs">
-          <p><a href="#the-built-in-len-returns-the-number-of-keyvalue-pairs">The built-in `len` returns the number of key/value pairs
+          <p><a href="#the-built-in-len-returns-the-number-of-keyvalue-pairs">The built-in <code>len</code> returns the number of key/value pairs
 when called on a map.</a></p>
         </div>
         <div class="code leading">
@@ -116,7 +110,7 @@ when called on a map.</a></p>
       
       <div class="row" id="the-built-in-delete-removes-keyvalue-pairs-from-a-map">
         <div class="docs">
-          <p><a href="#the-built-in-delete-removes-keyvalue-pairs-from-a-map">The built-in `delete` removes key/value pairs from a map.</a></p>
+          <p><a href="#the-built-in-delete-removes-keyvalue-pairs-from-a-map">The built-in <code>delete</code> removes key/value pairs from a map.</a></p>
         </div>
         <div class="code leading">
           
@@ -153,7 +147,7 @@ fmt.println(&#34;map:&#34;, n)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

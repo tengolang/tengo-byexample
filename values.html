@@ -6,16 +6,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "hello-world.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "variables.html"; }
-  };
-</script>
 <body>
   <div class="example" id="values">
-    <h2><a href="index.html">Tengo by Example</a>: Values</h2>
+    <h2>Values</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
@@ -43,7 +37,7 @@
       
       <div class="row" id="strings-can-be-concatenated-with">
         <div class="docs">
-          <p><a href="#strings-can-be-concatenated-with">Strings can be concatenated with `&#43;`.</a></p>
+          <p><a href="#strings-can-be-concatenated-with">Strings can be concatenated with <code>+</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -95,7 +89,7 @@ fmt.println(!true)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

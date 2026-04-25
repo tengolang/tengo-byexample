@@ -6,16 +6,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "maps.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "slices.html"; }
-  };
-</script>
 <body>
   <div class="example" id="strings">
-    <h2><a href="index.html">Tengo by Example</a>: Strings</h2>
+    <h2>Strings</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
@@ -58,7 +52,7 @@ text := import(&#34;text&#34;)</code></pre>
       
       <div class="row" id="len-returns-the-number-of-bytes-in-the-string">
         <div class="docs">
-          <p><a href="#len-returns-the-number-of-bytes-in-the-string">`len` returns the number of bytes in the string.</a></p>
+          <p><a href="#len-returns-the-number-of-bytes-in-the-string"><code>len</code> returns the number of bytes in the string.</a></p>
         </div>
         <div class="code leading">
           
@@ -73,7 +67,7 @@ text := import(&#34;text&#34;)</code></pre>
       <div class="row" id="you-can-use-slice-notation-to-get-a-substring">
         <div class="docs">
           <p><a href="#you-can-use-slice-notation-to-get-a-substring">You can use slice notation to get a substring.
-`s[7:12]` gets characters from index 7 to 11.</a></p>
+<code>s[7:12]</code> gets characters from index 7 to 11.</a></p>
         </div>
         <div class="code leading">
           
@@ -87,7 +81,7 @@ text := import(&#34;text&#34;)</code></pre>
       
       <div class="row" id="the-text-module-provides-many-helpful-functions">
         <div class="docs">
-          <p><a href="#the-text-module-provides-many-helpful-functions">The `text` module provides many helpful functions.
+          <p><a href="#the-text-module-provides-many-helpful-functions">The <code>text</code> module provides many helpful functions.
 Here we change the case of the string.</a></p>
         </div>
         <div class="code leading">
@@ -166,7 +160,7 @@ fmt.println(&#34;split:&#34;, parts)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

@@ -6,16 +6,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "recursion.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "maps.html"; }
-  };
-</script>
 <body>
   <div class="example" id="arrays">
-    <h2><a href="index.html">Tengo by Example</a>: Arrays</h2>
+    <h2>Arrays</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
@@ -43,7 +37,7 @@
       
       <div class="row" id="here-we-create-an-array-a-that-will-hold-exactly-5-integers">
         <div class="docs">
-          <p><a href="#here-we-create-an-array-a-that-will-hold-exactly-5-integers">Here we create an array `a` that will hold exactly 5 integers.
+          <p><a href="#here-we-create-an-array-a-that-will-hold-exactly-5-integers">Here we create an array <code>a</code> that will hold exactly 5 integers.
 By default, an array is zero-valued, which for integers means 0s.</a></p>
         </div>
         <div class="code leading">
@@ -59,8 +53,8 @@ fmt.println(&#34;emp:&#34;, a)</code></pre>
       
       <div class="row" id="we-can-set-a-value-at-an-index-using-the-arrayindex-value-syntax">
         <div class="docs">
-          <p><a href="#we-can-set-a-value-at-an-index-using-the-arrayindex-value-syntax">We can set a value at an index using the `array[index] = value` syntax,
-and get a value with `array[index]`.</a></p>
+          <p><a href="#we-can-set-a-value-at-an-index-using-the-arrayindex-value-syntax">We can set a value at an index using the <code>array[index] = value</code> syntax,
+and get a value with <code>array[index]</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -76,7 +70,7 @@ fmt.println(&#34;get:&#34;, a[4])</code></pre>
       
       <div class="row" id="the-built-in-len-returns-the-length-of-an-array">
         <div class="docs">
-          <p><a href="#the-built-in-len-returns-the-length-of-an-array">The built-in `len` returns the length of an array.</a></p>
+          <p><a href="#the-built-in-len-returns-the-length-of-an-array">The built-in <code>len</code> returns the length of an array.</a></p>
         </div>
         <div class="code leading">
           
@@ -145,7 +139,7 @@ fmt.println(&#34;2d: &#34;, twoD)</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

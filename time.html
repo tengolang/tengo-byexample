@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "regular-expressions.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "random-numbers.html"; }
-  };
-</script>
 <body>
   <div class="example" id="time">
-    <h2><a href="index.html">Tengo by Example</a>: Time</h2>
+    <h2>Time</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>The `times` module wraps Go&#39;s `time` package. Use `times.now()` for the current instant, `times.time_format` to produce strings with a layout, and `times.parse` to parse a string back into a time value.</p>
+          <p>The <code>times</code> module wraps Go&#39;s <code>time</code> package. Use <code>times.now()</code> for the current instant and <code>times.time_format</code> to produce formatted strings.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,19 +30,71 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-times := import(&#34;times&#34;)
-
-now := times.now()
+times := import(&#34;times&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="timesnow-returns-the-current-local-time-as-a-time-value">
+        <div class="docs">
+          <p><a href="#timesnow-returns-the-current-local-time-as-a-time-value"><code>times.now()</code> returns the current local time as a time value.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">now := times.now()
 fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
-fmt.println(times.time_format(now, times.format_rfc3339))
-fmt.println(times.time_year(now))
-fmt.println(times.time_month(now))
-
-past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
-fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
-
-diff := times.sub(now, past)
-fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))</code></pre>
+fmt.println(times.time_format(now, times.format_rfc3339))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="extract-individual-components-with-timeyear-timemonth-etc">
+        <div class="docs">
+          <p><a href="#extract-individual-components-with-timeyear-timemonth-etc">Extract individual components with <code>time_year</code>, <code>time_month</code>, etc.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;year: &#34;, times.time_year(now))
+fmt.println(&#34;month:&#34;, times.month_string(times.time_month(now)))
+fmt.println(&#34;day:  &#34;, times.time_day(now))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="timesparse-parses-a-time-string-using-a-layout">
+        <div class="docs">
+          <p><a href="#timesparse-parses-a-time-string-using-a-layout"><code>times.parse</code> parses a time string using a layout.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
+fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="timessub-gives-a-duration-between-two-instants">
+        <div class="docs">
+          <p><a href="#timessub-gives-a-duration-between-two-instants"><code>times.sub</code> gives a duration between two instants.
+<code>duration_hours</code> converts it to a float number of hours.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">diff := times.sub(now, past)
+days := times.duration_hours(diff) / 24
+fmt.printf(&#34;%.0f days since then\n&#34;, days)</code></pre>
           </div>
           
         </div>
@@ -62,7 +108,7 @@ fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(dif
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -76,27 +122,33 @@ times := import(&#34;times&#34;)
 now := times.now()
 fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
 fmt.println(times.time_format(now, times.format_rfc3339))
-fmt.println(times.time_year(now))
-fmt.println(times.time_month(now))
+
+fmt.println(&#34;year: &#34;, times.time_year(now))
+fmt.println(&#34;month:&#34;, times.month_string(times.time_month(now)))
+fmt.println(&#34;day:  &#34;, times.time_day(now))
 
 past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
 fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
 
 diff := times.sub(now, past)
-fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))">fmt := import(&#34;fmt&#34;)
+days := times.duration_hours(diff) / 24
+fmt.printf(&#34;%.0f days since then\n&#34;, days)">fmt := import(&#34;fmt&#34;)
 times := import(&#34;times&#34;)
 
 now := times.now()
 fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
 fmt.println(times.time_format(now, times.format_rfc3339))
-fmt.println(times.time_year(now))
-fmt.println(times.time_month(now))
+
+fmt.println(&#34;year: &#34;, times.time_year(now))
+fmt.println(&#34;month:&#34;, times.month_string(times.time_month(now)))
+fmt.println(&#34;day:  &#34;, times.time_day(now))
 
 past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
 fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
 
 diff := times.sub(now, past)
-fmt.println(fmt.sprintf(&#34;%.0f days since then&#34;, times.duration_hours(diff)/24))</textarea>
+days := times.duration_hours(diff) / 24
+fmt.printf(&#34;%.0f days since then\n&#34;, days)</textarea>
           </div>
         </div>
       </div>

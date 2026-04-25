@@ -6,22 +6,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "constants.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "multiple-return-values.html"; }
-  };
-</script>
 <body>
   <div class="example" id="type-conversions">
-    <h2><a href="index.html">Tengo by Example</a>: Type Conversions</h2>
+    <h2>Type Conversions</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>Tengo provides built-in functions to convert between its core types: `int`, `float`, `string`, `bool`, `char`, and `bytes`. Conversions that cannot succeed return `undefined`.</p>
+          <p>Tengo provides built-in functions to convert between its core types.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -35,18 +29,97 @@
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
-
-fmt.println(int(&#34;42&#34;))
-fmt.println(int(3.99))
-fmt.println(float(&#34;3.14&#34;))
-fmt.println(float(7))
-fmt.println(string(99))
-fmt.println(string(true))
-fmt.println(bool(0))
-fmt.println(bool(1))
-fmt.println(char(65))
-fmt.println(bytes(&#34;hi&#34;))
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="int-converts-a-string-or-float-to-an-integer">
+        <div class="docs">
+          <p><a href="#int-converts-a-string-or-float-to-an-integer"><code>int</code> converts a string or float to an integer.
+Float conversion truncates toward zero.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(int(&#34;42&#34;))
+fmt.println(int(3.99))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="float-converts-a-string-or-integer-to-a-float">
+        <div class="docs">
+          <p><a href="#float-converts-a-string-or-integer-to-a-float"><code>float</code> converts a string or integer to a float.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(float(&#34;3.14&#34;))
+fmt.println(float(7))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="string-converts-any-value-to-its-string-representation">
+        <div class="docs">
+          <p><a href="#string-converts-any-value-to-its-string-representation"><code>string</code> converts any value to its string representation.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(string(99))
+fmt.println(string(true))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="bool-converts-a-number-zero-is-false-anything-else-is-true">
+        <div class="docs">
+          <p><a href="#bool-converts-a-number-zero-is-false-anything-else-is-true"><code>bool</code> converts a number: zero is false, anything else is true.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(bool(0))
+fmt.println(bool(1))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="char-converts-an-integer-to-the-unicode-character-it-represents">
+        <div class="docs">
+          <p><a href="#char-converts-an-integer-to-the-unicode-character-it-represents"><code>char</code> converts an integer to the Unicode character it represents.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(char(65))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="bytes-converts-a-string-to-a-raw-byte-slice">
+        <div class="docs">
+          <p><a href="#bytes-converts-a-string-to-a-raw-byte-slice"><code>bytes</code> converts a string to a raw byte slice.
+Use <code>string()</code> to convert back.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(bytes(&#34;hi&#34;))
 fmt.println(string(bytes(&#34;hi&#34;)))</code></pre>
           </div>
           
@@ -61,7 +134,7 @@ fmt.println(string(bytes(&#34;hi&#34;)))</code></pre>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
@@ -73,25 +146,35 @@ fmt.println(string(bytes(&#34;hi&#34;)))</code></pre>
 
 fmt.println(int(&#34;42&#34;))
 fmt.println(int(3.99))
+
 fmt.println(float(&#34;3.14&#34;))
 fmt.println(float(7))
+
 fmt.println(string(99))
 fmt.println(string(true))
+
 fmt.println(bool(0))
 fmt.println(bool(1))
+
 fmt.println(char(65))
+
 fmt.println(bytes(&#34;hi&#34;))
 fmt.println(string(bytes(&#34;hi&#34;)))">fmt := import(&#34;fmt&#34;)
 
 fmt.println(int(&#34;42&#34;))
 fmt.println(int(3.99))
+
 fmt.println(float(&#34;3.14&#34;))
 fmt.println(float(7))
+
 fmt.println(string(99))
 fmt.println(string(true))
+
 fmt.println(bool(0))
 fmt.println(bool(1))
+
 fmt.println(char(65))
+
 fmt.println(bytes(&#34;hi&#34;))
 fmt.println(string(bytes(&#34;hi&#34;)))</textarea>
           </div>
@@ -101,7 +184,7 @@ fmt.println(string(bytes(&#34;hi&#34;)))</textarea>
 
     <div class="nav-links">
       
-        <a href="constants.html" rel="prev">← Constants</a>
+        <a href="for.html" rel="prev">← For Loops</a>
       
       
         <a href="multiple-return-values.html" rel="next">Multiple Return Values →</a>

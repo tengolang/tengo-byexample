@@ -6,16 +6,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    
-    if (e.key === "ArrowRight") { window.location.href = "values.html"; }
-  };
-</script>
 <body>
   <div class="example" id="hello-world">
-    <h2><a href="index.html">Tengo by Example</a>: Hello World</h2>
+    <h2>Hello World</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
@@ -29,7 +23,7 @@
       
       <div class="row" id="we-start-by-importing-the-fmt-module-which-provides">
         <div class="docs">
-          <p><a href="#we-start-by-importing-the-fmt-module-which-provides">We start by importing the `fmt` module, which provides
+          <p><a href="#we-start-by-importing-the-fmt-module-which-provides">We start by importing the <code>fmt</code> module, which provides
 formatted I/O functions.</a></p>
         </div>
         <div class="code leading">
@@ -44,7 +38,7 @@ formatted I/O functions.</a></p>
       
       <div class="row" id="then-we-use-the-println-function-to-print-the-greeting">
         <div class="docs">
-          <p><a href="#then-we-use-the-println-function-to-print-the-greeting">Then we use the `println` function to print the greeting
+          <p><a href="#then-we-use-the-println-function-to-print-the-greeting">Then we use the <code>println</code> function to print the greeting
 to the standard output.</a></p>
         </div>
         <div class="code leading">
@@ -65,7 +59,7 @@ to the standard output.</a></p>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>

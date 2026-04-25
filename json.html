@@ -6,16 +6,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
-<script>
-  window.onkeydown = (e) => {
-    if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) return;
-    if (e.key === "ArrowLeft")  { window.location.href = "math.html"; }
-    if (e.key === "ArrowRight") { window.location.href = "text.html"; }
-  };
-</script>
 <body>
   <div class="example" id="json">
-    <h2><a href="index.html">Tengo by Example</a>: JSON</h2>
+    <h2>JSON</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
@@ -64,8 +58,8 @@ Here&#39;s one for a map of data.</a></p>
       
       <div class="row" id="jsonencode-converts-a-tengo-value-into-a-byte-array">
         <div class="docs">
-          <p><a href="#jsonencode-converts-a-tengo-value-into-a-byte-array">`json.encode` converts a Tengo value into a byte array
-of JSON. We use `string()` to convert it for printing.</a></p>
+          <p><a href="#jsonencode-converts-a-tengo-value-into-a-byte-array"><code>json.encode</code> converts a Tengo value into a byte array
+of JSON. We use <code>string()</code> to convert it for printing.</a></p>
         </div>
         <div class="code leading">
           
@@ -95,7 +89,7 @@ Here&#39;s a generic JSON string.</a></p>
       
       <div class="row" id="jsondecode-parses-the-json-and-returns-a-tengo-map-or-array">
         <div class="docs">
-          <p><a href="#jsondecode-parses-the-json-and-returns-a-tengo-map-or-array">`json.decode` parses the JSON and returns a Tengo map or array.</a></p>
+          <p><a href="#jsondecode-parses-the-json-and-returns-a-tengo-map-or-array"><code>json.decode</code> parses the JSON and returns a Tengo map or array.</a></p>
         </div>
         <div class="code leading">
           
@@ -142,7 +136,7 @@ most common.</a></p>
           <p class="play-label">try it</p>
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
         </div>
-        <div class="code leading">
+        <div class="leading">
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
