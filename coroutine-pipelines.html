@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Coroutine Pipelines</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="coroutine-pipelines">
+    <h2>Coroutine Pipelines</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Because coroutines implement the iterable protocol, they can be chained into lazy pipelines — each stage consumes one coroutine and produces another, with no intermediate arrays allocated.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+coro := import(&#34;coro&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="numbersn-yields-integers-1-through-n">
+        <div class="docs">
+          <p><a href="#numbersn-yields-integers-1-through-n"><code>numbers(n)</code> yields integers 1 through n.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">numbers := func(n) {
+    return coro.new(func(yield) {
+        for i := 1; i &lt;= n; i&#43;&#43; {
+            yield(i)
+        }
+    })
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="filterc-keeps-only-values-where-pred-returns-true">
+        <div class="docs">
+          <p><a href="#filterc-keeps-only-values-where-pred-returns-true"><code>filter_c</code> keeps only values where <code>pred</code> returns true.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">filter_c := func(src, pred) {
+    return coro.new(func(yield) {
+        for _, v in src {
+            if pred(v) { yield(v) }
+        }
+    })
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="mapc-transforms-every-value-with-f">
+        <div class="docs">
+          <p><a href="#mapc-transforms-every-value-with-f"><code>map_c</code> transforms every value with <code>f</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">map_c := func(src, f) {
+    return coro.new(func(yield) {
+        for _, v in src { yield(f(v)) }
+    })
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="take-collects-the-first-n-values-from-a-coroutine-into-an-array">
+        <div class="docs">
+          <p><a href="#take-collects-the-first-n-values-from-a-coroutine-into-an-array"><code>take</code> collects the first n values from a coroutine into an array.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">take := func(src, n) {
+    result := []
+    for _, v in src {
+        result = append(result, v)
+        if len(result) &gt;= n { break }
+    }
+    return result
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="pipeline-squares-of-even-numbers-from-110">
+        <div class="docs">
+          <p><a href="#pipeline-squares-of-even-numbers-from-110">Pipeline: squares of even numbers from 1..10.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">pipeline := map_c(
+    filter_c(numbers(10), func(x) { return x % 2 == 0 }),
+    func(x) { return x * x }
+)
+
+for _, v in pipeline {
+    fmt.println(v)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="infinite-source-with-early-termination-via-take">
+        <div class="docs">
+          <p><a href="#infinite-source-with-early-termination-via-take">Infinite source with early termination via <code>take</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">naturals := coro.new(func(yield) {
+    i := 1
+    for { yield(i); i&#43;&#43; }
+})
+
+odds := filter_c(naturals, func(x) { return x % 2 != 0 })
+fmt.println(take(odds, 5))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">4
+16
+36
+64
+100
+[1, 3, 5, 7, 9]</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+coro := import(&#34;coro&#34;)
+
+numbers := func(n) {
+    return coro.new(func(yield) {
+        for i := 1; i &lt;= n; i&#43;&#43; {
+            yield(i)
+        }
+    })
+}
+
+filter_c := func(src, pred) {
+    return coro.new(func(yield) {
+        for _, v in src {
+            if pred(v) { yield(v) }
+        }
+    })
+}
+
+map_c := func(src, f) {
+    return coro.new(func(yield) {
+        for _, v in src { yield(f(v)) }
+    })
+}
+
+take := func(src, n) {
+    result := []
+    for _, v in src {
+        result = append(result, v)
+        if len(result) &gt;= n { break }
+    }
+    return result
+}
+
+pipeline := map_c(
+    filter_c(numbers(10), func(x) { return x % 2 == 0 }),
+    func(x) { return x * x }
+)
+
+for _, v in pipeline {
+    fmt.println(v)
+}
+
+naturals := coro.new(func(yield) {
+    i := 1
+    for { yield(i); i&#43;&#43; }
+})
+
+odds := filter_c(naturals, func(x) { return x % 2 != 0 })
+fmt.println(take(odds, 5))">fmt := import(&#34;fmt&#34;)
+coro := import(&#34;coro&#34;)
+
+numbers := func(n) {
+    return coro.new(func(yield) {
+        for i := 1; i &lt;= n; i&#43;&#43; {
+            yield(i)
+        }
+    })
+}
+
+filter_c := func(src, pred) {
+    return coro.new(func(yield) {
+        for _, v in src {
+            if pred(v) { yield(v) }
+        }
+    })
+}
+
+map_c := func(src, f) {
+    return coro.new(func(yield) {
+        for _, v in src { yield(f(v)) }
+    })
+}
+
+take := func(src, n) {
+    result := []
+    for _, v in src {
+        result = append(result, v)
+        if len(result) &gt;= n { break }
+    }
+    return result
+}
+
+pipeline := map_c(
+    filter_c(numbers(10), func(x) { return x % 2 == 0 }),
+    func(x) { return x * x }
+)
+
+for _, v in pipeline {
+    fmt.println(v)
+}
+
+naturals := coro.new(func(yield) {
+    i := 1
+    for { yield(i); i&#43;&#43; }
+})
+
+odds := filter_c(naturals, func(x) { return x % 2 != 0 })
+fmt.println(take(odds, 5))</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="modules.html" rel="prev">← Modules</a>
+      
+      
+        <a href="command-line-arguments.html" rel="next">Command-Line Arguments →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
