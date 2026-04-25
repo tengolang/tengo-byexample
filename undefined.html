@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tengo by Example: If / Else</title>
+  <title>Tengo by Example: Undefined</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <div class="example" id="if-else">
-    <h2>If / Else</h2>
+  <div class="example" id="undefined">
+    <h2>Undefined</h2>
     <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>Branching with <code>if</code> and <code>else</code> in Tengo is straight-forward.</p>
+          <p><code>undefined</code> is Tengo&#39;s zero value — a distinct type returned by functions that do not explicitly return, and by missing map lookups.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,67 +36,70 @@
         </div>
       </div>
       
-      <div class="row" id="heres-a-basic-example">
+      <div class="row" id="a-function-with-no-return-statement-returns-undefined">
         <div class="docs">
-          <p><a href="#heres-a-basic-example">Here&#39;s a basic example.</a></p>
+          <p><a href="#a-function-with-no-return-statement-returns-undefined">A function with no return statement returns <code>undefined</code>.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">if 7 % 2 == 0 {
-    fmt.println(&#34;7 is even&#34;)
-} else {
-    fmt.println(&#34;7 is odd&#34;)
-}</code></pre>
+            <pre><code class="language-go">nothing := func() {}
+result := nothing()
+fmt.println(is_undefined(result))</code></pre>
           </div>
           
         </div>
       </div>
       
-      <div class="row" id="you-can-have-an-if-statement-without-an-else">
+      <div class="row" id="accessing-a-missing-map-key-also-yields-undefined">
         <div class="docs">
-          <p><a href="#you-can-have-an-if-statement-without-an-else">You can have an <code>if</code> statement without an else.</a></p>
+          <p><a href="#accessing-a-missing-map-key-also-yields-undefined">Accessing a missing map key also yields <code>undefined</code>.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">if 8 % 4 == 0 {
-    fmt.println(&#34;8 is divisible by 4&#34;)
-}</code></pre>
+            <pre><code class="language-go">m := {name: &#34;Tengo&#34;}
+fmt.println(is_undefined(m[&#34;missing&#34;]))
+fmt.println(is_undefined(m[&#34;name&#34;]))</code></pre>
           </div>
           
         </div>
       </div>
       
-      <div class="row" id="a-statement-can-precede-conditionals-any-variables-declared-in-this">
+      <div class="row" id="typename-confirms-the-type">
         <div class="docs">
-          <p><a href="#a-statement-can-precede-conditionals-any-variables-declared-in-this">A statement can precede conditionals; any variables declared in this
-statement are available in all branches.</a></p>
+          <p><a href="#typename-confirms-the-type"><code>type_name</code> confirms the type.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">if n := 9; n &lt; 0 {
-    fmt.println(n, &#34;is negative&#34;)
-} else if n &lt; 10 {
-    fmt.println(n, &#34;has 1 digit&#34;)
-} else {
-    fmt.println(n, &#34;has multiple digits&#34;)
-}</code></pre>
+            <pre><code class="language-go">fmt.println(type_name(result))</code></pre>
           </div>
           
         </div>
       </div>
       
-      <div class="row" id="note-that-you-dont-need-parentheses-around-conditions-in-tengo">
+      <div class="row" id="guard-against-undefined-before-using-a-value">
         <div class="docs">
-          <p><a href="#note-that-you-dont-need-parentheses-around-conditions-in-tengo">Note that you don&#39;t need parentheses around conditions in Tengo,
-but that the braces are required.</a></p>
+          <p><a href="#guard-against-undefined-before-using-a-value">Guard against <code>undefined</code> before using a value.</a></p>
         </div>
         <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">lookup := func(m, key) {
+    val := m[key]
+    if is_undefined(val) {
+        return &#34;not found&#34;
+    }
+    return val
+}
+fmt.println(lookup(m, &#34;name&#34;))
+fmt.println(lookup(m, &#34;missing&#34;))</code></pre>
+          </div>
           
         </div>
       </div>
@@ -119,41 +122,45 @@ but that the braces are required.</a></p>
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 
-if 7 % 2 == 0 {
-    fmt.println(&#34;7 is even&#34;)
-} else {
-    fmt.println(&#34;7 is odd&#34;)
+nothing := func() {}
+result := nothing()
+fmt.println(is_undefined(result))
+
+m := {name: &#34;Tengo&#34;}
+fmt.println(is_undefined(m[&#34;missing&#34;]))
+fmt.println(is_undefined(m[&#34;name&#34;]))
+
+fmt.println(type_name(result))
+
+lookup := func(m, key) {
+    val := m[key]
+    if is_undefined(val) {
+        return &#34;not found&#34;
+    }
+    return val
 }
+fmt.println(lookup(m, &#34;name&#34;))
+fmt.println(lookup(m, &#34;missing&#34;))">fmt := import(&#34;fmt&#34;)
 
-if 8 % 4 == 0 {
-    fmt.println(&#34;8 is divisible by 4&#34;)
+nothing := func() {}
+result := nothing()
+fmt.println(is_undefined(result))
+
+m := {name: &#34;Tengo&#34;}
+fmt.println(is_undefined(m[&#34;missing&#34;]))
+fmt.println(is_undefined(m[&#34;name&#34;]))
+
+fmt.println(type_name(result))
+
+lookup := func(m, key) {
+    val := m[key]
+    if is_undefined(val) {
+        return &#34;not found&#34;
+    }
+    return val
 }
-
-if n := 9; n &lt; 0 {
-    fmt.println(n, &#34;is negative&#34;)
-} else if n &lt; 10 {
-    fmt.println(n, &#34;has 1 digit&#34;)
-} else {
-    fmt.println(n, &#34;has multiple digits&#34;)
-}">fmt := import(&#34;fmt&#34;)
-
-if 7 % 2 == 0 {
-    fmt.println(&#34;7 is even&#34;)
-} else {
-    fmt.println(&#34;7 is odd&#34;)
-}
-
-if 8 % 4 == 0 {
-    fmt.println(&#34;8 is divisible by 4&#34;)
-}
-
-if n := 9; n &lt; 0 {
-    fmt.println(n, &#34;is negative&#34;)
-} else if n &lt; 10 {
-    fmt.println(n, &#34;has 1 digit&#34;)
-} else {
-    fmt.println(n, &#34;has multiple digits&#34;)
-}</textarea>
+fmt.println(lookup(m, &#34;name&#34;))
+fmt.println(lookup(m, &#34;missing&#34;))</textarea>
           </div>
         </div>
       </div>
@@ -161,10 +168,10 @@ if n := 9; n &lt; 0 {
 
     <div class="nav-links">
       
-        <a href="variables.html" rel="prev">← Variables</a>
+        <a href="recursion.html" rel="prev">← Recursion</a>
       
       
-        <a href="switch.html" rel="next">Switch →</a>
+        <a href="type-checking.html" rel="next">Type Checking →</a>
       
     </div>
 
