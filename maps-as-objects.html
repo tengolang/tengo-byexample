@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tengo by Example: Multiple Return Values</title>
+  <title>Tengo by Example: Maps as Objects</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <div class="example" id="multiple-return-values">
-    <h2>Multiple Return Values</h2>
+  <div class="example" id="maps-as-objects">
+    <h2>Maps as Objects</h2>
     <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p>Functions in Tengo can return more than one value using a comma-separated return list. The caller unpacks them with a multi-assignment.</p>
+          <p>Tengo has no classes. The idiomatic pattern is a constructor function that returns a map bundling data and closures as &#34;methods&#34;.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -36,65 +36,81 @@
         </div>
       </div>
       
-      <div class="row" id="this-function-returns-the-minimum-and-maximum-of-an-array">
+      <div class="row" id="the-constructor-creates-a-fresh-count-variable-per-call">
         <div class="docs">
-          <p><a href="#this-function-returns-the-minimum-and-maximum-of-an-array">This function returns the minimum and maximum of an array.</a></p>
+          <p><a href="#the-constructor-creates-a-fresh-count-variable-per-call">The constructor creates a fresh <code>count</code> variable per call.
+All returned functions close over the same <code>count</code>.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">minmax := func(arr) {
-    mn := arr[0]
-    mx := arr[0]
-    for _, v in arr {
-        if v &lt; mn { mn = v }
-        if v &gt; mx { mx = v }
+            <pre><code class="language-go">new_counter := func(start) {
+    count := start
+    return {
+        inc:   func() { count&#43;&#43; },
+        dec:   func() { count-- },
+        value: func() { return count },
+        reset: func() { count = start },
     }
-    return mn, mx
-}</code></pre>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="row" id="both-return-values-are-captured-in-one-assignment">
-        <div class="docs">
-          <p><a href="#both-return-values-are-captured-in-one-assignment">Both return values are captured in one assignment.</a></p>
-        </div>
-        <div class="code leading">
-          
-          <div class="code-block">
-            <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(&#34;min:&#34;, lo)
-fmt.println(&#34;max:&#34;, hi)</code></pre>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="row" id="a-common-pattern-is-returning-a-result-and-an-error">
-        <div class="docs">
-          <p><a href="#a-common-pattern-is-returning-a-result-and-an-error">A common pattern is returning a result and an error.
-Use <code>_</code> to discard a value you don&#39;t need.</a></p>
-        </div>
-        <div class="code leading">
-          
-          <div class="code-block">
-            <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">divide := func(a, b) {
-    if b == 0 {
-        return 0, error(&#34;division by zero&#34;)
-    }
-    return a / b, undefined
 }
 
-result, err := divide(10, 3)
-fmt.println(&#34;result:&#34;, result)
+c := new_counter(0)
+c.inc()
+c.inc()
+c.inc()
+fmt.println(c.value())
 
-_, err = divide(5, 0)
-fmt.println(&#34;is_error:&#34;, is_error(err))</code></pre>
+c.dec()
+fmt.println(c.value())
+
+c.reset()
+fmt.println(c.value())</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="each-instance-has-independent-state">
+        <div class="docs">
+          <p><a href="#each-instance-has-independent-state">Each instance has independent state.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">a := new_counter(10)
+b := new_counter(20)
+a.inc()
+b.inc()
+b.inc()
+fmt.printf(&#34;%d %d\n&#34;, a.value(), b.value())</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="maps-can-also-carry-plain-data-alongside-functions">
+        <div class="docs">
+          <p><a href="#maps-can-also-carry-plain-data-alongside-functions">Maps can also carry plain data alongside functions.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">new_point := func(x, y) {
+    return {
+        x: x,
+        y: y,
+        string: func() {
+            return fmt.sprintf(&#34;(%d, %d)&#34;, x, y)
+        },
+    }
+}
+
+p := new_point(3, 4)
+fmt.println(p.string())
+fmt.printf(&#34;%d %d\n&#34;, p.x, p.y)</code></pre>
           </div>
           
         </div>
@@ -104,10 +120,12 @@ fmt.println(&#34;is_error:&#34;, is_error(err))</code></pre>
       <div class="row">
         <div class="docs"></div>
         <div class="code">
-          <pre class="static-output">min: 1
-max: 9
-result: 3
-is_error: true</pre>
+          <pre class="static-output">3
+2
+0
+11 22
+(3, 4)
+3 4</pre>
         </div>
       </div>
       
@@ -129,59 +147,91 @@ is_error: true</pre>
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 
-minmax := func(arr) {
-    mn := arr[0]
-    mx := arr[0]
-    for _, v in arr {
-        if v &lt; mn { mn = v }
-        if v &gt; mx { mx = v }
+new_counter := func(start) {
+    count := start
+    return {
+        inc:   func() { count&#43;&#43; },
+        dec:   func() { count-- },
+        value: func() { return count },
+        reset: func() { count = start },
     }
-    return mn, mx
 }
 
-lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(&#34;min:&#34;, lo)
-fmt.println(&#34;max:&#34;, hi)
+c := new_counter(0)
+c.inc()
+c.inc()
+c.inc()
+fmt.println(c.value())
 
-divide := func(a, b) {
-    if b == 0 {
-        return 0, error(&#34;division by zero&#34;)
+c.dec()
+fmt.println(c.value())
+
+c.reset()
+fmt.println(c.value())
+
+a := new_counter(10)
+b := new_counter(20)
+a.inc()
+b.inc()
+b.inc()
+fmt.printf(&#34;%d %d\n&#34;, a.value(), b.value())
+
+new_point := func(x, y) {
+    return {
+        x: x,
+        y: y,
+        string: func() {
+            return fmt.sprintf(&#34;(%d, %d)&#34;, x, y)
+        },
     }
-    return a / b, undefined
 }
 
-result, err := divide(10, 3)
-fmt.println(&#34;result:&#34;, result)
+p := new_point(3, 4)
+fmt.println(p.string())
+fmt.printf(&#34;%d %d\n&#34;, p.x, p.y)">fmt := import(&#34;fmt&#34;)
 
-_, err = divide(5, 0)
-fmt.println(&#34;is_error:&#34;, is_error(err))">fmt := import(&#34;fmt&#34;)
-
-minmax := func(arr) {
-    mn := arr[0]
-    mx := arr[0]
-    for _, v in arr {
-        if v &lt; mn { mn = v }
-        if v &gt; mx { mx = v }
+new_counter := func(start) {
+    count := start
+    return {
+        inc:   func() { count&#43;&#43; },
+        dec:   func() { count-- },
+        value: func() { return count },
+        reset: func() { count = start },
     }
-    return mn, mx
 }
 
-lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(&#34;min:&#34;, lo)
-fmt.println(&#34;max:&#34;, hi)
+c := new_counter(0)
+c.inc()
+c.inc()
+c.inc()
+fmt.println(c.value())
 
-divide := func(a, b) {
-    if b == 0 {
-        return 0, error(&#34;division by zero&#34;)
+c.dec()
+fmt.println(c.value())
+
+c.reset()
+fmt.println(c.value())
+
+a := new_counter(10)
+b := new_counter(20)
+a.inc()
+b.inc()
+b.inc()
+fmt.printf(&#34;%d %d\n&#34;, a.value(), b.value())
+
+new_point := func(x, y) {
+    return {
+        x: x,
+        y: y,
+        string: func() {
+            return fmt.sprintf(&#34;(%d, %d)&#34;, x, y)
+        },
     }
-    return a / b, undefined
 }
 
-result, err := divide(10, 3)
-fmt.println(&#34;result:&#34;, result)
-
-_, err = divide(5, 0)
-fmt.println(&#34;is_error:&#34;, is_error(err))</textarea>
+p := new_point(3, 4)
+fmt.println(p.string())
+fmt.printf(&#34;%d %d\n&#34;, p.x, p.y)</textarea>
           </div>
         </div>
       </div>
@@ -189,10 +239,10 @@ fmt.println(&#34;is_error:&#34;, is_error(err))</textarea>
 
     <div class="nav-links">
       
-        <a href="type-conversions.html" rel="prev">← Type Conversions</a>
+        <a href="coroutines.html" rel="prev">← Coroutines</a>
       
       
-        <a href="recursion.html" rel="next">Recursion →</a>
+        <a href="command-line-arguments.html" rel="next">Command-Line Arguments →</a>
       
     </div>
 

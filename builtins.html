@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Built-in Functions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="builtins">
+    <h2>Built-in Functions</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Tengo provides built-in functions that are always available without importing a module. Many come in mutating and non-mutating pairs.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="len-works-on-strings-arrays-maps-and-bytes">
+        <div class="docs">
+          <p><a href="#len-works-on-strings-arrays-maps-and-bytes"><code>len</code> works on strings, arrays, maps, and bytes.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(len(&#34;hello&#34;))
+fmt.println(len([1, 2, 3]))
+fmt.println(len({a: 1, b: 2}))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="rangestart-stop-produces-an-integer-array-optional-third-arg-is-step">
+        <div class="docs">
+          <p><a href="#rangestart-stop-produces-an-integer-array-optional-third-arg-is-step"><code>range(start, stop)</code> produces an integer array. Optional third arg is step.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(range(0, 5))
+fmt.println(range(0, 10, 2))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="assoc-and-dissoc-return-modified-copies-of-a-map-non-mutating">
+        <div class="docs">
+          <p><a href="#assoc-and-dissoc-return-modified-copies-of-a-map-non-mutating"><code>assoc</code> and <code>dissoc</code> return modified copies of a map (non-mutating).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">m := {name: &#34;Tengo&#34;, version: 3}
+m2 := assoc(m, &#34;stable&#34;, true)
+fmt.println(m2)
+m3 := dissoc(m, &#34;version&#34;)
+fmt.println(m3)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="delete-removes-a-key-from-a-map-in-place-mutating">
+        <div class="docs">
+          <p><a href="#delete-removes-a-key-from-a-map-in-place-mutating"><code>delete</code> removes a key from a map in place (mutating).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">counts := {a: 1, b: 2, c: 3}
+delete(counts, &#34;b&#34;)
+fmt.println(counts)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="insert-and-remove-return-modified-copies-of-an-array-non-mutating">
+        <div class="docs">
+          <p><a href="#insert-and-remove-return-modified-copies-of-an-array-non-mutating"><code>insert</code> and <code>remove</code> return modified copies of an array (non-mutating).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">arr := [1, 2, 3, 4]
+arr2 := insert(arr, 2, 99)
+fmt.println(arr2)
+arr3 := remove(arr, 0)
+fmt.println(arr3)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="splice-modifies-an-array-in-place-and-returns-the-removed-elements">
+        <div class="docs">
+          <p><a href="#splice-modifies-an-array-in-place-and-returns-the-removed-elements"><code>splice</code> modifies an array in place and returns the removed elements.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">nums := [10, 20, 30, 40, 50]
+removed := splice(nums, 1, 2)
+fmt.println(nums)
+fmt.println(removed)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="format-is-a-built-in-sprintf-no-import-needed">
+        <div class="docs">
+          <p><a href="#format-is-a-built-in-sprintf-no-import-needed"><code>format</code> is a built-in sprintf — no import needed.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(format(&#34;%-8s %d&#34;, &#34;score:&#34;, 42))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="type-check-predicates-work-on-any-value">
+        <div class="docs">
+          <p><a href="#type-check-predicates-work-on-any-value">Type-check predicates work on any value.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(is_int(42))
+fmt.println(is_string(&#34;hi&#34;))
+fmt.println(is_callable(func() {}))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">5
+3
+2
+[0, 1, 2, 3, 4]
+[0, 2, 4, 6, 8]
+{version: 3, name: &#34;Tengo&#34;, stable: true}
+{name: &#34;Tengo&#34;}
+{a: 1, c: 3}
+[1, 2, 99, 3, 4]
+[2, 3, 4]
+[10, 40, 50]
+[20, 30]
+score:   42
+true
+true
+true</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+
+fmt.println(len(&#34;hello&#34;))
+fmt.println(len([1, 2, 3]))
+fmt.println(len({a: 1, b: 2}))
+
+fmt.println(range(0, 5))
+fmt.println(range(0, 10, 2))
+
+m := {name: &#34;Tengo&#34;, version: 3}
+m2 := assoc(m, &#34;stable&#34;, true)
+fmt.println(m2)
+m3 := dissoc(m, &#34;version&#34;)
+fmt.println(m3)
+
+counts := {a: 1, b: 2, c: 3}
+delete(counts, &#34;b&#34;)
+fmt.println(counts)
+
+arr := [1, 2, 3, 4]
+arr2 := insert(arr, 2, 99)
+fmt.println(arr2)
+arr3 := remove(arr, 0)
+fmt.println(arr3)
+
+nums := [10, 20, 30, 40, 50]
+removed := splice(nums, 1, 2)
+fmt.println(nums)
+fmt.println(removed)
+
+fmt.println(format(&#34;%-8s %d&#34;, &#34;score:&#34;, 42))
+
+fmt.println(is_int(42))
+fmt.println(is_string(&#34;hi&#34;))
+fmt.println(is_callable(func() {}))">fmt := import(&#34;fmt&#34;)
+
+fmt.println(len(&#34;hello&#34;))
+fmt.println(len([1, 2, 3]))
+fmt.println(len({a: 1, b: 2}))
+
+fmt.println(range(0, 5))
+fmt.println(range(0, 10, 2))
+
+m := {name: &#34;Tengo&#34;, version: 3}
+m2 := assoc(m, &#34;stable&#34;, true)
+fmt.println(m2)
+m3 := dissoc(m, &#34;version&#34;)
+fmt.println(m3)
+
+counts := {a: 1, b: 2, c: 3}
+delete(counts, &#34;b&#34;)
+fmt.println(counts)
+
+arr := [1, 2, 3, 4]
+arr2 := insert(arr, 2, 99)
+fmt.println(arr2)
+arr3 := remove(arr, 0)
+fmt.println(arr3)
+
+nums := [10, 20, 30, 40, 50]
+removed := splice(nums, 1, 2)
+fmt.println(nums)
+fmt.println(removed)
+
+fmt.println(format(&#34;%-8s %d&#34;, &#34;score:&#34;, 42))
+
+fmt.println(is_int(42))
+fmt.println(is_string(&#34;hi&#34;))
+fmt.println(is_callable(func() {}))</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="type-checking.html" rel="prev">← Type Checking</a>
+      
+      
+        <a href="arrays.html" rel="next">Arrays →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

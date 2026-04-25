@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Higher-Order Functions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="higher-order-functions">
+    <h2>Higher-Order Functions</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Functions are first-class values in Tengo. You can pass them as arguments, return them from other functions, and store them in maps or arrays — enabling map, filter, and reduce patterns without a stdlib.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="mapfn-applies-a-function-to-every-element-and-returns-a-new-array">
+        <div class="docs">
+          <p><a href="#mapfn-applies-a-function-to-every-element-and-returns-a-new-array"><code>map_fn</code> applies a function to every element and returns a new array.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">map_fn := func(arr, f) {
+    result := []
+    for _, v in arr {
+        result = append(result, f(v))
+    }
+    return result
+}
+
+doubled := map_fn([1, 2, 3, 4], func(x) { return x * 2 })
+fmt.println(doubled)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="filterfn-keeps-only-elements-where-the-predicate-returns-true">
+        <div class="docs">
+          <p><a href="#filterfn-keeps-only-elements-where-the-predicate-returns-true"><code>filter_fn</code> keeps only elements where the predicate returns true.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">filter_fn := func(arr, pred) {
+    result := []
+    for _, v in arr {
+        if pred(v) {
+            result = append(result, v)
+        }
+    }
+    return result
+}
+
+evens := filter_fn([1, 2, 3, 4, 5, 6], func(x) { return x % 2 == 0 })
+fmt.println(evens)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="reducefn-folds-an-array-into-a-single-value">
+        <div class="docs">
+          <p><a href="#reducefn-folds-an-array-into-a-single-value"><code>reduce_fn</code> folds an array into a single value.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">reduce_fn := func(arr, initial, f) {
+    acc := initial
+    for _, v in arr {
+        acc = f(acc, v)
+    }
+    return acc
+}
+
+total := reduce_fn([1, 2, 3, 4, 5], 0, func(a, b) { return a &#43; b })
+fmt.println(total)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="functions-can-return-functions-useful-for-building-specialised-helpers">
+        <div class="docs">
+          <p><a href="#functions-can-return-functions-useful-for-building-specialised-helpers">Functions can return functions — useful for building specialised helpers.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">multiplier := func(factor) {
+    return func(x) { return x * factor }
+}
+
+triple := multiplier(3)
+fmt.println(triple(7))
+fmt.println(map_fn([1, 2, 3], multiplier(10)))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">[2, 4, 6, 8]
+[2, 4, 6]
+15
+21
+[10, 20, 30]</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+
+map_fn := func(arr, f) {
+    result := []
+    for _, v in arr {
+        result = append(result, f(v))
+    }
+    return result
+}
+
+doubled := map_fn([1, 2, 3, 4], func(x) { return x * 2 })
+fmt.println(doubled)
+
+filter_fn := func(arr, pred) {
+    result := []
+    for _, v in arr {
+        if pred(v) {
+            result = append(result, v)
+        }
+    }
+    return result
+}
+
+evens := filter_fn([1, 2, 3, 4, 5, 6], func(x) { return x % 2 == 0 })
+fmt.println(evens)
+
+reduce_fn := func(arr, initial, f) {
+    acc := initial
+    for _, v in arr {
+        acc = f(acc, v)
+    }
+    return acc
+}
+
+total := reduce_fn([1, 2, 3, 4, 5], 0, func(a, b) { return a &#43; b })
+fmt.println(total)
+
+multiplier := func(factor) {
+    return func(x) { return x * factor }
+}
+
+triple := multiplier(3)
+fmt.println(triple(7))
+fmt.println(map_fn([1, 2, 3], multiplier(10)))">fmt := import(&#34;fmt&#34;)
+
+map_fn := func(arr, f) {
+    result := []
+    for _, v in arr {
+        result = append(result, f(v))
+    }
+    return result
+}
+
+doubled := map_fn([1, 2, 3, 4], func(x) { return x * 2 })
+fmt.println(doubled)
+
+filter_fn := func(arr, pred) {
+    result := []
+    for _, v in arr {
+        if pred(v) {
+            result = append(result, v)
+        }
+    }
+    return result
+}
+
+evens := filter_fn([1, 2, 3, 4, 5, 6], func(x) { return x % 2 == 0 })
+fmt.println(evens)
+
+reduce_fn := func(arr, initial, f) {
+    acc := initial
+    for _, v in arr {
+        acc = f(acc, v)
+    }
+    return acc
+}
+
+total := reduce_fn([1, 2, 3, 4, 5], 0, func(a, b) { return a &#43; b })
+fmt.println(total)
+
+multiplier := func(factor) {
+    return func(x) { return x * factor }
+}
+
+triple := multiplier(3)
+fmt.println(triple(7))
+fmt.println(map_fn([1, 2, 3], multiplier(10)))</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="custom-errors.html" rel="prev">← Custom Errors</a>
+      
+      
+        <a href="math.html" rel="next">Math →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
