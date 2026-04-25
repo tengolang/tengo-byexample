@@ -1,0 +1,39 @@
+// # Modules
+//
+// Any `.tengo` file can be a module. Use `export` to expose a value —
+// typically a map of functions — that other scripts import by filename.
+//
+// A module file (`math_utils.tengo`) looks like this:
+//
+//   square := func(x) { return x * x }
+//   cube   := func(x) { return x * x * x }
+//
+//   export {
+//       square: square,
+//       cube:   cube,
+//   }
+//
+// The consuming script imports it by name (without the `.tengo` suffix):
+//
+//   math := import("math_utils")
+//   fmt.println(math.square(4))   // 16
+//   fmt.println(math.cube(3))     // 27
+//
+// Modules are evaluated once and their exported value is cached, so
+// shared state inside a module is shared across all importers.
+//
+// The playground runs a single file, so the example below demonstrates
+// the same pattern inline — replace the map literal with a real import
+// in a multi-file project.
+
+fmt := import("fmt")
+
+math_utils := {
+    square: func(x) { return x * x },
+    cube:   func(x) { return x * x * x },
+    abs:    func(x) { if x < 0 { return -x }; return x },
+}
+
+fmt.println(math_utils.square(4))
+fmt.println(math_utils.cube(3))
+fmt.println(math_utils.abs(-7))

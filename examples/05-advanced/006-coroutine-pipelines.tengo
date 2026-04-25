@@ -1,0 +1,62 @@
+// # Coroutine Pipelines
+//
+// Because coroutines implement the iterable protocol, they can be chained
+// into lazy pipelines — each stage consumes one coroutine and produces
+// another, with no intermediate arrays allocated.
+
+fmt := import("fmt")
+coro := import("coro")
+
+// `numbers(n)` yields integers 1 through n.
+numbers := func(n) {
+    return coro.new(func(yield) {
+        for i := 1; i <= n; i++ {
+            yield(i)
+        }
+    })
+}
+
+// `filter_c` keeps only values where `pred` returns true.
+filter_c := func(src, pred) {
+    return coro.new(func(yield) {
+        for _, v in src {
+            if pred(v) { yield(v) }
+        }
+    })
+}
+
+// `map_c` transforms every value with `f`.
+map_c := func(src, f) {
+    return coro.new(func(yield) {
+        for _, v in src { yield(f(v)) }
+    })
+}
+
+// `take` collects the first n values from a coroutine into an array.
+take := func(src, n) {
+    result := []
+    for _, v in src {
+        result = append(result, v)
+        if len(result) >= n { break }
+    }
+    return result
+}
+
+// Pipeline: squares of even numbers from 1..10.
+pipeline := map_c(
+    filter_c(numbers(10), func(x) { return x % 2 == 0 }),
+    func(x) { return x * x }
+)
+
+for _, v in pipeline {
+    fmt.println(v)
+}
+
+// Infinite source with early termination via `take`.
+naturals := coro.new(func(yield) {
+    i := 1
+    for { yield(i); i++ }
+})
+
+odds := filter_c(naturals, func(x) { return x % 2 != 0 })
+fmt.println(take(odds, 5))
