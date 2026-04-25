@@ -1,0 +1,30 @@
+// # Undefined
+//
+// `undefined` is Tengo's zero value — a distinct type returned by functions
+// that do not explicitly return, and by missing map lookups.
+
+fmt := import("fmt")
+
+// A function with no return statement returns `undefined`.
+nothing := func() {}
+result := nothing()
+fmt.println(is_undefined(result))
+
+// Accessing a missing map key also yields `undefined`.
+m := {name: "Tengo"}
+fmt.println(is_undefined(m["missing"]))
+fmt.println(is_undefined(m["name"]))
+
+// `type_name` confirms the type.
+fmt.println(type_name(result))
+
+// Guard against `undefined` before using a value.
+lookup := func(m, key) {
+    val := m[key]
+    if is_undefined(val) {
+        return "not found"
+    }
+    return val
+}
+fmt.println(lookup(m, "name"))
+fmt.println(lookup(m, "missing"))

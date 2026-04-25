@@ -1,0 +1,44 @@
+// # Type Checking
+//
+// `type_name` returns any value's type as a string. `is_error`,
+// `is_undefined`, and `is_callable` are dedicated predicates for the
+// three types that need special handling.
+
+fmt := import("fmt")
+
+// `type_name` works on any value.
+fmt.println(type_name(42))
+fmt.println(type_name(3.14))
+fmt.println(type_name("hello"))
+fmt.println(type_name(true))
+fmt.println(type_name(bytes("x")))
+fmt.println(type_name([1, 2]))
+fmt.println(type_name({a: 1}))
+
+// Functions are values; their type name is `compiled-function`.
+// Use `is_callable` rather than comparing the string directly.
+double := func(x) { return x * 2 }
+fmt.println(type_name(double))
+fmt.println(is_callable(double))
+fmt.println(is_callable(42))
+
+// Errors and `undefined` have dedicated predicates.
+fmt.println(is_error(error("oops")))
+fmt.println(is_undefined(func() {}()))
+
+// Switch on `type_name` to dispatch by type.
+describe := func(v) {
+    t := type_name(v)
+    if t == "int" || t == "float" {
+        return fmt.sprintf("number: %v", v)
+    } else if t == "string" {
+        return "string: " + v
+    } else if t == "array" {
+        return fmt.sprintf("array of %d", len(v))
+    }
+    return "other: " + t
+}
+fmt.println(describe(42))
+fmt.println(describe("hi"))
+fmt.println(describe([1, 2, 3]))
+fmt.println(describe(true))

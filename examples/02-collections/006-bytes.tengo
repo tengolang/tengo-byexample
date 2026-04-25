@@ -1,0 +1,41 @@
+// # Bytes
+//
+// `bytes` is a first-class type distinct from strings — an immutable
+// sequence of raw byte values. Use it for binary data, encoding, or
+// low-level string work.
+
+fmt := import("fmt")
+
+// `bytes(string)` converts a string to its UTF-8 byte representation.
+b := bytes("hello")
+fmt.println(len(b))
+fmt.println(type_name(b))
+
+// Individual bytes are integers (0–255).
+fmt.println(b[0])
+fmt.println(b[4])
+
+// `bytes(n)` allocates n zero bytes — useful as a fixed-size read buffer.
+buf := bytes(4)
+fmt.println(len(buf))
+fmt.println(buf[0])
+
+// Slicing produces a new `bytes` value.
+fmt.println(string(b[0:3]))
+fmt.println(string(b[3:]))
+
+// Iterate to inspect raw byte values.
+for i, v in bytes("ABC") {
+    fmt.printf("  [%d] = %d\n", i, v)
+}
+
+// `string` converts bytes back to a UTF-8 string.
+fmt.println(string(b))
+
+// To produce modified bytes, convert through strings.
+modified := string(b[0:1]) + "ELL" + string(b[4:])
+fmt.println(string(bytes(modified)))
+
+// Bytes support equality comparison.
+fmt.println(bytes("abc") == bytes("abc"))
+fmt.println(bytes("abc") == bytes("xyz"))
