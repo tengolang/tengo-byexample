@@ -21,9 +21,10 @@
         <div class="code empty"></div>
       </div>
       {{end}}
+
       {{if .Example.Files}}
-      {{/* Multi-file example: show each file as a labelled code block */}}
-      {{range .Example.Files}}
+      {{/* Multi-file: module files (non-main) as labelled blocks, then main sections */}}
+      {{range .Example.Files}}{{if ne .Name "main.tengo"}}
       <div class="row">
         <div class="docs"></div>
         <div class="code leading">
@@ -34,9 +35,25 @@
           </div>
         </div>
       </div>
+      {{end}}{{end}}
+      {{range .Example.Sections}}
+      <div class="row" {{if .ID}}id="{{.ID}}"{{end}}>
+        <div class="docs">
+          {{if .Doc}}<p>{{if .ID}}<a href="#{{.ID}}">{{.Doc}}</a>{{else}}{{.Doc}}{{end}}</p>{{end}}
+        </div>
+        <div class="code leading">
+          {{if .Code}}
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">{{.Code}}</code></pre>
+          </div>
+          {{end}}
+        </div>
+      </div>
       {{end}}
+
       {{else}}
-      {{/* Single-file example: interleaved doc/code sections */}}
+      {{/* Single-file: interleaved doc/code sections */}}
       {{range .Example.Sections}}
       <div class="row" {{if .ID}}id="{{.ID}}"{{end}}>
         <div class="docs">
@@ -53,6 +70,7 @@
       </div>
       {{end}}
       {{end}}
+
       {{if .Example.GoCode}}
       <div class="row">
         <div class="docs">
@@ -86,20 +104,15 @@
               <span id="wasm-status">loading…</span>
             </div>
             {{if .Example.Files}}
-            {{/* Multi-file playground: one hidden textarea per file, tab strip */}}
+            {{/* Multi-file playground: tab strip + one CodeMirror div + JSON data */}}
             <div class="file-tabs" id="file-tabs">
               {{range $i, $f := .Example.Files}}
               <div class="file-tab{{if eq $i 0}} active{{end}}"
                    data-tab="{{$i}}" onclick="switchTab(this)">{{$f.Name}}</div>
               {{end}}
             </div>
-            {{range $i, $f := .Example.Files}}
-            <textarea class="code-editor-tab" data-tab="{{$i}}"
-              data-name="{{$f.Name}}"
-              data-original="{{$f.Code}}"
-              spellcheck="false"
-              style="{{if ne $i 0}}display:none{{end}}">{{$f.Code}}</textarea>
-            {{end}}
+            <script type="application/json" id="tab-data">{{.Example.FilesJSON}}</script>
+            <div id="multi-editor"></div>
             {{else}}
             {{/* Single-file playground */}}
             <textarea id="code-editor" spellcheck="false"

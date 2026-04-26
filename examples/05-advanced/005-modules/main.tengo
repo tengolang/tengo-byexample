@@ -1,3 +1,10 @@
+// # Modules
+//
+// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
+// A `.tengo` file becomes a module by ending with an `export` statement.
+// Importing it runs the file once, caches the result, and returns the
+// exported value — usually a map of functions — to every importer.
+
 // `main.tengo` imports the module by name — no `.tengo` extension.
 // `import` returns whatever was exported, here a map of functions.
 fmt  := import("fmt")
@@ -9,12 +16,10 @@ fmt.printf("abs(-7)   = %d\n", math.abs(-7))
 
 // Any Tengo value can be exported — a map, a single function, a number.
 // Exporting a bare function makes the import directly callable:
-//   double := import("doubler")
-//   double(7)  // → 14
+// `double := import("doubler")` then `double(7)` returns `14`.
 
-// Built-in modules (fmt, math, text, json, …) follow the same protocol.
-// They are pre-compiled Go modules rather than source files, but the
-// import mechanism is identical.
+// Built-in modules (`fmt`, `math`, `text`, `json`, …) follow the same
+// protocol: pre-compiled Go modules imported identically to source files.
 stdlib := import("math")
 fmt.printf("pi      = %.4f\n", stdlib.pi)
 fmt.printf("sqrt(2) = %.4f\n", stdlib.sqrt(2.0))

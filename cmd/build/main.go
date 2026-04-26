@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"html/template"
 	"log"
 	"os"
@@ -27,6 +28,7 @@ type Example struct {
 	Output         string
 	GoCode         string
 	Files          []ExampleFile // non-empty for multi-file examples; main.tengo first
+	FilesJSON      template.JS   // JSON array of {name, code, original} for multi-file playground
 }
 
 type Section struct {
@@ -55,6 +57,7 @@ func main() {
 	if err := os.MkdirAll("docs", 0755); err != nil {
 		log.Fatal(err)
 	}
+	copyStatic("static", "docs")
 
 	var allExamples []Example
 	for _, g := range groups {
@@ -239,6 +242,21 @@ func loadMultiFileExample(dir string) (Example, error) {
 	// Use the directory path for slug/title derivation.
 	ex := parseExample(dir, mainSrc)
 	ex.Files = exFiles
+
+	// JSON-encode files for safe embedding in a <script> tag.
+	type jsonFile struct {
+		Name     string `json:"name"`
+		Code     string `json:"code"`
+		Original string `json:"original"`
+	}
+	var jf []jsonFile
+	for _, f := range exFiles {
+		jf = append(jf, jsonFile{Name: f.Name, Code: f.Code, Original: f.Code})
+	}
+	if b, err := json.Marshal(jf); err == nil {
+		// Replace </ with <\/ to prevent script tag injection.
+		ex.FilesJSON = template.JS(strings.ReplaceAll(string(b), "</", `<\/`))
+	}
 
 	mainStr := files["main"]
 	if !strings.Contains(mainStr, "// nooutput") {
@@ -500,6 +518,28 @@ func slugify(text string) string {
 		}
 	}
 	return strings.Trim(strings.ReplaceAll(res.String(), "--", "-"), "-")
+}
+
+func copyStatic(srcDir, dstDir string) {
+	entries, err := os.ReadDir(srcDir)
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, e := range entries {
+		if e.IsDir() {
+			continue
+		}
+		src := filepath.Join(srcDir, e.Name())
+		dst := filepath.Join(dstDir, e.Name())
+		data, err := os.ReadFile(src)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if err := os.WriteFile(dst, data, 0644); err != nil {
+			log.Fatal(err)
+		}
+		log.Printf("  → %s", dst)
+	}
 }
 
 func mustTemplate(path string) *template.Template {
