@@ -1,40 +1,49 @@
 // # Modules
 //
-// Any `.tengo` file can be a module. Use `export` to expose a value —
-// typically a map of functions — that other scripts import by filename.
+// A `.tengo` file becomes a module when it ends with an `export`
+// statement. The module runs top to bottom, then returns its exported
+// value to the caller — typically a map of functions. Modules are
+// evaluated once and the result is cached for all importers.
 // [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
-//
-// A module file (`math_utils.tengo`) looks like this:
-//
-//   square := func(x) { return x * x }
-//   cube   := func(x) { return x * x * x }
-//
-//   export {
-//       square: square,
-//       cube:   cube,
-//   }
-//
-// The consuming script imports it by name (without the `.tengo` suffix):
-//
-//   math := import("math_utils")
-//   fmt.println(math.square(4))   // 16
-//   fmt.println(math.cube(3))     // 27
-//
-// Modules are evaluated once and their exported value is cached, so
-// shared state inside a module is shared across all importers.
-//
-// The playground runs a single file, so the example below demonstrates
-// the same pattern inline — replace the map literal with a real import
-// in a multi-file project.
 
-fmt := import("fmt")
+// This is `math_utils.tengo` — a module file that bundles three
+// related helpers and exports them as a single map.
+square := func(x) { return x * x }
+cube   := func(x) { return x * x * x }
+abs    := func(x) { return x < 0 ? -x : x }
 
-math_utils := {
-    square: func(x) { return x * x },
-    cube:   func(x) { return x * x * x },
-    abs:    func(x) { if x < 0 { return -x }; return x },
+export {
+    square: square,
+    cube:   cube,
+    abs:    abs,
 }
 
-fmt.println(math_utils.square(4))
-fmt.println(math_utils.cube(3))
-fmt.println(math_utils.abs(-7))
+// In `main.tengo` the module is imported by name (no `.tengo`
+// extension needed). `import` returns the exported map.
+//
+//   fmt  := import("fmt")
+//   math := import("math_utils")
+//
+//   fmt.println(math.square(4))   // 16
+//   fmt.println(math.cube(3))     // 27
+//   fmt.println(math.abs(-5))     // 5
+
+// A module can export any single value. Exporting a bare function
+// makes the import expression directly callable:
+//
+//   export func(x) { return x * 2 }
+//
+//   double := import("doubler")
+//   fmt.println(double(7))        // 14
+
+// Tengo's built-in modules (fmt, math, text, json, …) are pre-compiled
+// modules that follow exactly the same import protocol. In the playground
+// below, `import` works with any built-in module — swap in `math_utils`
+// when running in a project with that file on disk.
+fmt  := import("fmt")
+math := import("math")
+
+fmt.printf("pi        = %.4f\n", math.pi)
+fmt.printf("sqrt(2)   = %.4f\n", math.sqrt(2.0))
+fmt.printf("square(5) = %d\n",   square(5))
+fmt.printf("cube(3)   = %d\n",   cube(3))
