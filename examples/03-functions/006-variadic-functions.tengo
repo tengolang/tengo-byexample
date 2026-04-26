@@ -1,0 +1,50 @@
+// # Variadic Functions
+//
+// A function's last parameter can collect any number of extra
+// arguments by prefixing it with `...`. Inside the function the
+// variadic parameter is a plain array. The spread operator `...`
+// on a call site expands an array into individual arguments.
+
+fmt := import("fmt")
+
+// All arguments are collected into `nums`.
+sum := func(...nums) {
+    total := 0
+    for _, v in nums { total += v }
+    return total
+}
+
+fmt.println(sum())           // 0  — variadic may be empty
+fmt.println(sum(1, 2, 3))    // 6
+fmt.println(sum(1, 2, 3, 4, 5)) // 15
+
+// Fixed parameters come first; the variadic collects the rest.
+tag := func(name, ...attrs) {
+    s := "<" + name
+    for _, a in attrs { s += " " + a }
+    return s + ">"
+}
+
+fmt.println(tag("br"))
+fmt.println(tag("input", `type="text"`, `required`))
+
+// Spread `...` on the call site expands an array into arguments.
+nums := [10, 20, 30]
+fmt.println(sum(nums...))     // 60
+fmt.println(sum(1, nums...))  // 61 — fixed arg followed by spread
+
+// Variadic closures behave the same way.
+logger := func(prefix) {
+    return func(...parts) {
+        msg := prefix + ": "
+        for i, p in parts {
+            if i > 0 { msg += " " }
+            msg += string(p)
+        }
+        fmt.println(msg)
+    }
+}
+
+warn := logger("WARN")
+warn("disk", "usage", "high")
+warn("retries:", 3)
