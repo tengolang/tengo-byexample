@@ -1,0 +1,61 @@
+// # Validation Rules
+//
+// Business rules change frequently. Encoding them in Tengo scripts
+// instead of compiled Go means rules can be updated and reloaded while
+// the host application keeps running.
+//
+// The Go host evaluates the script to obtain a `validate` function,
+// then calls it for each incoming record. Adding a new rule or tweaking
+// a threshold requires editing only this file — no recompile, no redeploy.
+
+fmt  := import("fmt")
+text := import("text")
+
+// Each rule is a map with a field name, a check function, and an error
+// message. Rules compose freely — add, remove, or reorder at will.
+rules := [
+    {
+        field:   "username",
+        check:   func(v) { return is_string(v) && len(v) >= 3 && len(v) <= 20 },
+        message: "must be 3–20 characters",
+    },
+    {
+        field:   "age",
+        check:   func(v) { return is_int(v) && v >= 13 && v <= 120 },
+        message: "must be an integer between 13 and 120",
+    },
+    {
+        field:   "email",
+        check:   func(v) { return is_string(v) && text.contains(v, "@") && len(v) > 5 },
+        message: "must contain @ and be at least 6 characters",
+    },
+    {
+        field:   "score",
+        check:   func(v) { return is_float(v) && v >= 0.0 && v <= 1.0 },
+        message: "must be a float between 0.0 and 1.0",
+    },
+]
+
+validate := func(record) {
+    errs := []
+    for _, rule in rules {
+        val := record[rule.field]
+        if is_undefined(val) || !rule.check(val) {
+            errs = append(errs, {field: rule.field, msg: rule.message})
+        }
+    }
+    return errs
+}
+
+// A valid record.
+good := {username: "alice", age: 30, email: "alice@example.com", score: 0.95}
+errs := validate(good)
+fmt.printf("valid record errors: %d\n", len(errs))
+
+// An invalid record — multiple violations.
+bad := {username: "x", age: 10, email: "notanemail", score: 1.5}
+errs = validate(bad)
+fmt.printf("invalid record errors: %d\n", len(errs))
+for _, e in errs {
+    fmt.printf("  %-12s %s\n", e.field+":", e.msg)
+}

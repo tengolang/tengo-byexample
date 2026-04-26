@@ -1,0 +1,56 @@
+// # Dynamic Configuration
+//
+// Static config files (JSON, YAML) can only hold data. A Tengo config
+// file can compute values, branch on environment, and derive one setting
+// from another — all without recompiling the host application.
+//
+// The Go host runs the script once at startup (or on each reload) and
+// reads the exported map. Changing the config file takes effect on the
+// next reload with zero code changes in Go.
+
+fmt := import("fmt")
+os  := import("os")
+
+// Read the deployment environment (falls back to "development").
+env := os.getenv("APP_ENV")
+if env == "" { env = "development" }
+
+// Base configuration — sensible defaults for local development.
+config := {
+    env:          env,
+    debug:        true,
+    log_level:    "debug",
+    db_host:      "localhost",
+    db_port:      5432,
+    db_pool:      3,
+    cache_ttl:    60,
+    rate_limit:   50,
+    feature_dark_mode: false,
+}
+
+// Production overrides — tighter, faster, quieter.
+if env == "production" {
+    config.debug      = false
+    config.log_level  = "warn"
+    config.db_host    = "db.prod.internal"
+    config.db_pool    = 20
+    config.cache_ttl  = 3600
+    config.rate_limit = 2000
+    config.feature_dark_mode = true
+} else if env == "staging" {
+    config.log_level  = "info"
+    config.db_host    = "db.staging.internal"
+    config.db_pool    = 8
+    config.cache_ttl  = 300
+}
+
+// Derived values — computed once from the resolved base config.
+config.db_url   = fmt.sprintf("postgres://%s:%d/app", config.db_host, config.db_port)
+config.workers  = config.db_pool * 2
+
+// Pretty-print the resolved config.
+keys := ["env", "debug", "log_level", "db_url", "workers",
+         "cache_ttl", "rate_limit", "feature_dark_mode"]
+for _, k in keys {
+    fmt.printf("%-20s %v\n", k, config[k])
+}

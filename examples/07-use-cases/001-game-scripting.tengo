@@ -1,0 +1,85 @@
+// # Game Scripting
+//
+// Tengo is well suited for NPC behaviour, ability definitions, and quest
+// logic in a game engine. The Go host loads and evaluates the script each
+// tick, providing game state through a custom `game` module. Scripts can
+// be hot-reloaded and modders can write them without touching Go.
+//
+// In a real integration the host supplies a `game` module. Here we
+// simulate the game state directly to show the scripting patterns.
+
+fmt := import("fmt")
+
+// Simulated host data — in a real engine these come from the Go host.
+player := {health: 45, position: {x: 20, y: 15}, weapon: "sword"}
+npc    := {
+    name:         "Guard",
+    health:       80,
+    position:     {x: 10, y: 10},
+    state:        "idle",
+    alert_range:  8,
+    attack_range: 2,
+}
+
+// Squared-distance comparison avoids a square root.
+within := func(a, b, r) {
+    dx := a.x - b.x
+    dy := a.y - b.y
+    return dx*dx + dy*dy <= r*r
+}
+
+// The NPC behaviour script: pure function, returns an action for the
+// host to execute and advances the NPC state machine.
+tick := func(npc, player) {
+    if npc.state == "idle" {
+        if within(player.position, npc.position, npc.alert_range) {
+            npc.state = "alerted"
+            return {action: "say", text: "Halt! Who goes there?"}
+        }
+        return {action: "patrol"}
+    }
+
+    if npc.state == "alerted" {
+        if within(player.position, npc.position, npc.attack_range) {
+            npc.state = "fighting"
+        } else {
+            return {action: "move_towards", target: player.position}
+        }
+    }
+
+    if npc.state == "fighting" {
+        if npc.health < 20 {
+            npc.state = "fleeing"
+            return {action: "say", text: "Mercy!"}
+        }
+        dmg := 12
+        if player.weapon != "" { dmg = 8 }
+        return {action: "attack", damage: dmg}
+    }
+
+    if npc.state == "fleeing" {
+        return {action: "run"}
+    }
+
+    return {action: "idle"}
+}
+
+// Simulate the player approaching over three ticks.
+positions := [
+    {x: 20, y: 15},
+    {x: 14, y: 12},
+    {x: 10, y: 10},
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    fmt.printf("%-10s → %s", npc.state, result["action"])
+    if !is_undefined(result["text"]) {
+        fmt.printf(": %q", result["text"])
+    }
+    if !is_undefined(result["damage"]) {
+        fmt.printf(" (dmg %d)", result["damage"])
+    }
+    fmt.println("")
+}
