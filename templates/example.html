@@ -36,6 +36,19 @@
         </div>
       </div>
       {{end}}
+      {{if .Example.GoCode}}
+      <div class="row">
+        <div class="docs">
+          <p class="go-host-label">Go host</p>
+        </div>
+        <div class="code leading">
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">{{.Example.GoCode}}</code></pre>
+          </div>
+        </div>
+      </div>
+      {{end}}
       {{if .Example.Output}}
       <div class="row">
         <div class="docs"></div>

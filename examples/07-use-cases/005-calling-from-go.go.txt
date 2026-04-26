@@ -1,0 +1,55 @@
+package main
+
+import (
+	"fmt"
+	"log"
+
+	tengo "github.com/tengolang/tengo/v3"
+)
+
+const script = `
+add := func(a, b) { return a + b }
+
+clamp := func(v, lo, hi) {
+    if v < lo { return lo }
+    if v > hi { return hi }
+    return v
+}
+
+greet := func(name, lang) {
+    phrases := {en: "Hello", sv: "Hej", es: "Hola", fr: "Bonjour"}
+    p := phrases[lang]
+    if is_undefined(p) { p = "Hello" }
+    return p + ", " + name + "!"
+}
+
+score_band := func(score) {
+    if score >= 90 { return {grade: "A", pass: true} }
+    if score >= 75 { return {grade: "B", pass: true} }
+    if score >= 60 { return {grade: "C", pass: true} }
+    return {grade: "F", pass: false}
+}
+`
+
+func main() {
+	compiled, err := tengo.NewScript([]byte(script)).Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	res, _ := compiled.Call("add", 3, 4)
+	fmt.Println(res.Int()) // 7
+
+	res, _ = compiled.Call("clamp", 150, 0, 100)
+	fmt.Println(res.Int()) // 100
+
+	res, _ = compiled.Call("greet", "Alice", "sv")
+	fmt.Println(res.String()) // Hej, Alice!
+
+	// CanCall guards against user scripts that omit a function.
+	if compiled.CanCall("score_band") {
+		res, _ = compiled.Call("score_band", 82)
+		m := res.Map()
+		fmt.Printf("%s (pass=%v)\n", m["grade"], m["pass"]) // B (pass=true)
+	}
+}

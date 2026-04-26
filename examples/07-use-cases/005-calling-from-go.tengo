@@ -1,0 +1,42 @@
+// # Calling Functions from Go
+//
+// After compiling a script, the Go host can call any named function
+// with `compiled.Call`. Arguments are converted from Go types
+// automatically; return values come back as `*tengo.Variable` with
+// typed accessors: `.Int()`, `.String()`, `.Float()`, `.Bool()`,
+// and `.Map()`. `compiled.CanCall(name)` checks that a name is
+// defined and callable before dispatching.
+
+fmt := import("fmt")
+
+// Functions at script scope are directly callable from Go by name.
+// No export keyword or registration needed.
+add := func(a, b) { return a + b }
+
+clamp := func(v, lo, hi) {
+    if v < lo { return lo }
+    if v > hi { return hi }
+    return v
+}
+
+greet := func(name, lang) {
+    phrases := {en: "Hello", sv: "Hej", es: "Hola", fr: "Bonjour"}
+    p := phrases[lang]
+    if is_undefined(p) { p = "Hello" }
+    return p + ", " + name + "!"
+}
+
+// score_band returns a map; on the Go side read it with .Map().
+score_band := func(score) {
+    if score >= 90 { return {grade: "A", pass: true} }
+    if score >= 75 { return {grade: "B", pass: true} }
+    if score >= 60 { return {grade: "C", pass: true} }
+    return {grade: "F", pass: false}
+}
+
+// Standalone demo — same calls the Go host makes; produces identical output.
+fmt.println(add(3, 4))
+fmt.println(clamp(150, 0, 100))
+fmt.println(greet("Alice", "sv"))
+band := score_band(82)
+fmt.printf("%s (pass=%v)\n", band.grade, band.pass)

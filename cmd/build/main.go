@@ -20,6 +20,7 @@ type Example struct {
 	FullCode       string
 	PlaygroundCode string
 	Output         string
+	GoCode         string
 }
 
 type Section struct {
@@ -144,6 +145,10 @@ func loadExamplesFromDir(dir string) ([]Example, error) {
 		if !strings.Contains(string(src), "// nooutput") {
 			out, _ := tengorunner.Run(string(src))
 			ex.Output = strings.TrimRight(out, "\n")
+		}
+		goFile := strings.TrimSuffix(f, ".tengo") + ".go.txt"
+		if goSrc, err := os.ReadFile(goFile); err == nil {
+			ex.GoCode = strings.TrimSpace(string(goSrc))
 		}
 		examples = append(examples, ex)
 	}
