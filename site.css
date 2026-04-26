@@ -290,6 +290,18 @@ pre, code {
   letter-spacing: 0.1em;
   color: var(--text-muted);
 }
+.go-host-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: #00acd7;
+  border-radius: 3px;
+  padding: 2px 7px;
+  display: inline-block;
+  margin: 0;
+  letter-spacing: 0.04em;
+}
 
 .editor-wrap {
   border: 1px solid var(--border-color);

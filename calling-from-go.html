@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Calling Functions from Go</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="calling-from-go">
+    <h2>Calling Functions from Go</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>After compiling a script, the Go host can call any named function with <code>compiled.Call</code>. Arguments are converted from Go types automatically; return values come back as <code>*tengo.Variable</code> with typed accessors: <code>.Int()</code>, <code>.String()</code>, <code>.Float()</code>, <code>.Bool()</code>, and <code>.Map()</code>. <code>compiled.CanCall(name)</code> checks that a name is defined and callable before dispatching.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="functions-at-script-scope-are-directly-callable-from-go-by-name">
+        <div class="docs">
+          <p><a href="#functions-at-script-scope-are-directly-callable-from-go-by-name">Functions at script scope are directly callable from Go by name.
+No export keyword or registration needed.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">add := func(a, b) { return a &#43; b }
+
+clamp := func(v, lo, hi) {
+    if v &lt; lo { return lo }
+    if v &gt; hi { return hi }
+    return v
+}
+
+greet := func(name, lang) {
+    phrases := {en: &#34;Hello&#34;, sv: &#34;Hej&#34;, es: &#34;Hola&#34;, fr: &#34;Bonjour&#34;}
+    p := phrases[lang]
+    if is_undefined(p) { p = &#34;Hello&#34; }
+    return p &#43; &#34;, &#34; &#43; name &#43; &#34;!&#34;
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="scoreband-returns-a-map-on-the-go-side-read-it-with-map">
+        <div class="docs">
+          <p><a href="#scoreband-returns-a-map-on-the-go-side-read-it-with-map">score_band returns a map; on the Go side read it with .Map().</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">score_band := func(score) {
+    if score &gt;= 90 { return {grade: &#34;A&#34;, pass: true} }
+    if score &gt;= 75 { return {grade: &#34;B&#34;, pass: true} }
+    if score &gt;= 60 { return {grade: &#34;C&#34;, pass: true} }
+    return {grade: &#34;F&#34;, pass: false}
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="standalone-demo-same-calls-the-go-host-makes-produces-identical-output">
+        <div class="docs">
+          <p><a href="#standalone-demo-same-calls-the-go-host-makes-produces-identical-output">Standalone demo — same calls the Go host makes; produces identical output.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(add(3, 4))
+fmt.println(clamp(150, 0, 100))
+fmt.println(greet(&#34;Alice&#34;, &#34;sv&#34;))
+band := score_band(82)
+fmt.printf(&#34;%s (pass=%v)\n&#34;, band.grade, band.pass)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs">
+          <p class="go-host-label">Go host</p>
+        </div>
+        <div class="code leading">
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">package main
+
+import (
+	&#34;fmt&#34;
+	&#34;log&#34;
+
+	tengo &#34;github.com/tengolang/tengo/v3&#34;
+)
+
+const script = `
+add := func(a, b) { return a &#43; b }
+
+clamp := func(v, lo, hi) {
+    if v &lt; lo { return lo }
+    if v &gt; hi { return hi }
+    return v
+}
+
+greet := func(name, lang) {
+    phrases := {en: &#34;Hello&#34;, sv: &#34;Hej&#34;, es: &#34;Hola&#34;, fr: &#34;Bonjour&#34;}
+    p := phrases[lang]
+    if is_undefined(p) { p = &#34;Hello&#34; }
+    return p &#43; &#34;, &#34; &#43; name &#43; &#34;!&#34;
+}
+
+score_band := func(score) {
+    if score &gt;= 90 { return {grade: &#34;A&#34;, pass: true} }
+    if score &gt;= 75 { return {grade: &#34;B&#34;, pass: true} }
+    if score &gt;= 60 { return {grade: &#34;C&#34;, pass: true} }
+    return {grade: &#34;F&#34;, pass: false}
+}
+`
+
+func main() {
+	compiled, err := tengo.NewScript([]byte(script)).Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	res, _ := compiled.Call(&#34;add&#34;, 3, 4)
+	fmt.Println(res.Int()) // 7
+
+	res, _ = compiled.Call(&#34;clamp&#34;, 150, 0, 100)
+	fmt.Println(res.Int()) // 100
+
+	res, _ = compiled.Call(&#34;greet&#34;, &#34;Alice&#34;, &#34;sv&#34;)
+	fmt.Println(res.String()) // Hej, Alice!
+
+	// CanCall guards against user scripts that omit a function.
+	if compiled.CanCall(&#34;score_band&#34;) {
+		res, _ = compiled.Call(&#34;score_band&#34;, 82)
+		m := res.Map()
+		fmt.Printf(&#34;%s (pass=%v)\n&#34;, m[&#34;grade&#34;], m[&#34;pass&#34;]) // B (pass=true)
+	}
+}</code></pre>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">7
+100
+Hej, Alice!
+B (pass=true)</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+
+add := func(a, b) { return a &#43; b }
+
+clamp := func(v, lo, hi) {
+    if v &lt; lo { return lo }
+    if v &gt; hi { return hi }
+    return v
+}
+
+greet := func(name, lang) {
+    phrases := {en: &#34;Hello&#34;, sv: &#34;Hej&#34;, es: &#34;Hola&#34;, fr: &#34;Bonjour&#34;}
+    p := phrases[lang]
+    if is_undefined(p) { p = &#34;Hello&#34; }
+    return p &#43; &#34;, &#34; &#43; name &#43; &#34;!&#34;
+}
+
+score_band := func(score) {
+    if score &gt;= 90 { return {grade: &#34;A&#34;, pass: true} }
+    if score &gt;= 75 { return {grade: &#34;B&#34;, pass: true} }
+    if score &gt;= 60 { return {grade: &#34;C&#34;, pass: true} }
+    return {grade: &#34;F&#34;, pass: false}
+}
+
+fmt.println(add(3, 4))
+fmt.println(clamp(150, 0, 100))
+fmt.println(greet(&#34;Alice&#34;, &#34;sv&#34;))
+band := score_band(82)
+fmt.printf(&#34;%s (pass=%v)\n&#34;, band.grade, band.pass)">fmt := import(&#34;fmt&#34;)
+
+add := func(a, b) { return a &#43; b }
+
+clamp := func(v, lo, hi) {
+    if v &lt; lo { return lo }
+    if v &gt; hi { return hi }
+    return v
+}
+
+greet := func(name, lang) {
+    phrases := {en: &#34;Hello&#34;, sv: &#34;Hej&#34;, es: &#34;Hola&#34;, fr: &#34;Bonjour&#34;}
+    p := phrases[lang]
+    if is_undefined(p) { p = &#34;Hello&#34; }
+    return p &#43; &#34;, &#34; &#43; name &#43; &#34;!&#34;
+}
+
+score_band := func(score) {
+    if score &gt;= 90 { return {grade: &#34;A&#34;, pass: true} }
+    if score &gt;= 75 { return {grade: &#34;B&#34;, pass: true} }
+    if score &gt;= 60 { return {grade: &#34;C&#34;, pass: true} }
+    return {grade: &#34;F&#34;, pass: false}
+}
+
+fmt.println(add(3, 4))
+fmt.println(clamp(150, 0, 100))
+fmt.println(greet(&#34;Alice&#34;, &#34;sv&#34;))
+band := score_band(82)
+fmt.printf(&#34;%s (pass=%v)\n&#34;, band.grade, band.pass)</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="plugin-system.html" rel="prev">← Plugin System</a>
+      
+      
+        <span></span>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
