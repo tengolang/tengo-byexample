@@ -657,6 +657,46 @@ triple := multiplier(3)
 fmt.println(triple(7))
 fmt.println(map_fn([1, 2, 3], multiplier(10)))">Higher-Order Functions</option>
             
+            <option value="variadic-functions" data-code="fmt := import(&#34;fmt&#34;)
+
+sum := func(...nums) {
+    total := 0
+    for _, v in nums { total &#43;= v }
+    return total
+}
+
+fmt.println(sum())           // 0  — variadic may be empty
+fmt.println(sum(1, 2, 3))    // 6
+fmt.println(sum(1, 2, 3, 4, 5)) // 15
+
+tag := func(name, ...attrs) {
+    s := &#34;&lt;&#34; &#43; name
+    for _, a in attrs { s &#43;= &#34; &#34; &#43; a }
+    return s &#43; &#34;&gt;&#34;
+}
+
+fmt.println(tag(&#34;br&#34;))
+fmt.println(tag(&#34;input&#34;, `type=&#34;text&#34;`, `required`))
+
+nums := [10, 20, 30]
+fmt.println(sum(nums...))     // 60
+fmt.println(sum(1, nums...))  // 61 — fixed arg followed by spread
+
+logger := func(prefix) {
+    return func(...parts) {
+        msg := prefix &#43; &#34;: &#34;
+        for i, p in parts {
+            if i &gt; 0 { msg &#43;= &#34; &#34; }
+            msg &#43;= string(p)
+        }
+        fmt.println(msg)
+    }
+}
+
+warn := logger(&#34;WARN&#34;)
+warn(&#34;disk&#34;, &#34;usage&#34;, &#34;high&#34;)
+warn(&#34;retries:&#34;, 3)">Variadic Functions</option>
+            
           </optgroup>
           
           <optgroup label="Standard Library">

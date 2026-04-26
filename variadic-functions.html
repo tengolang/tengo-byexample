@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Variadic Functions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="variadic-functions">
+    <h2>Variadic Functions</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>A function&#39;s last parameter can collect any number of extra arguments by prefixing it with <code>...</code>. Inside the function the variadic parameter is a plain array. The spread operator <code>...</code> on a call site expands an array into individual arguments.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="all-arguments-are-collected-into-nums">
+        <div class="docs">
+          <p><a href="#all-arguments-are-collected-into-nums">All arguments are collected into <code>nums</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">sum := func(...nums) {
+    total := 0
+    for _, v in nums { total &#43;= v }
+    return total
+}
+
+fmt.println(sum())           // 0  — variadic may be empty
+fmt.println(sum(1, 2, 3))    // 6
+fmt.println(sum(1, 2, 3, 4, 5)) // 15</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="fixed-parameters-come-first-the-variadic-collects-the-rest">
+        <div class="docs">
+          <p><a href="#fixed-parameters-come-first-the-variadic-collects-the-rest">Fixed parameters come first; the variadic collects the rest.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">tag := func(name, ...attrs) {
+    s := &#34;&lt;&#34; &#43; name
+    for _, a in attrs { s &#43;= &#34; &#34; &#43; a }
+    return s &#43; &#34;&gt;&#34;
+}
+
+fmt.println(tag(&#34;br&#34;))
+fmt.println(tag(&#34;input&#34;, `type=&#34;text&#34;`, `required`))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="spread-on-the-call-site-expands-an-array-into-arguments">
+        <div class="docs">
+          <p><a href="#spread-on-the-call-site-expands-an-array-into-arguments">Spread <code>...</code> on the call site expands an array into arguments.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">nums := [10, 20, 30]
+fmt.println(sum(nums...))     // 60
+fmt.println(sum(1, nums...))  // 61 — fixed arg followed by spread</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="variadic-closures-behave-the-same-way">
+        <div class="docs">
+          <p><a href="#variadic-closures-behave-the-same-way">Variadic closures behave the same way.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">logger := func(prefix) {
+    return func(...parts) {
+        msg := prefix &#43; &#34;: &#34;
+        for i, p in parts {
+            if i &gt; 0 { msg &#43;= &#34; &#34; }
+            msg &#43;= string(p)
+        }
+        fmt.println(msg)
+    }
+}
+
+warn := logger(&#34;WARN&#34;)
+warn(&#34;disk&#34;, &#34;usage&#34;, &#34;high&#34;)
+warn(&#34;retries:&#34;, 3)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">0
+6
+15
+&lt;br&gt;
+&lt;input type=&#34;text&#34; required&gt;
+60
+61
+WARN: disk usage high
+WARN: retries: 3</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+
+sum := func(...nums) {
+    total := 0
+    for _, v in nums { total &#43;= v }
+    return total
+}
+
+fmt.println(sum())           // 0  — variadic may be empty
+fmt.println(sum(1, 2, 3))    // 6
+fmt.println(sum(1, 2, 3, 4, 5)) // 15
+
+tag := func(name, ...attrs) {
+    s := &#34;&lt;&#34; &#43; name
+    for _, a in attrs { s &#43;= &#34; &#34; &#43; a }
+    return s &#43; &#34;&gt;&#34;
+}
+
+fmt.println(tag(&#34;br&#34;))
+fmt.println(tag(&#34;input&#34;, `type=&#34;text&#34;`, `required`))
+
+nums := [10, 20, 30]
+fmt.println(sum(nums...))     // 60
+fmt.println(sum(1, nums...))  // 61 — fixed arg followed by spread
+
+logger := func(prefix) {
+    return func(...parts) {
+        msg := prefix &#43; &#34;: &#34;
+        for i, p in parts {
+            if i &gt; 0 { msg &#43;= &#34; &#34; }
+            msg &#43;= string(p)
+        }
+        fmt.println(msg)
+    }
+}
+
+warn := logger(&#34;WARN&#34;)
+warn(&#34;disk&#34;, &#34;usage&#34;, &#34;high&#34;)
+warn(&#34;retries:&#34;, 3)">fmt := import(&#34;fmt&#34;)
+
+sum := func(...nums) {
+    total := 0
+    for _, v in nums { total &#43;= v }
+    return total
+}
+
+fmt.println(sum())           // 0  — variadic may be empty
+fmt.println(sum(1, 2, 3))    // 6
+fmt.println(sum(1, 2, 3, 4, 5)) // 15
+
+tag := func(name, ...attrs) {
+    s := &#34;&lt;&#34; &#43; name
+    for _, a in attrs { s &#43;= &#34; &#34; &#43; a }
+    return s &#43; &#34;&gt;&#34;
+}
+
+fmt.println(tag(&#34;br&#34;))
+fmt.println(tag(&#34;input&#34;, `type=&#34;text&#34;`, `required`))
+
+nums := [10, 20, 30]
+fmt.println(sum(nums...))     // 60
+fmt.println(sum(1, nums...))  // 61 — fixed arg followed by spread
+
+logger := func(prefix) {
+    return func(...parts) {
+        msg := prefix &#43; &#34;: &#34;
+        for i, p in parts {
+            if i &gt; 0 { msg &#43;= &#34; &#34; }
+            msg &#43;= string(p)
+        }
+        fmt.println(msg)
+    }
+}
+
+warn := logger(&#34;WARN&#34;)
+warn(&#34;disk&#34;, &#34;usage&#34;, &#34;high&#34;)
+warn(&#34;retries:&#34;, 3)</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="higher-order-functions.html" rel="prev">← Higher-Order Functions</a>
+      
+      
+        <a href="math.html" rel="next">Math →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
