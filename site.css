@@ -352,6 +352,19 @@ button.reset-btn:hover {
   color: var(--text-muted);
 }
 
+#example-picker {
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 3px 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  cursor: pointer;
+  max-width: 260px;
+}
+
 #output {
   background-color: var(--terminal-bg);
   color: var(--terminal-text);
