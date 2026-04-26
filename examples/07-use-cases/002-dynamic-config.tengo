@@ -49,8 +49,12 @@ config.db_url   = fmt.sprintf("postgres://%s:%d/app", config.db_host, config.db_
 config.workers  = config.db_pool * 2
 
 // Pretty-print the resolved config.
-keys := ["env", "debug", "log_level", "db_url", "workers",
-         "cache_ttl", "rate_limit", "feature_dark_mode"]
-for _, k in keys {
+string_keys := ["env", "log_level", "db_url"]
+other_keys  := ["debug", "workers", "cache_ttl", "rate_limit", "feature_dark_mode"]
+
+for _, k in string_keys {
+    fmt.printf("%-20s %s\n", k, config[k])
+}
+for _, k in other_keys {
     fmt.printf("%-20s %v\n", k, config[k])
 }

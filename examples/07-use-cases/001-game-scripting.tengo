@@ -28,8 +28,8 @@ within := func(a, b, r) {
     return dx*dx + dy*dy <= r*r
 }
 
-// The NPC behaviour script: pure function, returns an action for the
-// host to execute and advances the NPC state machine.
+// The NPC behaviour script — returns an action for the host to execute
+// and advances the NPC state machine in place.
 tick := func(npc, player) {
     if npc.state == "idle" {
         if within(player.position, npc.position, npc.alert_range) {
@@ -64,22 +64,37 @@ tick := func(npc, player) {
     return {action: "idle"}
 }
 
-// Simulate the player approaching over three ticks.
-positions := [
-    {x: 20, y: 15},
-    {x: 14, y: 12},
-    {x: 10, y: 10},
-]
-
-for _, pos in positions {
-    player.position = pos
-    result := tick(npc, player)
+print_tick := func(npc, result) {
     fmt.printf("%-10s → %s", npc.state, result["action"])
     if !is_undefined(result["text"]) {
         fmt.printf(": %q", result["text"])
+    }
+    if !is_undefined(result["target"]) {
+        t := result["target"]
+        fmt.printf(" (%d,%d)", t.x, t.y)
     }
     if !is_undefined(result["damage"]) {
         fmt.printf(" (dmg %d)", result["damage"])
     }
     fmt.println("")
 }
+
+// Simulate the player approaching: idle → alerted → chasing → fighting.
+positions := [
+    {x: 20, y: 15},  // out of range  → patrol
+    {x: 14, y: 12},  // alert range   → alerted, say
+    {x: 12, y: 11},  // closing in    → move_towards
+    {x: 10, y: 10},  // attack range  → fighting, attack
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    print_tick(npc, result)
+}
+
+// Wound the NPC and show the flee transition.
+fmt.println("--- NPC takes heavy damage ---")
+npc.health = 15
+result := tick(npc, player)
+print_tick(npc, result)
