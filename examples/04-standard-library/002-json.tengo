@@ -1,7 +1,7 @@
 // # JSON
 //
+// [Wikipedia: JSON](https://en.wikipedia.org/wiki/JSON)  
 // Tengo offers built-in support for JSON encoding and decoding.
-// [Wikipedia: JSON](https://en.wikipedia.org/wiki/JSON)
 
 fmt := import("fmt")
 json := import("json")
@@ -30,7 +30,7 @@ fmt.println(decoded)
 
 // We can access the values in the decoded map just like 
 // any other Tengo map.
-fmt.println("apple count:", decoded["apple"])
+fmt.println("apple count: ", decoded["apple"])
 
 // You can also decode into a pre-existing map to merge or 
 // strictly define the structure, but simple decoding is 

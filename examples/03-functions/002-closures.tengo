@@ -1,8 +1,8 @@
 // # Closures
 //
+// [Wikipedia: Closure](https://en.wikipedia.org/wiki/Closure_(computer_programming))  
 // Tengo supports anonymous functions, which can form closures. 
 // Closures are functions that "capture" variables from their outer scope.
-// [Wikipedia: Closure](https://en.wikipedia.org/wiki/Closure_(computer_programming))
 
 fmt := import("fmt")
 

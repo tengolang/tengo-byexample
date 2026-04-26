@@ -1,10 +1,10 @@
 // # Modules
 //
+// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)  
 // A `.tengo` file becomes a module when it ends with an `export`
 // statement. The module runs top to bottom, then returns its exported
 // value to the caller — typically a map of functions. Modules are
 // evaluated once and the result is cached for all importers.
-// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
 
 // This is `math_utils.tengo` — a module file that bundles three
 // related helpers and exports them as a single map.

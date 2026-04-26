@@ -1,8 +1,8 @@
 // # Maps as Objects
 //
+// [Wikipedia: Prototype-based programming](https://en.wikipedia.org/wiki/Prototype-based_programming)  
 // Tengo has no classes. The idiomatic pattern is a constructor function
 // that returns a map bundling data and closures as "methods".
-// [Wikipedia: Prototype-based programming](https://en.wikipedia.org/wiki/Prototype-based_programming)
 
 fmt := import("fmt")
 

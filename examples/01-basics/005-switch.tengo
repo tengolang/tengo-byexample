@@ -1,7 +1,7 @@
 // # Switch
 //
+// [Wikipedia: Switch statement](https://en.wikipedia.org/wiki/Switch_statement)  
 // `switch` statements express conditionals across many branches.
-// [Wikipedia: Switch statement](https://en.wikipedia.org/wiki/Switch_statement)
 
 fmt := import("fmt")
 times := import("times")
@@ -47,7 +47,7 @@ whatAmI := func(v) {
     case "int":
         fmt.println("int")
     default:
-        fmt.println("other:", type_name(v))
+        fmt.println("other: ", type_name(v))
     }
 }
 whatAmI(true)

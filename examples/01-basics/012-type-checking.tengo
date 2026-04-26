@@ -1,9 +1,9 @@
 // # Type Checking
 //
+// [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system)  
 // `type_name` returns any value's type as a string. `is_error`,
 // `is_undefined`, and `is_callable` are dedicated predicates for the
 // three types that need special handling.
-// [Wikipedia: Type system](https://en.wikipedia.org/wiki/Type_system)
 
 fmt := import("fmt")
 

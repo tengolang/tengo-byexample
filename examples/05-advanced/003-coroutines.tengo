@@ -1,8 +1,8 @@
 // # Coroutines
 //
+// [Wikipedia: Coroutine](https://en.wikipedia.org/wiki/Coroutine)  
 // The `coro` module provides cooperative coroutines. A coroutine suspends
 // at each `yield` call and resumes when iterated or when `.resume()` is called.
-// [Wikipedia: Coroutine](https://en.wikipedia.org/wiki/Coroutine)
 
 fmt := import("fmt")
 coro := import("coro")
@@ -29,6 +29,6 @@ countdown := coro.new(func(yield) {
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
+fmt.printf("%v %v\n", v, ok)
 v, ok = countdown.resume()
-fmt.println(v, ok)
+fmt.printf("%v %v\n", v, ok)

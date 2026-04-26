@@ -1,10 +1,10 @@
 // # Game Scripting
 //
+// [Wikipedia: Scripting language](https://en.wikipedia.org/wiki/Scripting_language)  
 // Tengo is well suited for NPC behaviour, ability definitions, and quest
 // logic in a game engine. The Go host loads and evaluates the script each
 // tick, providing game state through a custom `game` module. Scripts can
 // be hot-reloaded and modders can write them without touching Go.
-// [Wikipedia: Scripting language](https://en.wikipedia.org/wiki/Scripting_language)
 //
 // In a real integration the host supplies a `game` module. Here we
 // simulate the game state directly to show the scripting patterns.

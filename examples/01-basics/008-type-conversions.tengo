@@ -1,7 +1,7 @@
 // # Type Conversions
 //
+// [Wikipedia: Type conversion](https://en.wikipedia.org/wiki/Type_conversion)  
 // Tengo provides built-in functions to convert between its core types.
-// [Wikipedia: Type conversion](https://en.wikipedia.org/wiki/Type_conversion)
 
 fmt := import("fmt")
 

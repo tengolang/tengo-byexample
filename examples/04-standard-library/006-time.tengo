@@ -14,7 +14,7 @@ fmt.println(times.time_format(now, times.format_rfc3339))
 
 // Extract individual components with `time_year`, `time_month`, etc.
 fmt.println("year: ", times.time_year(now))
-fmt.println("month:", times.month_string(times.time_month(now)))
+fmt.println("month: ", times.month_string(times.time_month(now)))
 fmt.println("day:  ", times.time_day(now))
 
 // `times.parse` parses a time string using a layout.

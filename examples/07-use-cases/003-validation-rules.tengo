@@ -1,9 +1,9 @@
 // # Validation Rules
 //
+// [Wikipedia: Data validation](https://en.wikipedia.org/wiki/Data_validation)  
 // Business rules change frequently. Encoding them in Tengo scripts
 // instead of compiled Go means rules can be updated and reloaded while
 // the host application keeps running.
-// [Wikipedia: Data validation](https://en.wikipedia.org/wiki/Data_validation)
 //
 // The Go host evaluates the script to obtain a `validate` function,
 // then calls it for each incoming record. Adding a new rule or tweaking

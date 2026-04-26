@@ -1,9 +1,9 @@
 // # Coroutine Pipelines
 //
+// [Wikipedia: Pipeline](https://en.wikipedia.org/wiki/Pipeline_(software))  
 // Because coroutines implement the iterable protocol, they can be chained
 // into lazy pipelines — each stage consumes one coroutine and produces
 // another, with no intermediate arrays allocated.
-// [Wikipedia: Pipeline](https://en.wikipedia.org/wiki/Pipeline_(software))
 
 fmt := import("fmt")
 coro := import("coro")

@@ -49,21 +49,17 @@
         </div>
       </div>
       {{end}}
-      {{if .Example.Output}}
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">{{.Example.Output}}</pre>
-        </div>
-      </div>
-      {{end}}
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
+          {{if .Example.Output}}
+          <pre id="output" class="expected-output" data-expected="{{.Example.Output}}">{{.Example.Output}}</pre>
+          {{else}}
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          {{end}}
         </div>
         <div class="leading">
           <div class="editor-wrap">

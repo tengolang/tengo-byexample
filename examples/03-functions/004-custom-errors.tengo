@@ -1,8 +1,8 @@
 // # Custom Errors
 //
+// [Wikipedia: Error handling](https://en.wikipedia.org/wiki/Error_handling)  
 // `error(value)` accepts any value, not just strings. Passing a map lets you
 // attach structured metadata — a code, a field name, or any other context.
-// [Wikipedia: Error handling](https://en.wikipedia.org/wiki/Error_handling)
 
 fmt := import("fmt")
 
@@ -15,8 +15,8 @@ notFound := func(name) {
 result := notFound("config.json")
 if is_error(result) {
     e := result.value
-    fmt.println("code:", e["code"])
-    fmt.println("message:", e["message"])
+    fmt.println("code: ", e["code"])
+    fmt.println("message: ", e["message"])
 }
 
 // Structured errors are easy to inspect in validation logic.

@@ -1,8 +1,8 @@
 // # Errors
 //
+// [Wikipedia: Error handling](https://en.wikipedia.org/wiki/Error_handling)  
 // Tengo uses `error(value)` to create error values. Functions signal failure
 // by returning an error, and callers check with `is_error()`.
-// [Wikipedia: Error handling](https://en.wikipedia.org/wiki/Error_handling)
 
 fmt := import("fmt")
 
@@ -21,15 +21,15 @@ fmt.println(divide(10, 2))
 // Retrieve the message with `.value`.
 result := divide(10, 0)
 if is_error(result) {
-    fmt.println("error:", result.value)
+    fmt.println("error: ", result.value)
 }
 
 // `is_error` lets you handle failure without panicking.
 vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
 for _, v in vals {
     if is_error(v) {
-        fmt.println("got error:", v.value)
+        fmt.println("got error: ", v.value)
     } else {
-        fmt.println("got value:", v)
+        fmt.println("got value: ", v)
     }
 }

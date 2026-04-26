@@ -1,9 +1,9 @@
 // # Bytes
 //
+// [Wikipedia: Byte](https://en.wikipedia.org/wiki/Byte)  
 // `bytes` is a first-class type distinct from strings — an immutable
 // sequence of raw byte values. Use it for binary data, encoding, or
 // low-level string work.
-// [Wikipedia: Byte](https://en.wikipedia.org/wiki/Byte)
 
 fmt := import("fmt")
 

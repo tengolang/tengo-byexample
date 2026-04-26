@@ -1,12 +1,12 @@
 // # GDScript-Style Node Scripting
 //
+// [Wikipedia: Godot game engine](https://en.wikipedia.org/wiki/Godot_(game_engine))  
 // GDScript attaches a script to each Godot node; the engine calls
 // `_ready` once on startup and `_process(delta)` every frame.
 // Tengo maps to this naturally: script-level variables hold node
 // state that persists between `compiled.Call` invocations, because
 // they live in shared globals — mutations from one call are visible
 // in the next, just like a GDScript node's exported properties.
-// [Wikipedia: Godot game engine](https://en.wikipedia.org/wiki/Godot_(game_engine))
 //
 // Signal handlers such as `_on_hit` are registered by the host
 // after loading the script. `compiled.CanCall` lets the host check

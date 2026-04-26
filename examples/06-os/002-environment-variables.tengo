@@ -1,8 +1,8 @@
 // # Environment Variables
 //
+// [Wikipedia: Environment variable](https://en.wikipedia.org/wiki/Environment_variable)  
 // The `os` module provides `getenv`, `setenv`, `unsetenv`, and `lookup_env`
 // for reading and writing the process environment.
-// [Wikipedia: Environment variable](https://en.wikipedia.org/wiki/Environment_variable)
 
 fmt := import("fmt")
 os := import("os")
@@ -19,7 +19,7 @@ fmt.println(os.getenv("GREETING"))
 // or `("", false)` when it is absent — useful to distinguish
 // an unset variable from one set to the empty string.
 val, ok := os.lookup_env("GREETING")
-fmt.println(val, ok)
+fmt.printf("%v %v\n", val, ok)
 
 _, ok = os.lookup_env("MISSING")
 fmt.println(ok)

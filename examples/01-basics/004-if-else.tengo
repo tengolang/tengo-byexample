@@ -1,7 +1,7 @@
 // # If / Else
 //
+// [Wikipedia: Conditional](https://en.wikipedia.org/wiki/Conditional_(computer_programming))  
 // Branching with `if` and `else` in Tengo is straight-forward.
-// [Wikipedia: Conditional](https://en.wikipedia.org/wiki/Conditional_(computer_programming))
 
 fmt := import("fmt")
 
@@ -20,11 +20,11 @@ if 8 % 4 == 0 {
 // A statement can precede conditionals; any variables declared in this
 // statement are available in all branches.
 if n := 9; n < 0 {
-    fmt.println(n, "is negative")
+    fmt.printf("%v is negative\n", n)
 } else if n < 10 {
-    fmt.println(n, "has 1 digit")
+    fmt.printf("%v has 1 digit\n", n)
 } else {
-    fmt.println(n, "has multiple digits")
+    fmt.printf("%v has multiple digits\n", n)
 }
 
 // Note that you don't need parentheses around conditions in Tengo,

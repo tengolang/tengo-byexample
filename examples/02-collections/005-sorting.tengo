@@ -1,8 +1,8 @@
 // # Sorting
 //
+// [Wikipedia: Sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm)  
 // Tengo has no built-in sort function, but it is straightforward to implement
 // one using closures and recursion.
-// [Wikipedia: Sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm)
 
 fmt := import("fmt")
 
@@ -47,5 +47,5 @@ fmt.println(msort(["banana", "apple", "cherry", "date"]))
 // The original array is unchanged.
 nums := [5, 2, 8, 1]
 sorted := msort(nums)
-fmt.println("original:", nums)
+fmt.println("original: ", nums)
 fmt.println("sorted:  ", sorted)

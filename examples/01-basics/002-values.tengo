@@ -9,9 +9,9 @@ fmt := import("fmt")
 fmt.println("ten" + "go")
 
 // Integers and floats.
-fmt.println("1+1 =", 1+1)
-fmt.println("7/2 =", 7/2)
-fmt.println("7.0/2.0 =", 7.0/2.0)
+fmt.println("1+1 = ", 1+1)
+fmt.println("7/2 = ", 7/2)
+fmt.println("7.0/2.0 = ", 7.0/2.0)
 
 // Booleans, with boolean operators as you'd expect.
 fmt.println(true && false)

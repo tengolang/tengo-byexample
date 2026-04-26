@@ -1,9 +1,9 @@
 // # Collection Helpers
 //
+// [Wikipedia: Higher-order function](https://en.wikipedia.org/wiki/Higher-order_function)  
 // The `enum` source module provides functional iteration helpers: `map`,
 // `filter`, `find`, `all`, `any`, and `each`. Callbacks receive the key
 // (index for arrays) and value as arguments.
-// [Wikipedia: Higher-order function](https://en.wikipedia.org/wiki/Higher-order_function)
 
 fmt := import("fmt")
 enum := import("enum")

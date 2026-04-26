@@ -10,7 +10,7 @@ fmt.println("starting")
 
 // Everything before `os.exit` runs normally.
 for i := 0; i < 3; i++ {
-    fmt.println("step", i)
+    fmt.println("step ", i)
 }
 
 // `os.exit` stops execution immediately.

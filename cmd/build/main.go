@@ -196,6 +196,11 @@ func parseExample(filename string, src []byte) Example {
 		if strings.HasPrefix(trimmed, "//") {
 			text := strings.TrimPrefix(trimmed, "// ")
 			text = strings.TrimPrefix(text, "//")
+			// Preserve trailing double-space (force-break marker) before TrimSpace strips it.
+			rawContent := strings.TrimLeft(line, " \t")
+			if strings.HasSuffix(rawContent, "  ") {
+				text += "  "
+			}
 			if len(blocks) == 0 || blocks[len(blocks)-1].kind != "doc" {
 				blocks = append(blocks, rawBlock{kind: "doc", content: text})
 			} else {
@@ -219,15 +224,28 @@ func parseExample(filename string, src []byte) Example {
 			rest := strings.TrimSpace(content[nl+1:])
 			if rest != "" {
 				descLines := strings.Split(rest, "\n")
-				var parts []string
-				for _, l := range descLines {
-					l = strings.TrimSpace(l)
-					if l == "" {
+				var sb strings.Builder
+				started, prevBreak := false, false
+				for _, raw := range descLines {
+					forceBreak := strings.HasSuffix(raw, "  ")
+					trimmed := strings.TrimSpace(raw)
+					if trimmed == "" {
 						break
 					}
-					parts = append(parts, l)
+					if started {
+						if prevBreak {
+							sb.WriteByte('\n')
+						} else {
+							sb.WriteByte(' ')
+						}
+					}
+					sb.WriteString(trimmed)
+					if forceBreak {
+						sb.WriteString("  ")
+					}
+					started, prevBreak = true, forceBreak
 				}
-				description = renderDoc(strings.Join(parts, " "))
+				description = renderDoc(sb.String())
 			}
 			blocks[0].content = rest
 			blocks = blocks[1:]
@@ -284,9 +302,25 @@ func fileSlug(filename string) string {
 }
 
 // renderDoc converts plain doc text to HTML.
-// Handles `backtick` → <code> and [text](url) → <a href="url">.
-// Balanced parentheses are supported in URLs (e.g. Wikipedia links).
+// A '\n' in s (produced by a trailing double-space in the source comment)
+// becomes a <br>. Within each line: `backtick` → <code>, [text](url) → <a>.
 func renderDoc(s string) template.HTML {
+	parts := strings.Split(s, "\n")
+	var out strings.Builder
+	for i, part := range parts {
+		if i > 0 {
+			if strings.HasSuffix(parts[i-1], "  ") {
+				out.WriteString("<br>")
+			} else {
+				out.WriteByte(' ')
+			}
+		}
+		out.WriteString(string(renderDocLine(strings.TrimRight(part, " "))))
+	}
+	return template.HTML(out.String())
+}
+
+func renderDocLine(s string) template.HTML {
 	var out strings.Builder
 	for len(s) > 0 {
 		ci := strings.IndexByte(s, '`')
@@ -356,6 +390,8 @@ func renderDoc(s string) template.HTML {
 	}
 	return template.HTML(out.String())
 }
+
+// renderDocLine is the per-line worker called by renderDoc.
 
 func slugify(text string) string {
 	if text == "" {

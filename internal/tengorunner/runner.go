@@ -49,7 +49,7 @@ func CaptureFmtModuleMap(w *bytes.Buffer) *tengo.ModuleMap {
 			if err != nil {
 				return nil, err
 			}
-			_, _ = fmt.Fprintln(w, strings.Join(pa, " "))
+			_, _ = fmt.Fprintln(w, strings.Join(pa, ""))
 			return nil, nil
 		}},
 		"printf": &tengo.UserFunction{Name: "printf", Value: func(args ...tengo.Object) (tengo.Object, error) {

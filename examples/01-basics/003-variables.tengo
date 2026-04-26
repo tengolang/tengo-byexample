@@ -1,8 +1,8 @@
 // # Variables
 //
+// [Wikipedia: Variable](https://en.wikipedia.org/wiki/Variable_(computer_science))  
 // Variables are declared and initialized with `:=`. Tengo is dynamically typed:
 // a variable can hold any value and be reassigned to a different type.
-// [Wikipedia: Variable](https://en.wikipedia.org/wiki/Variable_(computer_science))
 
 fmt := import("fmt")
 
@@ -17,7 +17,7 @@ fmt.println(message)
 // You can declare multiple variables.
 x := 10
 y := 20
-fmt.println("sum:", x+y)
+fmt.println("sum: ", x+y)
 
 // Dynamically typed: a variable can change types.
 value := 42

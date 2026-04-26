@@ -1,9 +1,9 @@
 // # Command-Line Arguments
 //
+// [Wikipedia: Command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)  
 // `os.args()` returns the full argument list. The first element is the
 // interpreter name, the second is the script path, and anything after
 // that is user-supplied.
-// [Wikipedia: Command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)
 
 fmt := import("fmt")
 os := import("os")
@@ -13,12 +13,12 @@ args := os.args()
 fmt.println(args)
 
 // The interpreter and script are always present.
-fmt.println("program:", args[0])
+fmt.println("program: ", args[0])
 fmt.println("script: ", args[1])
 
 // User arguments start at index 2.
 if len(args) > 2 {
-    fmt.println("first user arg:", args[2])
+    fmt.println("first user arg: ", args[2])
 } else {
     fmt.println("(no user args — try: tengo script.tengo hello)")
 }
