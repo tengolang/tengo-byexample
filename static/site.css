@@ -414,12 +414,36 @@ button.reset-btn:hover {
   margin-bottom: 20px;
 }
 
-.standalone-playground .editor-wrap {
-  margin-bottom: 12px;
+.standalone-playground .playground-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.standalone-playground #output {
+.standalone-playground .playground-body .editor-wrap {
+  min-width: 0;
+}
+
+.standalone-playground .playground-body #output {
   min-height: 120px;
+}
+
+@media (min-width: 860px) {
+  .standalone-playground .playground-body {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .standalone-playground .playground-body .editor-wrap {
+    flex: 3;
+  }
+  .standalone-playground .playground-body #output {
+    flex: 2;
+    min-height: 200px;
+    margin-top: 0;
+    position: sticky;
+    top: 20px;
+  }
 }
 
 /* CodeMirror overrides */
