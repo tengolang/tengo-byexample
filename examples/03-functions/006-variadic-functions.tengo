@@ -4,6 +4,7 @@
 // arguments by prefixing it with `...`. Inside the function the
 // variadic parameter is a plain array. The spread operator `...`
 // on a call site expands an array into individual arguments.
+// [Wikipedia: Variadic function](https://en.wikipedia.org/wiki/Variadic_function)
 
 fmt := import("fmt")
 

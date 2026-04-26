@@ -2,6 +2,7 @@
 //
 // Tengo has no built-in sort function, but it is straightforward to implement
 // one using closures and recursion.
+// [Wikipedia: Sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm)
 
 fmt := import("fmt")
 

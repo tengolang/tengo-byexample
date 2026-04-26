@@ -1,6 +1,7 @@
 // # Maps
 //
 // Maps are Tengo's built-in associative data type (sometimes called hashes or dicts).
+// [Wikipedia: Associative array](https://en.wikipedia.org/wiki/Associative_array)
 
 fmt := import("fmt")
 

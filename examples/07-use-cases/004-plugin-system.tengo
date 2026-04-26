@@ -4,6 +4,7 @@
 // when events fire. End users extend application behaviour without
 // touching Go code, and different scripts can register different sets
 // of handlers for the same event bus.
+// [Wikipedia: Plug-in](https://en.wikipedia.org/wiki/Plug-in_(computing))
 //
 // The Go host imports the script, reads the `handlers` map, and calls
 // the matching function whenever an event is emitted. Unregistered

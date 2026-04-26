@@ -1,6 +1,7 @@
 // # Switch
 //
 // `switch` statements express conditionals across many branches.
+// [Wikipedia: Switch statement](https://en.wikipedia.org/wiki/Switch_statement)
 
 fmt := import("fmt")
 times := import("times")

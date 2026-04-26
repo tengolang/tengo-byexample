@@ -2,6 +2,7 @@
 //
 // Variables are declared and initialized with `:=`. Tengo is dynamically typed:
 // a variable can hold any value and be reassigned to a different type.
+// [Wikipedia: Variable](https://en.wikipedia.org/wiki/Variable_(computer_science))
 
 fmt := import("fmt")
 

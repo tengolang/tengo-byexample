@@ -2,6 +2,7 @@
 //
 // Slices are a key data type in Tengo, giving a more powerful interface
 // to sequences than arrays.
+// [Wikipedia: Array slicing](https://en.wikipedia.org/wiki/Array_slicing)
 
 fmt := import("fmt")
 

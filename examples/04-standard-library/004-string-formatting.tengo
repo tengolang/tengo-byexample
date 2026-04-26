@@ -2,6 +2,7 @@
 //
 // `fmt.sprintf` formats a string using Go-style verbs and returns it.
 // `fmt.printf` writes the formatted output directly.
+// [Wikipedia: printf format string](https://en.wikipedia.org/wiki/Printf_format_string)
 
 fmt := import("fmt")
 

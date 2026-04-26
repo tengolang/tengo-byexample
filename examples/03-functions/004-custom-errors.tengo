@@ -2,6 +2,7 @@
 //
 // `error(value)` accepts any value, not just strings. Passing a map lets you
 // attach structured metadata — a code, a field name, or any other context.
+// [Wikipedia: Error handling](https://en.wikipedia.org/wiki/Error_handling)
 
 fmt := import("fmt")
 

@@ -3,6 +3,7 @@
 // `os.args()` returns the full argument list. The first element is the
 // interpreter name, the second is the script path, and anything after
 // that is user-supplied.
+// [Wikipedia: Command-line interface](https://en.wikipedia.org/wiki/Command-line_interface)
 
 fmt := import("fmt")
 os := import("os")

@@ -2,6 +2,7 @@
 //
 // Tengo uses `error(value)` to create error values. Functions signal failure
 // by returning an error, and callers check with `is_error()`.
+// [Wikipedia: Error handling](https://en.wikipedia.org/wiki/Error_handling)
 
 fmt := import("fmt")
 

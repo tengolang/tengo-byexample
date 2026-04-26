@@ -1,6 +1,7 @@
 // # JSON
 //
 // Tengo offers built-in support for JSON encoding and decoding.
+// [Wikipedia: JSON](https://en.wikipedia.org/wiki/JSON)
 
 fmt := import("fmt")
 json := import("json")

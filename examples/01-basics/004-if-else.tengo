@@ -1,6 +1,7 @@
 // # If / Else
 //
 // Branching with `if` and `else` in Tengo is straight-forward.
+// [Wikipedia: Conditional](https://en.wikipedia.org/wiki/Conditional_(computer_programming))
 
 fmt := import("fmt")
 

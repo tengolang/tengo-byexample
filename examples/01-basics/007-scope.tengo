@@ -2,6 +2,7 @@
 //
 // Tengo uses lexical (block) scoping. `:=` always declares a new variable
 // in the current scope; `=` assigns to an existing one in an enclosing scope.
+// [Wikipedia: Scope](https://en.wikipedia.org/wiki/Scope_(computer_science))
 
 fmt := import("fmt")
 

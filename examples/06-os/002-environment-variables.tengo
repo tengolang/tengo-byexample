@@ -2,6 +2,7 @@
 //
 // The `os` module provides `getenv`, `setenv`, `unsetenv`, and `lookup_env`
 // for reading and writing the process environment.
+// [Wikipedia: Environment variable](https://en.wikipedia.org/wiki/Environment_variable)
 
 fmt := import("fmt")
 os := import("os")

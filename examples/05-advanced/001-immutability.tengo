@@ -3,6 +3,7 @@
 // By default, arrays and maps are mutable. The built-in `immutable()`
 // returns a deeply immutable copy of any value. Attempting to modify it
 // causes a runtime error.
+// [Wikipedia: Immutable object](https://en.wikipedia.org/wiki/Immutable_object)
 
 fmt := import("fmt")
 

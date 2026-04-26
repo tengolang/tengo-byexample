@@ -283,27 +283,76 @@ func fileSlug(filename string) string {
 	return base
 }
 
-// renderDoc converts plain doc text to HTML, wrapping `backtick` spans in <code>.
+// renderDoc converts plain doc text to HTML.
+// Handles `backtick` → <code> and [text](url) → <a href="url">.
+// Balanced parentheses are supported in URLs (e.g. Wikipedia links).
 func renderDoc(s string) template.HTML {
 	var out strings.Builder
 	for len(s) > 0 {
-		start := strings.IndexByte(s, '`')
-		if start < 0 {
+		ci := strings.IndexByte(s, '`')
+		li := strings.IndexByte(s, '[')
+		switch {
+		case ci < 0 && li < 0:
 			out.WriteString(template.HTMLEscapeString(s))
-			break
+			return template.HTML(out.String())
+		case ci >= 0 && (li < 0 || ci < li):
+			// backtick code span
+			out.WriteString(template.HTMLEscapeString(s[:ci]))
+			s = s[ci+1:]
+			end := strings.IndexByte(s, '`')
+			if end < 0 {
+				out.WriteByte('`')
+				out.WriteString(template.HTMLEscapeString(s))
+				return template.HTML(out.String())
+			}
+			out.WriteString("<code>")
+			out.WriteString(template.HTMLEscapeString(s[:end]))
+			out.WriteString("</code>")
+			s = s[end+1:]
+		default:
+			// possible [text](url) markdown link
+			out.WriteString(template.HTMLEscapeString(s[:li]))
+			s = s[li+1:]
+			te := strings.IndexByte(s, ']')
+			if te < 0 || te+1 >= len(s) || s[te+1] != '(' {
+				out.WriteByte('[')
+				continue
+			}
+			linkText := s[:te]
+			s = s[te+2:] // skip ](
+			// find closing ) with balanced-paren matching so URLs like
+			// Closure_(computer_programming) are captured correctly.
+			depth, urlEnd := 0, -1
+			for i := 0; i < len(s); i++ {
+				switch s[i] {
+				case '(':
+					depth++
+				case ')':
+					if depth == 0 {
+						urlEnd = i
+					} else {
+						depth--
+					}
+				}
+				if urlEnd >= 0 {
+					break
+				}
+			}
+			if urlEnd < 0 {
+				out.WriteByte('[')
+				out.WriteString(template.HTMLEscapeString(linkText))
+				out.WriteString("](")
+				out.WriteString(template.HTMLEscapeString(s))
+				return template.HTML(out.String())
+			}
+			url := s[:urlEnd]
+			s = s[urlEnd+1:]
+			out.WriteString(`<a href="`)
+			out.WriteString(template.HTMLEscapeString(url))
+			out.WriteString(`" target="_blank" rel="noopener">`)
+			out.WriteString(template.HTMLEscapeString(linkText))
+			out.WriteString("</a>")
 		}
-		out.WriteString(template.HTMLEscapeString(s[:start]))
-		s = s[start+1:]
-		end := strings.IndexByte(s, '`')
-		if end < 0 {
-			out.WriteByte('`')
-			out.WriteString(template.HTMLEscapeString(s))
-			break
-		}
-		out.WriteString("<code>")
-		out.WriteString(template.HTMLEscapeString(s[:end]))
-		out.WriteString("</code>")
-		s = s[end+1:]
 	}
 	return template.HTML(out.String())
 }

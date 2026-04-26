@@ -2,6 +2,7 @@
 //
 // The `hex` module encodes bytes to a lowercase hexadecimal string and
 // decodes hex strings back to bytes.
+// [Wikipedia: Hexadecimal](https://en.wikipedia.org/wiki/Hexadecimal)
 
 fmt := import("fmt")
 hex := import("hex")

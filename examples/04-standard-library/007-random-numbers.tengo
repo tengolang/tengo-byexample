@@ -2,6 +2,7 @@
 //
 // The `rand` module provides random integers, floats, and permutations.
 // Call `rand.seed` first for reproducible output.
+// [Wikipedia: Pseudorandom number generator](https://en.wikipedia.org/wiki/Pseudorandom_number_generator)
 
 fmt := import("fmt")
 rand := import("rand")

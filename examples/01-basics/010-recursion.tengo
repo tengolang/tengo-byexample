@@ -3,6 +3,7 @@
 // Tengo supports recursive functions. Because functions are values assigned
 // to variables, the function body references its own variable name, and the
 // closure captures the current binding.
+// [Wikipedia: Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))
 
 fmt := import("fmt")
 

@@ -2,6 +2,7 @@
 //
 // Any `.tengo` file can be a module. Use `export` to expose a value —
 // typically a map of functions — that other scripts import by filename.
+// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
 //
 // A module file (`math_utils.tengo`) looks like this:
 //

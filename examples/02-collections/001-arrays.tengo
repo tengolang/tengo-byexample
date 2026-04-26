@@ -1,6 +1,7 @@
 // # Arrays
 //
 // In Tengo, an array is a numbered sequence of elements of any type.
+// [Wikipedia: Array](https://en.wikipedia.org/wiki/Array_(data_structure))
 
 fmt := import("fmt")
 

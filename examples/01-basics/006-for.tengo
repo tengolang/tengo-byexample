@@ -1,6 +1,7 @@
 // # For Loops
 //
 // `for` is Tengo's only looping construct. It supports several forms.
+// [Wikipedia: For loop](https://en.wikipedia.org/wiki/For_loop)
 
 fmt := import("fmt")
 

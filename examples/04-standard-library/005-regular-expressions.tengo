@@ -2,6 +2,7 @@
 //
 // The `text` module exposes Go's `regexp` package through `re_match`,
 // `re_find`, `re_replace`, and `re_split`. Patterns follow Go regexp syntax.
+// [Wikipedia: Regular expression](https://en.wikipedia.org/wiki/Regular_expression)
 
 fmt := import("fmt")
 text := import("text")

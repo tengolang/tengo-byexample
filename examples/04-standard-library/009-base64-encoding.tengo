@@ -2,6 +2,7 @@
 //
 // The `base64` module encodes and decodes using standard, URL-safe, and
 // raw (no padding) variants. Input and output are `bytes`.
+// [Wikipedia: Base64](https://en.wikipedia.org/wiki/Base64)
 
 fmt := import("fmt")
 base64 := import("base64")

@@ -6,6 +6,7 @@
 // state that persists between `compiled.Call` invocations, because
 // they live in shared globals — mutations from one call are visible
 // in the next, just like a GDScript node's exported properties.
+// [Wikipedia: Godot game engine](https://en.wikipedia.org/wiki/Godot_(game_engine))
 //
 // Signal handlers such as `_on_hit` are registered by the host
 // after loading the script. `compiled.CanCall` lets the host check

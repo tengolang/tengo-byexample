@@ -2,6 +2,7 @@
 //
 // A string is an immutable sequence of bytes. In Tengo, strings are 
 // UTF-8 encoded by default.
+// [Wikipedia: String](https://en.wikipedia.org/wiki/String_(computer_science))
 
 fmt := import("fmt")
 text := import("text")
