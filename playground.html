@@ -1373,6 +1373,41 @@ fmt.println(greet(&#34;Alice&#34;, &#34;sv&#34;))
 band := score_band(82)
 fmt.printf(&#34;%s (pass=%v)\n&#34;, band.grade, band.pass)">Calling Functions from Go</option>
             
+            <option value="gdscript-style" data-code="fmt := import(&#34;fmt&#34;)
+
+position := {x: 0.0, y: 0.0}
+speed    := 150.0
+health   := 100
+coins    := 0
+
+_ready := func() {
+    fmt.printf(&#34;_ready   pos=(%.0f,%.0f) hp=%d\n&#34;,
+        position.x, position.y, health)
+}
+
+_process := func(delta) {
+    position.x &#43;= speed * delta
+    fmt.printf(&#34;_process pos=(%.1f, %.1f)\n&#34;, position.x, position.y)
+}
+
+_on_coin_picked_up := func() {
+    coins &#43;= 1
+    fmt.printf(&#34;coin!    total=%d\n&#34;, coins)
+}
+
+_on_hit := func(damage) {
+    health -= damage
+    fmt.printf(&#34;hit!     hp=%d%s\n&#34;, health, health &lt;= 0 ? &#34; [dead]&#34; : &#34;&#34;)
+}
+
+_ready()
+_process(0.016)
+_process(0.016)
+_process(0.016)
+_on_coin_picked_up()
+_on_hit(35)
+_on_hit(80)">GDScript-Style Node Scripting</option>
+            
           </optgroup>
           
         </select>

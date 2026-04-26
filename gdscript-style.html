@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: GDScript-Style Node Scripting</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="gdscript-style">
+    <h2>GDScript-Style Node Scripting</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>GDScript attaches a script to each Godot node; the engine calls <code>_ready</code> once on startup and <code>_process(delta)</code> every frame. Tengo maps to this naturally: script-level variables hold node state that persists between <code>compiled.Call</code> invocations, because they live in shared globals — mutations from one call are visible in the next, just like a GDScript node&#39;s exported properties.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="node-properties-script-level-state-persists-across-calls">
+        <div class="docs">
+          <p><a href="#node-properties-script-level-state-persists-across-calls">Node properties — script-level state, persists across calls.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">position := {x: 0.0, y: 0.0}
+speed    := 150.0
+health   := 100
+coins    := 0</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="called-once-when-the-node-enters-the-scene-tree">
+        <div class="docs">
+          <p><a href="#called-once-when-the-node-enters-the-scene-tree">Called once when the node enters the scene tree.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">_ready := func() {
+    fmt.printf(&#34;_ready   pos=(%.0f,%.0f) hp=%d\n&#34;,
+        position.x, position.y, health)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="called-every-frame-delta-is-elapsed-seconds-since-the-last-frame">
+        <div class="docs">
+          <p><a href="#called-every-frame-delta-is-elapsed-seconds-since-the-last-frame">Called every frame; delta is elapsed seconds since the last frame.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">_process := func(delta) {
+    position.x &#43;= speed * delta
+    fmt.printf(&#34;_process pos=(%.1f, %.1f)\n&#34;, position.x, position.y)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="signal-handlers-wired-to-game-events-by-the-host">
+        <div class="docs">
+          <p><a href="#signal-handlers-wired-to-game-events-by-the-host">Signal handlers — wired to game events by the host.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">_on_coin_picked_up := func() {
+    coins &#43;= 1
+    fmt.printf(&#34;coin!    total=%d\n&#34;, coins)
+}
+
+_on_hit := func(damage) {
+    health -= damage
+    fmt.printf(&#34;hit!     hp=%d%s\n&#34;, health, health &lt;= 0 ? &#34; [dead]&#34; : &#34;&#34;)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="standalone-demo-same-sequence-the-go-host-runs-below">
+        <div class="docs">
+          <p><a href="#standalone-demo-same-sequence-the-go-host-runs-below">Standalone demo — same sequence the Go host runs below.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">_ready()
+_process(0.016)
+_process(0.016)
+_process(0.016)
+_on_coin_picked_up()
+_on_hit(35)
+_on_hit(80)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs">
+          <p class="go-host-label">Go host</p>
+        </div>
+        <div class="code leading">
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">package main
+
+import (
+	&#34;log&#34;
+
+	tengo &#34;github.com/tengolang/tengo/v3&#34;
+)
+
+// playerScript contains only the node definitions — no standalone demo.
+// State (position, health, coins) persists across compiled.Call calls
+// because script-level variables live in shared globals.
+const playerScript = `
+fmt := import(&#34;fmt&#34;)
+
+position := {x: 0.0, y: 0.0}
+speed    := 150.0
+health   := 100
+coins    := 0
+
+_ready := func() {
+    fmt.printf(&#34;_ready   pos=(%.0f,%.0f) hp=%d\n&#34;,
+        position.x, position.y, health)
+}
+_process := func(delta) {
+    position.x &#43;= speed * delta
+    fmt.printf(&#34;_process pos=(%.1f, %.1f)\n&#34;, position.x, position.y)
+}
+_on_coin_picked_up := func() {
+    coins &#43;= 1
+    fmt.printf(&#34;coin!    total=%d\n&#34;, coins)
+}
+_on_hit := func(damage) {
+    health -= damage
+    fmt.printf(&#34;hit!     hp=%d%s\n&#34;, health, health &lt;= 0 ? &#34; [dead]&#34; : &#34;&#34;)
+}
+`
+
+func main() {
+	compiled, err := tengo.NewScript([]byte(playerScript)).Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	compiled.Call(&#34;_ready&#34;)
+
+	// Game loop — three frames at ~60 fps.
+	for i := 0; i &lt; 3; i&#43;&#43; {
+		compiled.Call(&#34;_process&#34;, 0.016)
+	}
+
+	// Dispatch signal handlers if the script defines them.
+	if compiled.CanCall(&#34;_on_coin_picked_up&#34;) {
+		compiled.Call(&#34;_on_coin_picked_up&#34;)
+	}
+	compiled.Call(&#34;_on_hit&#34;, 35)
+	compiled.Call(&#34;_on_hit&#34;, 80)
+}</code></pre>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">_ready   pos=(0,0) hp=100
+_process pos=(2.4, 0.0)
+_process pos=(4.8, 0.0)
+_process pos=(7.2, 0.0)
+coin!    total=1
+hit!     hp=65
+hit!     hp=-15 [dead]</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+
+position := {x: 0.0, y: 0.0}
+speed    := 150.0
+health   := 100
+coins    := 0
+
+_ready := func() {
+    fmt.printf(&#34;_ready   pos=(%.0f,%.0f) hp=%d\n&#34;,
+        position.x, position.y, health)
+}
+
+_process := func(delta) {
+    position.x &#43;= speed * delta
+    fmt.printf(&#34;_process pos=(%.1f, %.1f)\n&#34;, position.x, position.y)
+}
+
+_on_coin_picked_up := func() {
+    coins &#43;= 1
+    fmt.printf(&#34;coin!    total=%d\n&#34;, coins)
+}
+
+_on_hit := func(damage) {
+    health -= damage
+    fmt.printf(&#34;hit!     hp=%d%s\n&#34;, health, health &lt;= 0 ? &#34; [dead]&#34; : &#34;&#34;)
+}
+
+_ready()
+_process(0.016)
+_process(0.016)
+_process(0.016)
+_on_coin_picked_up()
+_on_hit(35)
+_on_hit(80)">fmt := import(&#34;fmt&#34;)
+
+position := {x: 0.0, y: 0.0}
+speed    := 150.0
+health   := 100
+coins    := 0
+
+_ready := func() {
+    fmt.printf(&#34;_ready   pos=(%.0f,%.0f) hp=%d\n&#34;,
+        position.x, position.y, health)
+}
+
+_process := func(delta) {
+    position.x &#43;= speed * delta
+    fmt.printf(&#34;_process pos=(%.1f, %.1f)\n&#34;, position.x, position.y)
+}
+
+_on_coin_picked_up := func() {
+    coins &#43;= 1
+    fmt.printf(&#34;coin!    total=%d\n&#34;, coins)
+}
+
+_on_hit := func(damage) {
+    health -= damage
+    fmt.printf(&#34;hit!     hp=%d%s\n&#34;, health, health &lt;= 0 ? &#34; [dead]&#34; : &#34;&#34;)
+}
+
+_ready()
+_process(0.016)
+_process(0.016)
+_process(0.016)
+_on_coin_picked_up()
+_on_hit(35)
+_on_hit(80)</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="calling-from-go.html" rel="prev">← Calling Functions from Go</a>
+      
+      
+        <span></span>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
