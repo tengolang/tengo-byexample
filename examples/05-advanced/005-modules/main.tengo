@@ -1,0 +1,20 @@
+// `main.tengo` imports the module by name — no `.tengo` extension.
+// `import` returns whatever was exported, here a map of functions.
+fmt  := import("fmt")
+math := import("math_utils")
+
+fmt.printf("square(4) = %d\n", math.square(4))
+fmt.printf("cube(3)   = %d\n", math.cube(3))
+fmt.printf("abs(-7)   = %d\n", math.abs(-7))
+
+// Any Tengo value can be exported — a map, a single function, a number.
+// Exporting a bare function makes the import directly callable:
+//   double := import("doubler")
+//   double(7)  // → 14
+
+// Built-in modules (fmt, math, text, json, …) follow the same protocol.
+// They are pre-compiled Go modules rather than source files, but the
+// import mechanism is identical.
+stdlib := import("math")
+fmt.printf("pi      = %.4f\n", stdlib.pi)
+fmt.printf("sqrt(2) = %.4f\n", stdlib.sqrt(2.0))

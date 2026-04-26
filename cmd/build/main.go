@@ -12,6 +12,11 @@ import (
 	"github.com/tengolang/tengo-byexample/internal/tengorunner"
 )
 
+type ExampleFile struct {
+	Name string // e.g. "math_utils.tengo"
+	Code string
+}
+
 type Example struct {
 	Slug           string
 	Title          string
@@ -21,6 +26,7 @@ type Example struct {
 	PlaygroundCode string
 	Output         string
 	GoCode         string
+	Files          []ExampleFile // non-empty for multi-file examples; main.tengo first
 }
 
 type Section struct {
@@ -129,31 +135,117 @@ func loadExamplesFromDir(dir string) ([]Example, error) {
 	if err != nil {
 		return nil, err
 	}
-	var files []string
+
+	// Collect single-file .tengo paths and multi-file subdirectory paths separately,
+	// then sort them together by their base name so ordering is consistent.
+	type entry struct {
+		name  string // for sorting (e.g. "005-modules" or "005-modules.tengo")
+		path  string
+		isDir bool
+	}
+	var items []entry
 	for _, e := range entries {
-		if !e.IsDir() && strings.HasSuffix(e.Name(), ".tengo") {
-			files = append(files, filepath.Join(dir, e.Name()))
+		if e.IsDir() {
+			// Only treat as a multi-file example if it contains .tengo files.
+			subEntries, err := os.ReadDir(filepath.Join(dir, e.Name()))
+			if err != nil {
+				return nil, err
+			}
+			hasTengo := false
+			for _, se := range subEntries {
+				if !se.IsDir() && strings.HasSuffix(se.Name(), ".tengo") {
+					hasTengo = true
+					break
+				}
+			}
+			if hasTengo {
+				items = append(items, entry{name: e.Name(), path: filepath.Join(dir, e.Name()), isDir: true})
+			}
+		} else if strings.HasSuffix(e.Name(), ".tengo") {
+			items = append(items, entry{name: e.Name(), path: filepath.Join(dir, e.Name()), isDir: false})
 		}
 	}
-	sort.Strings(files)
+	sort.Slice(items, func(i, j int) bool { return items[i].name < items[j].name })
+
 	var examples []Example
-	for _, f := range files {
-		src, err := os.ReadFile(f)
-		if err != nil {
-			return nil, err
+	for _, item := range items {
+		var ex Example
+		var loadErr error
+		if item.isDir {
+			ex, loadErr = loadMultiFileExample(item.path)
+		} else {
+			ex, loadErr = loadSingleFileExample(item.path)
 		}
-		ex := parseExample(f, src)
-		if !strings.Contains(string(src), "// nooutput") {
-			out, _ := tengorunner.Run(string(src))
-			ex.Output = strings.TrimRight(out, "\n")
-		}
-		goFile := strings.TrimSuffix(f, ".tengo") + ".go.txt"
-		if goSrc, err := os.ReadFile(goFile); err == nil {
-			ex.GoCode = strings.TrimSpace(string(goSrc))
+		if loadErr != nil {
+			return nil, loadErr
 		}
 		examples = append(examples, ex)
 	}
 	return examples, nil
+}
+
+func loadSingleFileExample(path string) (Example, error) {
+	src, err := os.ReadFile(path)
+	if err != nil {
+		return Example{}, err
+	}
+	ex := parseExample(path, src)
+	if !strings.Contains(string(src), "// nooutput") {
+		out, _ := tengorunner.Run(string(src))
+		ex.Output = strings.TrimRight(out, "\n")
+	}
+	goFile := strings.TrimSuffix(path, ".tengo") + ".go.txt"
+	if goSrc, err := os.ReadFile(goFile); err == nil {
+		ex.GoCode = strings.TrimSpace(string(goSrc))
+	}
+	return ex, nil
+}
+
+func loadMultiFileExample(dir string) (Example, error) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return Example{}, err
+	}
+	var names []string
+	for _, e := range entries {
+		if !e.IsDir() && strings.HasSuffix(e.Name(), ".tengo") {
+			names = append(names, e.Name())
+		}
+	}
+	sort.Slice(names, func(i, j int) bool {
+		// main.tengo always first, rest alphabetical.
+		if names[i] == "main.tengo" {
+			return true
+		}
+		if names[j] == "main.tengo" {
+			return false
+		}
+		return names[i] < names[j]
+	})
+
+	files := make(map[string]string, len(names))
+	var exFiles []ExampleFile
+	for _, name := range names {
+		src, err := os.ReadFile(filepath.Join(dir, name))
+		if err != nil {
+			return Example{}, err
+		}
+		modName := strings.TrimSuffix(name, ".tengo")
+		files[modName] = string(src)
+		exFiles = append(exFiles, ExampleFile{Name: name, Code: strings.TrimSpace(string(src))})
+	}
+
+	mainSrc := []byte(files["main"])
+	// Use the directory path for slug/title derivation.
+	ex := parseExample(dir, mainSrc)
+	ex.Files = exFiles
+
+	mainStr := files["main"]
+	if !strings.Contains(mainStr, "// nooutput") {
+		out, _ := tengorunner.RunFiles(files)
+		ex.Output = strings.TrimRight(out, "\n")
+	}
+	return ex, nil
 }
 
 var allCaps = map[string]string{

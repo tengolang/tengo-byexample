@@ -12,12 +12,28 @@ import (
 	"github.com/tengolang/tengo/v3/stdlib"
 )
 
-// Run compiles and executes code, capturing all fmt output into the returned
-// string. errMsg is non-empty on compile or runtime error.
+// Run compiles and executes a single script, capturing all fmt output.
 func Run(code string) (output string, errMsg string) {
+	return RunFiles(map[string]string{"main": code})
+}
+
+// RunFiles compiles and executes a set of files. The file named "main" is the
+// entry point; all others are registered as importable source modules so that
+// import("math_utils") resolves against the provided map.
+func RunFiles(files map[string]string) (output string, errMsg string) {
+	main, ok := files["main"]
+	if !ok {
+		return "", "no main file provided"
+	}
 	var buf bytes.Buffer
-	s := tengo.NewScript([]byte(code))
-	s.SetImports(CaptureFmtModuleMap(&buf))
+	mods := CaptureFmtModuleMap(&buf)
+	for name, src := range files {
+		if name != "main" {
+			mods.AddSourceModule(name, []byte(src))
+		}
+	}
+	s := tengo.NewScript([]byte(main))
+	s.SetImports(mods)
 	s.SetMaxAllocs(1 << 20)
 	compiled, err := s.Compile()
 	if err != nil {

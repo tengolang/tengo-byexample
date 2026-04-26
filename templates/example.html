@@ -21,6 +21,22 @@
         <div class="code empty"></div>
       </div>
       {{end}}
+      {{if .Example.Files}}
+      {{/* Multi-file example: show each file as a labelled code block */}}
+      {{range .Example.Files}}
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code leading">
+          <div class="code-block">
+            <span class="filename-badge">{{.Name}}</span>
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">{{.Code}}</code></pre>
+          </div>
+        </div>
+      </div>
+      {{end}}
+      {{else}}
+      {{/* Single-file example: interleaved doc/code sections */}}
       {{range .Example.Sections}}
       <div class="row" {{if .ID}}id="{{.ID}}"{{end}}>
         <div class="docs">
@@ -35,6 +51,7 @@
           {{end}}
         </div>
       </div>
+      {{end}}
       {{end}}
       {{if .Example.GoCode}}
       <div class="row">
@@ -68,8 +85,26 @@
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            {{if .Example.Files}}
+            {{/* Multi-file playground: one hidden textarea per file, tab strip */}}
+            <div class="file-tabs" id="file-tabs">
+              {{range $i, $f := .Example.Files}}
+              <div class="file-tab{{if eq $i 0}} active{{end}}"
+                   data-tab="{{$i}}" onclick="switchTab(this)">{{$f.Name}}</div>
+              {{end}}
+            </div>
+            {{range $i, $f := .Example.Files}}
+            <textarea class="code-editor-tab" data-tab="{{$i}}"
+              data-name="{{$f.Name}}"
+              data-original="{{$f.Code}}"
+              spellcheck="false"
+              style="{{if ne $i 0}}display:none{{end}}">{{$f.Code}}</textarea>
+            {{end}}
+            {{else}}
+            {{/* Single-file playground */}}
             <textarea id="code-editor" spellcheck="false"
               data-original="{{.Example.PlaygroundCode}}">{{.Example.PlaygroundCode}}</textarea>
+            {{end}}
           </div>
         </div>
       </div>
