@@ -1,4 +1,4 @@
-// # Enum
+// # Collection Helpers
 //
 // The `enum` source module provides functional iteration helpers: `map`,
 // `filter`, `find`, `all`, `any`, and `each`. Callbacks receive the key
