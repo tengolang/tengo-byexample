@@ -3,56 +3,27 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tengo by Example: `main.tengo` imports the module by name — no `.tengo` extension.</title>
+  <title>Tengo by Example: Modules</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <div class="example" id="modules">
-    <h2>`main.tengo` imports the module by name — no `.tengo` extension.</h2>
+    <h2>Modules</h2>
     <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
 
     <div class="example-grid">
       
       <div class="row">
         <div class="docs">
-          <p><code>import</code> returns whatever was exported, here a map of functions.</p>
+          <p><a href="https://en.wikipedia.org/wiki/Modular_programming" target="_blank" rel="noopener">Wikipedia: Modular programming</a> A <code>.tengo</code> file becomes a module by ending with an <code>export</code> statement. Importing it runs the file once, caches the result, and returns the exported value — usually a map of functions — to every importer.</p>
         </div>
         <div class="code empty"></div>
       </div>
       
+
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code leading">
-          <div class="code-block">
-            <span class="filename-badge">main.tengo</span>
-            <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">// `main.tengo` imports the module by name — no `.tengo` extension.
-// `import` returns whatever was exported, here a map of functions.
-fmt  := import(&#34;fmt&#34;)
-math := import(&#34;math_utils&#34;)
-
-fmt.printf(&#34;square(4) = %d\n&#34;, math.square(4))
-fmt.printf(&#34;cube(3)   = %d\n&#34;, math.cube(3))
-fmt.printf(&#34;abs(-7)   = %d\n&#34;, math.abs(-7))
-
-// Any Tengo value can be exported — a map, a single function, a number.
-// Exporting a bare function makes the import directly callable:
-//   double := import(&#34;doubler&#34;)
-//   double(7)  // → 14
-
-// Built-in modules (fmt, math, text, json, …) follow the same protocol.
-// They are pre-compiled Go modules rather than source files, but the
-// import mechanism is identical.
-stdlib := import(&#34;math&#34;)
-fmt.printf(&#34;pi      = %.4f\n&#34;, stdlib.pi)
-fmt.printf(&#34;sqrt(2) = %.4f\n&#34;, stdlib.sqrt(2.0))</code></pre>
-          </div>
-        </div>
-      </div>
       
       <div class="row">
         <div class="docs"></div>
@@ -60,14 +31,7 @@ fmt.printf(&#34;sqrt(2) = %.4f\n&#34;, stdlib.sqrt(2.0))</code></pre>
           <div class="code-block">
             <span class="filename-badge">math_utils.tengo</span>
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">// # Modules
-//
-// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
-// A `.tengo` file becomes a module by ending with an `export` statement.
-// Importing it runs the file once, caches the result, and returns the
-// exported value — usually a map of functions — to every importer.
-
-// `math_utils.tengo` defines three helpers and exports them as a map.
+            <pre><code class="language-go">// `math_utils.tengo` defines three helpers and exports them as a map.
 // The module has no side effects on import — it only defines and exports.
 square := func(x) { return x * x }
 cube   := func(x) { return x * x * x }
@@ -83,6 +47,53 @@ export {
       </div>
       
       
+      <div class="row" id="maintengo-imports-the-module-by-name-no-tengo-extension">
+        <div class="docs">
+          <p><a href="#maintengo-imports-the-module-by-name-no-tengo-extension"><code>main.tengo</code> imports the module by name — no <code>.tengo</code> extension. <code>import</code> returns whatever was exported, here a map of functions.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt  := import(&#34;fmt&#34;)
+math := import(&#34;math_utils&#34;)
+
+fmt.printf(&#34;square(4) = %d\n&#34;, math.square(4))
+fmt.printf(&#34;cube(3)   = %d\n&#34;, math.cube(3))
+fmt.printf(&#34;abs(-7)   = %d\n&#34;, math.abs(-7))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="any-tengo-value-can-be-exported-a-map-a-single-function-a-number">
+        <div class="docs">
+          <p><a href="#any-tengo-value-can-be-exported-a-map-a-single-function-a-number">Any Tengo value can be exported — a map, a single function, a number. Exporting a bare function makes the import directly callable: <code>double := import(&#34;doubler&#34;)</code> then <code>double(7)</code> returns <code>14</code>.</a></p>
+        </div>
+        <div class="code leading">
+          
+        </div>
+      </div>
+      
+      <div class="row" id="built-in-modules-fmt-math-text-json-follow-the-same">
+        <div class="docs">
+          <p><a href="#built-in-modules-fmt-math-text-json-follow-the-same">Built-in modules (<code>fmt</code>, <code>math</code>, <code>text</code>, <code>json</code>, …) follow the same protocol: pre-compiled Go modules imported identically to source files.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">stdlib := import(&#34;math&#34;)
+fmt.printf(&#34;pi      = %.4f\n&#34;, stdlib.pi)
+fmt.printf(&#34;sqrt(2) = %.4f\n&#34;, stdlib.sqrt(2.0))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+
+      
+
       
     </div>
 
@@ -120,91 +131,8 @@ sqrt(2) = 1.4142</pre>
                    data-tab="1" onclick="switchTab(this)">math_utils.tengo</div>
               
             </div>
-            
-            <textarea class="code-editor-tab" data-tab="0"
-              data-name="main.tengo"
-              data-original="// `main.tengo` imports the module by name — no `.tengo` extension.
-// `import` returns whatever was exported, here a map of functions.
-fmt  := import(&#34;fmt&#34;)
-math := import(&#34;math_utils&#34;)
-
-fmt.printf(&#34;square(4) = %d\n&#34;, math.square(4))
-fmt.printf(&#34;cube(3)   = %d\n&#34;, math.cube(3))
-fmt.printf(&#34;abs(-7)   = %d\n&#34;, math.abs(-7))
-
-// Any Tengo value can be exported — a map, a single function, a number.
-// Exporting a bare function makes the import directly callable:
-//   double := import(&#34;doubler&#34;)
-//   double(7)  // → 14
-
-// Built-in modules (fmt, math, text, json, …) follow the same protocol.
-// They are pre-compiled Go modules rather than source files, but the
-// import mechanism is identical.
-stdlib := import(&#34;math&#34;)
-fmt.printf(&#34;pi      = %.4f\n&#34;, stdlib.pi)
-fmt.printf(&#34;sqrt(2) = %.4f\n&#34;, stdlib.sqrt(2.0))"
-              spellcheck="false"
-              style="">// `main.tengo` imports the module by name — no `.tengo` extension.
-// `import` returns whatever was exported, here a map of functions.
-fmt  := import(&#34;fmt&#34;)
-math := import(&#34;math_utils&#34;)
-
-fmt.printf(&#34;square(4) = %d\n&#34;, math.square(4))
-fmt.printf(&#34;cube(3)   = %d\n&#34;, math.cube(3))
-fmt.printf(&#34;abs(-7)   = %d\n&#34;, math.abs(-7))
-
-// Any Tengo value can be exported — a map, a single function, a number.
-// Exporting a bare function makes the import directly callable:
-//   double := import(&#34;doubler&#34;)
-//   double(7)  // → 14
-
-// Built-in modules (fmt, math, text, json, …) follow the same protocol.
-// They are pre-compiled Go modules rather than source files, but the
-// import mechanism is identical.
-stdlib := import(&#34;math&#34;)
-fmt.printf(&#34;pi      = %.4f\n&#34;, stdlib.pi)
-fmt.printf(&#34;sqrt(2) = %.4f\n&#34;, stdlib.sqrt(2.0))</textarea>
-            
-            <textarea class="code-editor-tab" data-tab="1"
-              data-name="math_utils.tengo"
-              data-original="// # Modules
-//
-// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
-// A `.tengo` file becomes a module by ending with an `export` statement.
-// Importing it runs the file once, caches the result, and returns the
-// exported value — usually a map of functions — to every importer.
-
-// `math_utils.tengo` defines three helpers and exports them as a map.
-// The module has no side effects on import — it only defines and exports.
-square := func(x) { return x * x }
-cube   := func(x) { return x * x * x }
-abs    := func(x) { return x &lt; 0 ? -x : x }
-
-export {
-    square: square,
-    cube:   cube,
-    abs:    abs,
-}"
-              spellcheck="false"
-              style="display:none">// # Modules
-//
-// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)
-// A `.tengo` file becomes a module by ending with an `export` statement.
-// Importing it runs the file once, caches the result, and returns the
-// exported value — usually a map of functions — to every importer.
-
-// `math_utils.tengo` defines three helpers and exports them as a map.
-// The module has no side effects on import — it only defines and exports.
-square := func(x) { return x * x }
-cube   := func(x) { return x * x * x }
-abs    := func(x) { return x &lt; 0 ? -x : x }
-
-export {
-    square: square,
-    cube:   cube,
-    abs:    abs,
-}</textarea>
-            
+            <script type="application/json" id="tab-data">[{"name":"main.tengo","code":"// # Modules\n//\n// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)\n// A `.tengo` file becomes a module by ending with an `export` statement.\n// Importing it runs the file once, caches the result, and returns the\n// exported value — usually a map of functions — to every importer.\n\n// `main.tengo` imports the module by name — no `.tengo` extension.\n// `import` returns whatever was exported, here a map of functions.\nfmt  := import(\"fmt\")\nmath := import(\"math_utils\")\n\nfmt.printf(\"square(4) = %d\\n\", math.square(4))\nfmt.printf(\"cube(3)   = %d\\n\", math.cube(3))\nfmt.printf(\"abs(-7)   = %d\\n\", math.abs(-7))\n\n// Any Tengo value can be exported — a map, a single function, a number.\n// Exporting a bare function makes the import directly callable:\n// `double := import(\"doubler\")` then `double(7)` returns `14`.\n\n// Built-in modules (`fmt`, `math`, `text`, `json`, …) follow the same\n// protocol: pre-compiled Go modules imported identically to source files.\nstdlib := import(\"math\")\nfmt.printf(\"pi      = %.4f\\n\", stdlib.pi)\nfmt.printf(\"sqrt(2) = %.4f\\n\", stdlib.sqrt(2.0))","original":"// # Modules\n//\n// [Wikipedia: Modular programming](https://en.wikipedia.org/wiki/Modular_programming)\n// A `.tengo` file becomes a module by ending with an `export` statement.\n// Importing it runs the file once, caches the result, and returns the\n// exported value — usually a map of functions — to every importer.\n\n// `main.tengo` imports the module by name — no `.tengo` extension.\n// `import` returns whatever was exported, here a map of functions.\nfmt  := import(\"fmt\")\nmath := import(\"math_utils\")\n\nfmt.printf(\"square(4) = %d\\n\", math.square(4))\nfmt.printf(\"cube(3)   = %d\\n\", math.cube(3))\nfmt.printf(\"abs(-7)   = %d\\n\", math.abs(-7))\n\n// Any Tengo value can be exported — a map, a single function, a number.\n// Exporting a bare function makes the import directly callable:\n// `double := import(\"doubler\")` then `double(7)` returns `14`.\n\n// Built-in modules (`fmt`, `math`, `text`, `json`, …) follow the same\n// protocol: pre-compiled Go modules imported identically to source files.\nstdlib := import(\"math\")\nfmt.printf(\"pi      = %.4f\\n\", stdlib.pi)\nfmt.printf(\"sqrt(2) = %.4f\\n\", stdlib.sqrt(2.0))"},{"name":"math_utils.tengo","code":"// `math_utils.tengo` defines three helpers and exports them as a map.\n// The module has no side effects on import — it only defines and exports.\nsquare := func(x) { return x * x }\ncube   := func(x) { return x * x * x }\nabs    := func(x) { return x \u003c 0 ? -x : x }\n\nexport {\n    square: square,\n    cube:   cube,\n    abs:    abs,\n}","original":"// `math_utils.tengo` defines three helpers and exports them as a map.\n// The module has no side effects on import — it only defines and exports.\nsquare := func(x) { return x * x }\ncube   := func(x) { return x * x * x }\nabs    := func(x) { return x \u003c 0 ? -x : x }\n\nexport {\n    square: square,\n    cube:   cube,\n    abs:    abs,\n}"}]</script>
+            <div id="multi-editor"></div>
             
           </div>
         </div>
