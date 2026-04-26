@@ -16,31 +16,85 @@
       
       <div class="row">
         <div class="docs">
-          <p>Any <code>.tengo</code> file can be a module. Use <code>export</code> to expose a value — typically a map of functions — that other scripts import by filename. <a href="https://en.wikipedia.org/wiki/Modular_programming" target="_blank" rel="noopener">Wikipedia: Modular programming</a></p>
+          <p>A <code>.tengo</code> file becomes a module when it ends with an <code>export</code> statement. The module runs top to bottom, then returns its exported value to the caller — typically a map of functions. Modules are evaluated once and the result is cached for all importers. <a href="https://en.wikipedia.org/wiki/Modular_programming" target="_blank" rel="noopener">Wikipedia: Modular programming</a></p>
         </div>
         <div class="code empty"></div>
       </div>
       
       
-      <div class="row" >
+      <div class="row" id="this-is-mathutilstengo-a-module-file-that-bundles-three">
         <div class="docs">
-          
+          <p><a href="#this-is-mathutilstengo-a-module-file-that-bundles-three">This is <code>math_utils.tengo</code> — a module file that bundles three
+related helpers and exports them as a single map.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+            <pre><code class="language-go">square := func(x) { return x * x }
+cube   := func(x) { return x * x * x }
+abs    := func(x) { return x &lt; 0 ? -x : x }
 
-math_utils := {
-    square: func(x) { return x * x },
-    cube:   func(x) { return x * x * x },
-    abs:    func(x) { if x &lt; 0 { return -x }; return x },
-}
+export {
+    square: square,
+    cube:   cube,
+    abs:    abs,
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="in-maintengo-the-module-is-imported-by-name-no-tengo">
+        <div class="docs">
+          <p><a href="#in-maintengo-the-module-is-imported-by-name-no-tengo">In <code>main.tengo</code> the module is imported by name (no <code>.tengo</code>
+extension needed). <code>import</code> returns the exported map.
 
-fmt.println(math_utils.square(4))
-fmt.println(math_utils.cube(3))
-fmt.println(math_utils.abs(-7))</code></pre>
+  fmt  := import(&#34;fmt&#34;)
+  math := import(&#34;math_utils&#34;)
+
+  fmt.println(math.square(4))   // 16
+  fmt.println(math.cube(3))     // 27
+  fmt.println(math.abs(-5))     // 5</a></p>
+        </div>
+        <div class="code leading">
+          
+        </div>
+      </div>
+      
+      <div class="row" id="a-module-can-export-any-single-value-exporting-a-bare-function">
+        <div class="docs">
+          <p><a href="#a-module-can-export-any-single-value-exporting-a-bare-function">A module can export any single value. Exporting a bare function
+makes the import expression directly callable:
+
+  export func(x) { return x * 2 }
+
+  double := import(&#34;doubler&#34;)
+  fmt.println(double(7))        // 14</a></p>
+        </div>
+        <div class="code leading">
+          
+        </div>
+      </div>
+      
+      <div class="row" id="tengos-built-in-modules-fmt-math-text-json-are-pre-compiled">
+        <div class="docs">
+          <p><a href="#tengos-built-in-modules-fmt-math-text-json-are-pre-compiled">Tengo&#39;s built-in modules (fmt, math, text, json, …) are pre-compiled
+modules that follow exactly the same import protocol. In the playground
+below, <code>import</code> works with any built-in module — swap in <code>math_utils</code>
+when running in a project with that file on disk.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt  := import(&#34;fmt&#34;)
+math := import(&#34;math&#34;)
+
+fmt.printf(&#34;pi        = %.4f\n&#34;, math.pi)
+fmt.printf(&#34;sqrt(2)   = %.4f\n&#34;, math.sqrt(2.0))
+fmt.printf(&#34;square(5) = %d\n&#34;,   square(5))
+fmt.printf(&#34;cube(3)   = %d\n&#34;,   cube(3))</code></pre>
           </div>
           
         </div>
@@ -51,9 +105,10 @@ fmt.println(math_utils.abs(-7))</code></pre>
       <div class="row">
         <div class="docs"></div>
         <div class="code">
-          <pre class="static-output">16
-27
-7</pre>
+          <pre class="static-output">pi        = 3.1416
+sqrt(2)   = 1.4142
+square(5) = 25
+cube(3)   = 27</pre>
         </div>
       </div>
       
@@ -73,27 +128,47 @@ fmt.println(math_utils.abs(-7))</code></pre>
               <span id="wasm-status">loading…</span>
             </div>
             <textarea id="code-editor" spellcheck="false"
-              data-original="fmt := import(&#34;fmt&#34;)
+              data-original="square := func(x) { return x * x }
+cube   := func(x) { return x * x * x }
+abs    := func(x) { return x &lt; 0 ? -x : x }
 
-math_utils := {
-    square: func(x) { return x * x },
-    cube:   func(x) { return x * x * x },
-    abs:    func(x) { if x &lt; 0 { return -x }; return x },
+export {
+    square: square,
+    cube:   cube,
+    abs:    abs,
 }
 
-fmt.println(math_utils.square(4))
-fmt.println(math_utils.cube(3))
-fmt.println(math_utils.abs(-7))">fmt := import(&#34;fmt&#34;)
 
-math_utils := {
-    square: func(x) { return x * x },
-    cube:   func(x) { return x * x * x },
-    abs:    func(x) { if x &lt; 0 { return -x }; return x },
+
+
+
+fmt  := import(&#34;fmt&#34;)
+math := import(&#34;math&#34;)
+
+fmt.printf(&#34;pi        = %.4f\n&#34;, math.pi)
+fmt.printf(&#34;sqrt(2)   = %.4f\n&#34;, math.sqrt(2.0))
+fmt.printf(&#34;square(5) = %d\n&#34;,   square(5))
+fmt.printf(&#34;cube(3)   = %d\n&#34;,   cube(3))">square := func(x) { return x * x }
+cube   := func(x) { return x * x * x }
+abs    := func(x) { return x &lt; 0 ? -x : x }
+
+export {
+    square: square,
+    cube:   cube,
+    abs:    abs,
 }
 
-fmt.println(math_utils.square(4))
-fmt.println(math_utils.cube(3))
-fmt.println(math_utils.abs(-7))</textarea>
+
+
+
+
+fmt  := import(&#34;fmt&#34;)
+math := import(&#34;math&#34;)
+
+fmt.printf(&#34;pi        = %.4f\n&#34;, math.pi)
+fmt.printf(&#34;sqrt(2)   = %.4f\n&#34;, math.sqrt(2.0))
+fmt.printf(&#34;square(5) = %d\n&#34;,   square(5))
+fmt.printf(&#34;cube(3)   = %d\n&#34;,   cube(3))</textarea>
           </div>
         </div>
       </div>

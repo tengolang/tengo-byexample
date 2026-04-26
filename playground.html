@@ -1013,17 +1013,27 @@ p := new_point(3, 4)
 fmt.println(p.string())
 fmt.printf(&#34;%d %d\n&#34;, p.x, p.y)">Maps as Objects</option>
             
-            <option value="modules" data-code="fmt := import(&#34;fmt&#34;)
+            <option value="modules" data-code="square := func(x) { return x * x }
+cube   := func(x) { return x * x * x }
+abs    := func(x) { return x &lt; 0 ? -x : x }
 
-math_utils := {
-    square: func(x) { return x * x },
-    cube:   func(x) { return x * x * x },
-    abs:    func(x) { if x &lt; 0 { return -x }; return x },
+export {
+    square: square,
+    cube:   cube,
+    abs:    abs,
 }
 
-fmt.println(math_utils.square(4))
-fmt.println(math_utils.cube(3))
-fmt.println(math_utils.abs(-7))">Modules</option>
+
+
+
+
+fmt  := import(&#34;fmt&#34;)
+math := import(&#34;math&#34;)
+
+fmt.printf(&#34;pi        = %.4f\n&#34;, math.pi)
+fmt.printf(&#34;sqrt(2)   = %.4f\n&#34;, math.sqrt(2.0))
+fmt.printf(&#34;square(5) = %d\n&#34;,   square(5))
+fmt.printf(&#34;cube(3)   = %d\n&#34;,   cube(3))">Modules</option>
             
             <option value="coroutine-pipelines" data-code="fmt := import(&#34;fmt&#34;)
 coro := import(&#34;coro&#34;)
