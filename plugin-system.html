@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Scripts can register named event handlers that the host dispatches when events fire. End users extend application behaviour without touching Go code, and different scripts can register different sets of handlers for the same event bus. <a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" target="_blank" rel="noopener">Wikipedia: Plug-in</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Plug-in_(computing)" target="_blank" rel="noopener">Wikipedia: Plug-in</a><br>Scripts can register named event handlers that the host dispatches when events fire. End users extend application behaviour without touching Go code, and different scripts can register different sets of handlers for the same event bus.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,9 +38,7 @@
       
       <div class="row" id="each-handler-is-a-function-that-receives-an-event-payload-map">
         <div class="docs">
-          <p><a href="#each-handler-is-a-function-that-receives-an-event-payload-map">Each handler is a function that receives an event payload map.
-Handlers are plain Tengo functions — they can import modules,
-call helpers, maintain closure state, or return values to the host.</a></p>
+          <p><a href="#each-handler-is-a-function-that-receives-an-event-payload-map">Each handler is a function that receives an event payload map. Handlers are plain Tengo functions — they can import modules, call helpers, maintain closure state, or return values to the host.</a></p>
         </div>
         <div class="code leading">
           
@@ -112,11 +110,21 @@ dispatch(&#34;on_password_reset&#34;,{username: &#34;alice&#34;})</code></pre>
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">login:  alice (admin=false)
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="login:  alice (admin=false)
+login:  root (admin=true)
+        → audit log entry written
+order:  Graphics card ×2 = $698.00
+        → fraud review triggered
+order:  Mouse pad ×1 = $12.00
+logout: alice
+(no handler for &#34;on_password_reset&#34;)">login:  alice (admin=false)
 login:  root (admin=true)
         → audit log entry written
 order:  Graphics card ×2 = $698.00
@@ -124,16 +132,7 @@ order:  Graphics card ×2 = $698.00
 order:  Mouse pad ×1 = $12.00
 logout: alice
 (no handler for &#34;on_password_reset&#34;)</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Tengo uses lexical (block) scoping. <code>:=</code> always declares a new variable in the current scope; <code>=</code> assigns to an existing one in an enclosing scope. <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)" target="_blank" rel="noopener">Wikipedia: Scope</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Scope_(computer_science)" target="_blank" rel="noopener">Wikipedia: Scope</a><br>Tengo uses lexical (block) scoping. <code>:=</code> always declares a new variable in the current scope; <code>=</code> assigns to an existing one in an enclosing scope.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -74,8 +74,7 @@ fmt.println(x)</code></pre>
       
       <div class="row" id="loop-variables-are-scoped-to-the-loop-body">
         <div class="docs">
-          <p><a href="#loop-variables-are-scoped-to-the-loop-body">Loop variables are scoped to the loop body.
-Referencing <code>i</code> outside the loop would be a compile error.</a></p>
+          <p><a href="#loop-variables-are-scoped-to-the-loop-body">Loop variables are scoped to the loop body. Referencing <code>i</code> outside the loop would be a compile error.</a></p>
         </div>
         <div class="code leading">
           
@@ -109,8 +108,7 @@ fmt.println(counter)</code></pre>
       
       <div class="row" id="loop-closure-trap-all-closures-share-the-same-loop-variable">
         <div class="docs">
-          <p><a href="#loop-closure-trap-all-closures-share-the-same-loop-variable">Loop-closure trap: all closures share the same loop variable.
-When the loop ends <code>i</code> equals 3, so every closure returns 3.</a></p>
+          <p><a href="#loop-closure-trap-all-closures-share-the-same-loop-variable">Loop-closure trap: all closures share the same loop variable. When the loop ends <code>i</code> equals 3, so every closure returns 3.</a></p>
         </div>
         <div class="code leading">
           
@@ -128,8 +126,7 @@ fmt.printf(&#34;%d %d %d\n&#34;, fns[0](), fns[1](), fns[2]())</code></pre>
       
       <div class="row" id="fix-use-an-immediately-called-function-to-pass-the-current-value">
         <div class="docs">
-          <p><a href="#fix-use-an-immediately-called-function-to-pass-the-current-value">Fix: use an immediately-called function to pass the current value
-as a parameter, creating a fresh binding for each iteration.</a></p>
+          <p><a href="#fix-use-an-immediately-called-function-to-pass-the-current-value">Fix: use an immediately-called function to pass the current value as a parameter, creating a fresh binding for each iteration.</a></p>
         </div>
         <div class="code leading">
           
@@ -146,26 +143,25 @@ fmt.printf(&#34;%d %d %d\n&#34;, fns2[0](), fns2[1](), fns2[2]())</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">20
-10
-30
-2
-3 3 3
-0 1 2</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="20
+10
+30
+2
+3 3 3
+0 1 2">20
+10
+30
+2
+3 3 3
+0 1 2</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

@@ -74,8 +74,14 @@ function resetCode() {
   setCode(ta ? ta.dataset.original : '');
   const output = document.getElementById('output');
   if (output) {
-    output.className = '';
-    output.innerHTML = '<span class="hint">$ (output will appear here)</span>';
+    const expected = output.dataset.expected;
+    if (expected) {
+      output.className = 'expected-output';
+      output.textContent = expected;
+    } else {
+      output.className = '';
+      output.innerHTML = '<span class="hint">$ (output will appear here)</span>';
+    }
   }
 }
 

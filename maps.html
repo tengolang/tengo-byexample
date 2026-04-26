@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Maps are Tengo&#39;s built-in associative data type (sometimes called hashes or dicts). <a href="https://en.wikipedia.org/wiki/Associative_array" target="_blank" rel="noopener">Wikipedia: Associative array</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Associative_array" target="_blank" rel="noopener">Wikipedia: Associative array</a><br>Maps are Tengo&#39;s built-in associative data type (sometimes called hashes or dicts).</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -73,7 +73,7 @@ m[&#34;k2&#34;] = 13</code></pre>
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;map:&#34;, m)</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;map: &#34;, m)</code></pre>
           </div>
           
         </div>
@@ -96,14 +96,13 @@ fmt.println(&#34;v1: &#34;, v1)</code></pre>
       
       <div class="row" id="the-built-in-len-returns-the-number-of-keyvalue-pairs">
         <div class="docs">
-          <p><a href="#the-built-in-len-returns-the-number-of-keyvalue-pairs">The built-in <code>len</code> returns the number of key/value pairs
-when called on a map.</a></p>
+          <p><a href="#the-built-in-len-returns-the-number-of-keyvalue-pairs">The built-in <code>len</code> returns the number of key/value pairs when called on a map.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;len:&#34;, len(m))</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;len: &#34;, len(m))</code></pre>
           </div>
           
         </div>
@@ -118,7 +117,7 @@ when called on a map.</a></p>
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">delete(m, &#34;k2&#34;)
-fmt.println(&#34;map:&#34;, m)</code></pre>
+fmt.println(&#34;map: &#34;, m)</code></pre>
           </div>
           
         </div>
@@ -126,32 +125,19 @@ fmt.println(&#34;map:&#34;, m)</code></pre>
       
       <div class="row" id="you-can-also-use-a-literal-syntax-to-declare-and-initialize">
         <div class="docs">
-          <p><a href="#you-can-also-use-a-literal-syntax-to-declare-and-initialize">You can also use a literal syntax to declare and initialize
-a new map on the same line.</a></p>
+          <p><a href="#you-can-also-use-a-literal-syntax-to-declare-and-initialize">You can also use a literal syntax to declare and initialize a new map on the same line.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">n := {foo: 1, bar: 2}
-fmt.println(&#34;map:&#34;, n)</code></pre>
+fmt.println(&#34;map: &#34;, n)</code></pre>
           </div>
           
         </div>
       </div>
       
-      
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">map: {k1: 7, k2: 13}
-v1:  7
-len: 2
-map: {k1: 7}
-map: {foo: 1, bar: 2}</pre>
-        </div>
-      </div>
       
     </div>
 
@@ -159,7 +145,17 @@ map: {foo: 1, bar: 2}</pre>
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="map: {k2: 13, k1: 7}
+v1: 7
+len: 2
+map: {k1: 7}
+map: {bar: 2, foo: 1}">map: {k2: 13, k1: 7}
+v1: 7
+len: 2
+map: {k1: 7}
+map: {bar: 2, foo: 1}</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -176,36 +172,36 @@ m := {}
 m[&#34;k1&#34;] = 7
 m[&#34;k2&#34;] = 13
 
-fmt.println(&#34;map:&#34;, m)
+fmt.println(&#34;map: &#34;, m)
 
 v1 := m[&#34;k1&#34;]
 fmt.println(&#34;v1: &#34;, v1)
 
-fmt.println(&#34;len:&#34;, len(m))
+fmt.println(&#34;len: &#34;, len(m))
 
 delete(m, &#34;k2&#34;)
-fmt.println(&#34;map:&#34;, m)
+fmt.println(&#34;map: &#34;, m)
 
 n := {foo: 1, bar: 2}
-fmt.println(&#34;map:&#34;, n)">fmt := import(&#34;fmt&#34;)
+fmt.println(&#34;map: &#34;, n)">fmt := import(&#34;fmt&#34;)
 
 m := {}
 
 m[&#34;k1&#34;] = 7
 m[&#34;k2&#34;] = 13
 
-fmt.println(&#34;map:&#34;, m)
+fmt.println(&#34;map: &#34;, m)
 
 v1 := m[&#34;k1&#34;]
 fmt.println(&#34;v1: &#34;, v1)
 
-fmt.println(&#34;len:&#34;, len(m))
+fmt.println(&#34;len: &#34;, len(m))
 
 delete(m, &#34;k2&#34;)
-fmt.println(&#34;map:&#34;, m)
+fmt.println(&#34;map: &#34;, m)
 
 n := {foo: 1, bar: 2}
-fmt.println(&#34;map:&#34;, n)</textarea>
+fmt.println(&#34;map: &#34;, n)</textarea>
           </div>
         </div>
       </div>

@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>The <code>os</code> module provides <code>getenv</code>, <code>setenv</code>, <code>unsetenv</code>, and <code>lookup_env</code> for reading and writing the process environment. <a href="https://en.wikipedia.org/wiki/Environment_variable" target="_blank" rel="noopener">Wikipedia: Environment variable</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Environment_variable" target="_blank" rel="noopener">Wikipedia: Environment variable</a><br>The <code>os</code> module provides <code>getenv</code>, <code>setenv</code>, <code>unsetenv</code>, and <code>lookup_env</code> for reading and writing the process environment.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -69,16 +69,14 @@ fmt.println(os.getenv(&#34;GREETING&#34;))</code></pre>
       
       <div class="row" id="lookupenv-returns-value-true-when-the-variable-exists">
         <div class="docs">
-          <p><a href="#lookupenv-returns-value-true-when-the-variable-exists"><code>lookup_env</code> returns <code>(value, true)</code> when the variable exists,
-or <code>(&#34;&#34;, false)</code> when it is absent — useful to distinguish
-an unset variable from one set to the empty string.</a></p>
+          <p><a href="#lookupenv-returns-value-true-when-the-variable-exists"><code>lookup_env</code> returns <code>(value, true)</code> when the variable exists, or <code>(&#34;&#34;, false)</code> when it is absent — useful to distinguish an unset variable from one set to the empty string.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">val, ok := os.lookup_env(&#34;GREETING&#34;)
-fmt.println(val, ok)
+fmt.printf(&#34;%v %v\n&#34;, val, ok)
 
 _, ok = os.lookup_env(&#34;MISSING&#34;)
 fmt.println(ok)
@@ -90,24 +88,21 @@ os.unsetenv(&#34;GREETING&#34;)</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">/home/tengo
-
-hello
-[&#34;hello&#34;, true] </pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="/home/tengo
+
+hello
+[&#34;hello&#34;, true] &lt;undefined&gt;">/home/tengo
+
+hello
+[&#34;hello&#34;, true] &lt;undefined&gt;</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -127,7 +122,7 @@ os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
 fmt.println(os.getenv(&#34;GREETING&#34;))
 
 val, ok := os.lookup_env(&#34;GREETING&#34;)
-fmt.println(val, ok)
+fmt.printf(&#34;%v %v\n&#34;, val, ok)
 
 _, ok = os.lookup_env(&#34;MISSING&#34;)
 fmt.println(ok)
@@ -142,7 +137,7 @@ os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
 fmt.println(os.getenv(&#34;GREETING&#34;))
 
 val, ok := os.lookup_env(&#34;GREETING&#34;)
-fmt.println(val, ok)
+fmt.printf(&#34;%v %v\n&#34;, val, ok)
 
 _, ok = os.lookup_env(&#34;MISSING&#34;)
 fmt.println(ok)

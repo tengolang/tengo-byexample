@@ -67,8 +67,8 @@
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(&#34;min:&#34;, lo)
-fmt.println(&#34;max:&#34;, hi)</code></pre>
+fmt.println(&#34;min: &#34;, lo)
+fmt.println(&#34;max: &#34;, hi)</code></pre>
           </div>
           
         </div>
@@ -76,8 +76,7 @@ fmt.println(&#34;max:&#34;, hi)</code></pre>
       
       <div class="row" id="a-common-pattern-is-returning-a-result-and-an-error">
         <div class="docs">
-          <p><a href="#a-common-pattern-is-returning-a-result-and-an-error">A common pattern is returning a result and an error.
-Use <code>_</code> to discard a value you don&#39;t need.</a></p>
+          <p><a href="#a-common-pattern-is-returning-a-result-and-an-error">A common pattern is returning a result and an error. Use <code>_</code> to discard a value you don&#39;t need.</a></p>
         </div>
         <div class="code leading">
           
@@ -91,26 +90,15 @@ Use <code>_</code> to discard a value you don&#39;t need.</a></p>
 }
 
 result, err := divide(10, 3)
-fmt.println(&#34;result:&#34;, result)
+fmt.println(&#34;result: &#34;, result)
 
 _, err = divide(5, 0)
-fmt.println(&#34;is_error:&#34;, is_error(err))</code></pre>
+fmt.println(&#34;is_error: &#34;, is_error(err))</code></pre>
           </div>
           
         </div>
       </div>
       
-      
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">min: 1
-max: 9
-result: 3
-is_error: true</pre>
-        </div>
-      </div>
       
     </div>
 
@@ -118,7 +106,15 @@ is_error: true</pre>
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="min: 1
+max: 9
+result: 3
+is_error: true">min: 1
+max: 9
+result: 3
+is_error: true</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -141,8 +137,8 @@ minmax := func(arr) {
 }
 
 lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(&#34;min:&#34;, lo)
-fmt.println(&#34;max:&#34;, hi)
+fmt.println(&#34;min: &#34;, lo)
+fmt.println(&#34;max: &#34;, hi)
 
 divide := func(a, b) {
     if b == 0 {
@@ -152,10 +148,10 @@ divide := func(a, b) {
 }
 
 result, err := divide(10, 3)
-fmt.println(&#34;result:&#34;, result)
+fmt.println(&#34;result: &#34;, result)
 
 _, err = divide(5, 0)
-fmt.println(&#34;is_error:&#34;, is_error(err))">fmt := import(&#34;fmt&#34;)
+fmt.println(&#34;is_error: &#34;, is_error(err))">fmt := import(&#34;fmt&#34;)
 
 minmax := func(arr) {
     mn := arr[0]
@@ -168,8 +164,8 @@ minmax := func(arr) {
 }
 
 lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(&#34;min:&#34;, lo)
-fmt.println(&#34;max:&#34;, hi)
+fmt.println(&#34;min: &#34;, lo)
+fmt.println(&#34;max: &#34;, hi)
 
 divide := func(a, b) {
     if b == 0 {
@@ -179,10 +175,10 @@ divide := func(a, b) {
 }
 
 result, err := divide(10, 3)
-fmt.println(&#34;result:&#34;, result)
+fmt.println(&#34;result: &#34;, result)
 
 _, err = divide(5, 0)
-fmt.println(&#34;is_error:&#34;, is_error(err))</textarea>
+fmt.println(&#34;is_error: &#34;, is_error(err))</textarea>
           </div>
         </div>
       </div>

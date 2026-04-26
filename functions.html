@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Functions are central in Tengo. They are values that can be assigned to variables, passed as arguments, and returned from other functions. <a href="https://en.wikipedia.org/wiki/Subroutine" target="_blank" rel="noopener">Wikipedia: Subroutine</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Subroutine" target="_blank" rel="noopener">Wikipedia: Subroutine</a><br>Functions are central in Tengo. They are values that can be assigned to variables, passed as arguments, and returned from other functions.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,8 +38,7 @@
       
       <div class="row" id="heres-a-function-that-takes-two-numbers-and-returns-their-sum">
         <div class="docs">
-          <p><a href="#heres-a-function-that-takes-two-numbers-and-returns-their-sum">Here&#39;s a function that takes two numbers and returns their sum.
-Use <code>return</code> to return a value explicitly.</a></p>
+          <p><a href="#heres-a-function-that-takes-two-numbers-and-returns-their-sum">Here&#39;s a function that takes two numbers and returns their sum. Use <code>return</code> to return a value explicitly.</a></p>
         </div>
         <div class="code leading">
           
@@ -62,7 +61,7 @@ Use <code>return</code> to return a value explicitly.</a></p>
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">res := plus(1, 2)
-fmt.println(&#34;1&#43;2 =&#34;, res)</code></pre>
+fmt.println(&#34;1&#43;2 = &#34;, res)</code></pre>
           </div>
           
         </div>
@@ -80,7 +79,7 @@ fmt.println(&#34;1&#43;2 =&#34;, res)</code></pre>
     return a &#43; b &#43; c
 }
 res = plusPlus(1, 2, 3)
-fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)</code></pre>
+fmt.println(&#34;1&#43;2&#43;3 = &#34;, res)</code></pre>
           </div>
           
         </div>
@@ -97,22 +96,12 @@ fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)</code></pre>
             <pre><code class="language-go">apply := func(f, a, b) {
     return f(a, b)
 }
-fmt.println(&#34;apply:&#34;, apply(plus, 5, 3))</code></pre>
+fmt.println(&#34;apply: &#34;, apply(plus, 5, 3))</code></pre>
           </div>
           
         </div>
       </div>
       
-      
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">1&#43;2 = 3
-1&#43;2&#43;3 = 6
-apply: 8</pre>
-        </div>
-      </div>
       
     </div>
 
@@ -120,7 +109,13 @@ apply: 8</pre>
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="1&#43;2 = 3
+1&#43;2&#43;3 = 6
+apply: 8">1&#43;2 = 3
+1&#43;2&#43;3 = 6
+apply: 8</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -137,36 +132,36 @@ plus := func(a, b) {
 }
 
 res := plus(1, 2)
-fmt.println(&#34;1&#43;2 =&#34;, res)
+fmt.println(&#34;1&#43;2 = &#34;, res)
 
 plusPlus := func(a, b, c) {
     return a &#43; b &#43; c
 }
 res = plusPlus(1, 2, 3)
-fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)
+fmt.println(&#34;1&#43;2&#43;3 = &#34;, res)
 
 apply := func(f, a, b) {
     return f(a, b)
 }
-fmt.println(&#34;apply:&#34;, apply(plus, 5, 3))">fmt := import(&#34;fmt&#34;)
+fmt.println(&#34;apply: &#34;, apply(plus, 5, 3))">fmt := import(&#34;fmt&#34;)
 
 plus := func(a, b) {
     return a &#43; b
 }
 
 res := plus(1, 2)
-fmt.println(&#34;1&#43;2 =&#34;, res)
+fmt.println(&#34;1&#43;2 = &#34;, res)
 
 plusPlus := func(a, b, c) {
     return a &#43; b &#43; c
 }
 res = plusPlus(1, 2, 3)
-fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)
+fmt.println(&#34;1&#43;2&#43;3 = &#34;, res)
 
 apply := func(f, a, b) {
     return f(a, b)
 }
-fmt.println(&#34;apply:&#34;, apply(plus, 5, 3))</textarea>
+fmt.println(&#34;apply: &#34;, apply(plus, 5, 3))</textarea>
           </div>
         </div>
       </div>

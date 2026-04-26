@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Tengo provides built-in functions to convert between its core types. <a href="https://en.wikipedia.org/wiki/Type_conversion" target="_blank" rel="noopener">Wikipedia: Type conversion</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Type_conversion" target="_blank" rel="noopener">Wikipedia: Type conversion</a><br>Tengo provides built-in functions to convert between its core types.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,8 +38,7 @@
       
       <div class="row" id="int-converts-a-string-or-float-to-an-integer">
         <div class="docs">
-          <p><a href="#int-converts-a-string-or-float-to-an-integer"><code>int</code> converts a string or float to an integer.
-Float conversion truncates toward zero.</a></p>
+          <p><a href="#int-converts-a-string-or-float-to-an-integer"><code>int</code> converts a string or float to an integer. Float conversion truncates toward zero.</a></p>
         </div>
         <div class="code leading">
           
@@ -113,8 +112,7 @@ fmt.println(bool(1))</code></pre>
       
       <div class="row" id="bytes-converts-a-string-to-a-raw-byte-slice">
         <div class="docs">
-          <p><a href="#bytes-converts-a-string-to-a-raw-byte-slice"><code>bytes</code> converts a string to a raw byte slice.
-Use <code>string()</code> to convert back.</a></p>
+          <p><a href="#bytes-converts-a-string-to-a-raw-byte-slice"><code>bytes</code> converts a string to a raw byte slice. Use <code>string()</code> to convert back.</a></p>
         </div>
         <div class="code leading">
           
@@ -128,11 +126,24 @@ fmt.println(string(bytes(&#34;hi&#34;)))</code></pre>
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">42
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="42
+3
+3.14
+7
+99
+true
+false
+true
+A
+hi
+hi">42
 3
 3.14
 7
@@ -143,16 +154,7 @@ true
 A
 hi
 hi</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

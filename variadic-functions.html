@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>A function&#39;s last parameter can collect any number of extra arguments by prefixing it with <code>...</code>. Inside the function the variadic parameter is a plain array. The spread operator <code>...</code> on a call site expands an array into individual arguments. <a href="https://en.wikipedia.org/wiki/Variadic_function" target="_blank" rel="noopener">Wikipedia: Variadic function</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Variadic_function" target="_blank" rel="noopener">Wikipedia: Variadic function</a><br>A function&#39;s last parameter can collect any number of extra arguments by prefixing it with <code>...</code>. Inside the function the variadic parameter is a plain array. The spread operator <code>...</code> on a call site expands an array into individual arguments.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -123,11 +123,22 @@ warn(&#34;retries:&#34;, 3)</code></pre>
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">0
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="0
+6
+15
+&lt;br&gt;
+&lt;input type=&#34;text&#34; required&gt;
+60
+61
+WARN: disk usage high
+WARN: retries: 3">0
 6
 15
 &lt;br&gt;
@@ -136,16 +147,7 @@ warn(&#34;retries:&#34;, 3)</code></pre>
 61
 WARN: disk usage high
 WARN: retries: 3</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

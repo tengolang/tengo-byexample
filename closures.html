@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Tengo supports anonymous functions, which can form closures. Closures are functions that &#34;capture&#34; variables from their outer scope. <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Wikipedia: Closure</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)" target="_blank" rel="noopener">Wikipedia: Closure</a><br>Tengo supports anonymous functions, which can form closures. Closures are functions that &#34;capture&#34; variables from their outer scope.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,9 +38,7 @@
       
       <div class="row" id="this-function-intseq-returns-another-function-which">
         <div class="docs">
-          <p><a href="#this-function-intseq-returns-another-function-which">This function <code>intSeq</code> returns another function, which
-we define anonymously in the body of <code>intSeq</code>. The returned
-function closes over the variable <code>i</code> to form a closure.</a></p>
+          <p><a href="#this-function-intseq-returns-another-function-which">This function <code>intSeq</code> returns another function, which we define anonymously in the body of <code>intSeq</code>. The returned function closes over the variable <code>i</code> to form a closure.</a></p>
         </div>
         <div class="code leading">
           
@@ -60,10 +58,7 @@ function closes over the variable <code>i</code> to form a closure.</a></p>
       
       <div class="row" id="we-call-intseq-assigning-the-result-a-function">
         <div class="docs">
-          <p><a href="#we-call-intseq-assigning-the-result-a-function">We call <code>intSeq</code>, assigning the result (a function)
-to <code>nextInt</code>. This function value captures its
-own <code>i</code> value, which will be updated each time
-we call <code>nextInt</code>.</a></p>
+          <p><a href="#we-call-intseq-assigning-the-result-a-function">We call <code>intSeq</code>, assigning the result (a function) to <code>nextInt</code>. This function value captures its own <code>i</code> value, which will be updated each time we call <code>nextInt</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -77,8 +72,7 @@ we call <code>nextInt</code>.</a></p>
       
       <div class="row" id="see-the-effect-of-the-closure-by-calling-nextint">
         <div class="docs">
-          <p><a href="#see-the-effect-of-the-closure-by-calling-nextint">See the effect of the closure by calling <code>nextInt</code>
-a few times.</a></p>
+          <p><a href="#see-the-effect-of-the-closure-by-calling-nextint">See the effect of the closure by calling <code>nextInt</code> a few times.</a></p>
         </div>
         <div class="code leading">
           
@@ -94,8 +88,7 @@ fmt.println(nextInt())</code></pre>
       
       <div class="row" id="to-confirm-that-the-state-is-unique-to-that">
         <div class="docs">
-          <p><a href="#to-confirm-that-the-state-is-unique-to-that">To confirm that the state is unique to that
-particular function, create and test a new one.</a></p>
+          <p><a href="#to-confirm-that-the-state-is-unique-to-that">To confirm that the state is unique to that particular function, create and test a new one.</a></p>
         </div>
         <div class="code leading">
           
@@ -109,24 +102,21 @@ fmt.println(newInts())</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">1
-2
-3
-1</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="1
+2
+3
+1">1
+2
+3
+1</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

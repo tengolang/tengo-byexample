@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p><code>type_name</code> returns any value&#39;s type as a string. <code>is_error</code>, <code>is_undefined</code>, and <code>is_callable</code> are dedicated predicates for the three types that need special handling. <a href="https://en.wikipedia.org/wiki/Type_system" target="_blank" rel="noopener">Wikipedia: Type system</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Type_system" target="_blank" rel="noopener">Wikipedia: Type system</a><br><code>type_name</code> returns any value&#39;s type as a string. <code>is_error</code>, <code>is_undefined</code>, and <code>is_callable</code> are dedicated predicates for the three types that need special handling.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -58,8 +58,7 @@ fmt.println(type_name({a: 1}))</code></pre>
       
       <div class="row" id="functions-are-values-their-type-name-is-compiled-function">
         <div class="docs">
-          <p><a href="#functions-are-values-their-type-name-is-compiled-function">Functions are values; their type name is <code>compiled-function</code>.
-Use <code>is_callable</code> rather than comparing the string directly.</a></p>
+          <p><a href="#functions-are-values-their-type-name-is-compiled-function">Functions are values; their type name is <code>compiled-function</code>. Use <code>is_callable</code> rather than comparing the string directly.</a></p>
         </div>
         <div class="code leading">
           
@@ -118,11 +117,29 @@ fmt.println(describe(true))</code></pre>
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">int
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="int
+float
+string
+bool
+bytes
+array
+map
+compiled-function
+true
+false
+true
+true
+number: 42
+string: hi
+array of 3
+other: bool">int
 float
 string
 bool
@@ -138,16 +155,7 @@ number: 42
 string: hi
 array of 3
 other: bool</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

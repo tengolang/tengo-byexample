@@ -48,7 +48,7 @@ fmt.println(&#34;starting&#34;)</code></pre>
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">for i := 0; i &lt; 3; i&#43;&#43; {
-    fmt.println(&#34;step&#34;, i)
+    fmt.println(&#34;step &#34;, i)
 }</code></pre>
           </div>
           
@@ -57,8 +57,7 @@ fmt.println(&#34;starting&#34;)</code></pre>
       
       <div class="row" id="osexit-stops-execution-immediately">
         <div class="docs">
-          <p><a href="#osexit-stops-execution-immediately"><code>os.exit</code> stops execution immediately.
-Nothing after this line will run.</a></p>
+          <p><a href="#osexit-stops-execution-immediately"><code>os.exit</code> stops execution immediately. Nothing after this line will run.</a></p>
         </div>
         <div class="code leading">
           
@@ -73,25 +72,23 @@ fmt.println(&#34;this will not print&#34;)</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">starting
-step 0
-step 1
-step 2
-this will not print</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="starting
+step 0
+step 1
+step 2
+this will not print">starting
+step 0
+step 1
+step 2
+this will not print</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -107,7 +104,7 @@ os := import(&#34;os&#34;)
 fmt.println(&#34;starting&#34;)
 
 for i := 0; i &lt; 3; i&#43;&#43; {
-    fmt.println(&#34;step&#34;, i)
+    fmt.println(&#34;step &#34;, i)
 }
 
 os.exit(0)
@@ -118,7 +115,7 @@ os := import(&#34;os&#34;)
 fmt.println(&#34;starting&#34;)
 
 for i := 0; i &lt; 3; i&#43;&#43; {
-    fmt.println(&#34;step&#34;, i)
+    fmt.println(&#34;step &#34;, i)
 }
 
 os.exit(0)

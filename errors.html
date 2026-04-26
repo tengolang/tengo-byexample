@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Tengo uses <code>error(value)</code> to create error values. Functions signal failure by returning an error, and callers check with <code>is_error()</code>. <a href="https://en.wikipedia.org/wiki/Error_handling" target="_blank" rel="noopener">Wikipedia: Error handling</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Error_handling" target="_blank" rel="noopener">Wikipedia: Error handling</a><br>Tengo uses <code>error(value)</code> to create error values. Functions signal failure by returning an error, and callers check with <code>is_error()</code>.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -71,8 +71,7 @@
       
       <div class="row" id="a-failed-call-returns-an-error-value">
         <div class="docs">
-          <p><a href="#a-failed-call-returns-an-error-value">A failed call returns an error value.
-Retrieve the message with <code>.value</code>.</a></p>
+          <p><a href="#a-failed-call-returns-an-error-value">A failed call returns an error value. Retrieve the message with <code>.value</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -80,7 +79,7 @@ Retrieve the message with <code>.value</code>.</a></p>
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">result := divide(10, 0)
 if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
+    fmt.println(&#34;error: &#34;, result.value)
 }</code></pre>
           </div>
           
@@ -98,9 +97,9 @@ if is_error(result) {
             <pre><code class="language-go">vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
 for _, v in vals {
     if is_error(v) {
-        fmt.println(&#34;got error:&#34;, v.value)
+        fmt.println(&#34;got error: &#34;, v.value)
     } else {
-        fmt.println(&#34;got value:&#34;, v)
+        fmt.println(&#34;got value: &#34;, v)
     }
 }</code></pre>
           </div>
@@ -109,25 +108,23 @@ for _, v in vals {
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">5
-error: division by zero
-got value: 4
-got error: division by zero
-got value: 3</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="5
+error: division by zero
+got value: 4
+got error: division by zero
+got value: 3">5
+error: division by zero
+got value: 4
+got error: division by zero
+got value: 3</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -150,15 +147,15 @@ fmt.println(divide(10, 2))
 
 result := divide(10, 0)
 if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
+    fmt.println(&#34;error: &#34;, result.value)
 }
 
 vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
 for _, v in vals {
     if is_error(v) {
-        fmt.println(&#34;got error:&#34;, v.value)
+        fmt.println(&#34;got error: &#34;, v.value)
     } else {
-        fmt.println(&#34;got value:&#34;, v)
+        fmt.println(&#34;got value: &#34;, v)
     }
 }">fmt := import(&#34;fmt&#34;)
 
@@ -173,15 +170,15 @@ fmt.println(divide(10, 2))
 
 result := divide(10, 0)
 if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
+    fmt.println(&#34;error: &#34;, result.value)
 }
 
 vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
 for _, v in vals {
     if is_error(v) {
-        fmt.println(&#34;got error:&#34;, v.value)
+        fmt.println(&#34;got error: &#34;, v.value)
     } else {
-        fmt.println(&#34;got value:&#34;, v)
+        fmt.println(&#34;got value: &#34;, v)
     }
 }</textarea>
           </div>

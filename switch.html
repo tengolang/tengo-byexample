@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p><code>switch</code> statements express conditionals across many branches. <a href="https://en.wikipedia.org/wiki/Switch_statement" target="_blank" rel="noopener">Wikipedia: Switch statement</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Switch_statement" target="_blank" rel="noopener">Wikipedia: Switch statement</a><br><code>switch</code> statements express conditionals across many branches.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -62,9 +62,7 @@ case 3:
       
       <div class="row" id="you-can-use-commas-to-separate-multiple-expressions-in-the-same">
         <div class="docs">
-          <p><a href="#you-can-use-commas-to-separate-multiple-expressions-in-the-same">You can use commas to separate multiple expressions in the same
-<code>case</code> statement. <code>times.time_weekday</code> returns 0 (Sunday) through
-6 (Saturday).</a></p>
+          <p><a href="#you-can-use-commas-to-separate-multiple-expressions-in-the-same">You can use commas to separate multiple expressions in the same <code>case</code> statement. <code>times.time_weekday</code> returns 0 (Sunday) through 6 (Saturday).</a></p>
         </div>
         <div class="code leading">
           
@@ -84,8 +82,7 @@ default:
       
       <div class="row" id="switch-without-an-expression-is-an-alternate-way-to-express">
         <div class="docs">
-          <p><a href="#switch-without-an-expression-is-an-alternate-way-to-express"><code>switch</code> without an expression is an alternate way to express
-if/else logic.</a></p>
+          <p><a href="#switch-without-an-expression-is-an-alternate-way-to-express"><code>switch</code> without an expression is an alternate way to express if/else logic.</a></p>
         </div>
         <div class="code leading">
           
@@ -118,7 +115,7 @@ default:
     case &#34;int&#34;:
         fmt.println(&#34;int&#34;)
     default:
-        fmt.println(&#34;other:&#34;, type_name(v))
+        fmt.println(&#34;other: &#34;, type_name(v))
     }
 }
 whatAmI(true)
@@ -130,26 +127,25 @@ whatAmI(&#34;hey&#34;)</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">Write 2 as two
-It&#39;s the weekend
-It&#39;s before noon
-bool
-int
-other: string</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="Write 2 as two
+It&#39;s the weekend
+It&#39;s after noon
+bool
+int
+other: string">Write 2 as two
+It&#39;s the weekend
+It&#39;s after noon
+bool
+int
+other: string</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -196,7 +192,7 @@ whatAmI := func(v) {
     case &#34;int&#34;:
         fmt.println(&#34;int&#34;)
     default:
-        fmt.println(&#34;other:&#34;, type_name(v))
+        fmt.println(&#34;other: &#34;, type_name(v))
     }
 }
 whatAmI(true)
@@ -238,7 +234,7 @@ whatAmI := func(v) {
     case &#34;int&#34;:
         fmt.println(&#34;int&#34;)
     default:
-        fmt.println(&#34;other:&#34;, type_name(v))
+        fmt.println(&#34;other: &#34;, type_name(v))
     }
 }
 whatAmI(true)

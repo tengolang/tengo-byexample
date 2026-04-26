@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Tengo has no built-in sort function, but it is straightforward to implement one using closures and recursion. <a href="https://en.wikipedia.org/wiki/Sorting_algorithm" target="_blank" rel="noopener">Wikipedia: Sorting algorithm</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Sorting_algorithm" target="_blank" rel="noopener">Wikipedia: Sorting algorithm</a><br>Tengo has no built-in sort function, but it is straightforward to implement one using closures and recursion.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -128,7 +128,7 @@
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">nums := [5, 2, 8, 1]
 sorted := msort(nums)
-fmt.println(&#34;original:&#34;, nums)
+fmt.println(&#34;original: &#34;, nums)
 fmt.println(&#34;sorted:  &#34;, sorted)</code></pre>
           </div>
           
@@ -136,24 +136,21 @@ fmt.println(&#34;sorted:  &#34;, sorted)</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">[1, 2, 3, 5, 8, 9]
-[&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;, &#34;date&#34;]
-original: [5, 2, 8, 1]
-sorted:   [1, 2, 5, 8]</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="[1, 2, 3, 5, 8, 9]
+[&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;, &#34;date&#34;]
+original: [5, 2, 8, 1]
+sorted:  [1, 2, 5, 8]">[1, 2, 3, 5, 8, 9]
+[&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;, &#34;date&#34;]
+original: [5, 2, 8, 1]
+sorted:  [1, 2, 5, 8]</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -201,7 +198,7 @@ fmt.println(msort([&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;dat
 
 nums := [5, 2, 8, 1]
 sorted := msort(nums)
-fmt.println(&#34;original:&#34;, nums)
+fmt.println(&#34;original: &#34;, nums)
 fmt.println(&#34;sorted:  &#34;, sorted)">fmt := import(&#34;fmt&#34;)
 
 merge := func(left, right) {
@@ -240,7 +237,7 @@ fmt.println(msort([&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;dat
 
 nums := [5, 2, 8, 1]
 sorted := msort(nums)
-fmt.println(&#34;original:&#34;, nums)
+fmt.println(&#34;original: &#34;, nums)
 fmt.println(&#34;sorted:  &#34;, sorted)</textarea>
           </div>
         </div>

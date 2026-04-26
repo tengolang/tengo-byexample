@@ -62,7 +62,7 @@ fmt.println(times.time_format(now, times.format_rfc3339))</code></pre>
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">fmt.println(&#34;year: &#34;, times.time_year(now))
-fmt.println(&#34;month:&#34;, times.month_string(times.time_month(now)))
+fmt.println(&#34;month: &#34;, times.month_string(times.time_month(now)))
 fmt.println(&#34;day:  &#34;, times.time_day(now))</code></pre>
           </div>
           
@@ -86,8 +86,7 @@ fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))</code></pre>
       
       <div class="row" id="timessub-gives-a-duration-between-two-instants">
         <div class="docs">
-          <p><a href="#timessub-gives-a-duration-between-two-instants"><code>times.sub</code> gives a duration between two instants.
-<code>duration_hours</code> converts it to a float number of hours.</a></p>
+          <p><a href="#timessub-gives-a-duration-between-two-instants"><code>times.sub</code> gives a duration between two instants. <code>duration_hours</code> converts it to a float number of hours.</a></p>
         </div>
         <div class="code leading">
           
@@ -102,14 +101,15 @@ fmt.printf(&#34;%.0f days since then\n&#34;, days)</code></pre>
       </div>
       
       
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
+          
           <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -127,7 +127,7 @@ fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
 fmt.println(times.time_format(now, times.format_rfc3339))
 
 fmt.println(&#34;year: &#34;, times.time_year(now))
-fmt.println(&#34;month:&#34;, times.month_string(times.time_month(now)))
+fmt.println(&#34;month: &#34;, times.month_string(times.time_month(now)))
 fmt.println(&#34;day:  &#34;, times.time_day(now))
 
 past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
@@ -143,7 +143,7 @@ fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
 fmt.println(times.time_format(now, times.format_rfc3339))
 
 fmt.println(&#34;year: &#34;, times.time_year(now))
-fmt.println(&#34;month:&#34;, times.month_string(times.time_month(now)))
+fmt.println(&#34;month: &#34;, times.month_string(times.time_month(now)))
 fmt.println(&#34;day:  &#34;, times.time_day(now))
 
 past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)

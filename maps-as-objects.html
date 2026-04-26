@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Tengo has no classes. The idiomatic pattern is a constructor function that returns a map bundling data and closures as &#34;methods&#34;. <a href="https://en.wikipedia.org/wiki/Prototype-based_programming" target="_blank" rel="noopener">Wikipedia: Prototype-based programming</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Prototype-based_programming" target="_blank" rel="noopener">Wikipedia: Prototype-based programming</a><br>Tengo has no classes. The idiomatic pattern is a constructor function that returns a map bundling data and closures as &#34;methods&#34;.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,8 +38,7 @@
       
       <div class="row" id="the-constructor-creates-a-fresh-count-variable-per-call">
         <div class="docs">
-          <p><a href="#the-constructor-creates-a-fresh-count-variable-per-call">The constructor creates a fresh <code>count</code> variable per call.
-All returned functions close over the same <code>count</code>.</a></p>
+          <p><a href="#the-constructor-creates-a-fresh-count-variable-per-call">The constructor creates a fresh <code>count</code> variable per call. All returned functions close over the same <code>count</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -117,26 +116,25 @@ fmt.printf(&#34;%d %d\n&#34;, p.x, p.y)</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">3
-2
-0
-11 22
-(3, 4)
-3 4</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="3
+2
+0
+11 22
+(3, 4)
+3 4">3
+2
+0
+11 22
+(3, 4)
+3 4</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

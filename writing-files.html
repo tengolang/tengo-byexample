@@ -59,8 +59,7 @@ fmt.println(string(os.read_file(&#34;/tmp/tengo_write.txt&#34;)))</code></pre>
       
       <div class="row" id="osopenfile-with-oappend-adds-to-an-existing-file">
         <div class="docs">
-          <p><a href="#osopenfile-with-oappend-adds-to-an-existing-file"><code>os.open_file</code> with <code>o_append</code> adds to an existing file
-without truncating it.</a></p>
+          <p><a href="#osopenfile-with-oappend-adds-to-an-existing-file"><code>os.open_file</code> with <code>o_append</code> adds to an existing file without truncating it.</a></p>
         </div>
         <div class="code leading">
           
@@ -92,11 +91,21 @@ fmt.println(string(os.read_file(&#34;/tmp/tengo_write.txt&#34;)))</code></pre>
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">line 1
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="line 1
+line 2
+line 3
+
+line 1
+line 2
+line 3
+line 4">line 1
 line 2
 line 3
 
@@ -104,16 +113,7 @@ line 1
 line 2
 line 3
 line 4</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

@@ -163,15 +163,6 @@ div.example {
   word-break: break-all;
 }
 
-.static-output {
-  background-color: var(--terminal-bg);
-  color: var(--terminal-text);
-  padding: 10px 14px;
-  border-radius: 4px;
-  font-size: 13px;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
 
 .leading {
   min-width: 0;
@@ -376,6 +367,19 @@ button.reset-btn:hover {
   word-break: break-all;
 }
 #output.error { color: #f87171; }
+#output.expected-output {
+  color: color-mix(in srgb, var(--terminal-text) 55%, transparent);
+}
+#output.expected-output::before {
+  content: "$ expected output";
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: color-mix(in srgb, var(--terminal-text) 40%, transparent);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid color-mix(in srgb, var(--terminal-text) 15%, transparent);
+}
 
 /* Navigation */
 .nav-links {

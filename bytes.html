@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p><code>bytes</code> is a first-class type distinct from strings — an immutable sequence of raw byte values. Use it for binary data, encoding, or low-level string work. <a href="https://en.wikipedia.org/wiki/Byte" target="_blank" rel="noopener">Wikipedia: Byte</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Byte" target="_blank" rel="noopener">Wikipedia: Byte</a><br><code>bytes</code> is a first-class type distinct from strings — an immutable sequence of raw byte values. Use it for binary data, encoding, or low-level string work.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -159,11 +159,28 @@ fmt.println(bytes(&#34;abc&#34;) == bytes(&#34;xyz&#34;))</code></pre>
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">5
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="5
+bytes
+104
+111
+4
+0
+hel
+lo
+  [0] = 65
+  [1] = 66
+  [2] = 67
+hello
+hELLo
+true
+false">5
 bytes
 104
 111
@@ -178,16 +195,7 @@ hello
 hELLo
 true
 false</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

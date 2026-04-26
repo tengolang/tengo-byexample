@@ -141,11 +141,21 @@ for _, k in other_keys {
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">env                  development
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="env                  development
+log_level            debug
+db_url               postgres://localhost:5432/app
+debug                true
+workers              6
+cache_ttl            60
+rate_limit           50
+feature_dark_mode    false">env                  development
 log_level            debug
 db_url               postgres://localhost:5432/app
 debug                true
@@ -153,16 +163,7 @@ workers              6
 cache_ttl            60
 rate_limit           50
 feature_dark_mode    false</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

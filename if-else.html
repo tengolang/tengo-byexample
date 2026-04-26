@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Branching with <code>if</code> and <code>else</code> in Tengo is straight-forward. <a href="https://en.wikipedia.org/wiki/Conditional_(computer_programming)" target="_blank" rel="noopener">Wikipedia: Conditional</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Conditional_(computer_programming)" target="_blank" rel="noopener">Wikipedia: Conditional</a><br>Branching with <code>if</code> and <code>else</code> in Tengo is straight-forward.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -72,19 +72,18 @@
       
       <div class="row" id="a-statement-can-precede-conditionals-any-variables-declared-in-this">
         <div class="docs">
-          <p><a href="#a-statement-can-precede-conditionals-any-variables-declared-in-this">A statement can precede conditionals; any variables declared in this
-statement are available in all branches.</a></p>
+          <p><a href="#a-statement-can-precede-conditionals-any-variables-declared-in-this">A statement can precede conditionals; any variables declared in this statement are available in all branches.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">if n := 9; n &lt; 0 {
-    fmt.println(n, &#34;is negative&#34;)
+    fmt.printf(&#34;%v is negative\n&#34;, n)
 } else if n &lt; 10 {
-    fmt.println(n, &#34;has 1 digit&#34;)
+    fmt.printf(&#34;%v has 1 digit\n&#34;, n)
 } else {
-    fmt.println(n, &#34;has multiple digits&#34;)
+    fmt.printf(&#34;%v has multiple digits\n&#34;, n)
 }</code></pre>
           </div>
           
@@ -93,8 +92,7 @@ statement are available in all branches.</a></p>
       
       <div class="row" id="note-that-you-dont-need-parentheses-around-conditions-in-tengo">
         <div class="docs">
-          <p><a href="#note-that-you-dont-need-parentheses-around-conditions-in-tengo">Note that you don&#39;t need parentheses around conditions in Tengo,
-but that the braces are required.</a></p>
+          <p><a href="#note-that-you-dont-need-parentheses-around-conditions-in-tengo">Note that you don&#39;t need parentheses around conditions in Tengo, but that the braces are required.</a></p>
         </div>
         <div class="code leading">
           
@@ -102,23 +100,19 @@ but that the braces are required.</a></p>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">7 is odd
-8 is divisible by 4
-9 has 1 digit</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="7 is odd
+8 is divisible by 4
+9 has 1 digit">7 is odd
+8 is divisible by 4
+9 has 1 digit</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -141,11 +135,11 @@ if 8 % 4 == 0 {
 }
 
 if n := 9; n &lt; 0 {
-    fmt.println(n, &#34;is negative&#34;)
+    fmt.printf(&#34;%v is negative\n&#34;, n)
 } else if n &lt; 10 {
-    fmt.println(n, &#34;has 1 digit&#34;)
+    fmt.printf(&#34;%v has 1 digit\n&#34;, n)
 } else {
-    fmt.println(n, &#34;has multiple digits&#34;)
+    fmt.printf(&#34;%v has multiple digits\n&#34;, n)
 }">fmt := import(&#34;fmt&#34;)
 
 if 7 % 2 == 0 {
@@ -159,11 +153,11 @@ if 8 % 4 == 0 {
 }
 
 if n := 9; n &lt; 0 {
-    fmt.println(n, &#34;is negative&#34;)
+    fmt.printf(&#34;%v is negative\n&#34;, n)
 } else if n &lt; 10 {
-    fmt.println(n, &#34;has 1 digit&#34;)
+    fmt.printf(&#34;%v has 1 digit\n&#34;, n)
 } else {
-    fmt.println(n, &#34;has multiple digits&#34;)
+    fmt.printf(&#34;%v has multiple digits\n&#34;, n)
 }</textarea>
           </div>
         </div>

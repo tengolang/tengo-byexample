@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>The <code>coro</code> module provides cooperative coroutines. A coroutine suspends at each <code>yield</code> call and resumes when iterated or when <code>.resume()</code> is called. <a href="https://en.wikipedia.org/wiki/Coroutine" target="_blank" rel="noopener">Wikipedia: Coroutine</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Coroutine" target="_blank" rel="noopener">Wikipedia: Coroutine</a><br>The <code>coro</code> module provides cooperative coroutines. A coroutine suspends at each <code>yield</code> call and resumes when iterated or when <code>.resume()</code> is called.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -39,8 +39,7 @@ coro := import(&#34;coro&#34;)</code></pre>
       
       <div class="row" id="create-a-coroutine-with-coronew-the-function-receives-a-yield">
         <div class="docs">
-          <p><a href="#create-a-coroutine-with-coronew-the-function-receives-a-yield">Create a coroutine with <code>coro.new</code>. The function receives a <code>yield</code>
-callback it uses to emit values one at a time.</a></p>
+          <p><a href="#create-a-coroutine-with-coronew-the-function-receives-a-yield">Create a coroutine with <code>coro.new</code>. The function receives a <code>yield</code> callback it uses to emit values one at a time.</a></p>
         </div>
         <div class="code leading">
           
@@ -74,8 +73,7 @@ callback it uses to emit values one at a time.</a></p>
       
       <div class="row" id="resume-steps-the-coroutine-manually">
         <div class="docs">
-          <p><a href="#resume-steps-the-coroutine-manually"><code>.resume()</code> steps the coroutine manually.
-It returns <code>(value, ok)</code> — <code>ok</code> becomes false when exhausted.</a></p>
+          <p><a href="#resume-steps-the-coroutine-manually"><code>.resume()</code> steps the coroutine manually. It returns <code>(value, ok)</code> — <code>ok</code> becomes false when exhausted.</a></p>
         </div>
         <div class="code leading">
           
@@ -88,26 +86,14 @@ It returns <code>(value, ok)</code> — <code>ok</code> becomes false when exhau
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
+fmt.printf(&#34;%v %v\n&#34;, v, ok)
 v, ok = countdown.resume()
-fmt.println(v, ok)</code></pre>
+fmt.printf(&#34;%v %v\n&#34;, v, ok)</code></pre>
           </div>
           
         </div>
       </div>
       
-      
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">1
-2
-3
-5 true
-4 true</pre>
-        </div>
-      </div>
       
     </div>
 
@@ -115,7 +101,17 @@ fmt.println(v, ok)</code></pre>
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="1
+2
+3
+5 true
+4 true">1
+2
+3
+5 true
+4 true</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -145,9 +141,9 @@ countdown := coro.new(func(yield) {
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
+fmt.printf(&#34;%v %v\n&#34;, v, ok)
 v, ok = countdown.resume()
-fmt.println(v, ok)">fmt := import(&#34;fmt&#34;)
+fmt.printf(&#34;%v %v\n&#34;, v, ok)">fmt := import(&#34;fmt&#34;)
 coro := import(&#34;coro&#34;)
 
 gen := coro.new(func(yield) {
@@ -167,9 +163,9 @@ countdown := coro.new(func(yield) {
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
+fmt.printf(&#34;%v %v\n&#34;, v, ok)
 v, ok = countdown.resume()
-fmt.println(v, ok)</textarea>
+fmt.printf(&#34;%v %v\n&#34;, v, ok)</textarea>
           </div>
         </div>
       </div>

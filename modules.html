@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>A <code>.tengo</code> file becomes a module when it ends with an <code>export</code> statement. The module runs top to bottom, then returns its exported value to the caller — typically a map of functions. Modules are evaluated once and the result is cached for all importers. <a href="https://en.wikipedia.org/wiki/Modular_programming" target="_blank" rel="noopener">Wikipedia: Modular programming</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Modular_programming" target="_blank" rel="noopener">Wikipedia: Modular programming</a><br>A <code>.tengo</code> file becomes a module when it ends with an <code>export</code> statement. The module runs top to bottom, then returns its exported value to the caller — typically a map of functions. Modules are evaluated once and the result is cached for all importers.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -24,8 +24,7 @@
       
       <div class="row" id="this-is-mathutilstengo-a-module-file-that-bundles-three">
         <div class="docs">
-          <p><a href="#this-is-mathutilstengo-a-module-file-that-bundles-three">This is <code>math_utils.tengo</code> — a module file that bundles three
-related helpers and exports them as a single map.</a></p>
+          <p><a href="#this-is-mathutilstengo-a-module-file-that-bundles-three">This is <code>math_utils.tengo</code> — a module file that bundles three related helpers and exports them as a single map.</a></p>
         </div>
         <div class="code leading">
           
@@ -47,15 +46,7 @@ export {
       
       <div class="row" id="in-maintengo-the-module-is-imported-by-name-no-tengo">
         <div class="docs">
-          <p><a href="#in-maintengo-the-module-is-imported-by-name-no-tengo">In <code>main.tengo</code> the module is imported by name (no <code>.tengo</code>
-extension needed). <code>import</code> returns the exported map.
-
-  fmt  := import(&#34;fmt&#34;)
-  math := import(&#34;math_utils&#34;)
-
-  fmt.println(math.square(4))   // 16
-  fmt.println(math.cube(3))     // 27
-  fmt.println(math.abs(-5))     // 5</a></p>
+          <p><a href="#in-maintengo-the-module-is-imported-by-name-no-tengo">In <code>main.tengo</code> the module is imported by name (no <code>.tengo</code> extension needed). <code>import</code> returns the exported map.    fmt  := import(&#34;fmt&#34;)   math := import(&#34;math_utils&#34;)    fmt.println(math.square(4))   // 16   fmt.println(math.cube(3))     // 27   fmt.println(math.abs(-5))     // 5</a></p>
         </div>
         <div class="code leading">
           
@@ -64,13 +55,7 @@ extension needed). <code>import</code> returns the exported map.
       
       <div class="row" id="a-module-can-export-any-single-value-exporting-a-bare-function">
         <div class="docs">
-          <p><a href="#a-module-can-export-any-single-value-exporting-a-bare-function">A module can export any single value. Exporting a bare function
-makes the import expression directly callable:
-
-  export func(x) { return x * 2 }
-
-  double := import(&#34;doubler&#34;)
-  fmt.println(double(7))        // 14</a></p>
+          <p><a href="#a-module-can-export-any-single-value-exporting-a-bare-function">A module can export any single value. Exporting a bare function makes the import expression directly callable:    export func(x) { return x * 2 }    double := import(&#34;doubler&#34;)   fmt.println(double(7))        // 14</a></p>
         </div>
         <div class="code leading">
           
@@ -79,10 +64,7 @@ makes the import expression directly callable:
       
       <div class="row" id="tengos-built-in-modules-fmt-math-text-json-are-pre-compiled">
         <div class="docs">
-          <p><a href="#tengos-built-in-modules-fmt-math-text-json-are-pre-compiled">Tengo&#39;s built-in modules (fmt, math, text, json, …) are pre-compiled
-modules that follow exactly the same import protocol. In the playground
-below, <code>import</code> works with any built-in module — swap in <code>math_utils</code>
-when running in a project with that file on disk.</a></p>
+          <p><a href="#tengos-built-in-modules-fmt-math-text-json-are-pre-compiled">Tengo&#39;s built-in modules (fmt, math, text, json, …) are pre-compiled modules that follow exactly the same import protocol. In the playground below, <code>import</code> works with any built-in module — swap in <code>math_utils</code> when running in a project with that file on disk.</a></p>
         </div>
         <div class="code leading">
           
@@ -101,24 +83,21 @@ fmt.printf(&#34;cube(3)   = %d\n&#34;,   cube(3))</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">pi        = 3.1416
-sqrt(2)   = 1.4142
-square(5) = 25
-cube(3)   = 27</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="pi        = 3.1416
+sqrt(2)   = 1.4142
+square(5) = 25
+cube(3)   = 27">pi        = 3.1416
+sqrt(2)   = 1.4142
+square(5) = 25
+cube(3)   = 27</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

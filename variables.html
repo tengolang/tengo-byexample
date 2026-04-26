@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Variables are declared and initialized with <code>:=</code>. Tengo is dynamically typed: a variable can hold any value and be reassigned to a different type. <a href="https://en.wikipedia.org/wiki/Variable_(computer_science)" target="_blank" rel="noopener">Wikipedia: Variable</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Variable_(computer_science)" target="_blank" rel="noopener">Wikipedia: Variable</a><br>Variables are declared and initialized with <code>:=</code>. Tengo is dynamically typed: a variable can hold any value and be reassigned to a different type.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -76,7 +76,7 @@ fmt.println(message)</code></pre>
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">x := 10
 y := 20
-fmt.println(&#34;sum:&#34;, x&#43;y)</code></pre>
+fmt.println(&#34;sum: &#34;, x&#43;y)</code></pre>
           </div>
           
         </div>
@@ -100,25 +100,23 @@ fmt.println(value)</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">hello
-world
-sum: 30
-42
-now a string</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="hello
+world
+sum: 30
+42
+now a string">hello
+world
+sum: 30
+42
+now a string</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -138,7 +136,7 @@ fmt.println(message)
 
 x := 10
 y := 20
-fmt.println(&#34;sum:&#34;, x&#43;y)
+fmt.println(&#34;sum: &#34;, x&#43;y)
 
 value := 42
 fmt.println(value)
@@ -153,7 +151,7 @@ fmt.println(message)
 
 x := 10
 y := 20
-fmt.println(&#34;sum:&#34;, x&#43;y)
+fmt.println(&#34;sum: &#34;, x&#43;y)
 
 value := 42
 fmt.println(value)

@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p><code>fmt.sprintf</code> formats a string using Go-style verbs and returns it. <code>fmt.printf</code> writes the formatted output directly. <a href="https://en.wikipedia.org/wiki/Printf_format_string" target="_blank" rel="noopener">Wikipedia: printf format string</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Printf_format_string" target="_blank" rel="noopener">Wikipedia: printf format string</a><br><code>fmt.sprintf</code> formats a string using Go-style verbs and returns it. <code>fmt.printf</code> writes the formatted output directly.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -54,8 +54,7 @@ fmt.println(fmt.sprintf(&#34;Pi ~ %.4f&#34;, 3.14159))</code></pre>
       
       <div class="row" id="width-and-alignment-use-a-number-before-the-verb">
         <div class="docs">
-          <p><a href="#width-and-alignment-use-a-number-before-the-verb">Width and alignment: use a number before the verb.
-Negative width left-aligns.</a></p>
+          <p><a href="#width-and-alignment-use-a-number-before-the-verb">Width and alignment: use a number before the verb. Negative width left-aligns.</a></p>
         </div>
         <div class="code leading">
           
@@ -112,11 +111,22 @@ fmt.println(fmt.sprintf(&#34;%x&#34;, 255))</code></pre>
       </div>
       
       
-      
+    </div>
+
+    <div class="playground-grid">
       <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">Hello, Tengo!
+        <div class="docs">
+          <p class="play-label">try it</p>
+          
+          <pre id="output" class="expected-output" data-expected="Hello, Tengo!
+3 &#43; 4 = 7
+Pi ~ 3.1416
+|     right|left      |
+[1, 2, 3]
+{a: 1}
+00101010
+ff
+formatted: 99">Hello, Tengo!
 3 &#43; 4 = 7
 Pi ~ 3.1416
 |     right|left      |
@@ -125,16 +135,7 @@ Pi ~ 3.1416
 00101010
 ff
 formatted: 99</pre>
-        </div>
-      </div>
-      
-    </div>
-
-    <div class="playground-grid">
-      <div class="row">
-        <div class="docs">
-          <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

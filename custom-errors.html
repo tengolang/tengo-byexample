@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p><code>error(value)</code> accepts any value, not just strings. Passing a map lets you attach structured metadata — a code, a field name, or any other context. <a href="https://en.wikipedia.org/wiki/Error_handling" target="_blank" rel="noopener">Wikipedia: Error handling</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Error_handling" target="_blank" rel="noopener">Wikipedia: Error handling</a><br><code>error(value)</code> accepts any value, not just strings. Passing a map lets you attach structured metadata — a code, a field name, or any other context.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -38,8 +38,7 @@
       
       <div class="row" id="a-map-payload-turns-an-error-into-a-structured-object">
         <div class="docs">
-          <p><a href="#a-map-payload-turns-an-error-into-a-structured-object">A map payload turns an error into a structured object.
-Retrieve the payload with <code>.value</code>.</a></p>
+          <p><a href="#a-map-payload-turns-an-error-into-a-structured-object">A map payload turns an error into a structured object. Retrieve the payload with <code>.value</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -52,8 +51,8 @@ Retrieve the payload with <code>.value</code>.</a></p>
 result := notFound(&#34;config.json&#34;)
 if is_error(result) {
     e := result.value
-    fmt.println(&#34;code:&#34;, e[&#34;code&#34;])
-    fmt.println(&#34;message:&#34;, e[&#34;message&#34;])
+    fmt.println(&#34;code: &#34;, e[&#34;code&#34;])
+    fmt.println(&#34;message: &#34;, e[&#34;message&#34;])
 }</code></pre>
           </div>
           
@@ -91,24 +90,21 @@ if is_error(err) {
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">code: 404
-message: not found: config.json
-25
-age: must be non-negative</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="code: 404
+message: not found: config.json
+25
+age: must be non-negative">code: 404
+message: not found: config.json
+25
+age: must be non-negative</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -127,8 +123,8 @@ notFound := func(name) {
 result := notFound(&#34;config.json&#34;)
 if is_error(result) {
     e := result.value
-    fmt.println(&#34;code:&#34;, e[&#34;code&#34;])
-    fmt.println(&#34;message:&#34;, e[&#34;message&#34;])
+    fmt.println(&#34;code: &#34;, e[&#34;code&#34;])
+    fmt.println(&#34;message: &#34;, e[&#34;message&#34;])
 }
 
 validate := func(age) {
@@ -156,8 +152,8 @@ notFound := func(name) {
 result := notFound(&#34;config.json&#34;)
 if is_error(result) {
     e := result.value
-    fmt.println(&#34;code:&#34;, e[&#34;code&#34;])
-    fmt.println(&#34;message:&#34;, e[&#34;message&#34;])
+    fmt.println(&#34;code: &#34;, e[&#34;code&#34;])
+    fmt.println(&#34;message: &#34;, e[&#34;message&#34;])
 }
 
 validate := func(age) {

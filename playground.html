@@ -33,9 +33,9 @@ fmt.println(&#34;Hello, World!&#34;)">Hello World</option>
 
 fmt.println(&#34;ten&#34; &#43; &#34;go&#34;)
 
-fmt.println(&#34;1&#43;1 =&#34;, 1&#43;1)
-fmt.println(&#34;7/2 =&#34;, 7/2)
-fmt.println(&#34;7.0/2.0 =&#34;, 7.0/2.0)
+fmt.println(&#34;1&#43;1 = &#34;, 1&#43;1)
+fmt.println(&#34;7/2 = &#34;, 7/2)
+fmt.println(&#34;7.0/2.0 = &#34;, 7.0/2.0)
 
 fmt.println(true &amp;&amp; false)
 fmt.println(true || false)
@@ -51,7 +51,7 @@ fmt.println(message)
 
 x := 10
 y := 20
-fmt.println(&#34;sum:&#34;, x&#43;y)
+fmt.println(&#34;sum: &#34;, x&#43;y)
 
 value := 42
 fmt.println(value)
@@ -71,11 +71,11 @@ if 8 % 4 == 0 {
 }
 
 if n := 9; n &lt; 0 {
-    fmt.println(n, &#34;is negative&#34;)
+    fmt.printf(&#34;%v is negative\n&#34;, n)
 } else if n &lt; 10 {
-    fmt.println(n, &#34;has 1 digit&#34;)
+    fmt.printf(&#34;%v has 1 digit\n&#34;, n)
 } else {
-    fmt.println(n, &#34;has multiple digits&#34;)
+    fmt.printf(&#34;%v has multiple digits\n&#34;, n)
 }">If / Else</option>
             
             <option value="switch" data-code="fmt := import(&#34;fmt&#34;)
@@ -115,7 +115,7 @@ whatAmI := func(v) {
     case &#34;int&#34;:
         fmt.println(&#34;int&#34;)
     default:
-        fmt.println(&#34;other:&#34;, type_name(v))
+        fmt.println(&#34;other: &#34;, type_name(v))
     }
 }
 whatAmI(true)
@@ -131,7 +131,7 @@ for n &lt; 5 {
 }
 
 for i := 0; i &lt; 3; i&#43;&#43; {
-    fmt.println(&#34;i =&#34;, i)
+    fmt.println(&#34;i = &#34;, i)
 }
 
 for {
@@ -148,12 +148,12 @@ for i := 0; i &lt;= 5; i&#43;&#43; {
 
 fruits := [&#34;apple&#34;, &#34;banana&#34;, &#34;cherry&#34;]
 for i, fruit in fruits {
-    fmt.println(i, &#34;-&gt;&#34;, fruit)
+    fmt.printf(&#34;%v -&gt; %v\n&#34;, i, fruit)
 }
 
 scores := {alice: 95, bob: 87}
 for name, score in scores {
-    fmt.println(name, &#34;scored&#34;, score)
+    fmt.printf(&#34;%v scored %v\n&#34;, name, score)
 }">For Loops</option>
             
             <option value="scope" data-code="fmt := import(&#34;fmt&#34;)
@@ -224,8 +224,8 @@ minmax := func(arr) {
 }
 
 lo, hi := minmax([3, 1, 4, 1, 5, 9, 2, 6])
-fmt.println(&#34;min:&#34;, lo)
-fmt.println(&#34;max:&#34;, hi)
+fmt.println(&#34;min: &#34;, lo)
+fmt.println(&#34;max: &#34;, hi)
 
 divide := func(a, b) {
     if b == 0 {
@@ -235,10 +235,10 @@ divide := func(a, b) {
 }
 
 result, err := divide(10, 3)
-fmt.println(&#34;result:&#34;, result)
+fmt.println(&#34;result: &#34;, result)
 
 _, err = divide(5, 0)
-fmt.println(&#34;is_error:&#34;, is_error(err))">Multiple Return Values</option>
+fmt.println(&#34;is_error: &#34;, is_error(err))">Multiple Return Values</option>
             
             <option value="recursion" data-code="fmt := import(&#34;fmt&#34;)
 
@@ -359,19 +359,19 @@ fmt.println(is_callable(func() {}))">Built-in Functions</option>
             <option value="arrays" data-code="fmt := import(&#34;fmt&#34;)
 
 a := [0, 0, 0, 0, 0]
-fmt.println(&#34;emp:&#34;, a)
+fmt.println(&#34;emp: &#34;, a)
 
 a[4] = 100
-fmt.println(&#34;set:&#34;, a)
-fmt.println(&#34;get:&#34;, a[4])
+fmt.println(&#34;set: &#34;, a)
+fmt.println(&#34;get: &#34;, a[4])
 
-fmt.println(&#34;len:&#34;, len(a))
+fmt.println(&#34;len: &#34;, len(a))
 
 b := [1, 2, 3, 4, 5]
-fmt.println(&#34;dcl:&#34;, b)
+fmt.println(&#34;dcl: &#34;, b)
 
 c := [1, &#34;two&#34;, 3.0, true]
-fmt.println(&#34;mix:&#34;, c)
+fmt.println(&#34;mix: &#34;, c)
 
 twoD := [
     [0, 1, 2],
@@ -386,56 +386,56 @@ m := {}
 m[&#34;k1&#34;] = 7
 m[&#34;k2&#34;] = 13
 
-fmt.println(&#34;map:&#34;, m)
+fmt.println(&#34;map: &#34;, m)
 
 v1 := m[&#34;k1&#34;]
 fmt.println(&#34;v1: &#34;, v1)
 
-fmt.println(&#34;len:&#34;, len(m))
+fmt.println(&#34;len: &#34;, len(m))
 
 delete(m, &#34;k2&#34;)
-fmt.println(&#34;map:&#34;, m)
+fmt.println(&#34;map: &#34;, m)
 
 n := {foo: 1, bar: 2}
-fmt.println(&#34;map:&#34;, n)">Maps</option>
+fmt.println(&#34;map: &#34;, n)">Maps</option>
             
             <option value="strings" data-code="fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 s := &#34;Hello, Tengo!&#34;
 
-fmt.println(&#34;len:&#34;, len(s))
+fmt.println(&#34;len: &#34;, len(s))
 
-fmt.println(&#34;slice:&#34;, s[7:12])
+fmt.println(&#34;slice: &#34;, s[7:12])
 
-fmt.println(&#34;upper:&#34;, text.to_upper(s))
-fmt.println(&#34;lower:&#34;, text.to_lower(s))
+fmt.println(&#34;upper: &#34;, text.to_upper(s))
+fmt.println(&#34;lower: &#34;, text.to_lower(s))
 
-fmt.println(&#34;contains &#39;Tengo&#39;:&#34;, text.contains(s, &#34;Tengo&#34;))
+fmt.println(&#34;contains &#39;Tengo&#39;: &#34;, text.contains(s, &#34;Tengo&#34;))
 
-fmt.println(&#34;replace:&#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+fmt.println(&#34;replace: &#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
 
 parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(&#34;split:&#34;, parts)
+fmt.println(&#34;split: &#34;, parts)
 
-fmt.println(&#34;join:&#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))">Strings</option>
+fmt.println(&#34;join: &#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))">Strings</option>
             
             <option value="slices" data-code="fmt := import(&#34;fmt&#34;)
 
 s := [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;, &#34;d&#34;, &#34;e&#34;]
-fmt.println(&#34;base array:&#34;, s)
+fmt.println(&#34;base array: &#34;, s)
 
 l := s[1:3]
-fmt.println(&#34;sl1:&#34;, l)
+fmt.println(&#34;sl1: &#34;, l)
 
 l = s[:5]
-fmt.println(&#34;sl2:&#34;, l)
+fmt.println(&#34;sl2: &#34;, l)
 
 l = s[2:]
-fmt.println(&#34;sl3:&#34;, l)
+fmt.println(&#34;sl3: &#34;, l)
 
 c := append([], s...)
-fmt.println(&#34;cpy:&#34;, c)
+fmt.println(&#34;cpy: &#34;, c)
 
 twoD := [
     [0],
@@ -482,7 +482,7 @@ fmt.println(msort([&#34;banana&#34;, &#34;apple&#34;, &#34;cherry&#34;, &#34;dat
 
 nums := [5, 2, 8, 1]
 sorted := msort(nums)
-fmt.println(&#34;original:&#34;, nums)
+fmt.println(&#34;original: &#34;, nums)
 fmt.println(&#34;sorted:  &#34;, sorted)">Sorting</option>
             
             <option value="bytes" data-code="fmt := import(&#34;fmt&#34;)
@@ -524,18 +524,18 @@ plus := func(a, b) {
 }
 
 res := plus(1, 2)
-fmt.println(&#34;1&#43;2 =&#34;, res)
+fmt.println(&#34;1&#43;2 = &#34;, res)
 
 plusPlus := func(a, b, c) {
     return a &#43; b &#43; c
 }
 res = plusPlus(1, 2, 3)
-fmt.println(&#34;1&#43;2&#43;3 =&#34;, res)
+fmt.println(&#34;1&#43;2&#43;3 = &#34;, res)
 
 apply := func(f, a, b) {
     return f(a, b)
 }
-fmt.println(&#34;apply:&#34;, apply(plus, 5, 3))">Functions</option>
+fmt.println(&#34;apply: &#34;, apply(plus, 5, 3))">Functions</option>
             
             <option value="closures" data-code="fmt := import(&#34;fmt&#34;)
 
@@ -569,15 +569,15 @@ fmt.println(divide(10, 2))
 
 result := divide(10, 0)
 if is_error(result) {
-    fmt.println(&#34;error:&#34;, result.value)
+    fmt.println(&#34;error: &#34;, result.value)
 }
 
 vals := [divide(8, 2), divide(5, 0), divide(9, 3)]
 for _, v in vals {
     if is_error(v) {
-        fmt.println(&#34;got error:&#34;, v.value)
+        fmt.println(&#34;got error: &#34;, v.value)
     } else {
-        fmt.println(&#34;got value:&#34;, v)
+        fmt.println(&#34;got value: &#34;, v)
     }
 }">Errors</option>
             
@@ -590,8 +590,8 @@ notFound := func(name) {
 result := notFound(&#34;config.json&#34;)
 if is_error(result) {
     e := result.value
-    fmt.println(&#34;code:&#34;, e[&#34;code&#34;])
-    fmt.println(&#34;message:&#34;, e[&#34;message&#34;])
+    fmt.println(&#34;code: &#34;, e[&#34;code&#34;])
+    fmt.println(&#34;message: &#34;, e[&#34;message&#34;])
 }
 
 validate := func(age) {
@@ -735,7 +735,7 @@ raw := `{&#34;apple&#34;:5,&#34;lettuce&#34;:7}`
 decoded := json.decode(raw)
 fmt.println(decoded)
 
-fmt.println(&#34;apple count:&#34;, decoded[&#34;apple&#34;])">JSON</option>
+fmt.println(&#34;apple count: &#34;, decoded[&#34;apple&#34;])">JSON</option>
             
             <option value="text" data-code="fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
@@ -801,7 +801,7 @@ fmt.println(times.time_format(now, &#34;2006-01-02&#34;))
 fmt.println(times.time_format(now, times.format_rfc3339))
 
 fmt.println(&#34;year: &#34;, times.time_year(now))
-fmt.println(&#34;month:&#34;, times.month_string(times.time_month(now)))
+fmt.println(&#34;month: &#34;, times.month_string(times.time_month(now)))
 fmt.println(&#34;day:  &#34;, times.time_day(now))
 
 past := times.parse(&#34;2006-01-02&#34;, &#34;2001-09-09&#34;)
@@ -964,9 +964,9 @@ countdown := coro.new(func(yield) {
 })
 
 v, ok := countdown.resume()
-fmt.println(v, ok)
+fmt.printf(&#34;%v %v\n&#34;, v, ok)
 v, ok = countdown.resume()
-fmt.println(v, ok)">Coroutines</option>
+fmt.printf(&#34;%v %v\n&#34;, v, ok)">Coroutines</option>
             
             <option value="maps-as-objects" data-code="fmt := import(&#34;fmt&#34;)
 
@@ -1096,11 +1096,11 @@ os := import(&#34;os&#34;)
 args := os.args()
 fmt.println(args)
 
-fmt.println(&#34;program:&#34;, args[0])
+fmt.println(&#34;program: &#34;, args[0])
 fmt.println(&#34;script: &#34;, args[1])
 
 if len(args) &gt; 2 {
-    fmt.println(&#34;first user arg:&#34;, args[2])
+    fmt.println(&#34;first user arg: &#34;, args[2])
 } else {
     fmt.println(&#34;(no user args — try: tengo script.tengo hello)&#34;)
 }">Command-Line Arguments</option>
@@ -1115,7 +1115,7 @@ os.setenv(&#34;GREETING&#34;, &#34;hello&#34;)
 fmt.println(os.getenv(&#34;GREETING&#34;))
 
 val, ok := os.lookup_env(&#34;GREETING&#34;)
-fmt.println(val, ok)
+fmt.printf(&#34;%v %v\n&#34;, val, ok)
 
 _, ok = os.lookup_env(&#34;MISSING&#34;)
 fmt.println(ok)
@@ -1165,7 +1165,7 @@ os := import(&#34;os&#34;)
 fmt.println(&#34;starting&#34;)
 
 for i := 0; i &lt; 3; i&#43;&#43; {
-    fmt.println(&#34;step&#34;, i)
+    fmt.println(&#34;step &#34;, i)
 }
 
 os.exit(0)

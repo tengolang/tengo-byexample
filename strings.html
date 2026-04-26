@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>A string is an immutable sequence of bytes. In Tengo, strings are UTF-8 encoded by default. <a href="https://en.wikipedia.org/wiki/String_(computer_science)" target="_blank" rel="noopener">Wikipedia: String</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/String_(computer_science)" target="_blank" rel="noopener">Wikipedia: String</a><br>A string is an immutable sequence of bytes. In Tengo, strings are UTF-8 encoded by default.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -59,7 +59,7 @@ text := import(&#34;text&#34;)</code></pre>
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;len:&#34;, len(s))</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;len: &#34;, len(s))</code></pre>
           </div>
           
         </div>
@@ -67,14 +67,13 @@ text := import(&#34;text&#34;)</code></pre>
       
       <div class="row" id="you-can-use-slice-notation-to-get-a-substring">
         <div class="docs">
-          <p><a href="#you-can-use-slice-notation-to-get-a-substring">You can use slice notation to get a substring.
-<code>s[7:12]</code> gets characters from index 7 to 11.</a></p>
+          <p><a href="#you-can-use-slice-notation-to-get-a-substring">You can use slice notation to get a substring. <code>s[7:12]</code> gets characters from index 7 to 11.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;slice:&#34;, s[7:12])</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;slice: &#34;, s[7:12])</code></pre>
           </div>
           
         </div>
@@ -82,15 +81,14 @@ text := import(&#34;text&#34;)</code></pre>
       
       <div class="row" id="the-text-module-provides-many-helpful-functions">
         <div class="docs">
-          <p><a href="#the-text-module-provides-many-helpful-functions">The <code>text</code> module provides many helpful functions.
-Here we change the case of the string.</a></p>
+          <p><a href="#the-text-module-provides-many-helpful-functions">The <code>text</code> module provides many helpful functions. Here we change the case of the string.</a></p>
         </div>
         <div class="code leading">
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;upper:&#34;, text.to_upper(s))
-fmt.println(&#34;lower:&#34;, text.to_lower(s))</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;upper: &#34;, text.to_upper(s))
+fmt.println(&#34;lower: &#34;, text.to_lower(s))</code></pre>
           </div>
           
         </div>
@@ -104,7 +102,7 @@ fmt.println(&#34;lower:&#34;, text.to_lower(s))</code></pre>
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;contains &#39;Tengo&#39;:&#34;, text.contains(s, &#34;Tengo&#34;))</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;contains &#39;Tengo&#39;: &#34;, text.contains(s, &#34;Tengo&#34;))</code></pre>
           </div>
           
         </div>
@@ -118,7 +116,7 @@ fmt.println(&#34;lower:&#34;, text.to_lower(s))</code></pre>
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;replace:&#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;replace: &#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))</code></pre>
           </div>
           
         </div>
@@ -133,7 +131,7 @@ fmt.println(&#34;lower:&#34;, text.to_lower(s))</code></pre>
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
             <pre><code class="language-go">parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(&#34;split:&#34;, parts)</code></pre>
+fmt.println(&#34;split: &#34;, parts)</code></pre>
           </div>
           
         </div>
@@ -147,27 +145,12 @@ fmt.println(&#34;split:&#34;, parts)</code></pre>
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">fmt.println(&#34;join:&#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</code></pre>
+            <pre><code class="language-go">fmt.println(&#34;join: &#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</code></pre>
           </div>
           
         </div>
       </div>
       
-      
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">len: 13
-slice: Tengo
-upper: HELLO, TENGO!
-lower: hello, tengo!
-contains &#39;Tengo&#39;: true
-replace: Hello, World!
-split: [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;]
-join: x-y-z</pre>
-        </div>
-      </div>
       
     </div>
 
@@ -175,7 +158,23 @@ join: x-y-z</pre>
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="len: 13
+slice: Tengo
+upper: HELLO, TENGO!
+lower: hello, tengo!
+contains &#39;Tengo&#39;: true
+replace: Hello, World!
+split: [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;]
+join: x-y-z">len: 13
+slice: Tengo
+upper: HELLO, TENGO!
+lower: hello, tengo!
+contains &#39;Tengo&#39;: true
+replace: Hello, World!
+split: [&#34;a&#34;, &#34;b&#34;, &#34;c&#34;]
+join: x-y-z</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
@@ -190,40 +189,40 @@ text := import(&#34;text&#34;)
 
 s := &#34;Hello, Tengo!&#34;
 
-fmt.println(&#34;len:&#34;, len(s))
+fmt.println(&#34;len: &#34;, len(s))
 
-fmt.println(&#34;slice:&#34;, s[7:12])
+fmt.println(&#34;slice: &#34;, s[7:12])
 
-fmt.println(&#34;upper:&#34;, text.to_upper(s))
-fmt.println(&#34;lower:&#34;, text.to_lower(s))
+fmt.println(&#34;upper: &#34;, text.to_upper(s))
+fmt.println(&#34;lower: &#34;, text.to_lower(s))
 
-fmt.println(&#34;contains &#39;Tengo&#39;:&#34;, text.contains(s, &#34;Tengo&#34;))
+fmt.println(&#34;contains &#39;Tengo&#39;: &#34;, text.contains(s, &#34;Tengo&#34;))
 
-fmt.println(&#34;replace:&#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+fmt.println(&#34;replace: &#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
 
 parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(&#34;split:&#34;, parts)
+fmt.println(&#34;split: &#34;, parts)
 
-fmt.println(&#34;join:&#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))">fmt := import(&#34;fmt&#34;)
+fmt.println(&#34;join: &#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))">fmt := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
 
 s := &#34;Hello, Tengo!&#34;
 
-fmt.println(&#34;len:&#34;, len(s))
+fmt.println(&#34;len: &#34;, len(s))
 
-fmt.println(&#34;slice:&#34;, s[7:12])
+fmt.println(&#34;slice: &#34;, s[7:12])
 
-fmt.println(&#34;upper:&#34;, text.to_upper(s))
-fmt.println(&#34;lower:&#34;, text.to_lower(s))
+fmt.println(&#34;upper: &#34;, text.to_upper(s))
+fmt.println(&#34;lower: &#34;, text.to_lower(s))
 
-fmt.println(&#34;contains &#39;Tengo&#39;:&#34;, text.contains(s, &#34;Tengo&#34;))
+fmt.println(&#34;contains &#39;Tengo&#39;: &#34;, text.contains(s, &#34;Tengo&#34;))
 
-fmt.println(&#34;replace:&#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
+fmt.println(&#34;replace: &#34;, text.replace(s, &#34;Tengo&#34;, &#34;World&#34;, -1))
 
 parts := text.split(&#34;a,b,c&#34;, &#34;,&#34;)
-fmt.println(&#34;split:&#34;, parts)
+fmt.println(&#34;split: &#34;, parts)
 
-fmt.println(&#34;join:&#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</textarea>
+fmt.println(&#34;join: &#34;, text.join([&#34;x&#34;, &#34;y&#34;, &#34;z&#34;], &#34;-&#34;))</textarea>
           </div>
         </div>
       </div>

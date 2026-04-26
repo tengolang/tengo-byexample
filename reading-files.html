@@ -54,8 +54,7 @@ f0.write_string(&#34;Hello from Tengo!\nSecond line.\n&#34;)</code></pre>
       
       <div class="row" id="osreadfile-is-the-simplest-way-to-read-a-whole-file">
         <div class="docs">
-          <p><a href="#osreadfile-is-the-simplest-way-to-read-a-whole-file"><code>os.read_file</code> is the simplest way to read a whole file.
-Convert the bytes result with <code>string()</code>.</a></p>
+          <p><a href="#osreadfile-is-the-simplest-way-to-read-a-whole-file"><code>os.read_file</code> is the simplest way to read a whole file. Convert the bytes result with <code>string()</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -70,8 +69,7 @@ fmt.println(string(content))</code></pre>
       
       <div class="row" id="osopen-returns-a-file-object-for-streaming-reads">
         <div class="docs">
-          <p><a href="#osopen-returns-a-file-object-for-streaming-reads"><code>os.open</code> returns a file object for streaming reads.
-Pass a pre-allocated <code>bytes</code> buffer to <code>read</code>.</a></p>
+          <p><a href="#osopen-returns-a-file-object-for-streaming-reads"><code>os.open</code> returns a file object for streaming reads. Pass a pre-allocated <code>bytes</code> buffer to <code>read</code>.</a></p>
         </div>
         <div class="code leading">
           
@@ -102,24 +100,21 @@ f.close()</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">Hello from Tengo!
-Second line.
-
-Hello</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="Hello from Tengo!
+Second line.
+
+Hello">Hello from Tengo!
+Second line.
+
+Hello</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

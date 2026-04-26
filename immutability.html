@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>By default, arrays and maps are mutable. The built-in <code>immutable()</code> returns a deeply immutable copy of any value. Attempting to modify it causes a runtime error. <a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="noopener">Wikipedia: Immutable object</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Immutable_object" target="_blank" rel="noopener">Wikipedia: Immutable object</a><br>By default, arrays and maps are mutable. The built-in <code>immutable()</code> returns a deeply immutable copy of any value. Attempting to modify it causes a runtime error.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -54,8 +54,7 @@ fmt.println(nums)</code></pre>
       
       <div class="row" id="immutable-creates-a-read-only-copy">
         <div class="docs">
-          <p><a href="#immutable-creates-a-read-only-copy"><code>immutable()</code> creates a read-only copy.
-Any attempt to modify it at runtime will produce an error.</a></p>
+          <p><a href="#immutable-creates-a-read-only-copy"><code>immutable()</code> creates a read-only copy. Any attempt to modify it at runtime will produce an error.</a></p>
         </div>
         <div class="code leading">
           
@@ -101,26 +100,25 @@ fmt.println(data[&#34;users&#34;])</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">[99, 2, 3]
-[10, 20, 30]
-20
-localhost
-5432
-[&#34;alice&#34;, &#34;bob&#34;]</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="[99, 2, 3]
+[10, 20, 30]
+20
+localhost
+5432
+[&#34;alice&#34;, &#34;bob&#34;]">[99, 2, 3]
+[10, 20, 30]
+20
+localhost
+5432
+[&#34;alice&#34;, &#34;bob&#34;]</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

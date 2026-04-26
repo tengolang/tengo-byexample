@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>Functions are first-class values in Tengo. You can pass them as arguments, return them from other functions, and store them in maps or arrays — enabling map, filter, and reduce patterns without a stdlib. <a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="noopener">Wikipedia: Higher-order function</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="noopener">Wikipedia: Higher-order function</a><br>Functions are first-class values in Tengo. You can pass them as arguments, return them from other functions, and store them in maps or arrays — enabling map, filter, and reduce patterns without a stdlib.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -128,25 +128,23 @@ fmt.println(map_fn([1, 2, 3], multiplier(10)))</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">[2, 4, 6, 8]
-[2, 4, 6]
-15
-21
-[10, 20, 30]</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="[2, 4, 6, 8]
+[2, 4, 6]
+15
+21
+[10, 20, 30]">[2, 4, 6, 8]
+[2, 4, 6]
+15
+21
+[10, 20, 30]</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

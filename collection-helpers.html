@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>The <code>enum</code> source module provides functional iteration helpers: <code>map</code>, <code>filter</code>, <code>find</code>, <code>all</code>, <code>any</code>, and <code>each</code>. Callbacks receive the key (index for arrays) and value as arguments. <a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="noopener">Wikipedia: Higher-order function</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Higher-order_function" target="_blank" rel="noopener">Wikipedia: Higher-order function</a><br>The <code>enum</code> source module provides functional iteration helpers: <code>map</code>, <code>filter</code>, <code>find</code>, <code>all</code>, <code>any</code>, and <code>each</code>. Callbacks receive the key (index for arrays) and value as arguments.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -114,26 +114,25 @@ fmt.println(enum.all(nums, func(_, v) { return v &gt; 3 }))</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">[2, 4, 6, 8, 10]
-[2, 4]
-4
-true
-false
-true</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="[2, 4, 6, 8, 10]
+[2, 4]
+4
+true
+false
+true">[2, 4, 6, 8, 10]
+[2, 4]
+4
+true
+false
+true</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">

@@ -16,7 +16,7 @@
       
       <div class="row">
         <div class="docs">
-          <p>The <code>base64</code> module encodes and decodes using standard, URL-safe, and raw (no padding) variants. Input and output are <code>bytes</code>. <a href="https://en.wikipedia.org/wiki/Base64" target="_blank" rel="noopener">Wikipedia: Base64</a></p>
+          <p><a href="https://en.wikipedia.org/wiki/Base64" target="_blank" rel="noopener">Wikipedia: Base64</a><br>The <code>base64</code> module encodes and decodes using standard, URL-safe, and raw (no padding) variants. Input and output are <code>bytes</code>.</p>
         </div>
         <div class="code empty"></div>
       </div>
@@ -39,8 +39,7 @@ base64 := import(&#34;base64&#34;)</code></pre>
       
       <div class="row" id="base64encode-produces-standard-base64-with-padding">
         <div class="docs">
-          <p><a href="#base64encode-produces-standard-base64-with-padding"><code>base64.encode</code> produces standard base64 with <code>=</code> padding.
-Use <code>string()</code> to print the result.</a></p>
+          <p><a href="#base64encode-produces-standard-base64-with-padding"><code>base64.encode</code> produces standard base64 with <code>=</code> padding. Use <code>string()</code> to print the result.</a></p>
         </div>
         <div class="code leading">
           
@@ -71,8 +70,7 @@ fmt.println(string(dec))</code></pre>
       
       <div class="row" id="url-safe-base64-uses--and-instead-of-and">
         <div class="docs">
-          <p><a href="#url-safe-base64-uses--and-instead-of-and">URL-safe base64 uses <code>-</code> and <code>_</code> instead of <code>+</code> and <code>/</code>,
-making it safe for use in URLs and filenames.</a></p>
+          <p><a href="#url-safe-base64-uses--and-instead-of-and">URL-safe base64 uses <code>-</code> and <code>_</code> instead of <code>+</code> and <code>/</code>, making it safe for use in URLs and filenames.</a></p>
         </div>
         <div class="code leading">
           
@@ -102,25 +100,23 @@ fmt.println(string(raw))</code></pre>
       </div>
       
       
-      
-      <div class="row">
-        <div class="docs"></div>
-        <div class="code">
-          <pre class="static-output">SGVsbG8sIFRlbmdvIQ==
-Hello, Tengo!
-ZGF0YT9rZXk9dmFsdWUmeD0x
-data?key=value&amp;x=1
-VGVuZ28</pre>
-        </div>
-      </div>
-      
     </div>
 
     <div class="playground-grid">
       <div class="row">
         <div class="docs">
           <p class="play-label">try it</p>
-          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+          
+          <pre id="output" class="expected-output" data-expected="SGVsbG8sIFRlbmdvIQ==
+Hello, Tengo!
+ZGF0YT9rZXk9dmFsdWUmeD0x
+data?key=value&amp;x=1
+VGVuZ28">SGVsbG8sIFRlbmdvIQ==
+Hello, Tengo!
+ZGF0YT9rZXk9dmFsdWUmeD0x
+data?key=value&amp;x=1
+VGVuZ28</pre>
+          
         </div>
         <div class="leading">
           <div class="editor-wrap">
