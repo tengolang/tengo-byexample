@@ -22,6 +22,8 @@
       </div>
       
       
+      
+      
       <div class="row" >
         <div class="docs">
           
@@ -90,6 +92,7 @@ if is_error(err) {
       </div>
       
       
+      
     </div>
 
     <div class="playground-grid">
@@ -113,6 +116,8 @@ age: must be non-negative</pre>
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            
+            
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 
@@ -173,6 +178,7 @@ err := validate(-1)
 if is_error(err) {
     fmt.println(err.value[&#34;field&#34;] &#43; &#34;: &#34; &#43; err.value[&#34;reason&#34;])
 }</textarea>
+            
           </div>
         </div>
       </div>

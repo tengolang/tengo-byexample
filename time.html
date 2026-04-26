@@ -22,6 +22,8 @@
       </div>
       
       
+      
+      
       <div class="row" >
         <div class="docs">
           
@@ -101,6 +103,7 @@ fmt.printf(&#34;%.0f days since then\n&#34;, days)</code></pre>
       </div>
       
       
+      
     </div>
 
     <div class="playground-grid">
@@ -118,6 +121,8 @@ fmt.printf(&#34;%.0f days since then\n&#34;, days)</code></pre>
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            
+            
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 times := import(&#34;times&#34;)
@@ -152,6 +157,7 @@ fmt.println(times.time_format(past, &#34;January 2, 2006&#34;))
 diff := times.sub(now, past)
 days := times.duration_hours(diff) / 24
 fmt.printf(&#34;%.0f days since then\n&#34;, days)</textarea>
+            
           </div>
         </div>
       </div>

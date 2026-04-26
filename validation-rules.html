@@ -22,6 +22,8 @@
       </div>
       
       
+      
+      
       <div class="row" >
         <div class="docs">
           
@@ -119,6 +121,7 @@ for _, e in errs {
       </div>
       
       
+      
     </div>
 
     <div class="playground-grid">
@@ -146,6 +149,8 @@ invalid record errors: 4
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            
+            
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt  := import(&#34;fmt&#34;)
 text := import(&#34;text&#34;)
@@ -240,6 +245,7 @@ fmt.printf(&#34;invalid record errors: %d\n&#34;, len(errs))
 for _, e in errs {
     fmt.printf(&#34;  %-12s %s\n&#34;, e.field&#43;&#34;:&#34;, e.msg)
 }</textarea>
+            
           </div>
         </div>
       </div>

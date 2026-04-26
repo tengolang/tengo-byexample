@@ -2,7 +2,13 @@
 
 let go = null;
 let wasmReady = false;
-let cmEditor   = null;
+
+// Single-file mode: one CodeMirror instance.
+let cmEditor = null;
+
+// Multi-file mode: one CodeMirror instance per tab, keyed by tab index.
+let cmTabs = {};     // { tabIndex: CodeMirror }
+let activeTab = 0;
 
 async function initWasm() {
   const statusEl = document.getElementById('wasm-status');
@@ -32,7 +38,12 @@ async function initWasm() {
   }
 }
 
+function isMultiFile() {
+  return document.querySelector('.code-editor-tab') !== null;
+}
+
 function getCode() {
+  if (isMultiFile()) return null; // unused in multi-file path
   if (cmEditor) return cmEditor.getValue();
   const ta = document.getElementById('code-editor');
   return ta ? ta.value : '';
@@ -44,6 +55,17 @@ function setCode(val) {
   if (ta) ta.value = val;
 }
 
+// Returns { name: code, ... } for all tabs in multi-file mode.
+function getFiles() {
+  const files = {};
+  document.querySelectorAll('.code-editor-tab').forEach((ta, i) => {
+    const name = ta.dataset.name.replace(/\.tengo$/, '');
+    const cm = cmTabs[i];
+    files[name] = cm ? cm.getValue() : ta.value;
+  });
+  return files;
+}
+
 function runCode() {
   if (!wasmReady) return;
   const output = document.getElementById('output');
@@ -52,10 +74,14 @@ function runCode() {
   output.className = '';
   output.textContent = '…';
 
-  // Yield to the browser before the synchronous WASM call so it can repaint.
   setTimeout(() => {
     try {
-      const result = tengoRun(getCode());
+      let result;
+      if (isMultiFile()) {
+        result = tengoRun(getFiles());
+      } else {
+        result = tengoRun(getCode());
+      }
       if (result.error) {
         output.className = 'error';
         output.textContent = result.error;
@@ -70,8 +96,16 @@ function runCode() {
 }
 
 function resetCode() {
-  const ta = document.getElementById('code-editor');
-  setCode(ta ? ta.dataset.original : '');
+  if (isMultiFile()) {
+    document.querySelectorAll('.code-editor-tab').forEach((ta, i) => {
+      const original = ta.dataset.original;
+      const cm = cmTabs[i];
+      if (cm) cm.setValue(original); else ta.value = original;
+    });
+  } else {
+    const ta = document.getElementById('code-editor');
+    setCode(ta ? ta.dataset.original : '');
+  }
   const output = document.getElementById('output');
   if (output) {
     const expected = output.dataset.expected;
@@ -81,6 +115,33 @@ function resetCode() {
     } else {
       output.className = '';
       output.innerHTML = '<span class="hint">$ (output will appear here)</span>';
+    }
+  }
+}
+
+function switchTab(tabEl) {
+  const idx = parseInt(tabEl.dataset.tab, 10);
+  if (idx === activeTab) return;
+
+  // Deactivate current tab.
+  document.querySelectorAll('.file-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.code-editor-tab').forEach(ta => {
+    const cm = cmTabs[parseInt(ta.dataset.tab, 10)];
+    if (cm) cm.getWrapperElement().style.display = 'none';
+    else ta.style.display = 'none';
+  });
+
+  // Activate new tab.
+  tabEl.classList.add('active');
+  activeTab = idx;
+  const newTa = document.querySelector(`.code-editor-tab[data-tab="${idx}"]`);
+  if (newTa) {
+    const cm = cmTabs[idx];
+    if (cm) {
+      cm.getWrapperElement().style.display = '';
+      cm.refresh();
+    } else {
+      newTa.style.display = '';
     }
   }
 }
@@ -112,11 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const ta = document.getElementById('code-editor');
-  if (!ta || typeof CodeMirror === 'undefined') return;
+  if (typeof CodeMirror === 'undefined') return;
 
-  cmEditor = CodeMirror.fromTextArea(ta, {
-    mode:           'go',   // close enough for Tengo syntax
+  const cmOpts = {
+    mode:           'go',
     lineNumbers:    true,
     indentUnit:     4,
     tabSize:        4,
@@ -129,10 +189,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ? cm.indentSelection('add')
         : cm.replaceSelection('    '),
     },
-  });
+  };
 
-  // Let CM grow to fit content rather than scroll inside a fixed box.
-  cmEditor.setSize('100%', 'auto');
+  if (isMultiFile()) {
+    // Initialise one CodeMirror per tab textarea.
+    document.querySelectorAll('.code-editor-tab').forEach((ta, i) => {
+      const cm = CodeMirror.fromTextArea(ta, cmOpts);
+      cm.setSize('100%', 'auto');
+      if (i !== 0) cm.getWrapperElement().style.display = 'none';
+      cmTabs[i] = cm;
+    });
+  } else {
+    const ta = document.getElementById('code-editor');
+    if (!ta) return;
+    cmEditor = CodeMirror.fromTextArea(ta, cmOpts);
+    cmEditor.setSize('100%', 'auto');
+  }
 });
 
 // Ctrl+Enter / Cmd+Enter anywhere on the page.
@@ -143,7 +215,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Only initialize WASM if we're on an example page with a playground
-if (document.getElementById('code-editor')) {
+// Only initialize WASM if we're on an example page with a playground.
+if (document.getElementById('code-editor') || document.querySelector('.code-editor-tab')) {
   initWasm();
 }

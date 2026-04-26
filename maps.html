@@ -22,6 +22,8 @@
       </div>
       
       
+      
+      
       <div class="row" >
         <div class="docs">
           
@@ -139,6 +141,7 @@ fmt.println(&#34;map: &#34;, n)</code></pre>
       </div>
       
       
+      
     </div>
 
     <div class="playground-grid">
@@ -146,15 +149,15 @@ fmt.println(&#34;map: &#34;, n)</code></pre>
         <div class="docs">
           <p class="play-label">try it</p>
           
-          <pre id="output" class="expected-output" data-expected="map: {k2: 13, k1: 7}
+          <pre id="output" class="expected-output" data-expected="map: {k1: 7, k2: 13}
 v1: 7
 len: 2
 map: {k1: 7}
-map: {bar: 2, foo: 1}">map: {k2: 13, k1: 7}
+map: {foo: 1, bar: 2}">map: {k1: 7, k2: 13}
 v1: 7
 len: 2
 map: {k1: 7}
-map: {bar: 2, foo: 1}</pre>
+map: {foo: 1, bar: 2}</pre>
           
         </div>
         <div class="leading">
@@ -164,6 +167,8 @@ map: {bar: 2, foo: 1}</pre>
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            
+            
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 
@@ -202,6 +207,7 @@ fmt.println(&#34;map: &#34;, m)
 
 n := {foo: 1, bar: 2}
 fmt.println(&#34;map: &#34;, n)</textarea>
+            
           </div>
         </div>
       </div>

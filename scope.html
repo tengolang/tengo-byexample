@@ -22,6 +22,8 @@
       </div>
       
       
+      
+      
       <div class="row" >
         <div class="docs">
           
@@ -143,6 +145,7 @@ fmt.printf(&#34;%d %d %d\n&#34;, fns2[0](), fns2[1](), fns2[2]())</code></pre>
       </div>
       
       
+      
     </div>
 
     <div class="playground-grid">
@@ -170,6 +173,8 @@ fmt.printf(&#34;%d %d %d\n&#34;, fns2[0](), fns2[1](), fns2[2]())</code></pre>
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            
+            
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 
@@ -240,6 +245,7 @@ for i := 0; i &lt; 3; i&#43;&#43; {
     fns2 = append(fns2, (func(v) { return func() { return v } })(i))
 }
 fmt.printf(&#34;%d %d %d\n&#34;, fns2[0](), fns2[1](), fns2[2]())</textarea>
+            
           </div>
         </div>
       </div>

@@ -22,6 +22,8 @@
       </div>
       
       
+      
+      
       <div class="row" >
         <div class="docs">
           
@@ -141,6 +143,7 @@ for name, score in scores {
       </div>
       
       
+      
     </div>
 
     <div class="playground-grid">
@@ -188,6 +191,8 @@ loop
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            
+            
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 
@@ -254,6 +259,7 @@ scores := {alice: 95, bob: 87}
 for name, score in scores {
     fmt.printf(&#34;%v scored %v\n&#34;, name, score)
 }</textarea>
+            
           </div>
         </div>
       </div>

@@ -1013,27 +1013,18 @@ p := new_point(3, 4)
 fmt.println(p.string())
 fmt.printf(&#34;%d %d\n&#34;, p.x, p.y)">Maps as Objects</option>
             
-            <option value="modules" data-code="square := func(x) { return x * x }
-cube   := func(x) { return x * x * x }
-abs    := func(x) { return x &lt; 0 ? -x : x }
+            <option value="modules" data-code="fmt  := import(&#34;fmt&#34;)
+math := import(&#34;math_utils&#34;)
 
-export {
-    square: square,
-    cube:   cube,
-    abs:    abs,
-}
+fmt.printf(&#34;square(4) = %d\n&#34;, math.square(4))
+fmt.printf(&#34;cube(3)   = %d\n&#34;, math.cube(3))
+fmt.printf(&#34;abs(-7)   = %d\n&#34;, math.abs(-7))
 
 
 
-
-
-fmt  := import(&#34;fmt&#34;)
-math := import(&#34;math&#34;)
-
-fmt.printf(&#34;pi        = %.4f\n&#34;, math.pi)
-fmt.printf(&#34;sqrt(2)   = %.4f\n&#34;, math.sqrt(2.0))
-fmt.printf(&#34;square(5) = %d\n&#34;,   square(5))
-fmt.printf(&#34;cube(3)   = %d\n&#34;,   cube(3))">Modules</option>
+stdlib := import(&#34;math&#34;)
+fmt.printf(&#34;pi      = %.4f\n&#34;, stdlib.pi)
+fmt.printf(&#34;sqrt(2) = %.4f\n&#34;, stdlib.sqrt(2.0))">`main.tengo` imports the module by name — no `.tengo` extension.</option>
             
             <option value="coroutine-pipelines" data-code="fmt := import(&#34;fmt&#34;)
 coro := import(&#34;coro&#34;)

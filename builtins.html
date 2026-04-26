@@ -22,6 +22,8 @@
       </div>
       
       
+      
+      
       <div class="row" >
         <div class="docs">
           
@@ -167,6 +169,7 @@ fmt.println(is_callable(func() {}))</code></pre>
       </div>
       
       
+      
     </div>
 
     <div class="playground-grid">
@@ -179,7 +182,7 @@ fmt.println(is_callable(func() {}))</code></pre>
 2
 [0, 1, 2, 3, 4]
 [0, 2, 4, 6, 8]
-{name: &#34;Tengo&#34;, version: 3, stable: true}
+{name: &#34;Tengo&#34;, stable: true, version: 3}
 {name: &#34;Tengo&#34;}
 {c: 3, a: 1}
 [1, 2, 99, 3, 4]
@@ -194,7 +197,7 @@ true">5
 2
 [0, 1, 2, 3, 4]
 [0, 2, 4, 6, 8]
-{name: &#34;Tengo&#34;, version: 3, stable: true}
+{name: &#34;Tengo&#34;, stable: true, version: 3}
 {name: &#34;Tengo&#34;}
 {c: 3, a: 1}
 [1, 2, 99, 3, 4]
@@ -214,6 +217,8 @@ true</pre>
               <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
               <span id="wasm-status">loading…</span>
             </div>
+            
+            
             <textarea id="code-editor" spellcheck="false"
               data-original="fmt := import(&#34;fmt&#34;)
 
@@ -284,6 +289,7 @@ fmt.println(format(&#34;%-8s %d&#34;, &#34;score:&#34;, 42))
 fmt.println(is_int(42))
 fmt.println(is_string(&#34;hi&#34;))
 fmt.println(is_callable(func() {}))</textarea>
+            
           </div>
         </div>
       </div>
