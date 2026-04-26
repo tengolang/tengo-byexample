@@ -1,0 +1,52 @@
+// # GDScript-Style Node Scripting
+//
+// GDScript attaches a script to each Godot node; the engine calls
+// `_ready` once on startup and `_process(delta)` every frame.
+// Tengo maps to this naturally: script-level variables hold node
+// state that persists between `compiled.Call` invocations, because
+// they live in shared globals — mutations from one call are visible
+// in the next, just like a GDScript node's exported properties.
+//
+// Signal handlers such as `_on_hit` are registered by the host
+// after loading the script. `compiled.CanCall` lets the host check
+// whether a handler exists before dispatching.
+
+fmt := import("fmt")
+
+// Node properties — script-level state, persists across calls.
+position := {x: 0.0, y: 0.0}
+speed    := 150.0
+health   := 100
+coins    := 0
+
+// Called once when the node enters the scene tree.
+_ready := func() {
+    fmt.printf("_ready   pos=(%.0f,%.0f) hp=%d\n",
+        position.x, position.y, health)
+}
+
+// Called every frame; delta is elapsed seconds since the last frame.
+_process := func(delta) {
+    position.x += speed * delta
+    fmt.printf("_process pos=(%.1f, %.1f)\n", position.x, position.y)
+}
+
+// Signal handlers — wired to game events by the host.
+_on_coin_picked_up := func() {
+    coins += 1
+    fmt.printf("coin!    total=%d\n", coins)
+}
+
+_on_hit := func(damage) {
+    health -= damage
+    fmt.printf("hit!     hp=%d%s\n", health, health <= 0 ? " [dead]" : "")
+}
+
+// Standalone demo — same sequence the Go host runs below.
+_ready()
+_process(0.016)
+_process(0.016)
+_process(0.016)
+_on_coin_picked_up()
+_on_hit(35)
+_on_hit(80)

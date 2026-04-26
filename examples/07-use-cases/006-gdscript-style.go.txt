@@ -1,0 +1,57 @@
+package main
+
+import (
+	"log"
+
+	tengo "github.com/tengolang/tengo/v3"
+)
+
+// playerScript contains only the node definitions — no standalone demo.
+// State (position, health, coins) persists across compiled.Call calls
+// because script-level variables live in shared globals.
+const playerScript = `
+fmt := import("fmt")
+
+position := {x: 0.0, y: 0.0}
+speed    := 150.0
+health   := 100
+coins    := 0
+
+_ready := func() {
+    fmt.printf("_ready   pos=(%.0f,%.0f) hp=%d\n",
+        position.x, position.y, health)
+}
+_process := func(delta) {
+    position.x += speed * delta
+    fmt.printf("_process pos=(%.1f, %.1f)\n", position.x, position.y)
+}
+_on_coin_picked_up := func() {
+    coins += 1
+    fmt.printf("coin!    total=%d\n", coins)
+}
+_on_hit := func(damage) {
+    health -= damage
+    fmt.printf("hit!     hp=%d%s\n", health, health <= 0 ? " [dead]" : "")
+}
+`
+
+func main() {
+	compiled, err := tengo.NewScript([]byte(playerScript)).Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	compiled.Call("_ready")
+
+	// Game loop — three frames at ~60 fps.
+	for i := 0; i < 3; i++ {
+		compiled.Call("_process", 0.016)
+	}
+
+	// Dispatch signal handlers if the script defines them.
+	if compiled.CanCall("_on_coin_picked_up") {
+		compiled.Call("_on_coin_picked_up")
+	}
+	compiled.Call("_on_hit", 35)
+	compiled.Call("_on_hit", 80)
+}
