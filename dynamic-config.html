@@ -126,9 +126,13 @@ config.workers  = config.db_pool * 2</code></pre>
           
           <div class="code-block">
             <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">keys := [&#34;env&#34;, &#34;debug&#34;, &#34;log_level&#34;, &#34;db_url&#34;, &#34;workers&#34;,
-         &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
-for _, k in keys {
+            <pre><code class="language-go">string_keys := [&#34;env&#34;, &#34;log_level&#34;, &#34;db_url&#34;]
+other_keys  := [&#34;debug&#34;, &#34;workers&#34;, &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
+
+for _, k in string_keys {
+    fmt.printf(&#34;%-20s %s\n&#34;, k, config[k])
+}
+for _, k in other_keys {
     fmt.printf(&#34;%-20s %v\n&#34;, k, config[k])
 }</code></pre>
           </div>
@@ -140,10 +144,10 @@ for _, k in keys {
       <div class="row">
         <div class="docs"></div>
         <div class="code">
-          <pre class="static-output">env                  &#34;development&#34;
+          <pre class="static-output">env                  development
+log_level            debug
+db_url               postgres://localhost:5432/app
 debug                true
-log_level            &#34;debug&#34;
-db_url               &#34;postgres://localhost:5432/app&#34;
 workers              6
 cache_ttl            60
 rate_limit           50
@@ -203,9 +207,13 @@ if env == &#34;production&#34; {
 config.db_url   = fmt.sprintf(&#34;postgres://%s:%d/app&#34;, config.db_host, config.db_port)
 config.workers  = config.db_pool * 2
 
-keys := [&#34;env&#34;, &#34;debug&#34;, &#34;log_level&#34;, &#34;db_url&#34;, &#34;workers&#34;,
-         &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
-for _, k in keys {
+string_keys := [&#34;env&#34;, &#34;log_level&#34;, &#34;db_url&#34;]
+other_keys  := [&#34;debug&#34;, &#34;workers&#34;, &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
+
+for _, k in string_keys {
+    fmt.printf(&#34;%-20s %s\n&#34;, k, config[k])
+}
+for _, k in other_keys {
     fmt.printf(&#34;%-20s %v\n&#34;, k, config[k])
 }">fmt := import(&#34;fmt&#34;)
 os  := import(&#34;os&#34;)
@@ -243,9 +251,13 @@ if env == &#34;production&#34; {
 config.db_url   = fmt.sprintf(&#34;postgres://%s:%d/app&#34;, config.db_host, config.db_port)
 config.workers  = config.db_pool * 2
 
-keys := [&#34;env&#34;, &#34;debug&#34;, &#34;log_level&#34;, &#34;db_url&#34;, &#34;workers&#34;,
-         &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
-for _, k in keys {
+string_keys := [&#34;env&#34;, &#34;log_level&#34;, &#34;db_url&#34;]
+other_keys  := [&#34;debug&#34;, &#34;workers&#34;, &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
+
+for _, k in string_keys {
+    fmt.printf(&#34;%-20s %s\n&#34;, k, config[k])
+}
+for _, k in other_keys {
     fmt.printf(&#34;%-20s %v\n&#34;, k, config[k])
 }</textarea>
           </div>

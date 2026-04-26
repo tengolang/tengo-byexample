@@ -76,10 +76,10 @@ npc    := {
         </div>
       </div>
       
-      <div class="row" id="the-npc-behaviour-script-pure-function-returns-an-action-for-the">
+      <div class="row" id="the-npc-behaviour-script-returns-an-action-for-the-host-to-execute">
         <div class="docs">
-          <p><a href="#the-npc-behaviour-script-pure-function-returns-an-action-for-the">The NPC behaviour script: pure function, returns an action for the
-host to execute and advances the NPC state machine.</a></p>
+          <p><a href="#the-npc-behaviour-script-returns-an-action-for-the-host-to-execute">The NPC behaviour script — returns an action for the host to execute
+and advances the NPC state machine in place.</a></p>
         </div>
         <div class="code leading">
           
@@ -117,32 +117,16 @@ host to execute and advances the NPC state machine.</a></p>
     }
 
     return {action: &#34;idle&#34;}
-}</code></pre>
-          </div>
-          
-        </div>
-      </div>
-      
-      <div class="row" id="simulate-the-player-approaching-over-three-ticks">
-        <div class="docs">
-          <p><a href="#simulate-the-player-approaching-over-three-ticks">Simulate the player approaching over three ticks.</a></p>
-        </div>
-        <div class="code leading">
-          
-          <div class="code-block">
-            <button class="copy-btn" title="Copy code">copy</button>
-            <pre><code class="language-go">positions := [
-    {x: 20, y: 15},
-    {x: 14, y: 12},
-    {x: 10, y: 10},
-]
+}
 
-for _, pos in positions {
-    player.position = pos
-    result := tick(npc, player)
+print_tick := func(npc, result) {
     fmt.printf(&#34;%-10s → %s&#34;, npc.state, result[&#34;action&#34;])
     if !is_undefined(result[&#34;text&#34;]) {
         fmt.printf(&#34;: %q&#34;, result[&#34;text&#34;])
+    }
+    if !is_undefined(result[&#34;target&#34;]) {
+        t := result[&#34;target&#34;]
+        fmt.printf(&#34; (%d,%d)&#34;, t.x, t.y)
     }
     if !is_undefined(result[&#34;damage&#34;]) {
         fmt.printf(&#34; (dmg %d)&#34;, result[&#34;damage&#34;])
@@ -154,13 +138,58 @@ for _, pos in positions {
         </div>
       </div>
       
+      <div class="row" id="simulate-the-player-approaching-idle-alerted-chasing-fighting">
+        <div class="docs">
+          <p><a href="#simulate-the-player-approaching-idle-alerted-chasing-fighting">Simulate the player approaching: idle → alerted → chasing → fighting.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">positions := [
+    {x: 20, y: 15},  // out of range  → patrol
+    {x: 14, y: 12},  // alert range   → alerted, say
+    {x: 12, y: 11},  // closing in    → move_towards
+    {x: 10, y: 10},  // attack range  → fighting, attack
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    print_tick(npc, result)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="wound-the-npc-and-show-the-flee-transition">
+        <div class="docs">
+          <p><a href="#wound-the-npc-and-show-the-flee-transition">Wound the NPC and show the flee transition.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt.println(&#34;--- NPC takes heavy damage ---&#34;)
+npc.health = 15
+result := tick(npc, player)
+print_tick(npc, result)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
       
       <div class="row">
         <div class="docs"></div>
         <div class="code">
           <pre class="static-output">idle       → patrol
 alerted    → say: &#34;Halt! Who goes there?&#34;
-fighting   → attack (dmg 8)</pre>
+alerted    → move_towards (12,11)
+fighting   → attack (dmg 8)
+--- NPC takes heavy damage ---
+fleeing    → say: &#34;Mercy!&#34;</pre>
         </div>
       </div>
       
@@ -232,24 +261,38 @@ tick := func(npc, player) {
     return {action: &#34;idle&#34;}
 }
 
-positions := [
-    {x: 20, y: 15},
-    {x: 14, y: 12},
-    {x: 10, y: 10},
-]
-
-for _, pos in positions {
-    player.position = pos
-    result := tick(npc, player)
+print_tick := func(npc, result) {
     fmt.printf(&#34;%-10s → %s&#34;, npc.state, result[&#34;action&#34;])
     if !is_undefined(result[&#34;text&#34;]) {
         fmt.printf(&#34;: %q&#34;, result[&#34;text&#34;])
+    }
+    if !is_undefined(result[&#34;target&#34;]) {
+        t := result[&#34;target&#34;]
+        fmt.printf(&#34; (%d,%d)&#34;, t.x, t.y)
     }
     if !is_undefined(result[&#34;damage&#34;]) {
         fmt.printf(&#34; (dmg %d)&#34;, result[&#34;damage&#34;])
     }
     fmt.println(&#34;&#34;)
-}">fmt := import(&#34;fmt&#34;)
+}
+
+positions := [
+    {x: 20, y: 15},  // out of range  → patrol
+    {x: 14, y: 12},  // alert range   → alerted, say
+    {x: 12, y: 11},  // closing in    → move_towards
+    {x: 10, y: 10},  // attack range  → fighting, attack
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    print_tick(npc, result)
+}
+
+fmt.println(&#34;--- NPC takes heavy damage ---&#34;)
+npc.health = 15
+result := tick(npc, player)
+print_tick(npc, result)">fmt := import(&#34;fmt&#34;)
 
 player := {health: 45, position: {x: 20, y: 15}, weapon: &#34;sword&#34;}
 npc    := {
@@ -301,24 +344,38 @@ tick := func(npc, player) {
     return {action: &#34;idle&#34;}
 }
 
-positions := [
-    {x: 20, y: 15},
-    {x: 14, y: 12},
-    {x: 10, y: 10},
-]
-
-for _, pos in positions {
-    player.position = pos
-    result := tick(npc, player)
+print_tick := func(npc, result) {
     fmt.printf(&#34;%-10s → %s&#34;, npc.state, result[&#34;action&#34;])
     if !is_undefined(result[&#34;text&#34;]) {
         fmt.printf(&#34;: %q&#34;, result[&#34;text&#34;])
+    }
+    if !is_undefined(result[&#34;target&#34;]) {
+        t := result[&#34;target&#34;]
+        fmt.printf(&#34; (%d,%d)&#34;, t.x, t.y)
     }
     if !is_undefined(result[&#34;damage&#34;]) {
         fmt.printf(&#34; (dmg %d)&#34;, result[&#34;damage&#34;])
     }
     fmt.println(&#34;&#34;)
-}</textarea>
+}
+
+positions := [
+    {x: 20, y: 15},  // out of range  → patrol
+    {x: 14, y: 12},  // alert range   → alerted, say
+    {x: 12, y: 11},  // closing in    → move_towards
+    {x: 10, y: 10},  // attack range  → fighting, attack
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    print_tick(npc, result)
+}
+
+fmt.println(&#34;--- NPC takes heavy damage ---&#34;)
+npc.health = 15
+result := tick(npc, player)
+print_tick(npc, result)</textarea>
           </div>
         </div>
       </div>
