@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Game Scripting</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="game-scripting">
+    <h2>Game Scripting</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Tengo is well suited for NPC behaviour, ability definitions, and quest logic in a game engine. The Go host loads and evaluates the script each tick, providing game state through a custom <code>game</code> module. Scripts can be hot-reloaded and modders can write them without touching Go.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="simulated-host-data-in-a-real-engine-these-come-from-the-go-host">
+        <div class="docs">
+          <p><a href="#simulated-host-data-in-a-real-engine-these-come-from-the-go-host">Simulated host data — in a real engine these come from the Go host.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">player := {health: 45, position: {x: 20, y: 15}, weapon: &#34;sword&#34;}
+npc    := {
+    name:         &#34;Guard&#34;,
+    health:       80,
+    position:     {x: 10, y: 10},
+    state:        &#34;idle&#34;,
+    alert_range:  8,
+    attack_range: 2,
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="squared-distance-comparison-avoids-a-square-root">
+        <div class="docs">
+          <p><a href="#squared-distance-comparison-avoids-a-square-root">Squared-distance comparison avoids a square root.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">within := func(a, b, r) {
+    dx := a.x - b.x
+    dy := a.y - b.y
+    return dx*dx &#43; dy*dy &lt;= r*r
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="the-npc-behaviour-script-pure-function-returns-an-action-for-the">
+        <div class="docs">
+          <p><a href="#the-npc-behaviour-script-pure-function-returns-an-action-for-the">The NPC behaviour script: pure function, returns an action for the
+host to execute and advances the NPC state machine.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">tick := func(npc, player) {
+    if npc.state == &#34;idle&#34; {
+        if within(player.position, npc.position, npc.alert_range) {
+            npc.state = &#34;alerted&#34;
+            return {action: &#34;say&#34;, text: &#34;Halt! Who goes there?&#34;}
+        }
+        return {action: &#34;patrol&#34;}
+    }
+
+    if npc.state == &#34;alerted&#34; {
+        if within(player.position, npc.position, npc.attack_range) {
+            npc.state = &#34;fighting&#34;
+        } else {
+            return {action: &#34;move_towards&#34;, target: player.position}
+        }
+    }
+
+    if npc.state == &#34;fighting&#34; {
+        if npc.health &lt; 20 {
+            npc.state = &#34;fleeing&#34;
+            return {action: &#34;say&#34;, text: &#34;Mercy!&#34;}
+        }
+        dmg := 12
+        if player.weapon != &#34;&#34; { dmg = 8 }
+        return {action: &#34;attack&#34;, damage: dmg}
+    }
+
+    if npc.state == &#34;fleeing&#34; {
+        return {action: &#34;run&#34;}
+    }
+
+    return {action: &#34;idle&#34;}
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="simulate-the-player-approaching-over-three-ticks">
+        <div class="docs">
+          <p><a href="#simulate-the-player-approaching-over-three-ticks">Simulate the player approaching over three ticks.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">positions := [
+    {x: 20, y: 15},
+    {x: 14, y: 12},
+    {x: 10, y: 10},
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    fmt.printf(&#34;%-10s → %s&#34;, npc.state, result[&#34;action&#34;])
+    if !is_undefined(result[&#34;text&#34;]) {
+        fmt.printf(&#34;: %q&#34;, result[&#34;text&#34;])
+    }
+    if !is_undefined(result[&#34;damage&#34;]) {
+        fmt.printf(&#34; (dmg %d)&#34;, result[&#34;damage&#34;])
+    }
+    fmt.println(&#34;&#34;)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">idle       → patrol
+alerted    → say: &#34;Halt! Who goes there?&#34;
+fighting   → attack (dmg 8)</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+
+player := {health: 45, position: {x: 20, y: 15}, weapon: &#34;sword&#34;}
+npc    := {
+    name:         &#34;Guard&#34;,
+    health:       80,
+    position:     {x: 10, y: 10},
+    state:        &#34;idle&#34;,
+    alert_range:  8,
+    attack_range: 2,
+}
+
+within := func(a, b, r) {
+    dx := a.x - b.x
+    dy := a.y - b.y
+    return dx*dx &#43; dy*dy &lt;= r*r
+}
+
+tick := func(npc, player) {
+    if npc.state == &#34;idle&#34; {
+        if within(player.position, npc.position, npc.alert_range) {
+            npc.state = &#34;alerted&#34;
+            return {action: &#34;say&#34;, text: &#34;Halt! Who goes there?&#34;}
+        }
+        return {action: &#34;patrol&#34;}
+    }
+
+    if npc.state == &#34;alerted&#34; {
+        if within(player.position, npc.position, npc.attack_range) {
+            npc.state = &#34;fighting&#34;
+        } else {
+            return {action: &#34;move_towards&#34;, target: player.position}
+        }
+    }
+
+    if npc.state == &#34;fighting&#34; {
+        if npc.health &lt; 20 {
+            npc.state = &#34;fleeing&#34;
+            return {action: &#34;say&#34;, text: &#34;Mercy!&#34;}
+        }
+        dmg := 12
+        if player.weapon != &#34;&#34; { dmg = 8 }
+        return {action: &#34;attack&#34;, damage: dmg}
+    }
+
+    if npc.state == &#34;fleeing&#34; {
+        return {action: &#34;run&#34;}
+    }
+
+    return {action: &#34;idle&#34;}
+}
+
+positions := [
+    {x: 20, y: 15},
+    {x: 14, y: 12},
+    {x: 10, y: 10},
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    fmt.printf(&#34;%-10s → %s&#34;, npc.state, result[&#34;action&#34;])
+    if !is_undefined(result[&#34;text&#34;]) {
+        fmt.printf(&#34;: %q&#34;, result[&#34;text&#34;])
+    }
+    if !is_undefined(result[&#34;damage&#34;]) {
+        fmt.printf(&#34; (dmg %d)&#34;, result[&#34;damage&#34;])
+    }
+    fmt.println(&#34;&#34;)
+}">fmt := import(&#34;fmt&#34;)
+
+player := {health: 45, position: {x: 20, y: 15}, weapon: &#34;sword&#34;}
+npc    := {
+    name:         &#34;Guard&#34;,
+    health:       80,
+    position:     {x: 10, y: 10},
+    state:        &#34;idle&#34;,
+    alert_range:  8,
+    attack_range: 2,
+}
+
+within := func(a, b, r) {
+    dx := a.x - b.x
+    dy := a.y - b.y
+    return dx*dx &#43; dy*dy &lt;= r*r
+}
+
+tick := func(npc, player) {
+    if npc.state == &#34;idle&#34; {
+        if within(player.position, npc.position, npc.alert_range) {
+            npc.state = &#34;alerted&#34;
+            return {action: &#34;say&#34;, text: &#34;Halt! Who goes there?&#34;}
+        }
+        return {action: &#34;patrol&#34;}
+    }
+
+    if npc.state == &#34;alerted&#34; {
+        if within(player.position, npc.position, npc.attack_range) {
+            npc.state = &#34;fighting&#34;
+        } else {
+            return {action: &#34;move_towards&#34;, target: player.position}
+        }
+    }
+
+    if npc.state == &#34;fighting&#34; {
+        if npc.health &lt; 20 {
+            npc.state = &#34;fleeing&#34;
+            return {action: &#34;say&#34;, text: &#34;Mercy!&#34;}
+        }
+        dmg := 12
+        if player.weapon != &#34;&#34; { dmg = 8 }
+        return {action: &#34;attack&#34;, damage: dmg}
+    }
+
+    if npc.state == &#34;fleeing&#34; {
+        return {action: &#34;run&#34;}
+    }
+
+    return {action: &#34;idle&#34;}
+}
+
+positions := [
+    {x: 20, y: 15},
+    {x: 14, y: 12},
+    {x: 10, y: 10},
+]
+
+for _, pos in positions {
+    player.position = pos
+    result := tick(npc, player)
+    fmt.printf(&#34;%-10s → %s&#34;, npc.state, result[&#34;action&#34;])
+    if !is_undefined(result[&#34;text&#34;]) {
+        fmt.printf(&#34;: %q&#34;, result[&#34;text&#34;])
+    }
+    if !is_undefined(result[&#34;damage&#34;]) {
+        fmt.printf(&#34; (dmg %d)&#34;, result[&#34;damage&#34;])
+    }
+    fmt.println(&#34;&#34;)
+}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="exit.html" rel="prev">← Exit</a>
+      
+      
+        <a href="dynamic-config.html" rel="next">Dynamic Configuration →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

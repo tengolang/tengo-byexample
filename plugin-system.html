@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Plugin System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="plugin-system">
+    <h2>Plugin System</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Scripts can register named event handlers that the host dispatches when events fire. End users extend application behaviour without touching Go code, and different scripts can register different sets of handlers for the same event bus.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="each-handler-is-a-function-that-receives-an-event-payload-map">
+        <div class="docs">
+          <p><a href="#each-handler-is-a-function-that-receives-an-event-payload-map">Each handler is a function that receives an event payload map.
+Handlers are plain Tengo functions — they can import modules,
+call helpers, maintain closure state, or return values to the host.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">handlers := {
+    on_user_login: func(e) {
+        fmt.printf(&#34;login:  %s (admin=%v)\n&#34;, e.username, e.is_admin)
+        if e.is_admin {
+            fmt.println(&#34;        → audit log entry written&#34;)
+        }
+    },
+
+    on_order_placed: func(e) {
+        total := float(e.price) * float(e.qty)
+        fmt.printf(&#34;order:  %s ×%d = $%.2f\n&#34;, e.item, e.qty, total)
+        if total &gt; 500.0 {
+            fmt.println(&#34;        → fraud review triggered&#34;)
+        }
+    },
+
+    on_user_logout: func(e) {
+        fmt.printf(&#34;logout: %s\n&#34;, e.username)
+    },
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="simulated-host-dispatcher-in-go-this-would-iterate-the-event-queue">
+        <div class="docs">
+          <p><a href="#simulated-host-dispatcher-in-go-this-would-iterate-the-event-queue">Simulated host dispatcher — in Go this would iterate the event queue.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">dispatch := func(event, payload) {
+    h := handlers[event]
+    if is_undefined(h) {
+        fmt.printf(&#34;(no handler for %q)\n&#34;, event)
+        return
+    }
+    h(payload)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="fire-a-stream-of-events">
+        <div class="docs">
+          <p><a href="#fire-a-stream-of-events">Fire a stream of events.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">dispatch(&#34;on_user_login&#34;,    {username: &#34;alice&#34;, is_admin: false})
+dispatch(&#34;on_user_login&#34;,    {username: &#34;root&#34;,  is_admin: true})
+dispatch(&#34;on_order_placed&#34;,  {item: &#34;Graphics card&#34;, price: 349, qty: 2})
+dispatch(&#34;on_order_placed&#34;,  {item: &#34;Mouse pad&#34;,     price: 12,  qty: 1})
+dispatch(&#34;on_user_logout&#34;,   {username: &#34;alice&#34;})
+dispatch(&#34;on_password_reset&#34;,{username: &#34;alice&#34;})</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">login:  alice (admin=false)
+login:  root (admin=true)
+        → audit log entry written
+order:  Graphics card ×2 = $698.00
+        → fraud review triggered
+order:  Mouse pad ×1 = $12.00
+logout: alice
+(no handler for &#34;on_password_reset&#34;)</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+
+handlers := {
+    on_user_login: func(e) {
+        fmt.printf(&#34;login:  %s (admin=%v)\n&#34;, e.username, e.is_admin)
+        if e.is_admin {
+            fmt.println(&#34;        → audit log entry written&#34;)
+        }
+    },
+
+    on_order_placed: func(e) {
+        total := float(e.price) * float(e.qty)
+        fmt.printf(&#34;order:  %s ×%d = $%.2f\n&#34;, e.item, e.qty, total)
+        if total &gt; 500.0 {
+            fmt.println(&#34;        → fraud review triggered&#34;)
+        }
+    },
+
+    on_user_logout: func(e) {
+        fmt.printf(&#34;logout: %s\n&#34;, e.username)
+    },
+}
+
+dispatch := func(event, payload) {
+    h := handlers[event]
+    if is_undefined(h) {
+        fmt.printf(&#34;(no handler for %q)\n&#34;, event)
+        return
+    }
+    h(payload)
+}
+
+dispatch(&#34;on_user_login&#34;,    {username: &#34;alice&#34;, is_admin: false})
+dispatch(&#34;on_user_login&#34;,    {username: &#34;root&#34;,  is_admin: true})
+dispatch(&#34;on_order_placed&#34;,  {item: &#34;Graphics card&#34;, price: 349, qty: 2})
+dispatch(&#34;on_order_placed&#34;,  {item: &#34;Mouse pad&#34;,     price: 12,  qty: 1})
+dispatch(&#34;on_user_logout&#34;,   {username: &#34;alice&#34;})
+dispatch(&#34;on_password_reset&#34;,{username: &#34;alice&#34;})">fmt := import(&#34;fmt&#34;)
+
+handlers := {
+    on_user_login: func(e) {
+        fmt.printf(&#34;login:  %s (admin=%v)\n&#34;, e.username, e.is_admin)
+        if e.is_admin {
+            fmt.println(&#34;        → audit log entry written&#34;)
+        }
+    },
+
+    on_order_placed: func(e) {
+        total := float(e.price) * float(e.qty)
+        fmt.printf(&#34;order:  %s ×%d = $%.2f\n&#34;, e.item, e.qty, total)
+        if total &gt; 500.0 {
+            fmt.println(&#34;        → fraud review triggered&#34;)
+        }
+    },
+
+    on_user_logout: func(e) {
+        fmt.printf(&#34;logout: %s\n&#34;, e.username)
+    },
+}
+
+dispatch := func(event, payload) {
+    h := handlers[event]
+    if is_undefined(h) {
+        fmt.printf(&#34;(no handler for %q)\n&#34;, event)
+        return
+    }
+    h(payload)
+}
+
+dispatch(&#34;on_user_login&#34;,    {username: &#34;alice&#34;, is_admin: false})
+dispatch(&#34;on_user_login&#34;,    {username: &#34;root&#34;,  is_admin: true})
+dispatch(&#34;on_order_placed&#34;,  {item: &#34;Graphics card&#34;, price: 349, qty: 2})
+dispatch(&#34;on_order_placed&#34;,  {item: &#34;Mouse pad&#34;,     price: 12,  qty: 1})
+dispatch(&#34;on_user_logout&#34;,   {username: &#34;alice&#34;})
+dispatch(&#34;on_password_reset&#34;,{username: &#34;alice&#34;})</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="validation-rules.html" rel="prev">← Validation Rules</a>
+      
+      
+        <span></span>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

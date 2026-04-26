@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Dynamic Configuration</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="dynamic-config">
+    <h2>Dynamic Configuration</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Static config files (JSON, YAML) can only hold data. A Tengo config file can compute values, branch on environment, and derive one setting from another — all without recompiling the host application.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt := import(&#34;fmt&#34;)
+os  := import(&#34;os&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="read-the-deployment-environment-falls-back-to-development">
+        <div class="docs">
+          <p><a href="#read-the-deployment-environment-falls-back-to-development">Read the deployment environment (falls back to &#34;development&#34;).</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">env := os.getenv(&#34;APP_ENV&#34;)
+if env == &#34;&#34; { env = &#34;development&#34; }</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="base-configuration-sensible-defaults-for-local-development">
+        <div class="docs">
+          <p><a href="#base-configuration-sensible-defaults-for-local-development">Base configuration — sensible defaults for local development.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">config := {
+    env:          env,
+    debug:        true,
+    log_level:    &#34;debug&#34;,
+    db_host:      &#34;localhost&#34;,
+    db_port:      5432,
+    db_pool:      3,
+    cache_ttl:    60,
+    rate_limit:   50,
+    feature_dark_mode: false,
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="production-overrides-tighter-faster-quieter">
+        <div class="docs">
+          <p><a href="#production-overrides-tighter-faster-quieter">Production overrides — tighter, faster, quieter.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">if env == &#34;production&#34; {
+    config.debug      = false
+    config.log_level  = &#34;warn&#34;
+    config.db_host    = &#34;db.prod.internal&#34;
+    config.db_pool    = 20
+    config.cache_ttl  = 3600
+    config.rate_limit = 2000
+    config.feature_dark_mode = true
+} else if env == &#34;staging&#34; {
+    config.log_level  = &#34;info&#34;
+    config.db_host    = &#34;db.staging.internal&#34;
+    config.db_pool    = 8
+    config.cache_ttl  = 300
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="derived-values-computed-once-from-the-resolved-base-config">
+        <div class="docs">
+          <p><a href="#derived-values-computed-once-from-the-resolved-base-config">Derived values — computed once from the resolved base config.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">config.db_url   = fmt.sprintf(&#34;postgres://%s:%d/app&#34;, config.db_host, config.db_port)
+config.workers  = config.db_pool * 2</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="pretty-print-the-resolved-config">
+        <div class="docs">
+          <p><a href="#pretty-print-the-resolved-config">Pretty-print the resolved config.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">keys := [&#34;env&#34;, &#34;debug&#34;, &#34;log_level&#34;, &#34;db_url&#34;, &#34;workers&#34;,
+         &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
+for _, k in keys {
+    fmt.printf(&#34;%-20s %v\n&#34;, k, config[k])
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">env                  &#34;development&#34;
+debug                true
+log_level            &#34;debug&#34;
+db_url               &#34;postgres://localhost:5432/app&#34;
+workers              6
+cache_ttl            60
+rate_limit           50
+feature_dark_mode    false</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt := import(&#34;fmt&#34;)
+os  := import(&#34;os&#34;)
+
+env := os.getenv(&#34;APP_ENV&#34;)
+if env == &#34;&#34; { env = &#34;development&#34; }
+
+config := {
+    env:          env,
+    debug:        true,
+    log_level:    &#34;debug&#34;,
+    db_host:      &#34;localhost&#34;,
+    db_port:      5432,
+    db_pool:      3,
+    cache_ttl:    60,
+    rate_limit:   50,
+    feature_dark_mode: false,
+}
+
+if env == &#34;production&#34; {
+    config.debug      = false
+    config.log_level  = &#34;warn&#34;
+    config.db_host    = &#34;db.prod.internal&#34;
+    config.db_pool    = 20
+    config.cache_ttl  = 3600
+    config.rate_limit = 2000
+    config.feature_dark_mode = true
+} else if env == &#34;staging&#34; {
+    config.log_level  = &#34;info&#34;
+    config.db_host    = &#34;db.staging.internal&#34;
+    config.db_pool    = 8
+    config.cache_ttl  = 300
+}
+
+config.db_url   = fmt.sprintf(&#34;postgres://%s:%d/app&#34;, config.db_host, config.db_port)
+config.workers  = config.db_pool * 2
+
+keys := [&#34;env&#34;, &#34;debug&#34;, &#34;log_level&#34;, &#34;db_url&#34;, &#34;workers&#34;,
+         &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
+for _, k in keys {
+    fmt.printf(&#34;%-20s %v\n&#34;, k, config[k])
+}">fmt := import(&#34;fmt&#34;)
+os  := import(&#34;os&#34;)
+
+env := os.getenv(&#34;APP_ENV&#34;)
+if env == &#34;&#34; { env = &#34;development&#34; }
+
+config := {
+    env:          env,
+    debug:        true,
+    log_level:    &#34;debug&#34;,
+    db_host:      &#34;localhost&#34;,
+    db_port:      5432,
+    db_pool:      3,
+    cache_ttl:    60,
+    rate_limit:   50,
+    feature_dark_mode: false,
+}
+
+if env == &#34;production&#34; {
+    config.debug      = false
+    config.log_level  = &#34;warn&#34;
+    config.db_host    = &#34;db.prod.internal&#34;
+    config.db_pool    = 20
+    config.cache_ttl  = 3600
+    config.rate_limit = 2000
+    config.feature_dark_mode = true
+} else if env == &#34;staging&#34; {
+    config.log_level  = &#34;info&#34;
+    config.db_host    = &#34;db.staging.internal&#34;
+    config.db_pool    = 8
+    config.cache_ttl  = 300
+}
+
+config.db_url   = fmt.sprintf(&#34;postgres://%s:%d/app&#34;, config.db_host, config.db_port)
+config.workers  = config.db_pool * 2
+
+keys := [&#34;env&#34;, &#34;debug&#34;, &#34;log_level&#34;, &#34;db_url&#34;, &#34;workers&#34;,
+         &#34;cache_ttl&#34;, &#34;rate_limit&#34;, &#34;feature_dark_mode&#34;]
+for _, k in keys {
+    fmt.printf(&#34;%-20s %v\n&#34;, k, config[k])
+}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="game-scripting.html" rel="prev">← Game Scripting</a>
+      
+      
+        <a href="validation-rules.html" rel="next">Validation Rules →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>

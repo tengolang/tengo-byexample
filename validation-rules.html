@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tengo by Example: Validation Rules</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <div class="example" id="validation-rules">
+    <h2>Validation Rules</h2>
+    <nav class="site-nav"><a href="index.html">← Tengo by Example</a></nav>
+
+    <div class="example-grid">
+      
+      <div class="row">
+        <div class="docs">
+          <p>Business rules change frequently. Encoding them in Tengo scripts instead of compiled Go means rules can be updated and reloaded while the host application keeps running.</p>
+        </div>
+        <div class="code empty"></div>
+      </div>
+      
+      
+      <div class="row" >
+        <div class="docs">
+          
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">fmt  := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="each-rule-is-a-map-with-a-field-name-a-check-function-and-an-error">
+        <div class="docs">
+          <p><a href="#each-rule-is-a-map-with-a-field-name-a-check-function-and-an-error">Each rule is a map with a field name, a check function, and an error
+message. Rules compose freely — add, remove, or reorder at will.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">rules := [
+    {
+        field:   &#34;username&#34;,
+        check:   func(v) { return is_string(v) &amp;&amp; len(v) &gt;= 3 &amp;&amp; len(v) &lt;= 20 },
+        message: &#34;must be 3–20 characters&#34;,
+    },
+    {
+        field:   &#34;age&#34;,
+        check:   func(v) { return is_int(v) &amp;&amp; v &gt;= 13 &amp;&amp; v &lt;= 120 },
+        message: &#34;must be an integer between 13 and 120&#34;,
+    },
+    {
+        field:   &#34;email&#34;,
+        check:   func(v) { return is_string(v) &amp;&amp; text.contains(v, &#34;@&#34;) &amp;&amp; len(v) &gt; 5 },
+        message: &#34;must contain @ and be at least 6 characters&#34;,
+    },
+    {
+        field:   &#34;score&#34;,
+        check:   func(v) { return is_float(v) &amp;&amp; v &gt;= 0.0 &amp;&amp; v &lt;= 1.0 },
+        message: &#34;must be a float between 0.0 and 1.0&#34;,
+    },
+]
+
+validate := func(record) {
+    errs := []
+    for _, rule in rules {
+        val := record[rule.field]
+        if is_undefined(val) || !rule.check(val) {
+            errs = append(errs, {field: rule.field, msg: rule.message})
+        }
+    }
+    return errs
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="a-valid-record">
+        <div class="docs">
+          <p><a href="#a-valid-record">A valid record.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">good := {username: &#34;alice&#34;, age: 30, email: &#34;alice@example.com&#34;, score: 0.95}
+errs := validate(good)
+fmt.printf(&#34;valid record errors: %d\n&#34;, len(errs))</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="row" id="an-invalid-record-multiple-violations">
+        <div class="docs">
+          <p><a href="#an-invalid-record-multiple-violations">An invalid record — multiple violations.</a></p>
+        </div>
+        <div class="code leading">
+          
+          <div class="code-block">
+            <button class="copy-btn" title="Copy code">copy</button>
+            <pre><code class="language-go">bad := {username: &#34;x&#34;, age: 10, email: &#34;notanemail&#34;, score: 1.5}
+errs = validate(bad)
+fmt.printf(&#34;invalid record errors: %d\n&#34;, len(errs))
+for _, e in errs {
+    fmt.printf(&#34;  %-12s %s\n&#34;, e.field&#43;&#34;:&#34;, e.msg)
+}</code></pre>
+          </div>
+          
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="docs"></div>
+        <div class="code">
+          <pre class="static-output">valid record errors: 0
+invalid record errors: 4
+  username:    must be 3–20 characters
+  age:         must be an integer between 13 and 120
+  email:       must contain @ and be at least 6 characters
+  score:       must be a float between 0.0 and 1.0</pre>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class="playground-grid">
+      <div class="row">
+        <div class="docs">
+          <p class="play-label">try it</p>
+          <pre id="output"><span class="hint">$ (output will appear here)</span></pre>
+        </div>
+        <div class="leading">
+          <div class="editor-wrap">
+            <div class="editor-toolbar">
+              <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
+              <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
+              <span id="wasm-status">loading…</span>
+            </div>
+            <textarea id="code-editor" spellcheck="false"
+              data-original="fmt  := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)
+
+rules := [
+    {
+        field:   &#34;username&#34;,
+        check:   func(v) { return is_string(v) &amp;&amp; len(v) &gt;= 3 &amp;&amp; len(v) &lt;= 20 },
+        message: &#34;must be 3–20 characters&#34;,
+    },
+    {
+        field:   &#34;age&#34;,
+        check:   func(v) { return is_int(v) &amp;&amp; v &gt;= 13 &amp;&amp; v &lt;= 120 },
+        message: &#34;must be an integer between 13 and 120&#34;,
+    },
+    {
+        field:   &#34;email&#34;,
+        check:   func(v) { return is_string(v) &amp;&amp; text.contains(v, &#34;@&#34;) &amp;&amp; len(v) &gt; 5 },
+        message: &#34;must contain @ and be at least 6 characters&#34;,
+    },
+    {
+        field:   &#34;score&#34;,
+        check:   func(v) { return is_float(v) &amp;&amp; v &gt;= 0.0 &amp;&amp; v &lt;= 1.0 },
+        message: &#34;must be a float between 0.0 and 1.0&#34;,
+    },
+]
+
+validate := func(record) {
+    errs := []
+    for _, rule in rules {
+        val := record[rule.field]
+        if is_undefined(val) || !rule.check(val) {
+            errs = append(errs, {field: rule.field, msg: rule.message})
+        }
+    }
+    return errs
+}
+
+good := {username: &#34;alice&#34;, age: 30, email: &#34;alice@example.com&#34;, score: 0.95}
+errs := validate(good)
+fmt.printf(&#34;valid record errors: %d\n&#34;, len(errs))
+
+bad := {username: &#34;x&#34;, age: 10, email: &#34;notanemail&#34;, score: 1.5}
+errs = validate(bad)
+fmt.printf(&#34;invalid record errors: %d\n&#34;, len(errs))
+for _, e in errs {
+    fmt.printf(&#34;  %-12s %s\n&#34;, e.field&#43;&#34;:&#34;, e.msg)
+}">fmt  := import(&#34;fmt&#34;)
+text := import(&#34;text&#34;)
+
+rules := [
+    {
+        field:   &#34;username&#34;,
+        check:   func(v) { return is_string(v) &amp;&amp; len(v) &gt;= 3 &amp;&amp; len(v) &lt;= 20 },
+        message: &#34;must be 3–20 characters&#34;,
+    },
+    {
+        field:   &#34;age&#34;,
+        check:   func(v) { return is_int(v) &amp;&amp; v &gt;= 13 &amp;&amp; v &lt;= 120 },
+        message: &#34;must be an integer between 13 and 120&#34;,
+    },
+    {
+        field:   &#34;email&#34;,
+        check:   func(v) { return is_string(v) &amp;&amp; text.contains(v, &#34;@&#34;) &amp;&amp; len(v) &gt; 5 },
+        message: &#34;must contain @ and be at least 6 characters&#34;,
+    },
+    {
+        field:   &#34;score&#34;,
+        check:   func(v) { return is_float(v) &amp;&amp; v &gt;= 0.0 &amp;&amp; v &lt;= 1.0 },
+        message: &#34;must be a float between 0.0 and 1.0&#34;,
+    },
+]
+
+validate := func(record) {
+    errs := []
+    for _, rule in rules {
+        val := record[rule.field]
+        if is_undefined(val) || !rule.check(val) {
+            errs = append(errs, {field: rule.field, msg: rule.message})
+        }
+    }
+    return errs
+}
+
+good := {username: &#34;alice&#34;, age: 30, email: &#34;alice@example.com&#34;, score: 0.95}
+errs := validate(good)
+fmt.printf(&#34;valid record errors: %d\n&#34;, len(errs))
+
+bad := {username: &#34;x&#34;, age: 10, email: &#34;notanemail&#34;, score: 1.5}
+errs = validate(bad)
+fmt.printf(&#34;invalid record errors: %d\n&#34;, len(errs))
+for _, e in errs {
+    fmt.printf(&#34;  %-12s %s\n&#34;, e.field&#43;&#34;:&#34;, e.msg)
+}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      
+        <a href="dynamic-config.html" rel="prev">← Dynamic Configuration</a>
+      
+      
+        <a href="plugin-system.html" rel="next">Plugin System →</a>
+      
+    </div>
+
+    <p class="footer">
+      by <a href="https://github.com/tengolang/tengo">tengolang/tengo v3</a>
+      | <a href="https://github.com/tengolang/tengo-byexample">source</a>
+    </p>
+  </div>
+
+  <script src="wasm_exec.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/go/go.min.js"></script>
+  <script src="site.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+  <script>Prism.highlightAll();</script>
+</body>
+</html>
