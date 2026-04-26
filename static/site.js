@@ -79,6 +79,20 @@ function resetCode() {
   }
 }
 
+function loadExample(select) {
+  const opt = select.options[select.selectedIndex];
+  if (!opt || !opt.value) return;
+  const code = opt.dataset.code;
+  setCode(code);
+  const ta = document.getElementById('code-editor');
+  if (ta) ta.dataset.original = code;
+  const output = document.getElementById('output');
+  if (output) {
+    output.className = '';
+    output.innerHTML = '<span class="hint">$ (output will appear here)</span>';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- Copy Buttons ---
   document.querySelectorAll('.copy-btn').forEach(btn => {

@@ -62,6 +62,7 @@ func main() {
 	writeTemplate("docs/index.html", indexTmpl, map[string]any{"Groups": groups})
 	writeTemplate("docs/playground.html", playgroundTmpl, map[string]any{
 		"DefaultCode": defaultPlaygroundCode,
+		"Groups":      groups,
 	})
 
 	for i, ex := range allExamples {
@@ -155,6 +156,10 @@ func loadExamplesFromDir(dir string) ([]Example, error) {
 	return examples, nil
 }
 
+var allCaps = map[string]string{
+	"os": "OS",
+}
+
 func dirTitle(name string) string {
 	// Strip leading numeric prefix: "01-basics" → "basics"
 	parts := strings.SplitN(name, "-", 2)
@@ -163,10 +168,12 @@ func dirTitle(name string) string {
 			name = parts[1]
 		}
 	}
-	// Hyphen-separated words → Title Case
+	// Hyphen-separated words → Title Case, with known abbreviations uppercased.
 	words := strings.Split(name, "-")
 	for i, w := range words {
-		if len(w) > 0 {
+		if upper, ok := allCaps[w]; ok {
+			words[i] = upper
+		} else if len(w) > 0 {
 			words[i] = strings.ToUpper(w[:1]) + w[1:]
 		}
 	}

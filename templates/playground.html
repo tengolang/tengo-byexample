@@ -19,6 +19,16 @@
         <button class="run-btn" id="run-btn" disabled onclick="runCode()">run</button>
         <button class="reset-btn" id="reset-btn" onclick="resetCode()">reset</button>
         <span id="wasm-status">loading…</span>
+        <select id="example-picker" onchange="loadExample(this)" title="Load an example">
+          <option value="">— load an example —</option>
+          {{range .Groups}}
+          <optgroup label="{{.Title}}">
+            {{range .Examples}}
+            <option value="{{.Slug}}" data-code="{{.PlaygroundCode}}">{{.Title}}</option>
+            {{end}}
+          </optgroup>
+          {{end}}
+        </select>
       </div>
       <textarea id="code-editor" spellcheck="false"
         data-original="{{.DefaultCode}}">{{.DefaultCode}}</textarea>
